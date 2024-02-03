@@ -44,6 +44,10 @@ public class InterfazInicioPersonal extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         BotonOpciones = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
@@ -59,7 +63,6 @@ public class InterfazInicioPersonal extends javax.swing.JFrame {
 
         jLabel2.setBackground(new java.awt.Color(102, 255, 51));
         jLabel2.setFont(new java.awt.Font("Sitka Text", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("BIENVENIDO");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -152,6 +155,9 @@ public class InterfazInicioPersonal extends javax.swing.JFrame {
 
         BotonAgregarMiembros.setBackground(new java.awt.Color(0, 204, 153));
         BotonAgregarMiembros.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BotonAgregarMiembrosMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 BotonAgregarMiembrosMouseEntered(evt);
             }
@@ -203,6 +209,9 @@ public class InterfazInicioPersonal extends javax.swing.JFrame {
 
         BotonAgregarClientes.setBackground(new java.awt.Color(0, 204, 153));
         BotonAgregarClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BotonAgregarClientesMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 BotonAgregarClientesMouseEntered(evt);
             }
@@ -256,7 +265,6 @@ public class InterfazInicioPersonal extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(0, 153, 102));
 
         tbPaneles.setBackground(new java.awt.Color(255, 255, 255));
-        tbPaneles.setForeground(new java.awt.Color(0, 0, 0));
         tbPaneles.setTabPlacement(javax.swing.JTabbedPane.RIGHT);
 
         jPanel3.setBackground(new java.awt.Color(51, 102, 0));
@@ -381,17 +389,65 @@ public class InterfazInicioPersonal extends javax.swing.JFrame {
 
         tbPaneles.addTab("tab2", jPanel5);
 
-        jPanel6.setBackground(new java.awt.Color(204, 0, 204));
+        jPanel6.setBackground(new java.awt.Color(18, 75, 59));
+
+        jPanel9.setBackground(new java.awt.Color(153, 0, 153));
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
+
+        jLabel1.setBackground(new java.awt.Color(102, 255, 102));
+        jLabel1.setForeground(new java.awt.Color(102, 255, 102));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/FondoProyectos.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(369, Short.MAX_VALUE))
+            .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 766, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(88, Short.MAX_VALUE))
+            .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 424, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 844, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(44, Short.MAX_VALUE)
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 514, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(73, Short.MAX_VALUE)
+                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17))
         );
 
         tbPaneles.addTab("tab3", jPanel6);
@@ -503,6 +559,14 @@ public class InterfazInicioPersonal extends javax.swing.JFrame {
         tbPaneles.setSelectedIndex(1);
     }//GEN-LAST:event_BotonProyectosMouseClicked
 
+    private void BotonAgregarMiembrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonAgregarMiembrosMouseClicked
+        tbPaneles.setSelectedIndex(2);
+    }//GEN-LAST:event_BotonAgregarMiembrosMouseClicked
+
+    private void BotonAgregarClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonAgregarClientesMouseClicked
+        tbPaneles.setSelectedIndex(3);
+    }//GEN-LAST:event_BotonAgregarClientesMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -536,6 +600,7 @@ public class InterfazInicioPersonal extends javax.swing.JFrame {
     private javax.swing.JPanel BotonOpciones;
     private javax.swing.JPanel BotonProyectos;
     private javax.swing.JPanel PanelBiosigmaLogo;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -558,8 +623,11 @@ public class InterfazInicioPersonal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JPanel panelDescripcion;
     private javax.swing.JPanel panelTablaProyectos;
     private javax.swing.JTabbedPane tbPaneles;
