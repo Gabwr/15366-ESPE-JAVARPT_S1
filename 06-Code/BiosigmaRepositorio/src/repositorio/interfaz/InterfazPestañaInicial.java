@@ -65,12 +65,12 @@ public class InterfazPestañaInicial extends javax.swing.JFrame {
                     .addGroup(escritorioLayout.createSequentialGroup()
                         .addGap(207, 207, 207)
                         .addComponent(btnIniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(229, Short.MAX_VALUE))
+                .addContainerGap(330, Short.MAX_VALUE))
             .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(escritorioLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 692, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jLabel2)
+                    .addContainerGap(86, Short.MAX_VALUE)))
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -79,12 +79,12 @@ public class InterfazPestañaInicial extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnIniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(145, Short.MAX_VALUE))
+                .addContainerGap(247, Short.MAX_VALUE))
             .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(escritorioLayout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jLabel2)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addContainerGap(108, Short.MAX_VALUE)))
         );
 
         jLabel2.getAccessibleContext().setAccessibleDescription("");
@@ -93,16 +93,13 @@ public class InterfazPestañaInicial extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(escritorio)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(escritorio))
         );
 
         pack();
@@ -116,6 +113,10 @@ public class InterfazPestañaInicial extends javax.swing.JFrame {
                 interfazlogin = new InterfazLogin();
                 escritorio.add(interfazlogin);
                 System.out.println("Hola mundo");
+                
+                InterfazInicioMiembros interfaz2 = new InterfazInicioMiembros();
+                escritorio.add(interfaz2);
+                interfaz2.show();
             
             interfazlogin.show();
          
