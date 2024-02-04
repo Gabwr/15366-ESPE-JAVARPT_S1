@@ -113,10 +113,6 @@ public class InterfazPestañaInicial extends javax.swing.JFrame {
                 interfazlogin = new InterfazLogin();
                 escritorio.add(interfazlogin);
                 System.out.println("Hola mundo");
-                
-                InterfazInicioMiembros interfaz2 = new InterfazInicioMiembros();
-                escritorio.add(interfaz2);
-                interfaz2.show();
             
             interfazlogin.show();
          
