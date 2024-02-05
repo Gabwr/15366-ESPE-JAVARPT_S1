@@ -545,7 +545,7 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
                                 .addComponent(jButton11)
                                 .addContainerGap())
                             .addGroup(jPanel10Layout.createSequentialGroup()
-                                .addGap(59, 59, 59)
+                                .addGap(44, 44, 44)
                                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel22)
                                     .addComponent(jLabel27))
