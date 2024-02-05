@@ -7,11 +7,28 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
+    DefaultTableModel dtmClient = new DefaultTableModel();
+    DefaultTableModel dtmAdmin = new DefaultTableModel();
+    DefaultTableModel dtmWorker = new DefaultTableModel();
+    String CargoIngreso;
 
     public InterfazInicioMiembros() {
         initComponents();
+        dtmClient.addColumn("Cedula");
+        dtmClient.addColumn("Nombre");
+        dtmClient.addColumn("Correo");
+        this.tbClientes.setModel(dtmClient);
+        dtmAdmin.addColumn("Cedula");
+        dtmAdmin.addColumn("Nombre");
+        dtmAdmin.addColumn("Correo");
+        this.tbAdmin.setModel(dtmAdmin);
+        dtmWorker.addColumn("Cedula");
+        dtmWorker.addColumn("Nombre");
+        dtmWorker.addColumn("Correo");
+        this.tbTrabajadores.setModel(dtmWorker);
         PanelBiosigmaLogo.setBackground(new Color(0, 0, 0, 160));
         panelDescripcion.setBackground(new Color(0, 0, 0, 100));
         lbAvisoCorreo.setVisible(false);
@@ -106,9 +123,11 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
         jLabel29 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        tbAdmin = new javax.swing.JTable();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable5 = new javax.swing.JTable();
+        tbClientes = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbTrabajadores = new javax.swing.JTable();
         jLabel21 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
@@ -465,6 +484,11 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
         jLabel27.setText("Cargo");
 
         cbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un cargo", "Administrador", "Trabajador", " " }));
+        cbCargo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCargoActionPerformed(evt);
+            }
+        });
 
         txtCorreo.setEditable(false);
         txtCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -492,7 +516,7 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
 
         jTabbedPane1.setEnabled(false);
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        tbAdmin.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -503,11 +527,11 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane4.setViewportView(jTable4);
+        jScrollPane4.setViewportView(tbAdmin);
 
-        jTabbedPane1.addTab("Miembros", jScrollPane4);
+        jTabbedPane1.addTab("Administradores", jScrollPane4);
 
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+        tbClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -518,9 +542,24 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane5.setViewportView(jTable5);
+        jScrollPane5.setViewportView(tbClientes);
 
         jTabbedPane1.addTab("Clientes", jScrollPane5);
+
+        tbTrabajadores.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tbTrabajadores);
+
+        jTabbedPane1.addTab("Trabajadores", jScrollPane2);
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -838,8 +877,40 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
 
     private void btAgregarMiembroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgregarMiembroActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btAgregarMiembroActionPerformed
+        String nombre = (String) txtNombre.getText();
+        String cedula = (String) txtCedulA.getText();
+        String correo = (String) txtCorreo.getText();
 
+        String[] informacion = new String[3];
+        if (nombre.isEmpty() || cedula.isEmpty() || correo.isEmpty() || dcFecha.getDate() == null) {
+            JOptionPane.showMessageDialog(null, "No hay datos a ingresar\n Complete los campos");
+        } else if (CargoIngreso.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ingrese el area al que pertenece el trabajador");
+        } else {
+            if (CargoIngreso.equals("Administrador")) {
+                informacion[0] = txtCedulA.getText();
+                informacion[1] = txtNombre.getText();
+                informacion[3] = txtCorreo.getText();
+                dtmAdmin.addRow(informacion);
+                JOptionPane.showMessageDialog(null, "Usuario guardado correctamente.");
+            } else if (CargoIngreso.equals("Trabajador")) {
+                informacion[0] = txtCedulA.getText();
+                informacion[1] = txtNombre.getText();
+                informacion[3] = txtCorreo.getText();
+                dtmWorker.addRow(informacion);
+                JOptionPane.showMessageDialog(null, "Usuario guardado correctamente.");
+            } else if (CargoIngreso.equals("Cliente")) {
+                informacion[0] = txtCedulA.getText();
+                informacion[1] = txtNombre.getText();
+                informacion[3] = txtCorreo.getText();
+                dtmClient.addRow(informacion);
+                JOptionPane.showMessageDialog(null, "Usuario guardado correctamente.");
+            }
+
+        }
+
+    }//GEN-LAST:event_btAgregarMiembroActionPerformed
+s
     private void txtCorreoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyReleased
         if(validarCorreo(txtCorreo.getText())){
             lbAvisoCorreo.setVisible(false);
@@ -848,6 +919,20 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
             lbAvisoCorreo.setVisible(true);
         }
     }//GEN-LAST:event_txtCorreoKeyReleased
+
+    private void cbCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCargoActionPerformed
+     String cargo = (String) cbCargo.getSelectedItem();
+        if (cargo.equals("Seleccione un cargo")) {
+            CargoIngreso = "";
+        } else if (cargo.equals("Administrador")) {
+            CargoIngreso = "Administrador";
+        } else if (cargo.equals("Trabajador")) {
+            CargoIngreso = "Trabajador";
+        } else if (cargo.equals("Cliente")) {
+            CargoIngreso = "Cliente";
+        }
+
+    }//GEN-LAST:event_cbCargoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -893,12 +978,11 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable4;
-    private javax.swing.JTable jTable5;
     private javax.swing.JLabel lbAvisoCorreo;
     private javax.swing.JPanel panelBotones;
     private javax.swing.JPanel panelDescripcion;
@@ -908,7 +992,10 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
     private javax.swing.JPanel panelProyectos;
     private javax.swing.JPanel panelSuperior;
     private javax.swing.JPanel panelTablaProyectos;
+    private javax.swing.JTable tbAdmin;
+    private javax.swing.JTable tbClientes;
     private javax.swing.JTabbedPane tbPaneles;
+    private javax.swing.JTable tbTrabajadores;
     private javax.swing.JTextField txtCedulA;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtCorreo;
