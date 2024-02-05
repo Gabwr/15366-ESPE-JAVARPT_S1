@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
+
     DefaultTableModel dtmClient = new DefaultTableModel();
     DefaultTableModel dtmAdmin = new DefaultTableModel();
     DefaultTableModel dtmWorker = new DefaultTableModel();
@@ -47,21 +48,68 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
         int anioActual = actual.getYear();
 
         int edad = anioActual - anioNacimiento;
-            String edadCalculada = edad + "";
-            txtEdad.setText(edadCalculada);
+        String edadCalculada = edad + "";
+        txtEdad.setText(edadCalculada);
     }
-    
-    private boolean validarCorreo(String correo){
+
+    private boolean validarCorreo(String correo) {
         Pattern patron = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                                    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
         Matcher mat = patron.matcher(correo);
         return mat.find();
     }
-    
-    private boolean validarDatos(){
-        boolean validacion = false;
-        if((txtNombre.getText().length() > 0) && (txtCedulA.getText().length() == 10) && (dcFecha.getDate() != null)){
+
+    private boolean validarCedula() {
+        int[] cedulaContenido = new int[10];
+        int cedulaString = Integer.parseInt(txtCedulA.getText());
+        int cedulaStringDivisor = cedulaString, cont = 0, iniciador = 0, residuo, cosciente, mul = 0, sumpar = 0, sumimpar = 0, sumtotal = 0, res = 0, comprobador=0;
             
+            for (iniciador = 9; iniciador >= 0; iniciador--) {
+                cosciente = cedulaStringDivisor / 10;
+                residuo = cedulaStringDivisor % 10;
+                cedulaContenido[iniciador] = residuo;
+                cedulaStringDivisor = cosciente;
+            }
+
+            if (cedulaContenido[0] == 0 && cedulaContenido[1] == 0) {
+                cont++;
+            }
+
+            if (cedulaContenido[0] == 2 && cedulaContenido[1] > 4) {
+                cont++;
+            }
+
+            if (cedulaContenido[0] == 3 && cedulaContenido[1] != 0) {
+                cont++;
+            }
+            for (iniciador = 0; iniciador < 9; iniciador += 2) {
+                mul = cedulaContenido[iniciador] * 2;
+                if (mul > 9) {
+                    mul -= 9;
+                }
+                sumpar += mul;
+            }
+            for (iniciador = 1; iniciador < 9; iniciador += 2) {
+                sumimpar += cedulaContenido[iniciador];
+            }
+            sumtotal = sumpar + sumimpar;
+            res = sumtotal % 10;
+            comprobador = 10 - res;
+            if (comprobador== 10) {
+                comprobador = 0;
+            }
+            if (comprobador == cedulaContenido[9]&&cont==0) {
+                return true;
+            } else {
+                return false;
+            }
+            
+    }
+
+    private boolean validarDatos() {
+        boolean validacion = false;
+        if ((txtNombre.getText().length() > 0) && (txtCedulA.getText().length() == 10) && (dcFecha.getDate() != null)) {
+
         }
         return validacion;
     }
@@ -865,7 +913,7 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void dcFechaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dcFechaPropertyChange
-        if(dcFecha.getDate() != null){
+        if (dcFecha.getDate() != null) {
             int anioNacimiento = recuperarAnioNacimiento(dcFecha.getDate());
             calcularEdad(anioNacimiento);
         }
@@ -910,18 +958,17 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_btAgregarMiembroActionPerformed
-s
+
     private void txtCorreoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyReleased
-        if(validarCorreo(txtCorreo.getText())){
+        if (validarCorreo(txtCorreo.getText())) {
             lbAvisoCorreo.setVisible(false);
-        }
-        else{
+        } else {
             lbAvisoCorreo.setVisible(true);
         }
     }//GEN-LAST:event_txtCorreoKeyReleased
 
     private void cbCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCargoActionPerformed
-     String cargo = (String) cbCargo.getSelectedItem();
+        String cargo = (String) cbCargo.getSelectedItem();
         if (cargo.equals("Seleccione un cargo")) {
             CargoIngreso = "";
         } else if (cargo.equals("Administrador")) {
