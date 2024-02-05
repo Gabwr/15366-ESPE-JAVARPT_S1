@@ -689,7 +689,7 @@
                                                       <EmptySpace max="-2" attributes="0"/>
                                                       <Component id="txtCorreo" min="-2" pref="189" max="-2" attributes="0"/>
                                                       <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="lbAvisoCorreo" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
                                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -781,7 +781,7 @@
                                               <Group type="103" groupAlignment="3" attributes="0">
                                                   <Component id="txtCorreo" alignment="3" min="-2" max="-2" attributes="0"/>
                                                   <Component id="jLabel28" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="lbAvisoCorreo" alignment="3" min="-2" max="-2" attributes="0"/>
                                                   <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
@@ -914,13 +914,16 @@
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCorreoKeyReleased"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel28">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Correo"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel1">
+                    <Component class="javax.swing.JLabel" name="lbAvisoCorreo">
                       <Properties>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="0" green="0" red="cc" type="rgb"/>
@@ -973,8 +976,8 @@
                           </AuxValues>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                              <JTabbedPaneConstraints tabName="tab1">
-                                <Property name="tabTitle" type="java.lang.String" value="tab1"/>
+                              <JTabbedPaneConstraints tabName="Miembros">
+                                <Property name="tabTitle" type="java.lang.String" value="Miembros"/>
                               </JTabbedPaneConstraints>
                             </Constraint>
                           </Constraints>
@@ -1001,8 +1004,8 @@
                           </AuxValues>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                              <JTabbedPaneConstraints tabName="tab2">
-                                <Property name="tabTitle" type="java.lang.String" value="tab2"/>
+                              <JTabbedPaneConstraints tabName="Clientes">
+                                <Property name="tabTitle" type="java.lang.String" value="Clientes"/>
                               </JTabbedPaneConstraints>
                             </Constraint>
                           </Constraints>

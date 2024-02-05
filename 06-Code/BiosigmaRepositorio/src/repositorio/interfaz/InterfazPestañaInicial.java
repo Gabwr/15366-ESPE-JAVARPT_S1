@@ -2,11 +2,15 @@ package repositorio.interfaz;
 
 public class InterfazPestañaInicial extends javax.swing.JFrame {
 
-    private InterfazLogin interfazlogin;
+    public InterfazLogin interfazlogin;
+    public InterfazInicioMiembros interfazMiembro;
+    boolean presionBoton = false;
 
     public InterfazPestañaInicial() {
         initComponents();
+
     }
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -94,15 +98,15 @@ public class InterfazPestañaInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
-        
-
-            
 
                 interfazlogin = new InterfazLogin();
                 escritorio.add(interfazlogin);
                 System.out.println("Hola mundo");
+                
+
             
-            interfazlogin.show();
+            interfazlogin.show(); 
+            
          
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 

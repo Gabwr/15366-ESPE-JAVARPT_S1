@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
@@ -12,6 +14,7 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
         initComponents();
         PanelBiosigmaLogo.setBackground(new Color(0, 0, 0, 160));
         panelDescripcion.setBackground(new Color(0, 0, 0, 100));
+        lbAvisoCorreo.setVisible(false);
     }
 
     private int recuperarAnioNacimiento(Date anioNacimiento) {
@@ -31,7 +34,12 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
             txtEdad.setText(edadCalculada);
     }
     
-    
+    private boolean validarCorreo(String correo){
+        Pattern patron = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                                    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        Matcher mat = patron.matcher(correo);
+        return mat.find();
+    }
     
     private boolean validarDatos(){
         boolean validacion = false;
@@ -91,7 +99,7 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
         cbCargo = new javax.swing.JComboBox<>();
         txtCorreo = new javax.swing.JTextField();
         jLabel28 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lbAvisoCorreo = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -459,11 +467,16 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
         cbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un cargo", "Administrador", "Trabajador", " " }));
 
         txtCorreo.setEditable(false);
+        txtCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCorreoKeyReleased(evt);
+            }
+        });
 
         jLabel28.setText("Correo");
 
-        jLabel1.setForeground(new java.awt.Color(204, 0, 0));
-        jLabel1.setText("*CORREO INVÁLIDO");
+        lbAvisoCorreo.setForeground(new java.awt.Color(204, 0, 0));
+        lbAvisoCorreo.setText("*CORREO INVÁLIDO");
 
         jLabel7.setForeground(new java.awt.Color(255, 0, 0));
         jLabel7.setText("*");
@@ -492,7 +505,7 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
         ));
         jScrollPane4.setViewportView(jTable4);
 
-        jTabbedPane1.addTab("tab1", jScrollPane4);
+        jTabbedPane1.addTab("Miembros", jScrollPane4);
 
         jTable5.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -507,7 +520,7 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
         ));
         jScrollPane5.setViewportView(jTable5);
 
-        jTabbedPane1.addTab("tab2", jScrollPane5);
+        jTabbedPane1.addTab("Clientes", jScrollPane5);
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -564,7 +577,7 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel1)))
+                                        .addComponent(lbAvisoCorreo)))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())
                     .addGroup(jPanel10Layout.createSequentialGroup()
@@ -630,7 +643,7 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
                                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel28)
-                                    .addComponent(jLabel1)
+                                    .addComponent(lbAvisoCorreo)
                                     .addComponent(jLabel9))))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -827,6 +840,15 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btAgregarMiembroActionPerformed
 
+    private void txtCorreoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyReleased
+        if(validarCorreo(txtCorreo.getText())){
+            lbAvisoCorreo.setVisible(false);
+        }
+        else{
+            lbAvisoCorreo.setVisible(true);
+        }
+    }//GEN-LAST:event_txtCorreoKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BotonAgregarMiembros;
@@ -842,7 +864,6 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton9;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -878,6 +899,7 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
+    private javax.swing.JLabel lbAvisoCorreo;
     private javax.swing.JPanel panelBotones;
     private javax.swing.JPanel panelDescripcion;
     private javax.swing.JPanel panelMiembros;

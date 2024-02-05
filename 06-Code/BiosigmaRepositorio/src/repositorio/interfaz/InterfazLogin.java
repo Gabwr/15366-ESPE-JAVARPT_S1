@@ -4,10 +4,8 @@
  */
 package repositorio.interfaz;
 
-/**
- *
- * @author hp
- */
+
+ 
 public class InterfazLogin extends javax.swing.JInternalFrame {
 
     /**
@@ -16,6 +14,7 @@ public class InterfazLogin extends javax.swing.JInternalFrame {
     public InterfazLogin() {
         initComponents();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -158,7 +157,8 @@ public class InterfazLogin extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtContraseñaKeyReleased
 
     private void bttAcceder1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttAcceder1ActionPerformed
-        // TODO add your handling code here:
+        InterfazInicioMiembros inter = new InterfazInicioMiembros();
+        inter.show();
     }//GEN-LAST:event_bttAcceder1ActionPerformed
 
 
