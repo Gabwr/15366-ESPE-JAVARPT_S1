@@ -155,12 +155,10 @@ public class InterfazLogin extends javax.swing.JInternalFrame {
 
     private void txtUsuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyReleased
 
-        habilitarBoton();
     }//GEN-LAST:event_txtUsuarioKeyReleased
 
     private void txtContraseñaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraseñaKeyReleased
 
-        habilitarBoton();
     }//GEN-LAST:event_txtContraseñaKeyReleased
 
     private void bttAcceder1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttAcceder1ActionPerformed
