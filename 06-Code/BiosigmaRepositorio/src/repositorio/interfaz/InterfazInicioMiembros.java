@@ -138,6 +138,8 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
         panelPresentacion = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         panelDescripcion = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         panelProyectos = new javax.swing.JPanel();
         panelTablaProyectos = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -145,6 +147,7 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         panelMiembros = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
@@ -355,39 +358,54 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
 
         panelDescripcion.setBackground(new java.awt.Color(0, 0, 0));
 
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/oso5 (1).png"))); // NOI18N
+
         javax.swing.GroupLayout panelDescripcionLayout = new javax.swing.GroupLayout(panelDescripcion);
         panelDescripcion.setLayout(panelDescripcionLayout);
         panelDescripcionLayout.setHorizontalGroup(
             panelDescripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGroup(panelDescripcionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 235, Short.MAX_VALUE)
+                .addGap(15, 15, 15))
         );
         panelDescripcionLayout.setVerticalGroup(
             panelDescripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 319, Short.MAX_VALUE)
+            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
         );
+
+        jLabel1.setFont(new java.awt.Font("Yu Gothic Medium", 1, 36)); // NOI18N
+        jLabel1.setText("BIOSIGMA RESPOSITORIO");
 
         javax.swing.GroupLayout panelPresentacionLayout = new javax.swing.GroupLayout(panelPresentacion);
         panelPresentacion.setLayout(panelPresentacionLayout);
         panelPresentacionLayout.setHorizontalGroup(
             panelPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPresentacionLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel10)
-                .addGap(43, 43, 43)
-                .addComponent(panelDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+            .addGroup(panelPresentacionLayout.createSequentialGroup()
+                .addGroup(panelPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelPresentacionLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel10)
+                        .addGap(43, 43, 43)
+                        .addComponent(panelDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelPresentacionLayout.createSequentialGroup()
+                        .addGap(141, 141, 141)
+                        .addComponent(jLabel1)))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         panelPresentacionLayout.setVerticalGroup(
             panelPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPresentacionLayout.createSequentialGroup()
-                .addContainerGap(134, Short.MAX_VALUE)
+                .addContainerGap(64, Short.MAX_VALUE)
+                .addComponent(jLabel1)
                 .addGroup(panelPresentacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPresentacionLayout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addGap(88, 88, 88))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPresentacionLayout.createSequentialGroup()
-                        .addComponent(panelDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(61, 61, 61))))
+                    .addGroup(panelPresentacionLayout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel10))
+                    .addGroup(panelPresentacionLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panelDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(61, 61, 61))
         );
 
         tbPaneles.addTab("tab1", panelPresentacion);
@@ -423,6 +441,13 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/185042_edit_modify_icon.png"))); // NOI18N
         jButton3.setText("Actualizar Proyecto");
 
+        jButton12.setText("Regresar");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelTablaProyectosLayout = new javax.swing.GroupLayout(panelTablaProyectos);
         panelTablaProyectos.setLayout(panelTablaProyectosLayout);
         panelTablaProyectosLayout.setHorizontalGroup(
@@ -434,24 +459,28 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
                 .addGroup(panelTablaProyectosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTablaProyectosLayout.createSequentialGroup()
+                        .addComponent(jButton12)
+                        .addGap(8, 8, 8)))
                 .addGap(38, 38, 38))
         );
         panelTablaProyectosLayout.setVerticalGroup(
             panelTablaProyectosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTablaProyectosLayout.createSequentialGroup()
-                .addGroup(panelTablaProyectosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelTablaProyectosLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelTablaProyectosLayout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2)
-                        .addGap(29, 29, 29)
-                        .addComponent(jButton3)))
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(43, Short.MAX_VALUE))
+            .addGroup(panelTablaProyectosLayout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addGap(29, 29, 29)
+                .addComponent(jButton3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton12)
+                .addGap(15, 15, 15))
         );
 
         jLabel16.setBackground(new java.awt.Color(255, 255, 255));
@@ -1100,6 +1129,10 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton9ActionPerformed
 
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        tbPaneles.setSelectedIndex(0);
+    }//GEN-LAST:event_jButton12ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BotonAgregarMiembros;
@@ -1113,10 +1146,12 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton9;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -1138,6 +1173,7 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
