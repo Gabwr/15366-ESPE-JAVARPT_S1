@@ -2,6 +2,7 @@ package repositorio.interfaz;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import javax.swing.JOptionPane;
 
 public class InterfazLogin extends javax.swing.JFrame {
 
@@ -32,6 +33,7 @@ public class InterfazLogin extends javax.swing.JFrame {
         btnSesion = new javax.swing.JButton();
         txtContra = new javax.swing.JPasswordField();
         jLabel6 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         jButton1.setText("jButton1");
 
@@ -61,7 +63,14 @@ public class InterfazLogin extends javax.swing.JFrame {
         });
         panelLogin.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 39, 147, -1));
 
-        btnSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/button_iniciar-sesion.png"))); // NOI18N
+        btnSesion.setBackground(new java.awt.Color(204, 0, 204));
+        btnSesion.setFont(new java.awt.Font("Yu Gothic", 1, 18)); // NOI18N
+        btnSesion.setText("INICIAR SESIÓN");
+        btnSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSesionMouseEntered(evt);
+            }
+        });
         btnSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSesionActionPerformed(evt);
@@ -72,19 +81,28 @@ public class InterfazLogin extends javax.swing.JFrame {
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/paisaje.png"))); // NOI18N
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/logoBiosigma.png"))); // NOI18N
+
         escritorio.setLayer(panelLogin, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escritorioLayout.createSequentialGroup()
-                .addGap(380, 380, 380)
-                .addComponent(panelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(escritorioLayout.createSequentialGroup()
-                .addGap(210, 210, 210)
-                .addComponent(jLabel6))
+                .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(escritorioLayout.createSequentialGroup()
+                        .addGap(380, 380, 380)
+                        .addComponent(panelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(escritorioLayout.createSequentialGroup()
+                        .addGap(210, 210, 210)
+                        .addComponent(jLabel6))
+                    .addGroup(escritorioLayout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabel2)))
+                .addGap(490, 490, 490))
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,11 +110,13 @@ public class InterfazLogin extends javax.swing.JFrame {
                 .addGap(280, 280, 280)
                 .addComponent(panelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(escritorioLayout.createSequentialGroup()
-                .addGap(170, 170, 170)
+                .addGap(32, 32, 32)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
                 .addComponent(jLabel6))
         );
 
-        getContentPane().add(escritorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 690));
+        getContentPane().add(escritorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 710));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -115,13 +135,15 @@ public class InterfazLogin extends javax.swing.JFrame {
             interfaz.show();
 
         } else {
-            if (interfaz != null) {
-                interfaz.dispose();
-                interfaz = null;
-            }
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null,"INGRESE UN USUARIO Y CONTRASEÑA VÁLIDOS");
         }
 
     }//GEN-LAST:event_btnSesionActionPerformed
+
+    private void btnSesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSesionMouseEntered
+        
+    }//GEN-LAST:event_btnSesionMouseEntered
 
     /**
      * @param args the command line arguments
@@ -163,6 +185,7 @@ public class InterfazLogin extends javax.swing.JFrame {
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;

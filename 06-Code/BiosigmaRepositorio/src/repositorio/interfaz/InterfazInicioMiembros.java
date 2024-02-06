@@ -11,26 +11,11 @@ import javax.swing.table.DefaultTableModel;
 
 public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
 
-    DefaultTableModel dtmClient = new DefaultTableModel();
-    DefaultTableModel dtmAdmin = new DefaultTableModel();
-    DefaultTableModel dtmWorker = new DefaultTableModel();
     String CargoIngreso;
     private int contador = 1;
 
     public InterfazInicioMiembros() {
         initComponents();
-        dtmClient.addColumn("Cedula");
-        dtmClient.addColumn("Nombre");
-        dtmClient.addColumn("Correo");
-        this.tbClientes.setModel(dtmClient);
-        dtmAdmin.addColumn("Cedula");
-        dtmAdmin.addColumn("Nombre");
-        dtmAdmin.addColumn("Correo");
-        this.tbAdmin.setModel(dtmAdmin);
-        dtmWorker.addColumn("Cedula");
-        dtmWorker.addColumn("Nombre");
-        dtmWorker.addColumn("Correo");
-        this.tbTrabajadores.setModel(dtmWorker);
         PanelBiosigmaLogo.setBackground(new Color(0, 0, 0, 160));
         panelDescripcion.setBackground(new Color(0, 0, 0, 100));
         panelOpciones.setBackground(new Color(0, 0, 0, 160));
@@ -172,7 +157,7 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
         lbAvisoCedula = new javax.swing.JLabel();
         lbAvisoFecha = new javax.swing.JLabel();
         lbAvisoCargo = new javax.swing.JLabel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tbMiembros = new javax.swing.JTabbedPane();
         jScrollPane4 = new javax.swing.JScrollPane();
         tbAdmin = new javax.swing.JTable();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -291,7 +276,7 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        panelBotones.add(BotonProyectos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 230, 60));
+        panelBotones.add(BotonProyectos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 230, 60));
 
         BotonAgregarMiembros.setBackground(new java.awt.Color(0, 204, 153));
         BotonAgregarMiembros.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -337,7 +322,7 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        panelBotones.add(BotonAgregarMiembros, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 350, 240, 70));
+        panelBotones.add(BotonAgregarMiembros, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 240, 70));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/colibri_png.png"))); // NOI18N
         panelBotones.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 470, 160, 140));
@@ -394,7 +379,7 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
 
         panelProyectos.setBackground(new java.awt.Color(0, 51, 0));
 
-        panelTablaProyectos.setBackground(new java.awt.Color(51, 51, 51));
+        panelTablaProyectos.setBackground(new java.awt.Color(102, 102, 102));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -454,7 +439,9 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
                 .addContainerGap(43, Short.MAX_VALUE))
         );
 
+        jLabel16.setBackground(new java.awt.Color(255, 255, 255));
         jLabel16.setFont(new java.awt.Font("Yu Gothic Medium", 1, 24)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("PROYECTOS REGISTRADOS");
 
         javax.swing.GroupLayout panelProyectosLayout = new javax.swing.GroupLayout(panelProyectos);
@@ -548,7 +535,7 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
 
         jLabel27.setText("Cargo");
 
-        cbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un cargo", "Administrador", "Trabajador", " " }));
+        cbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un cargo", "Administrador", "Trabajador", "Cliente", " " }));
         cbCargo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbCargoActionPerformed(evt);
@@ -585,62 +572,73 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
 
         tbAdmin.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Cédula", "Nombre", "Correo", "Edad"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane4.setViewportView(tbAdmin);
 
-        jTabbedPane1.addTab("Administradores", jScrollPane4);
+        tbMiembros.addTab("Administradores", jScrollPane4);
 
         tbClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Cédula", "Nombre", "Correo", "Edad"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane5.setViewportView(tbClientes);
 
-        jTabbedPane1.addTab("Clientes", jScrollPane5);
+        tbMiembros.addTab("Clientes", jScrollPane5);
 
         tbTrabajadores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Cédula", "Nombre", "Correo", "Edad"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(tbTrabajadores);
 
-        jTabbedPane1.addTab("Trabajadores", jScrollPane2);
+        tbMiembros.addTab("Trabajadores", jScrollPane2);
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton11)
-                .addContainerGap())
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tbMiembros, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jButton9)
@@ -667,31 +665,37 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
                                     .addGroup(jPanel10Layout.createSequentialGroup()
                                         .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 0, Short.MAX_VALUE)))))
-                        .addGap(6, 6, 6)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
                                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbAvisoNombre)
-                                    .addComponent(lbAvisoCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(33, 33, 33)
-                                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel22)
-                                    .addComponent(jLabel27))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtCodigo)
-                                    .addComponent(cbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbAvisoCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel10Layout.createSequentialGroup()
-                                .addComponent(lbAvisoFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33)
-                                .addComponent(jLabel28)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbAvisoCorreo)))))
-                .addContainerGap(20, Short.MAX_VALUE))
+                                    .addGroup(jPanel10Layout.createSequentialGroup()
+                                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lbAvisoNombre)
+                                            .addComponent(lbAvisoCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(33, 33, 33)
+                                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel22)
+                                            .addComponent(jLabel27))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txtCodigo)
+                                            .addComponent(cbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lbAvisoCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel10Layout.createSequentialGroup()
+                                        .addComponent(lbAvisoFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(33, 33, 33)
+                                        .addComponent(jLabel28)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lbAvisoCorreo)))
+                                .addGap(0, 65, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton11)))))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -706,7 +710,7 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
                         .addComponent(jButton10))
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(tbMiembros, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
@@ -747,13 +751,17 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel28)
                                     .addComponent(lbAvisoCorreo)
                                     .addComponent(lbAvisoFecha))))
-                        .addGap(18, 18, 18)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel26)
-                            .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                        .addComponent(jButton11)
-                        .addContainerGap())))
+                            .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel26)
+                                    .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                                .addComponent(jButton11)
+                                .addGap(18, 18, 18))))))
         );
 
         jLabel21.setBackground(new java.awt.Color(255, 255, 255));
@@ -772,7 +780,7 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMiembrosLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(308, 308, 308))
+                .addGap(328, 328, 328))
         );
         panelMiembrosLayout.setVerticalGroup(
             panelMiembrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -780,8 +788,8 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel21)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(13, 13, 13))
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         tbPaneles.addTab("tab2", panelMiembros);
@@ -949,37 +957,30 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void btAgregarMiembroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgregarMiembroActionPerformed
-        // TODO add your handling code here:
-        String nombre = (String) txtNombre.getText();
-        String cedula = (String) txtCedulA.getText();
-        String correo = (String) txtCorreo.getText();
 
-        String[] informacion = new String[3];
-        if (nombre.isEmpty() || cedula.isEmpty() || correo.isEmpty() || dcFecha.getDate() == null) {
-            JOptionPane.showMessageDialog(null, "No hay datos a ingresar\n Complete los campos");
-        } else if (CargoIngreso.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Ingrese el area al que pertenece el trabajador");
-        } else {
+        DefaultTableModel dtm1 = (DefaultTableModel) tbAdmin.getModel();
+        DefaultTableModel dtm2 = (DefaultTableModel) tbClientes.getModel();
+        DefaultTableModel dtm3 = (DefaultTableModel) tbTrabajadores.getModel();
+
+        String nombre = txtNombre.getText();
+        String cedula = txtCedulA.getText();
+        String correo = txtCorreo.getText();
+        String edad = txtEdad.getText();
+
+        if (validarDatos()) {
             if (CargoIngreso.equals("Administrador")) {
-                informacion[0] = txtCedulA.getText();
-                informacion[1] = txtNombre.getText();
-                informacion[3] = txtCorreo.getText();
-                dtmAdmin.addRow(informacion);
+                dtm1.addRow(new Object[]{cedula,nombre, correo, edad});
+                tbMiembros.setSelectedIndex(0);
                 JOptionPane.showMessageDialog(null, "Usuario guardado correctamente.");
             } else if (CargoIngreso.equals("Trabajador")) {
-                informacion[0] = txtCedulA.getText();
-                informacion[1] = txtNombre.getText();
-                informacion[3] = txtCorreo.getText();
-                dtmWorker.addRow(informacion);
+                dtm3.addRow(new Object[]{cedula,nombre, correo, edad});
+                tbMiembros.setSelectedIndex(2);
                 JOptionPane.showMessageDialog(null, "Usuario guardado correctamente.");
             } else if (CargoIngreso.equals("Cliente")) {
-                informacion[0] = txtCedulA.getText();
-                informacion[1] = txtNombre.getText();
-                informacion[3] = txtCorreo.getText();
-                dtmClient.addRow(informacion);
+                tbMiembros.setSelectedIndex(1);
+                dtm2.addRow(new Object[]{cedula,nombre, correo, edad});
                 JOptionPane.showMessageDialog(null, "Usuario guardado correctamente.");
             }
-
         }
 
     }//GEN-LAST:event_btAgregarMiembroActionPerformed
@@ -1047,7 +1048,7 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
                 + "\n2.- Mateo Medranda"
                 + "\n3.- Alejandro Obando"
                 + "\n4.- Joselyn Morocho"
-                + "==============================================");
+                + "\n==============================================");
     }//GEN-LAST:event_btInfoProgramadorActionPerformed
 
     private void txtCedulAKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulAKeyTyped
@@ -1103,7 +1104,6 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbAvisoCargo;
     private javax.swing.JLabel lbAvisoCedula;
@@ -1121,6 +1121,7 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
     private javax.swing.JPanel panelTablaProyectos;
     private javax.swing.JTable tbAdmin;
     private javax.swing.JTable tbClientes;
+    private javax.swing.JTabbedPane tbMiembros;
     private javax.swing.JTabbedPane tbPaneles;
     private javax.swing.JTable tbTrabajadores;
     private javax.swing.JTextField txtCedulA;
