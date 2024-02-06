@@ -207,6 +207,7 @@ public class InterfazLogin extends javax.swing.JFrame {
     private javax.swing.JButton btnSesion;
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
