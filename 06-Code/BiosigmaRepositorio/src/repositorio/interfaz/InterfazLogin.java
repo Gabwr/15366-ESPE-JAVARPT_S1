@@ -6,13 +6,10 @@ import javax.swing.JOptionPane;
 
 public class InterfazLogin extends javax.swing.JFrame {
 
-    private InterfazInicioMiembros interfaz;
-
     public InterfazLogin() {
         initComponents();
         setIconImage(getIconImage());
     }
-
     @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("resource/colibri_png.png"));
@@ -127,22 +124,30 @@ public class InterfazLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUsuarioKeyReleased
 
     private void btnSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSesionActionPerformed
-        if ((txtContra.getText().equals("0650160203")) && (txtUsuario.getText().equals("A10001"))) {
-            if (interfaz == null || interfaz.isClosed()) {
-                interfaz = new InterfazInicioMiembros();
-                escritorio.add(interfaz);
-            }
+        InterfazInicioMiembros interfaz = null;
+        if ((txtContra.getText().equals("0650160203")) && (txtUsuario.getText().equals("A10001")) && interfaz == null) {
+            interfaz = new InterfazInicioMiembros("Admnistrador");
+            escritorio.add(interfaz);
             interfaz.show();
 
+        } else if ((txtContra.getText().equals("12345")) && (txtUsuario.getText().equals("T10001")) && interfaz == null) {
+            interfaz = new InterfazInicioMiembros("Trabajador");
+            escritorio.add(interfaz);
+            interfaz.show();
+
+        } else if ((txtContra.getText().equals("54321")) && (txtUsuario.getText().equals("C10001")) && interfaz == null) {
+            interfaz = new InterfazInicioMiembros("Cliente");
+            escritorio.add(interfaz);
+            interfaz.show();
         } else {
             getToolkit().beep();
-            JOptionPane.showMessageDialog(null,"INGRESE UN USUARIO Y CONTRASEÑA VÁLIDOS");
+            JOptionPane.showMessageDialog(null, "Ingrese usuario y contraseño existentes");
         }
 
     }//GEN-LAST:event_btnSesionActionPerformed
 
     private void btnSesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSesionMouseEntered
-        
+
     }//GEN-LAST:event_btnSesionMouseEntered
 
     /**

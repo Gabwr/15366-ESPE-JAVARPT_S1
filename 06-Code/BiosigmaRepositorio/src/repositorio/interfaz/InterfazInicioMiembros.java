@@ -14,8 +14,22 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
     String CargoIngreso;
     private int contador = 1;
 
-    public InterfazInicioMiembros() {
+
+    public InterfazInicioMiembros(String usuario) {
+        this.CargoIngreso = usuario;
         initComponents();
+        if (CargoIngreso.equals("Trabajador")) {
+            btAgregarMiembro.setVisible(false);
+            btnActualizarProyecto.setVisible(false);
+            jLUsuarios.setVisible(false);
+            jLImgUsuarios.setVisible(false);
+        } else if (CargoIngreso.equals("Cliente")) {
+            btAgregarMiembro.setVisible(false);
+            btnActualizarProyecto.setVisible(false);
+            btnAgregarProyecto.setVisible(false);
+            jLUsuarios.setVisible(false);
+            jLImgUsuarios.setVisible(false);
+        }
         PanelBiosigmaLogo.setBackground(new Color(0, 0, 0, 160));
         panelDescripcion.setBackground(new Color(0, 0, 0, 100));
         panelOpciones.setBackground(new Color(0, 0, 0, 160));
@@ -29,7 +43,8 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
         int anio = Integer.parseInt(anioNacimientoCadena);
         return anio;
     }
-    private void limpiar(){
+
+    private void limpiar() {
         txtCedulA.setText("");
         txtCodigo.setText("");
         txtCorreo.setText("");
@@ -38,6 +53,7 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
         cbCargo.setSelectedIndex(0);
         dcFecha.setDate(null);
     }
+
     private void calcularEdad(int anioNacimiento) {
         LocalDate actual = LocalDate.now();
 
@@ -56,64 +72,64 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
     }
 
     private boolean validarCedula() {
-        if(txtCedulA.getText().isEmpty()){
+        if (txtCedulA.getText().isEmpty()) {
             return false;
-        }else{
-        int[] cedulaContenido = new int[10];
-        int cedulaString = Integer.parseInt(txtCedulA.getText());
-        int cedulaStringDivisor = cedulaString, cont = 0, iniciador = 0, residuo, cosciente, mul = 0, sumpar = 0, sumimpar = 0, sumtotal = 0, res = 0, comprobador = 0;
-
-        for (iniciador = 9; iniciador >= 0; iniciador--) {
-            cosciente = cedulaStringDivisor / 10;
-            residuo = cedulaStringDivisor % 10;
-            cedulaContenido[iniciador] = residuo;
-            cedulaStringDivisor = cosciente;
-        }
-
-        if (cedulaContenido[0] == 0 && cedulaContenido[1] == 0) {
-            cont++;
-        }
-
-        if (cedulaContenido[0] == 2 && cedulaContenido[1] > 4) {
-            cont++;
-        }
-
-        if (cedulaContenido[0] == 3 && cedulaContenido[1] != 0) {
-            cont++;
-        }
-        for (iniciador = 0; iniciador < 9; iniciador += 2) {
-            mul = cedulaContenido[iniciador] * 2;
-            if (mul > 9) {
-                mul -= 9;
-            }
-            sumpar += mul;
-        }
-        for (iniciador = 1; iniciador < 9; iniciador += 2) {
-            sumimpar += cedulaContenido[iniciador];
-        }
-        sumtotal = sumpar + sumimpar;
-        res = sumtotal % 10;
-        comprobador = 10 - res;
-        if (comprobador == 10) {
-            comprobador = 0;
-        }
-        if (comprobador == cedulaContenido[9] && cont == 0) {
-            return true;
         } else {
-            return false;
-        }
+            int[] cedulaContenido = new int[10];
+            int cedulaString = Integer.parseInt(txtCedulA.getText());
+            int cedulaStringDivisor = cedulaString, cont = 0, iniciador = 0, residuo, cosciente, mul = 0, sumpar = 0, sumimpar = 0, sumtotal = 0, res = 0, comprobador = 0;
+
+            for (iniciador = 9; iniciador >= 0; iniciador--) {
+                cosciente = cedulaStringDivisor / 10;
+                residuo = cedulaStringDivisor % 10;
+                cedulaContenido[iniciador] = residuo;
+                cedulaStringDivisor = cosciente;
+            }
+
+            if (cedulaContenido[0] == 0 && cedulaContenido[1] == 0) {
+                cont++;
+            }
+
+            if (cedulaContenido[0] == 2 && cedulaContenido[1] > 4) {
+                cont++;
+            }
+
+            if (cedulaContenido[0] == 3 && cedulaContenido[1] != 0) {
+                cont++;
+            }
+            for (iniciador = 0; iniciador < 9; iniciador += 2) {
+                mul = cedulaContenido[iniciador] * 2;
+                if (mul > 9) {
+                    mul -= 9;
+                }
+                sumpar += mul;
+            }
+            for (iniciador = 1; iniciador < 9; iniciador += 2) {
+                sumimpar += cedulaContenido[iniciador];
+            }
+            sumtotal = sumpar + sumimpar;
+            res = sumtotal % 10;
+            comprobador = 10 - res;
+            if (comprobador == 10) {
+                comprobador = 0;
+            }
+            if (comprobador == cedulaContenido[9] && cont == 0) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
-    
+
     private boolean validarDatos() {
         boolean validacion = false;
         if ((txtNombre.getText().length() > 0) && validarCedula() && (dcFecha.getDate() != null) && validarCorreo(txtCorreo.getText()) && (!"Seleccione un cargo".equals(cbCargo.getSelectedItem().toString()))) {
             validacion = true;
             return validacion;
-        }else{
+        } else {
             return validacion;
         }
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -130,8 +146,8 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         BotonAgregarMiembros = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
+        jLImgUsuarios = new javax.swing.JLabel();
+        jLUsuarios = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         panelPestañas = new javax.swing.JPanel();
         tbPaneles = new javax.swing.JTabbedPane();
@@ -144,16 +160,16 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
         panelTablaProyectos = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
+        btnAgregarProyecto = new javax.swing.JButton();
+        btnAbrirProyecto = new javax.swing.JButton();
+        btnActualizarProyecto = new javax.swing.JButton();
+        btnRegresarProyectos = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         panelMiembros = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         btAgregarMiembro = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
+        btnActualizarusuarios = new javax.swing.JButton();
+        btnEliminarUsuarios = new javax.swing.JButton();
         txtEdad = new javax.swing.JTextField();
         dcFecha = new com.toedter.calendar.JDateChooser();
         txtCedulA = new javax.swing.JTextField();
@@ -162,7 +178,7 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
-        jButton11 = new javax.swing.JButton();
+        btnRegresarUsuarios = new javax.swing.JButton();
         jLabel22 = new javax.swing.JLabel();
         txtCodigo = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
@@ -181,7 +197,7 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
         tbClientes = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbTrabajadores = new javax.swing.JTable();
-        jButton4 = new javax.swing.JButton();
+        BtnLimpiarUsuarios = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
@@ -278,20 +294,21 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
         BotonProyectosLayout.setHorizontalGroup(
             BotonProyectosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BotonProyectosLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addContainerGap()
                 .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
-                .addGap(15, 15, 15))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
         BotonProyectosLayout.setVerticalGroup(
             BotonProyectosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BotonProyectosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(BotonProyectosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel5))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel5)
+                .addContainerGap(22, Short.MAX_VALUE))
+            .addGroup(BotonProyectosLayout.createSequentialGroup()
+                .addComponent(jLabel11)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         panelBotones.add(BotonProyectos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 230, 60));
@@ -309,23 +326,23 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/BotonAgregarMiembro.png"))); // NOI18N
+        jLImgUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/BotonAgregarMiembro.png"))); // NOI18N
 
-        jLabel17.setBackground(new java.awt.Color(51, 0, 51));
-        jLabel17.setFont(new java.awt.Font("Segoe UI Light", 1, 24)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel17.setText("Miembros");
+        jLUsuarios.setBackground(new java.awt.Color(51, 0, 51));
+        jLUsuarios.setFont(new java.awt.Font("Segoe UI Light", 1, 24)); // NOI18N
+        jLUsuarios.setForeground(new java.awt.Color(51, 51, 51));
+        jLUsuarios.setText("Usuarios");
 
         javax.swing.GroupLayout BotonAgregarMiembrosLayout = new javax.swing.GroupLayout(BotonAgregarMiembros);
         BotonAgregarMiembros.setLayout(BotonAgregarMiembrosLayout);
         BotonAgregarMiembrosLayout.setHorizontalGroup(
             BotonAgregarMiembrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BotonAgregarMiembrosLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                .addComponent(jLabel17)
-                .addGap(18, 18, 18))
+                .addContainerGap()
+                .addComponent(jLImgUsuarios)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLUsuarios)
+                .addContainerGap(89, Short.MAX_VALUE))
         );
         BotonAgregarMiembrosLayout.setVerticalGroup(
             BotonAgregarMiembrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -333,10 +350,10 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
                 .addGroup(BotonAgregarMiembrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(BotonAgregarMiembrosLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel13))
+                        .addComponent(jLImgUsuarios))
                     .addGroup(BotonAgregarMiembrosLayout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addComponent(jLabel17)))
+                        .addComponent(jLUsuarios)))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -432,19 +449,19 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/1814113_add_more_plus_icon.png"))); // NOI18N
-        jButton1.setText("Agregar Proyecto");
+        btnAgregarProyecto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/1814113_add_more_plus_icon.png"))); // NOI18N
+        btnAgregarProyecto.setText("Agregar Proyecto");
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/3643772-archive-archives-document-folder-open_113445.png"))); // NOI18N
-        jButton2.setText("Abrir Proyecto");
+        btnAbrirProyecto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/3643772-archive-archives-document-folder-open_113445.png"))); // NOI18N
+        btnAbrirProyecto.setText("Abrir Proyecto");
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/185042_edit_modify_icon.png"))); // NOI18N
-        jButton3.setText("Actualizar Proyecto");
+        btnActualizarProyecto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/185042_edit_modify_icon.png"))); // NOI18N
+        btnActualizarProyecto.setText("Actualizar Proyecto");
 
-        jButton12.setText("Regresar");
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
+        btnRegresarProyectos.setText("Regresar");
+        btnRegresarProyectos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
+                btnRegresarProyectosActionPerformed(evt);
             }
         });
 
@@ -457,11 +474,11 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(panelTablaProyectosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnActualizarProyecto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAbrirProyecto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAgregarProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTablaProyectosLayout.createSequentialGroup()
-                        .addComponent(jButton12)
+                        .addComponent(btnRegresarProyectos)
                         .addGap(8, 8, 8)))
                 .addGap(38, 38, 38))
         );
@@ -473,13 +490,13 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
                 .addContainerGap(43, Short.MAX_VALUE))
             .addGroup(panelTablaProyectosLayout.createSequentialGroup()
                 .addGap(42, 42, 42)
-                .addComponent(jButton1)
+                .addComponent(btnAgregarProyecto)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(btnAbrirProyecto)
                 .addGap(29, 29, 29)
-                .addComponent(jButton3)
+                .addComponent(btnActualizarProyecto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton12)
+                .addComponent(btnRegresarProyectos)
                 .addGap(15, 15, 15))
         );
 
@@ -526,16 +543,21 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/185042_edit_modify_icon.png"))); // NOI18N
-        jButton9.setText("Actualizar Informacion");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        btnActualizarusuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/185042_edit_modify_icon.png"))); // NOI18N
+        btnActualizarusuarios.setText("Actualizar Informacion");
+        btnActualizarusuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                btnActualizarusuariosActionPerformed(evt);
             }
         });
 
-        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/185090_delete_garbage_icon.png"))); // NOI18N
-        jButton10.setText("Eliminar Miembro");
+        btnEliminarUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/185090_delete_garbage_icon.png"))); // NOI18N
+        btnEliminarUsuarios.setText("Eliminar Miembro");
+        btnEliminarUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarUsuariosActionPerformed(evt);
+            }
+        });
 
         txtEdad.setEditable(false);
 
@@ -571,10 +593,10 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
 
         jLabel26.setText("Edad");
 
-        jButton11.setText("Regresar");
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
+        btnRegresarUsuarios.setText("Regresar");
+        btnRegresarUsuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
+                btnRegresarUsuariosActionPerformed(evt);
             }
         });
 
@@ -679,11 +701,11 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
 
         tbMiembros.addTab("Trabajadores", jScrollPane2);
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/limpiar.png"))); // NOI18N
-        jButton4.setText("Limpiar datos");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        BtnLimpiarUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/limpiar.png"))); // NOI18N
+        BtnLimpiarUsuarios.setText("Limpiar datos");
+        BtnLimpiarUsuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                BtnLimpiarUsuariosActionPerformed(evt);
             }
         });
 
@@ -698,9 +720,9 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
                         .addComponent(tbMiembros, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton9)
+                            .addComponent(btnActualizarusuarios)
                             .addComponent(btAgregarMiembro, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnEliminarUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel10Layout.createSequentialGroup()
@@ -749,10 +771,10 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
                                                 .addComponent(lbAvisoCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                                .addComponent(BtnLimpiarUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton11)
+                                .addComponent(btnRegresarUsuarios)
                                 .addGap(15, 15, 15)))))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
@@ -764,9 +786,9 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btAgregarMiembro)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton9)
+                        .addComponent(btnActualizarusuarios)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton10))
+                        .addComponent(btnEliminarUsuarios))
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(tbMiembros, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -790,7 +812,7 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
                                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18))
                             .addGroup(jPanel10Layout.createSequentialGroup()
-                                .addComponent(jButton4)
+                                .addComponent(BtnLimpiarUsuarios)
                                 .addGap(32, 32, 32)))
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel27)
@@ -818,7 +840,7 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel26)
-                            .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnRegresarUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(12, Short.MAX_VALUE))))
         );
 
@@ -1010,9 +1032,9 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_dcFechaPropertyChange
 
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+    private void btnRegresarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarUsuariosActionPerformed
         tbPaneles.setSelectedIndex(0);
-    }//GEN-LAST:event_jButton11ActionPerformed
+    }//GEN-LAST:event_btnRegresarUsuariosActionPerformed
 
     private void btAgregarMiembroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgregarMiembroActionPerformed
 
@@ -1025,21 +1047,21 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
         String correo = txtCorreo.getText();
         String edad = txtEdad.getText();
 
-        if (validarDatos()&&validarCedula()) {
+        if (validarDatos() && validarCedula()) {
             if (CargoIngreso.equals("Administrador")) {
-                dtm1.addRow(new Object[]{cedula,nombre, correo, edad});
+                dtm1.addRow(new Object[]{cedula, nombre, correo, edad});
                 tbMiembros.setSelectedIndex(0);
                 JOptionPane.showMessageDialog(null, "Usuario guardado correctamente.");
             } else if (CargoIngreso.equals("Trabajador")) {
-                dtm3.addRow(new Object[]{cedula,nombre, correo, edad});
+                dtm3.addRow(new Object[]{cedula, nombre, correo, edad});
                 tbMiembros.setSelectedIndex(2);
                 JOptionPane.showMessageDialog(null, "Usuario guardado correctamente.");
             } else if (CargoIngreso.equals("Cliente")) {
                 tbMiembros.setSelectedIndex(1);
-                dtm2.addRow(new Object[]{cedula,nombre, correo, edad});
+                dtm2.addRow(new Object[]{cedula, nombre, correo, edad});
                 JOptionPane.showMessageDialog(null, "Usuario guardado correctamente.");
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Ingrese los datos correctamente");
         }
 
@@ -1120,45 +1142,49 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txtCedulAKeyTyped
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void BtnLimpiarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLimpiarUsuariosActionPerformed
         // TODO add your handling code here:
         limpiar();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_BtnLimpiarUsuariosActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+    private void btnActualizarusuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarusuariosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton9ActionPerformed
+    }//GEN-LAST:event_btnActualizarusuariosActionPerformed
 
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+    private void btnRegresarProyectosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarProyectosActionPerformed
         tbPaneles.setSelectedIndex(0);
-    }//GEN-LAST:event_jButton12ActionPerformed
+    }//GEN-LAST:event_btnRegresarProyectosActionPerformed
+
+    private void btnEliminarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarUsuariosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminarUsuariosActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BotonAgregarMiembros;
     private javax.swing.JPanel BotonOpciones;
     private javax.swing.JPanel BotonProyectos;
+    private javax.swing.JButton BtnLimpiarUsuarios;
     private javax.swing.JPanel PanelBiosigmaLogo;
     private javax.swing.JButton btAgregarMiembro;
     private javax.swing.JButton btInfoProgramador;
+    private javax.swing.JButton btnAbrirProyecto;
+    private javax.swing.JButton btnActualizarProyecto;
+    private javax.swing.JButton btnActualizarusuarios;
+    private javax.swing.JButton btnAgregarProyecto;
+    private javax.swing.JButton btnEliminarUsuarios;
+    private javax.swing.JButton btnRegresarProyectos;
+    private javax.swing.JButton btnRegresarUsuarios;
     private javax.swing.JComboBox<String> cbCargo;
     private com.toedter.calendar.JDateChooser dcFecha;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton9;
+    private javax.swing.JLabel jLImgUsuarios;
+    private javax.swing.JLabel jLUsuarios;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;
