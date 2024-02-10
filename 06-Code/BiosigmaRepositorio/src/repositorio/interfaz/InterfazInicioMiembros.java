@@ -91,11 +91,9 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
             if (cedulaContenido[0] == 0 && cedulaContenido[1] == 0) {
                 cont++;
             }
-
             if (cedulaContenido[0] == 2 && cedulaContenido[1] > 4) {
                 cont++;
             }
-
             if (cedulaContenido[0] == 3 && cedulaContenido[1] != 0) {
                 cont++;
             }
@@ -233,6 +231,7 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
         jTextField9 = new javax.swing.JTextField();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
+        panelAgregarProyecto = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         panelMiembros = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
@@ -553,12 +552,14 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
 
         panelTablaProyectos.setBackground(new java.awt.Color(204, 204, 255));
 
+        jTable1.setBackground(new java.awt.Color(255, 204, 204));
+        jTable1.setForeground(new java.awt.Color(204, 255, 204));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Id", "Nombre ", "Completado", "Recordatorios"
+                "Código", "Nombre ", "Indicador", "Recordatorios"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -718,12 +719,6 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
 
         jLabel30.setFont(new java.awt.Font("Sitka Banner", 1, 14)); // NOI18N
         jLabel30.setText("Fecha de Finalización:");
-
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout panelAbrirProyectoLayout = new javax.swing.GroupLayout(panelAbrirProyecto);
         panelAbrirProyecto.setLayout(panelAbrirProyectoLayout);
@@ -1126,6 +1121,19 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
         );
 
         tbPanelesProyectos.addTab("tab2", PanelActualizarProyecto);
+
+        javax.swing.GroupLayout panelAgregarProyectoLayout = new javax.swing.GroupLayout(panelAgregarProyecto);
+        panelAgregarProyecto.setLayout(panelAgregarProyectoLayout);
+        panelAgregarProyectoLayout.setHorizontalGroup(
+            panelAgregarProyectoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 839, Short.MAX_VALUE)
+        );
+        panelAgregarProyectoLayout.setVerticalGroup(
+            panelAgregarProyectoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 451, Short.MAX_VALUE)
+        );
+
+        tbPanelesProyectos.addTab("tab4", panelAgregarProyecto);
 
         jLabel16.setBackground(new java.awt.Color(255, 255, 255));
         jLabel16.setFont(new java.awt.Font("Sitka Banner", 1, 36)); // NOI18N
@@ -1814,24 +1822,19 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
         tbPanelesProyectos.setSelectedIndex(1);
     }//GEN-LAST:event_btnAbrirProyectoActionPerformed
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
-
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         tbPanelesProyectos.setSelectedIndex(0);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void btAgregarCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgregarCargoActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btAgregarCargoActionPerformed
 
     private void rdEnProgresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdEnProgresoActionPerformed
-        if(rdEnProgreso.isSelected()){
+        if (rdEnProgreso.isSelected()) {
             dcFechaFinalizado.setEnabled(false);
             dcFechaFinalizado.setDate(null);
-        }
-        else{
+        } else {
             dcFechaFinalizado.setEnabled(true);
         }
     }//GEN-LAST:event_rdEnProgresoActionPerformed
@@ -1955,6 +1958,7 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lbAvisoNombre;
     private javax.swing.JLabel lbCargo;
     private javax.swing.JPanel panelAbrirProyecto;
+    private javax.swing.JPanel panelAgregarProyecto;
     private javax.swing.JPanel panelBotones;
     private javax.swing.JPanel panelDescripcion;
     private javax.swing.JPanel panelMiembros;

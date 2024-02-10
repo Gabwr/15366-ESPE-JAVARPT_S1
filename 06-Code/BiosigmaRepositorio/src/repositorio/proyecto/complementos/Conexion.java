@@ -30,7 +30,7 @@ public class Conexion {
     int puerto = 27017;
     try{
         mongo = new MongoClient(servidor,puerto);
-        dataB = mongo.getDatabase("dbBiosigma");
+        dataB = mongo.getDatabase("db_Biosigma");
         
     }catch(MongoException ex){
         JOptionPane.showMessageDialog(null, "Error en la conexión a Mongodb"+ex.toString());
