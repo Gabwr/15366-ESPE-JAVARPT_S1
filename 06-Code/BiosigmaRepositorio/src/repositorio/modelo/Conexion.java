@@ -1,4 +1,4 @@
-package repositorio.proyecto.complementos;
+package repositorio.modelo;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;

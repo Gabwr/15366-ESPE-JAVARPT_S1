@@ -1,4 +1,4 @@
-package repositorio.ejecutable;
+package repositorio.controlador;
 
 import java.util.*;
 
