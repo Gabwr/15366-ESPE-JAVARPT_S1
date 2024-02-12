@@ -362,14 +362,12 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
         jTextField1.setEditable(false);
         jTextField1.setBackground(new java.awt.Color(102, 204, 255));
         jTextField1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(0, 0, 0));
         jTextField1.setBorder(null);
         panelBotones.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 190, 30));
 
         jTextField2.setEditable(false);
         jTextField2.setBackground(new java.awt.Color(102, 204, 255));
         jTextField2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(0, 0, 0));
         jTextField2.setBorder(null);
         panelBotones.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 190, 30));
 
@@ -545,7 +543,7 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
                     .addComponent(panelDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPresentacionLayout.createSequentialGroup()
-                .addContainerGap(153, Short.MAX_VALUE)
+                .addContainerGap(200, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(120, 120, 120))
         );
@@ -686,6 +684,12 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
 
         jLabel17.setFont(new java.awt.Font("Sitka Banner", 1, 14)); // NOI18N
         jLabel17.setText("Descripción del proyecto:");
+
+        jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField3KeyTyped(evt);
+            }
+        });
 
         jTextField4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -872,6 +876,17 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
         jLabel32.setFont(new java.awt.Font("Sitka Banner", 1, 14)); // NOI18N
         jLabel32.setForeground(new java.awt.Color(51, 0, 51));
         jLabel32.setText("Fecha de Inicio:");
+
+        jTextField10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField10ActionPerformed(evt);
+            }
+        });
+        jTextField10.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField10KeyTyped(evt);
+            }
+        });
 
         jLabel33.setFont(new java.awt.Font("Sitka Banner", 1, 14)); // NOI18N
         jLabel33.setForeground(new java.awt.Color(51, 0, 51));
@@ -1252,6 +1267,17 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
         jLabel45.setForeground(new java.awt.Color(51, 0, 51));
         jLabel45.setText("Código de Proyecto:");
 
+        jTextField13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField13ActionPerformed(evt);
+            }
+        });
+        jTextField13.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField13KeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelAgregarProyectoLayout = new javax.swing.GroupLayout(panelAgregarProyecto);
         panelAgregarProyecto.setLayout(panelAgregarProyectoLayout);
         panelAgregarProyectoLayout.setHorizontalGroup(
@@ -1296,16 +1322,11 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
                 .addGroup(panelAgregarProyectoLayout.createSequentialGroup()
                     .addGap(41, 41, 41)
                     .addGroup(panelAgregarProyectoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAgregarProyectoLayout.createSequentialGroup()
-                            .addGroup(panelAgregarProyectoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel46)
-                                .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addContainerGap(472, Short.MAX_VALUE))
-                        .addGroup(panelAgregarProyectoLayout.createSequentialGroup()
-                            .addGroup(panelAgregarProyectoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                        .addComponent(jLabel46)
+                        .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         panelAgregarProyectoLayout.setVerticalGroup(
             panelAgregarProyectoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1439,16 +1460,12 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel15.setForeground(new java.awt.Color(0, 0, 0));
         jLabel15.setText("Nombre Completo");
 
-        jLabel24.setForeground(new java.awt.Color(0, 0, 0));
         jLabel24.setText("N° Cédula");
 
-        jLabel25.setForeground(new java.awt.Color(0, 0, 0));
         jLabel25.setText("Fecha de Nacimiento");
 
-        jLabel26.setForeground(new java.awt.Color(0, 0, 0));
         jLabel26.setText("Edad");
 
         btnRegresarUsuarios.setText("Regresar");
@@ -1460,7 +1477,6 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
 
         txtCodigo.setEditable(false);
 
-        jLabel27.setForeground(new java.awt.Color(0, 0, 0));
         jLabel27.setText("Tipo de Usuario");
 
         cbTipoPersona.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un tipo", "Administrador", "Trabajador", "Cliente", " " }));
@@ -1481,7 +1497,6 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel28.setForeground(new java.awt.Color(0, 0, 0));
         jLabel28.setText("Correo");
 
         lbAvisoCorreo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -1572,7 +1587,6 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
             }
         });
 
-        lbCargo.setForeground(new java.awt.Color(0, 0, 0));
         lbCargo.setText("Cargo:");
 
         cbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un tipo", "Administrador", "Trabajador", "Cliente", " " }));
@@ -1705,7 +1719,7 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(0, 25, Short.MAX_VALUE)
+                        .addGap(0, 113, Short.MAX_VALUE)
                         .addComponent(btnActualizarusuarios)
                         .addGap(18, 18, 18)
                         .addComponent(btAgregarMiembro, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1729,7 +1743,7 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
             .addGroup(panelMiembrosLayout.createSequentialGroup()
                 .addGap(311, 311, 311)
                 .addComponent(jLabel21)
-                .addContainerGap(357, Short.MAX_VALUE))
+                .addContainerGap(404, Short.MAX_VALUE))
             .addGroup(panelMiembrosLayout.createSequentialGroup()
                 .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -2015,7 +2029,8 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnActualizarProyectoActionPerformed
 
     private void btnAgregarProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProyectoActionPerformed
-
+//sdsdsdsdsdsdsd
+        tbPanelesProyectos.setSelectedIndex(3);
     }//GEN-LAST:event_btnAgregarProyectoActionPerformed
 
     private void btnRegresarPanelTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarPanelTablaActionPerformed
@@ -2064,8 +2079,40 @@ public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_rdEnProgreso1ActionPerformed
 
     private void btnRegresarPanelTabla1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarPanelTabla1ActionPerformed
-        // TODO add your handling code here:
+        tbPanelesProyectos.setSelectedIndex(0);
     }//GEN-LAST:event_btnRegresarPanelTabla1ActionPerformed
+
+    private void jTextField13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField13ActionPerformed
+
+    }//GEN-LAST:event_jTextField13ActionPerformed
+
+    private void jTextField13KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField13KeyTyped
+        char validacionnombre = evt.getKeyChar();
+        if (Character.isLetter(validacionnombre)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Ingresar solamente numeros");
+
+        }
+    }//GEN-LAST:event_jTextField13KeyTyped
+
+    private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField10ActionPerformed
+
+    private void jTextField10KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField10KeyTyped
+               char validacionnombre = evt.getKeyChar();
+        if (Character.isLetter(validacionnombre)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Ingresar solamente numeros");
+
+        }
+    }//GEN-LAST:event_jTextField10KeyTyped
+
+    private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3KeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
