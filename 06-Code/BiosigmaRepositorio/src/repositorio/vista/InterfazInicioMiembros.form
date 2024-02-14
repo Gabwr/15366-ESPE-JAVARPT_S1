@@ -1810,6 +1810,10 @@
                         <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser2">
                         </Component>
                         <Component class="javax.swing.JTextField" name="jTextField11">
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField11ActionPerformed"/>
+                            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextField11KeyTyped"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel43">
                           <Properties>
@@ -1932,6 +1936,10 @@
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JTextField" name="jTextField12">
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField12ActionPerformed"/>
+                                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextField12KeyTyped"/>
+                              </Events>
                             </Component>
                             <Component class="javax.swing.JButton" name="jButton15">
                               <Properties>
