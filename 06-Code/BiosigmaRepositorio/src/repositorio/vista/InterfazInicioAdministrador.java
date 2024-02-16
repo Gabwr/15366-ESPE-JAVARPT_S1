@@ -1185,6 +1185,17 @@ public class InterfazInicioAdministrador extends javax.swing.JInternalFrame {
         jLabel42.setForeground(new java.awt.Color(51, 0, 51));
         jLabel42.setText("Fecha de Inicio:");
 
+        jTextField11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField11ActionPerformed(evt);
+            }
+        });
+        jTextField11.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField11KeyTyped(evt);
+            }
+        });
+
         jLabel43.setFont(new java.awt.Font("Sitka Banner", 1, 14)); // NOI18N
         jLabel43.setForeground(new java.awt.Color(51, 0, 51));
         jLabel43.setText("Nombre Del Proyecto:");
@@ -1224,6 +1235,17 @@ public class InterfazInicioAdministrador extends javax.swing.JInternalFrame {
         jLabel47.setFont(new java.awt.Font("Sitka Banner", 1, 14)); // NOI18N
         jLabel47.setForeground(new java.awt.Color(51, 0, 51));
         jLabel47.setText("Actividad");
+
+        jTextField12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField12ActionPerformed(evt);
+            }
+        });
+        jTextField12.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField12KeyTyped(evt);
+            }
+        });
 
         jButton15.setText("Agregar");
 
@@ -1763,7 +1785,7 @@ public class InterfazInicioAdministrador extends javax.swing.JInternalFrame {
         panelPestañas.setLayout(panelPestañasLayout);
         panelPestañasLayout.setHorizontalGroup(
             panelPestañasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tbPaneles, javax.swing.GroupLayout.DEFAULT_SIZE, 896, Short.MAX_VALUE)
+            .addComponent(tbPaneles, javax.swing.GroupLayout.PREFERRED_SIZE, 896, Short.MAX_VALUE)
         );
         panelPestañasLayout.setVerticalGroup(
             panelPestañasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2101,7 +2123,7 @@ public class InterfazInicioAdministrador extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextField10ActionPerformed
 
     private void jTextField10KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField10KeyTyped
-               char validacionnombre = evt.getKeyChar();
+        char validacionnombre = evt.getKeyChar();
         if (Character.isLetter(validacionnombre)) {
             getToolkit().beep();
             evt.consume();
@@ -2113,6 +2135,34 @@ public class InterfazInicioAdministrador extends javax.swing.JInternalFrame {
     private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3KeyTyped
+
+    private void jTextField12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField12ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField12ActionPerformed
+
+    private void jTextField12KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField12KeyTyped
+        char validacionnombre = evt.getKeyChar();
+        if (Character.isDigit(validacionnombre)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Ingresar solamente numeros");
+
+        }
+    }//GEN-LAST:event_jTextField12KeyTyped
+
+    private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField11ActionPerformed
+
+    private void jTextField11KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField11KeyTyped
+        char validacionnombre = evt.getKeyChar();
+        if (Character.isDigit(validacionnombre)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Ingresar solamente numeros");
+
+        }
+    }//GEN-LAST:event_jTextField11KeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
