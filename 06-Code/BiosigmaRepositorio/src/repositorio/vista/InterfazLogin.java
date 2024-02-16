@@ -160,21 +160,21 @@ public class InterfazLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSesionActionPerformed
-        InterfazInicioMiembros interfaz = null;
+        InterfazInicioAdministrador interfaz = null;
         if ((txtContra.getText().equals("0650160203")) && (txtUsuario.getText().equals("A10001")) && interfaz == null) {
-            interfaz = new InterfazInicioMiembros("Admnistrador");
+            interfaz = new InterfazInicioAdministrador("Admnistrador");
             escritorio.add(interfaz);
             interfaz.show();
             limpiar();
 
         } else if ((txtContra.getText().equals("12345")) && (txtUsuario.getText().equals("T10001")) && interfaz == null) {
-            interfaz = new InterfazInicioMiembros("Trabajador");
+            interfaz = new InterfazInicioAdministrador("Trabajador");
             escritorio.add(interfaz);
             interfaz.show();
             limpiar();
 
         } else if ((txtContra.getText().equals("54321")) && (txtUsuario.getText().equals("C10001")) && interfaz == null) {
-            interfaz = new InterfazInicioMiembros("Cliente");
+            interfaz = new InterfazInicioAdministrador("Cliente");
             escritorio.add(interfaz);
             interfaz.show();
             limpiar();

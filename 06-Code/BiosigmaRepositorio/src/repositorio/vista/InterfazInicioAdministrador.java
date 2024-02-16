@@ -9,12 +9,12 @@ import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class InterfazInicioMiembros extends javax.swing.JInternalFrame {
+public class InterfazInicioAdministrador extends javax.swing.JInternalFrame {
 
     String CargoIngreso;
     private int contador = 1;
 
-    public InterfazInicioMiembros(String usuario) {
+    public InterfazInicioAdministrador(String usuario) {
         this.CargoIngreso = usuario;
         initComponents();
         if (CargoIngreso.equals("Trabajador")) {
