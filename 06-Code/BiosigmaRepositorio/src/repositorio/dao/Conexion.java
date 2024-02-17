@@ -1,4 +1,4 @@
-package repositorio.modelo;
+package repositorio.dao;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;

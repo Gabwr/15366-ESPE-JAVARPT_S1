@@ -9,34 +9,11 @@ import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class InterfazInicioAdministrador extends javax.swing.JInternalFrame {
 
-    String CargoIngreso;
-    private int contador = 1;
+public class InterfazAdminJFrame extends javax.swing.JFrame {
 
-    public InterfazInicioAdministrador(String usuario) {
-        this.CargoIngreso = usuario;
+    public InterfazAdminJFrame() {
         initComponents();
-        if (CargoIngreso.equals("Trabajador")) {
-            btAgregarMiembro.setVisible(false);
-            btnActualizarProyecto.setVisible(false);
-            jLUsuarios.setVisible(false);
-            jLImgUsuarios.setVisible(false);
-        } else if (CargoIngreso.equals("Cliente")) {
-            btAgregarMiembro.setVisible(false);
-            btnActualizarProyecto.setVisible(false);
-            btnAgregarProyecto.setVisible(false);
-            jLUsuarios.setVisible(false);
-            jLImgUsuarios.setVisible(false);
-        }
-        PanelBiosigmaLogo.setBackground(new Color(0, 0, 0, 160));
-        panelDescripcion.setBackground(new Color(0, 0, 0, 100));
-        panelOpciones.setBackground(new Color(0, 0, 0, 160));
-        panelOpciones.setVisible(false);
-        tbPanelesProyectos.setSelectedIndex(0);
-        lbCargo.setVisible(false);
-        cbCargo.setVisible(false);
-        btAgregarCargo.setVisible(false);
     }
 
     private int recuperarAnioNacimiento(Date anioNacimiento) {
@@ -131,14 +108,15 @@ public class InterfazInicioAdministrador extends javax.swing.JInternalFrame {
         }
 
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelBotones = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        escritorio = new javax.swing.JDesktopPane();
+        jPanel5 = new javax.swing.JPanel();
+        panelBotones1 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel41 = new javax.swing.JLabel();
         PanelBiosigmaLogo = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
@@ -275,42 +253,38 @@ public class InterfazInicioAdministrador extends javax.swing.JInternalFrame {
         btInfoProgramador = new javax.swing.JButton();
         jLabel19 = new javax.swing.JLabel();
 
-        setBorder(null);
-        setTitle("Repositorio");
-        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setMaximumSize(new java.awt.Dimension(1075, 660));
-        setMinimumSize(new java.awt.Dimension(1075, 660));
-        setPreferredSize(new java.awt.Dimension(1075, 660));
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        panelBotones.setBackground(new java.awt.Color(0, 204, 153));
-        panelBotones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(101, 206, 97));
-        jPanel2.setBorder(new javax.swing.border.MatteBorder(null));
+        panelBotones1.setBackground(new java.awt.Color(0, 204, 153));
+        panelBotones1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setBackground(new java.awt.Color(102, 255, 51));
-        jLabel2.setFont(new java.awt.Font("Sitka Text", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel2.setText("BIENVENIDO");
+        jPanel4.setBackground(new java.awt.Color(101, 206, 97));
+        jPanel4.setBorder(new javax.swing.border.MatteBorder(null));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        jLabel41.setBackground(new java.awt.Color(102, 255, 51));
+        jLabel41.setFont(new java.awt.Font("Sitka Text", 1, 24)); // NOI18N
+        jLabel41.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel41.setText("BIENVENIDO");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(14, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        panelBotones.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 190, 40));
+        panelBotones1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 190, 40));
 
         PanelBiosigmaLogo.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -332,23 +306,23 @@ public class InterfazInicioAdministrador extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        panelBotones.add(PanelBiosigmaLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 230, 60));
+        panelBotones1.add(PanelBiosigmaLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 230, 60));
 
         jTextField1.setEditable(false);
         jTextField1.setBackground(new java.awt.Color(102, 204, 255));
         jTextField1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jTextField1.setBorder(null);
-        panelBotones.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 190, 30));
+        panelBotones1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 190, 30));
 
         jTextField2.setEditable(false);
         jTextField2.setBackground(new java.awt.Color(102, 204, 255));
         jTextField2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jTextField2.setBorder(null);
-        panelBotones.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 190, 30));
+        panelBotones1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 190, 30));
 
         jLabel3.setBackground(new java.awt.Color(255, 51, 51));
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/FondoBienvenidos.png"))); // NOI18N
-        panelBotones.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 230, 100));
+        panelBotones1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 230, 100));
 
         BotonProyectos.setBackground(new java.awt.Color(0, 204, 153));
         BotonProyectos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -392,7 +366,7 @@ public class InterfazInicioAdministrador extends javax.swing.JInternalFrame {
                 .addContainerGap(7, Short.MAX_VALUE))
         );
 
-        panelBotones.add(BotonProyectos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 230, 70));
+        panelBotones1.add(BotonProyectos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 230, 70));
 
         BotonAgregarMiembros.setBackground(new java.awt.Color(0, 204, 153));
         BotonAgregarMiembros.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -435,10 +409,10 @@ public class InterfazInicioAdministrador extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        panelBotones.add(BotonAgregarMiembros, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 240, 60));
+        panelBotones1.add(BotonAgregarMiembros, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 240, 60));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/colibri_png.png"))); // NOI18N
-        panelBotones.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, 160, 140));
+        panelBotones1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, 160, 140));
 
         jButton1.setBackground(new java.awt.Color(255, 204, 255));
         jButton1.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
@@ -449,13 +423,13 @@ public class InterfazInicioAdministrador extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        panelBotones.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, -1, -1));
+        panelBotones1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, -1, -1));
 
         jLabel29.setBackground(new java.awt.Color(255, 51, 51));
         jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/FondoBienvenidos.png"))); // NOI18N
-        panelBotones.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 100));
+        panelBotones1.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 100));
 
-        getContentPane().add(panelBotones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 630));
+        jPanel5.add(panelBotones1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 630));
 
         panelPestañas.setBackground(new java.awt.Color(0, 153, 102));
 
@@ -518,7 +492,7 @@ public class InterfazInicioAdministrador extends javax.swing.JInternalFrame {
                     .addComponent(panelDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPresentacionLayout.createSequentialGroup()
-                .addContainerGap(200, Short.MAX_VALUE)
+                .addContainerGap(153, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(120, 120, 120))
         );
@@ -1479,7 +1453,7 @@ public class InterfazInicioAdministrador extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(0, 113, Short.MAX_VALUE)
+                        .addGap(0, 25, Short.MAX_VALUE)
                         .addComponent(btnActualizarusuarios)
                         .addGap(18, 18, 18)
                         .addComponent(btAgregarMiembro, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1503,7 +1477,7 @@ public class InterfazInicioAdministrador extends javax.swing.JInternalFrame {
             .addGroup(panelMiembrosLayout.createSequentialGroup()
                 .addGap(311, 311, 311)
                 .addComponent(jLabel21)
-                .addContainerGap(404, Short.MAX_VALUE))
+                .addContainerGap(357, Short.MAX_VALUE))
             .addGroup(panelMiembrosLayout.createSequentialGroup()
                 .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -1532,7 +1506,7 @@ public class InterfazInicioAdministrador extends javax.swing.JInternalFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        getContentPane().add(panelPestañas, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 840, 520));
+        jPanel5.add(panelPestañas, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 840, 520));
 
         panelSuperior.setBackground(new java.awt.Color(102, 255, 204));
         panelSuperior.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1599,42 +1573,99 @@ public class InterfazInicioAdministrador extends javax.swing.JInternalFrame {
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/Vólcan_Cotopaxi.jpg"))); // NOI18N
         panelSuperior.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 6, -1, 180));
 
-        getContentPane().add(panelSuperior, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 900, 110));
+        jPanel5.add(panelSuperior, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 900, 110));
+
+        escritorio.setLayer(jPanel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
+        escritorio.setLayout(escritorioLayout);
+        escritorioLayout.setHorizontalGroup(
+            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(escritorioLayout.createSequentialGroup()
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 1071, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        escritorioLayout.setVerticalGroup(
+            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(escritorio)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(escritorio)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BotonProyectosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonProyectosMouseClicked
-        tbPaneles.setSelectedIndex(1);
-    }//GEN-LAST:event_BotonProyectosMouseClicked
+    private void btInfoProgramadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInfoProgramadorActionPerformed
+        JOptionPane.showMessageDialog(null, "=============================================="
+            + "\n\tProgramadores:"
+            + "\n1.- Gabriel López"
+            + "\n2.- Mateo Medranda"
+            + "\n3.- Alejandro Obando"
+            + "\n4.- Joselyn Morocho"
+            + "\n==============================================");
+    }//GEN-LAST:event_btInfoProgramadorActionPerformed
 
-    private void BotonProyectosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonProyectosMouseEntered
-        BotonProyectos.setBackground(new Color(204, 255, 204));
-    }//GEN-LAST:event_BotonProyectosMouseEntered
-
-    private void BotonProyectosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonProyectosMouseExited
-        BotonProyectos.setBackground(new Color(0, 204, 153));
-    }//GEN-LAST:event_BotonProyectosMouseExited
-
-    private void BotonAgregarMiembrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonAgregarMiembrosMouseClicked
-        tbPaneles.setSelectedIndex(2);
-    }//GEN-LAST:event_BotonAgregarMiembrosMouseClicked
-
-    private void BotonAgregarMiembrosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonAgregarMiembrosMouseEntered
-        BotonAgregarMiembros.setBackground(new Color(204, 255, 204));
-    }//GEN-LAST:event_BotonAgregarMiembrosMouseEntered
-
-    private void BotonAgregarMiembrosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonAgregarMiembrosMouseExited
-        BotonAgregarMiembros.setBackground(new Color(0, 204, 153));
-    }//GEN-LAST:event_BotonAgregarMiembrosMouseExited
+    private void BotonOpcionesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonOpcionesMouseExited
+        BotonOpciones.setBackground(new Color(102, 255, 204));
+    }//GEN-LAST:event_BotonOpcionesMouseExited
 
     private void BotonOpcionesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonOpcionesMouseEntered
         BotonOpciones.setBackground(new Color(204, 255, 204));
     }//GEN-LAST:event_BotonOpcionesMouseEntered
 
-    private void BotonOpcionesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonOpcionesMouseExited
-        BotonOpciones.setBackground(new Color(102, 255, 204));
-    }//GEN-LAST:event_BotonOpcionesMouseExited
+    private void BotonOpcionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonOpcionesMouseClicked
+
+    }//GEN-LAST:event_BotonOpcionesMouseClicked
+
+    private void btAgregarCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgregarCargoActionPerformed
+
+    }//GEN-LAST:event_btAgregarCargoActionPerformed
+
+    private void cbCargoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cbCargoPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbCargoPropertyChange
+
+    private void cbCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCargoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbCargoActionPerformed
+
+    private void BtnLimpiarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLimpiarUsuariosActionPerformed
+        // TODO add your handling code here:
+        limpiar();
+    }//GEN-LAST:event_BtnLimpiarUsuariosActionPerformed
+
+    private void txtCorreoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyReleased
+        if (validarCorreo(txtCorreo.getText())) {
+            lbAvisoCorreo.setVisible(false);
+        } else {
+            lbAvisoCorreo.setVisible(true);
+        }
+    }//GEN-LAST:event_txtCorreoKeyReleased
+
+    private void cbTipoPersonaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cbTipoPersonaPropertyChange
+        if ("Seleccione un cargo".equals(cbTipoPersona.getSelectedItem().toString())) {
+            lbAvisoCargo.setVisible(true);
+        } else {
+            lbAvisoCargo.setVisible(false);
+        }
+    }//GEN-LAST:event_cbTipoPersonaPropertyChange
+
+    private void cbTipoPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoPersonaActionPerformed
+
+    }//GEN-LAST:event_cbTipoPersonaActionPerformed
+
+    private void btnRegresarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarUsuariosActionPerformed
+        tbPaneles.setSelectedIndex(0);
+    }//GEN-LAST:event_btnRegresarUsuariosActionPerformed
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
         char validacion = evt.getKeyChar();
@@ -1645,85 +1676,6 @@ public class InterfazInicioAdministrador extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txtNombreKeyTyped
 
-    private void dcFechaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dcFechaPropertyChange
-        if (dcFecha.getDate() != null) {
-            int anioNacimiento = recuperarAnioNacimiento(dcFecha.getDate());
-            lbAvisoFecha.setVisible(false);
-            calcularEdad(anioNacimiento);
-        }
-    }//GEN-LAST:event_dcFechaPropertyChange
-
-    private void btnRegresarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarUsuariosActionPerformed
-        tbPaneles.setSelectedIndex(0);
-    }//GEN-LAST:event_btnRegresarUsuariosActionPerformed
-
-    private void btAgregarMiembroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgregarMiembroActionPerformed
-
-        DefaultTableModel dtm1 = (DefaultTableModel) tbAdmin.getModel();
-        DefaultTableModel dtm2 = (DefaultTableModel) tbClientes.getModel();
-        DefaultTableModel dtm3 = (DefaultTableModel) tbTrabajadores.getModel();
-
-        String nombre = txtNombre.getText();
-        String cedula = txtCedulA.getText();
-        String correo = txtCorreo.getText();
-        String edad = txtEdad.getText();
-
-        if (validarDatos() && validarCedula()) {
-            if (CargoIngreso.equals("Administrador")) {
-                dtm1.addRow(new Object[]{cedula, nombre, correo, edad});
-                tbMiembros.setSelectedIndex(0);
-                JOptionPane.showMessageDialog(null, "Usuario guardado correctamente.");
-            } else if (CargoIngreso.equals("Trabajador")) {
-                dtm3.addRow(new Object[]{cedula, nombre, correo, edad});
-                tbMiembros.setSelectedIndex(2);
-                JOptionPane.showMessageDialog(null, "Usuario guardado correctamente.");
-            } else if (CargoIngreso.equals("Cliente")) {
-                tbMiembros.setSelectedIndex(1);
-                dtm2.addRow(new Object[]{cedula, nombre, correo, edad});
-                JOptionPane.showMessageDialog(null, "Usuario guardado correctamente.");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Ingrese los datos correctamente");
-        }
-
-    }//GEN-LAST:event_btAgregarMiembroActionPerformed
-
-    private void txtCorreoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyReleased
-        if (validarCorreo(txtCorreo.getText())) {
-            lbAvisoCorreo.setVisible(false);
-        } else {
-            lbAvisoCorreo.setVisible(true);
-        }
-    }//GEN-LAST:event_txtCorreoKeyReleased
-
-    private void cbTipoPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoPersonaActionPerformed
-        String cargo = (String) cbTipoPersona.getSelectedItem();
-        if (cargo.equals("Seleccione un cargo")) {
-            CargoIngreso = "";
-            lbAvisoCargo.setVisible(true);
-        } else if (cargo.equals("Administrador")) {
-            CargoIngreso = "Administrador";
-            lbAvisoCargo.setVisible(false);
-        } else if (cargo.equals("Trabajador")) {
-            CargoIngreso = "Trabajador";
-            lbAvisoCargo.setVisible(false);
-        } else if (cargo.equals("Cliente")) {
-            CargoIngreso = "Cliente";
-            lbAvisoCargo.setVisible(false);
-        }
-
-    }//GEN-LAST:event_cbTipoPersonaActionPerformed
-
-    private void BotonOpcionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonOpcionesMouseClicked
-        if (contador == 1) {
-            panelOpciones.setVisible(true);
-            contador = 2;
-        } else if (contador == 2) {
-            panelOpciones.setVisible(false);
-            contador = 1;
-        }
-    }//GEN-LAST:event_BotonOpcionesMouseClicked
-
     private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased
         if (txtNombre.getText().length() == 0) {
             lbAvisoNombre.setVisible(true);
@@ -1731,32 +1683,6 @@ public class InterfazInicioAdministrador extends javax.swing.JInternalFrame {
             lbAvisoNombre.setVisible(false);
         }
     }//GEN-LAST:event_txtNombreKeyReleased
-
-    private void txtCedulAKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulAKeyReleased
-        if (!validarCedula()) {
-            lbAvisoCedula.setVisible(true);
-        } else {
-            lbAvisoCedula.setVisible(false);
-        }
-    }//GEN-LAST:event_txtCedulAKeyReleased
-
-    private void cbTipoPersonaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cbTipoPersonaPropertyChange
-        if ("Seleccione un cargo".equals(cbTipoPersona.getSelectedItem().toString())) {
-            lbAvisoCargo.setVisible(true);
-        } else {
-            lbAvisoCargo.setVisible(false);
-        }
-    }//GEN-LAST:event_cbTipoPersonaPropertyChange
-
-    private void btInfoProgramadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInfoProgramadorActionPerformed
-        JOptionPane.showMessageDialog(null, "=============================================="
-                + "\n\tProgramadores:"
-                + "\n1.- Gabriel López"
-                + "\n2.- Mateo Medranda"
-                + "\n3.- Alejandro Obando"
-                + "\n4.- Joselyn Morocho"
-                + "\n==============================================");
-    }//GEN-LAST:event_btInfoProgramadorActionPerformed
 
     private void txtCedulAKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulAKeyTyped
         char validacion = evt.getKeyChar();
@@ -1767,63 +1693,33 @@ public class InterfazInicioAdministrador extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txtCedulAKeyTyped
 
-    private void BtnLimpiarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLimpiarUsuariosActionPerformed
-        // TODO add your handling code here:
-        limpiar();
-    }//GEN-LAST:event_BtnLimpiarUsuariosActionPerformed
+    private void txtCedulAKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulAKeyReleased
+        if (!validarCedula()) {
+            lbAvisoCedula.setVisible(true);
+        } else {
+            lbAvisoCedula.setVisible(false);
+        }
+    }//GEN-LAST:event_txtCedulAKeyReleased
 
-    private void btnActualizarusuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarusuariosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnActualizarusuariosActionPerformed
-
-    private void btnRegresarProyectosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarProyectosActionPerformed
-        tbPaneles.setSelectedIndex(0);
-    }//GEN-LAST:event_btnRegresarProyectosActionPerformed
+    private void dcFechaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dcFechaPropertyChange
+        if (dcFecha.getDate() != null) {
+            int anioNacimiento = recuperarAnioNacimiento(dcFecha.getDate());
+            lbAvisoFecha.setVisible(false);
+            calcularEdad(anioNacimiento);
+        }
+    }//GEN-LAST:event_dcFechaPropertyChange
 
     private void btnEliminarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarUsuariosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEliminarUsuariosActionPerformed
 
-    private void btnActualizarProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarProyectoActionPerformed
-        tbPanelesProyectos.setSelectedIndex(2);
-    }//GEN-LAST:event_btnActualizarProyectoActionPerformed
-
-    private void btnAgregarProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProyectoActionPerformed
-        AgregarProyecto agregar = new AgregarProyecto();
-        agregar.show();
-    }//GEN-LAST:event_btnAgregarProyectoActionPerformed
-
-    private void btnRegresarPanelTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarPanelTablaActionPerformed
-        tbPanelesProyectos.setSelectedIndex(0);
-    }//GEN-LAST:event_btnRegresarPanelTablaActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void cbCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCargoActionPerformed
+    private void btnActualizarusuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarusuariosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbCargoActionPerformed
+    }//GEN-LAST:event_btnActualizarusuariosActionPerformed
 
-    private void cbCargoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cbCargoPropertyChange
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbCargoPropertyChange
+    private void btAgregarMiembroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgregarMiembroActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
-
-    private void btnAbrirProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirProyectoActionPerformed
-        tbPanelesProyectos.setSelectedIndex(1);
-    }//GEN-LAST:event_btnAbrirProyectoActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        tbPanelesProyectos.setSelectedIndex(0);
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void btAgregarCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgregarCargoActionPerformed
-
-    }//GEN-LAST:event_btAgregarCargoActionPerformed
+    }//GEN-LAST:event_btAgregarMiembroActionPerformed
 
     private void rdEnProgresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdEnProgresoActionPerformed
         if (rdEnProgreso.isSelected()) {
@@ -1833,10 +1729,6 @@ public class InterfazInicioAdministrador extends javax.swing.JInternalFrame {
             dcFechaFinalizado.setEnabled(true);
         }
     }//GEN-LAST:event_rdEnProgresoActionPerformed
-
-    private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField10ActionPerformed
 
     private void jTextField10KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField10KeyTyped
         char validacionnombre = evt.getKeyChar();
@@ -1848,10 +1740,107 @@ public class InterfazInicioAdministrador extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jTextField10KeyTyped
 
+    private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField10ActionPerformed
+
+    private void btnRegresarPanelTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarPanelTablaActionPerformed
+        tbPanelesProyectos.setSelectedIndex(0);
+    }//GEN-LAST:event_btnRegresarPanelTablaActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        tbPanelesProyectos.setSelectedIndex(0);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField4ActionPerformed
+
     private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3KeyTyped
 
+    private void btnRegresarProyectosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarProyectosActionPerformed
+        tbPaneles.setSelectedIndex(0);
+    }//GEN-LAST:event_btnRegresarProyectosActionPerformed
+
+    private void btnActualizarProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarProyectoActionPerformed
+        tbPanelesProyectos.setSelectedIndex(2);
+    }//GEN-LAST:event_btnActualizarProyectoActionPerformed
+
+    private void btnAbrirProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirProyectoActionPerformed
+        tbPanelesProyectos.setSelectedIndex(1);
+    }//GEN-LAST:event_btnAbrirProyectoActionPerformed
+
+    private void btnAgregarProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProyectoActionPerformed
+        AgregarProyecto agregar = new AgregarProyecto();
+        escritorio.add(agregar);
+        agregar.show();
+    }//GEN-LAST:event_btnAgregarProyectoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void BotonAgregarMiembrosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonAgregarMiembrosMouseExited
+        BotonAgregarMiembros.setBackground(new Color(0, 204, 153));
+    }//GEN-LAST:event_BotonAgregarMiembrosMouseExited
+
+    private void BotonAgregarMiembrosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonAgregarMiembrosMouseEntered
+        BotonAgregarMiembros.setBackground(new Color(204, 255, 204));
+    }//GEN-LAST:event_BotonAgregarMiembrosMouseEntered
+
+    private void BotonAgregarMiembrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonAgregarMiembrosMouseClicked
+        tbPaneles.setSelectedIndex(2);
+    }//GEN-LAST:event_BotonAgregarMiembrosMouseClicked
+
+    private void BotonProyectosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonProyectosMouseExited
+        BotonProyectos.setBackground(new Color(0, 204, 153));
+    }//GEN-LAST:event_BotonProyectosMouseExited
+
+    private void BotonProyectosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonProyectosMouseEntered
+        BotonProyectos.setBackground(new Color(204, 255, 204));
+    }//GEN-LAST:event_BotonProyectosMouseEntered
+
+    private void BotonProyectosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonProyectosMouseClicked
+        tbPaneles.setSelectedIndex(1);
+    }//GEN-LAST:event_BotonProyectosMouseClicked
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(InterfazAdminJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(InterfazAdminJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(InterfazAdminJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(InterfazAdminJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new InterfazAdminJFrame().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BotonAgregarMiembros;
@@ -1875,6 +1864,7 @@ public class InterfazInicioAdministrador extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> cbTipoPersona;
     private com.toedter.calendar.JDateChooser dcFecha;
     private com.toedter.calendar.JDateChooser dcFechaFinalizado;
+    private javax.swing.JDesktopPane escritorio;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
@@ -1924,6 +1914,7 @@ public class InterfazInicioAdministrador extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1933,6 +1924,8 @@ public class InterfazInicioAdministrador extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
@@ -1972,6 +1965,7 @@ public class InterfazInicioAdministrador extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lbCargo;
     private javax.swing.JPanel panelAbrirProyecto;
     private javax.swing.JPanel panelBotones;
+    private javax.swing.JPanel panelBotones1;
     private javax.swing.JPanel panelDescripcion;
     private javax.swing.JPanel panelMiembros;
     private javax.swing.JPanel panelOpciones;
