@@ -1,11 +1,22 @@
+
 package repositorio.modelo;
 
 import java.util.Date;
 
-public class Persona {
+
+public class PersonaAdmin {
     private String usuario, contrasenia, cedula, correo, nombre;
     private Date fechaNacimiento;
 
+    public PersonaAdmin(String usuario, String contrasenia, String cedula, String correo, String nombre, Date fechaNacimiento) {
+        this.usuario = usuario;
+        this.contrasenia = contrasenia;
+        this.cedula = cedula;
+        this.correo = correo;
+        this.nombre = nombre;
+        this.fechaNacimiento = fechaNacimiento;
+    }
+    
     public String getUsuario() {
         return usuario;
     }
@@ -53,7 +64,5 @@ public class Persona {
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
-
-    
     
 }

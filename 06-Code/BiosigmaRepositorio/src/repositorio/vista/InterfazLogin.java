@@ -179,7 +179,13 @@ public class InterfazLogin extends javax.swing.JFrame {
             interfaz.show();
             limpiar();
             
-        } else {
+        } else if ((txtContra.getText().equals("")) && (txtUsuario.getText().equals("")) && interfaz == null) {
+            interfaz = new InterfazInicioAdministrador("Admnistrador");
+            escritorio.add(interfaz);
+            interfaz.show();
+            limpiar();
+
+        }else {
             getToolkit().beep();
             lbAvisoLogin.setVisible(true);
         }
