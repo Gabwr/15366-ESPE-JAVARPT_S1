@@ -21,4 +21,8 @@ public class ProyectoServicio {
     public static boolean EliminarProyecto(String idProyecto){
         return new ProyectoMetodos().EliminarProyecto(idProyecto);
     }
+    
+    public static boolean VerificarCodigoRepetido(String codigo){
+        return new ProyectoMetodos().VerificarCodigoRepetido(codigo);
+    }
 }

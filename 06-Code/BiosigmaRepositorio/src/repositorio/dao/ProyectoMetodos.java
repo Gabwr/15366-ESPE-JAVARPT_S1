@@ -124,4 +124,16 @@ public class ProyectoMetodos implements IProyecto {
         }
     }
 
+    @Override
+    public boolean VerificarCodigoRepetido(String codigo) {
+        Document filtro = new Document("id_Proyecto", codigo);
+        Document resultado = coleccion.find(filtro).first();
+        
+        if (resultado != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

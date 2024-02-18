@@ -8,4 +8,5 @@ public interface IProyecto {
     public boolean InsertarProyecto(Proyecto proyecto);
     public boolean ActualizarProyecto(Proyecto proyecto);
     public boolean EliminarProyecto(String idProyecto);
+    public boolean VerificarCodigoRepetido(String codigo);
 }
