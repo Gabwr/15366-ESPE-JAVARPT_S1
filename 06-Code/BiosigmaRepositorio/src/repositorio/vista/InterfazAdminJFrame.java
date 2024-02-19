@@ -2,19 +2,15 @@ package repositorio.vista;
 
 import java.awt.Color;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import org.bson.Document;
 import repositorio.controlador.ProyectoServicio;
 import repositorio.modelo.Proyecto;
 
 public class InterfazAdminJFrame extends javax.swing.JFrame {
 
     private int contador = 1;
+    private static String codigoProyecto = "";
 
     public InterfazAdminJFrame() {
         initComponents();
@@ -30,9 +26,9 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         dtm.setRowCount(0);
         for (Proyecto proyecto : ProyectoServicio.listaProyectos()) {
             String fechaaInicio, fechaFinal, permisoAmbiental, permisoAgua, auditoria, monitoreo;
-            
+
             fechaaInicio = new SimpleDateFormat("dd/MM/yyyy").format(proyecto.getFechaInicio());
-            
+
             if (proyecto.getFechaFinal() == null) {
                 fechaFinal = "En progreso";
             } else {
@@ -58,7 +54,7 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
             } else {
                 monitoreo = "Cargado";
             }
-            
+
             dtm.addRow(new Object[]{proyecto.getIdProyecto(), proyecto.getNombreProyecto(), fechaaInicio, fechaFinal, permisoAmbiental, permisoAgua, auditoria, monitoreo});
         }
     }
@@ -818,13 +814,25 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnActualizarProyectoActionPerformed
 
     private void btnAbrirProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirProyectoActionPerformed
+        int fila = tbProyecto.getSelectedRow();
 
+        if (fila != -1) {
+            codigoProyecto = tbProyecto.getValueAt(fila, 0).toString();
+            AbrirProyecto abrir = new AbrirProyecto();
+            escritorio.add(abrir);
+            abrir.show();
+
+        } else {
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "Seleccione una proyecto para poder abrir");
+        }
     }//GEN-LAST:event_btnAbrirProyectoActionPerformed
 
     private void btnAgregarProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProyectoActionPerformed
         AgregarProyecto agregar = new AgregarProyecto();
         escritorio.add(agregar);
         agregar.show();
+
     }//GEN-LAST:event_btnAgregarProyectoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -856,11 +864,11 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_BotonProyectosMouseClicked
 
     private void btnEliminarProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProyectoActionPerformed
-        
+
     }//GEN-LAST:event_btnEliminarProyectoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public static void main(String args[]) {
