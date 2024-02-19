@@ -8,7 +8,7 @@ import repositorio.controlador.ProyectoServicio;
 import repositorio.modelo.Proyecto;
 
 public class InterfazAdminJFrame extends javax.swing.JFrame {
-
+    public InterfazAdminInsertarUsuario IntfzInsertar = new InterfazAdminInsertarUsuario();
     private int contador = 1;
     private static String codigoProyecto = "";
 
@@ -119,6 +119,7 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         tbTrabajadores = new javax.swing.JTable();
         BtnLimpiarUsuarios = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
+        panelInsertar = new javax.swing.JPanel();
         panelSuperior = new javax.swing.JPanel();
         BotonOpciones = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
@@ -659,6 +660,25 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
 
         tbPaneles.addTab("tab2", panelMiembros);
 
+        panelInsertar.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                panelInsertarFocusGained(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelInsertarLayout = new javax.swing.GroupLayout(panelInsertar);
+        panelInsertar.setLayout(panelInsertarLayout);
+        panelInsertarLayout.setHorizontalGroup(
+            panelInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 955, Short.MAX_VALUE)
+        );
+        panelInsertarLayout.setVerticalGroup(
+            panelInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 610, Short.MAX_VALUE)
+        );
+
+        tbPaneles.addTab("tab4", panelInsertar);
+
         javax.swing.GroupLayout panelPestañasLayout = new javax.swing.GroupLayout(panelPestañas);
         panelPestañas.setLayout(panelPestañasLayout);
         panelPestañasLayout.setHorizontalGroup(
@@ -802,7 +822,9 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnActualizarusuariosActionPerformed
 
     private void btAgregarMiembroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgregarMiembroActionPerformed
-
+        tbPaneles.add(IntfzInsertar);
+        IntfzInsertar.show();
+        tbPaneles.setSelectedIndex(4);
     }//GEN-LAST:event_btAgregarMiembroActionPerformed
 
     private void btnRegresarProyectosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarProyectosActionPerformed
@@ -871,6 +893,13 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void panelInsertarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_panelInsertarFocusGained
+        // TODO add your handling code here:
+        if(IntfzInsertar.isClosed()){
+            tbPaneles.setSelectedIndex(0);
+        }
+    }//GEN-LAST:event_panelInsertarFocusGained
+
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -930,6 +959,7 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JPanel panelBotones1;
     private javax.swing.JPanel panelDescripcion;
+    private javax.swing.JPanel panelInsertar;
     private javax.swing.JPanel panelMiembros;
     private javax.swing.JPanel panelOpciones;
     private javax.swing.JPanel panelPestañas;

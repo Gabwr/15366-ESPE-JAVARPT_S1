@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class InterfazInicioAdministrador extends javax.swing.JInternalFrame {
-    InterfazAdminInsertarUsuario IntfzInsertar = new InterfazAdminInsertarUsuario();
+    public InterfazAdminInsertarUsuario IntfzInsertar = new InterfazAdminInsertarUsuario();
     String CargoIngreso;
     private int contador = 1;
 
