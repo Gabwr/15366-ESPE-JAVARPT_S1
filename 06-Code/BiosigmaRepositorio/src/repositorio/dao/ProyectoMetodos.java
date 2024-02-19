@@ -8,7 +8,6 @@ import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.UpdateResult;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import org.bson.Document;
 import repositorio.modelo.Proyecto;
@@ -40,22 +39,35 @@ public class ProyectoMetodos implements IProyecto {
         FindIterable<Document> documentos = coleccion.find();
         List<Proyecto> listaProyectos = new ArrayList<>();
         for (Document documento : documentos) {
-            Object objetoPermisoAmbiental = documento.get("permisoAmbiental");
-            org.bson.types.Binary binarioPermisoAmbiental = (org.bson.types.Binary) objetoPermisoAmbiental;
-            byte[] pdfPermisoAmbiental = binarioPermisoAmbiental.getData();
 
-            Object objetoPermisoAgua = documento.get("permisoAgua");
-            org.bson.types.Binary binarioPermisoAgua = (org.bson.types.Binary) objetoPermisoAgua;
-            byte[] pdfPermisoAgua = binarioPermisoAgua.getData();
+            byte[] pdfPermisoAmbiental = null;
+            if (documento.get("permisoAmbiental") != null) {
+                Object objetoPermisoAmbiental = documento.get("permisoAmbiental");
+                org.bson.types.Binary binarioPermisoAmbiental = (org.bson.types.Binary) objetoPermisoAmbiental;
+                pdfPermisoAmbiental = binarioPermisoAmbiental.getData();
+            }
 
-            Object objetoAuditoria = documento.get("auditoria");
-            org.bson.types.Binary binarioAuditoria = (org.bson.types.Binary) objetoAuditoria;
-            byte[] pdfAuditoria = binarioAuditoria.getData();
+            byte[] pdfPermisoAgua = null;
+            if (documento.get("permisoAgua") != null) {
+                Object objetoPermisoAgua = documento.get("permisoAgua");
+                org.bson.types.Binary binarioPermisoAgua = (org.bson.types.Binary) objetoPermisoAgua;
+                pdfPermisoAgua = binarioPermisoAgua.getData();
+            }
 
-            Object objetoMonitoreo = documento.get("monitoreo");
-            org.bson.types.Binary binarioMonitoreo = (org.bson.types.Binary) objetoMonitoreo;
-            byte[] pdfMonitoreo = binarioMonitoreo.getData();
+            byte[] pdfAuditoria = null;
+            if (documento.get("auditoria") != null) {
+                Object objetoAuditoria = documento.get("auditoria");
+                org.bson.types.Binary binarioAuditoria = (org.bson.types.Binary) objetoAuditoria;
+                pdfAuditoria = binarioAuditoria.getData();
+            }
 
+            byte[] pdfMonitoreo = null;
+            if (documento.get("monitoreo") != null) {
+                Object objetoMonitoreo = documento.get("monitoreo");
+                org.bson.types.Binary binarioMonitoreo = (org.bson.types.Binary) objetoMonitoreo;
+                pdfMonitoreo = binarioMonitoreo.getData();
+            }
+            
             Proyecto proyecto = new Proyecto(documento.getString("id_Proyecto"), documento.getString("nombre"), documento.getString("descripcion"), documento.getString("recordatorio"), documento.getDate("fechaInicio"), documento.getDate("fechaFinal"), pdfPermisoAmbiental, pdfPermisoAgua, pdfAuditoria, pdfMonitoreo);
             listaProyectos.add(proyecto);
         }
@@ -128,7 +140,7 @@ public class ProyectoMetodos implements IProyecto {
     public boolean VerificarCodigoRepetido(String codigo) {
         Document filtro = new Document("id_Proyecto", codigo);
         Document resultado = coleccion.find(filtro).first();
-        
+
         if (resultado != null) {
             return true;
         } else {
