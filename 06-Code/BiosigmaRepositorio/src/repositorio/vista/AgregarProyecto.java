@@ -8,6 +8,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 import repositorio.controlador.ProyectoServicio;
 import repositorio.modelo.Proyecto;
@@ -18,27 +20,67 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
 
     public AgregarProyecto() {
         initComponents();
+        limpiarCampos();
     }
-    
+
     private boolean validarDatos() {
         DefaultTableModel dtm = (DefaultTableModel) tbActividades.getModel();
         if ((txtCodigoProyecto.getText().length() > 0) && (txtNombreProyecto.getText().length() > 0) && (txtDescripcionProyecto.getText().length() > 0) && (dcFechaInicioProyecto.getDate() != null) && (rdEnProgreso.isSelected() || dcFechaFinalProyecto != null) && (rdActividades.isSelected() || (dtm.getRowCount() != 0))) {
-            if(ProyectoServicio.VerificarCodigoRepetido(txtCodigoProyecto.getText())){
-                JOptionPane.showMessageDialog(null,"El códgio ingresado ya esta registrado");
+            if (ProyectoServicio.VerificarCodigoRepetido(txtCodigoProyecto.getText())) {
+                JOptionPane.showMessageDialog(null, "El códgio ingresado ya esta registrado");
                 return false;
             }
-            
+
             proyecto.setIdProyecto(txtCodigoProyecto.getText());
             proyecto.setNombreProyecto(txtNombreProyecto.getText());
             proyecto.setDescripcionProyecto(txtDescripcionProyecto.getText());
             proyecto.setFechaInicio(dcFechaInicioProyecto.getDate());
-            if(!rdEnProgreso.isSelected()){
+            if (!rdEnProgreso.isSelected()) {
                 proyecto.setFechaFinal(dcFechaFinalProyecto.getDate());
             }
             return true;
         } else {
             return false;
         }
+    }
+
+    private void limpiarCampos() {
+        txtCodigoProyecto.setText("");
+        txtNombreProyecto.setText("");
+        txtDescripcionProyecto.setText("");
+        dcFechaInicioProyecto.setDate(null);
+        dcFechaFinalProyecto.setDate(null);
+        rdEnProgreso.setSelected(false);
+        rdActividades.setSelected(false);
+        lbAvisoCodigo.setVisible(true);
+        lbAvisoNombre.setVisible(true);
+        lbAvisoFechaInicio.setVisible(true);
+        lbAvisoFechaFinal.setVisible(true);
+        lbAvisoDescripcion.setVisible(true);
+        lbPermisoAmbiental.setVisible(false);
+        lbPermisoAgua.setVisible(false);
+        lbAuditoria.setVisible(false);
+        lbMonitoreo.setVisible(false);
+    }
+
+    private byte[] seleccionarArchivo() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Seleccione un archivo");
+
+        int result = fileChooser.showOpenDialog(null);
+        byte[] pdfBytes = null;
+
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            JOptionPane.showMessageDialog(null, "Archivo seleccionado: " + selectedFile.getAbsolutePath());
+
+            try {
+                pdfBytes = Files.readAllBytes(Paths.get(selectedFile.getAbsolutePath()));
+            } catch (IOException ex) {
+                Logger.getLogger(AgregarProyecto.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return pdfBytes;
     }
 
     @SuppressWarnings("unchecked")
@@ -76,15 +118,20 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         lbAvisoDescripcion = new javax.swing.JLabel();
         btPermisoAgua = new javax.swing.JButton();
         btMonitoreo = new javax.swing.JButton();
-        lbAvisoMonitoreo = new javax.swing.JLabel();
+        lbAvisoActividades = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
         rdActividades = new javax.swing.JRadioButton();
         jLabel8 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea3 = new javax.swing.JTextArea();
+        lbMonitoreo = new javax.swing.JLabel();
+        lbPermisoAmbiental = new javax.swing.JLabel();
+        lbPermisoAgua = new javax.swing.JLabel();
+        lbAuditoria = new javax.swing.JLabel();
 
         setBorder(null);
         setTitle("Agregar Proyecto");
@@ -98,7 +145,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
                 btAuditoriasActionPerformed(evt);
             }
         });
-        panelAgregarProyecto.add(btAuditorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 230, 180, -1));
+        panelAgregarProyecto.add(btAuditorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 320, 180, -1));
 
         btPermisoAmbiental.setText("Agregar Permiso Ambiental");
         btPermisoAmbiental.addActionListener(new java.awt.event.ActionListener() {
@@ -106,7 +153,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
                 btPermisoAmbientalActionPerformed(evt);
             }
         });
-        panelAgregarProyecto.add(btPermisoAmbiental, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 150, 180, -1));
+        panelAgregarProyecto.add(btPermisoAmbiental, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 240, 180, -1));
 
         rdEnProgreso.setForeground(new java.awt.Color(51, 0, 51));
         rdEnProgreso.setText("En progreso");
@@ -115,47 +162,62 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
                 rdEnProgresoActionPerformed(evt);
             }
         });
-        panelAgregarProyecto.add(rdEnProgreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 110, -1, -1));
-        panelAgregarProyecto.add(dcFechaFinalProyecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 80, 136, -1));
+        panelAgregarProyecto.add(rdEnProgreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 140, -1, -1));
+
+        dcFechaFinalProyecto.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dcFechaFinalProyectoPropertyChange(evt);
+            }
+        });
+        panelAgregarProyecto.add(dcFechaFinalProyecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 110, 136, -1));
 
         jLabel41.setFont(new java.awt.Font("Sitka Banner", 1, 14)); // NOI18N
         jLabel41.setForeground(new java.awt.Color(51, 0, 51));
         jLabel41.setText("Fecha de Finalización:");
-        panelAgregarProyecto.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 50, 136, -1));
+        panelAgregarProyecto.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 80, 136, -1));
 
         jLabel42.setFont(new java.awt.Font("Sitka Banner", 1, 14)); // NOI18N
         jLabel42.setForeground(new java.awt.Color(51, 0, 51));
         jLabel42.setText("Fecha de Inicio:");
-        panelAgregarProyecto.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 50, 136, -1));
-        panelAgregarProyecto.add(dcFechaInicioProyecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 80, 136, -1));
+        panelAgregarProyecto.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 80, 136, -1));
+
+        dcFechaInicioProyecto.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dcFechaInicioProyectoPropertyChange(evt);
+            }
+        });
+        panelAgregarProyecto.add(dcFechaInicioProyecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 110, 136, -1));
 
         txtNombreProyecto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNombreProyectoKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNombreProyectoKeyTyped(evt);
             }
         });
-        panelAgregarProyecto.add(txtNombreProyecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 136, -1));
+        panelAgregarProyecto.add(txtNombreProyecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 110, 136, -1));
 
         jLabel43.setFont(new java.awt.Font("Sitka Banner", 1, 14)); // NOI18N
         jLabel43.setForeground(new java.awt.Color(51, 0, 51));
         jLabel43.setText("Nombre Del Proyecto:");
-        panelAgregarProyecto.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, 136, -1));
+        panelAgregarProyecto.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 136, -1));
 
         jLabel44.setFont(new java.awt.Font("Sitka Banner", 1, 14)); // NOI18N
         jLabel44.setForeground(new java.awt.Color(51, 0, 51));
         jLabel44.setText("Descripción del proyecto:");
-        panelAgregarProyecto.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 156, -1));
+        panelAgregarProyecto.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 156, -1));
 
         txtDescripcionProyecto.setColumns(20);
         txtDescripcionProyecto.setRows(5);
         jScrollPane12.setViewportView(txtDescripcionProyecto);
 
-        panelAgregarProyecto.add(jScrollPane12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 310, -1));
+        panelAgregarProyecto.add(jScrollPane12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 310, 130));
 
         jLabel46.setFont(new java.awt.Font("Sitka Banner", 1, 18)); // NOI18N
         jLabel46.setForeground(new java.awt.Color(51, 0, 51));
         jLabel46.setText("Plan de Manejo Ambiental");
-        panelAgregarProyecto.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 290, -1, -1));
+        panelAgregarProyecto.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 440, -1, -1));
 
         tbActividades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -175,7 +237,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         });
         jScrollPane14.setViewportView(tbActividades);
 
-        panelAgregarProyecto.add(jScrollPane14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 480, 241));
+        panelAgregarProyecto.add(jScrollPane14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 470, 480, 110));
 
         panelActividades.setBackground(new java.awt.Color(204, 255, 204));
 
@@ -200,35 +262,36 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
                 .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelActividadesLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 27, Short.MAX_VALUE)
                 .addComponent(txtActividad, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(panelActividadesLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addContainerGap(33, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelActividadesLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btActividad)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addGap(41, 41, 41))
         );
         panelActividadesLayout.setVerticalGroup(
             panelActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelActividadesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel47)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtActividad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btActividad)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        panelAgregarProyecto.add(panelActividades, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 360, 210, 160));
+        panelAgregarProyecto.add(panelActividades, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 480, 210, 110));
 
+        btAgregarProyecto.setFont(new java.awt.Font("Sitka Banner", 1, 18)); // NOI18N
         btAgregarProyecto.setText("Agregar Proyecto");
         btAgregarProyecto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAgregarProyectoActionPerformed(evt);
             }
         });
-        panelAgregarProyecto.add(btAgregarProyecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 500, -1, 49));
+        panelAgregarProyecto.add(btAgregarProyecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 530, -1, 49));
 
         btnRegresarPanelTabla1.setText("Regresar");
         btnRegresarPanelTabla1.addActionListener(new java.awt.event.ActionListener() {
@@ -236,44 +299,47 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
                 btnRegresarPanelTabla1ActionPerformed(evt);
             }
         });
-        panelAgregarProyecto.add(btnRegresarPanelTabla1, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 20, -1, -1));
+        panelAgregarProyecto.add(btnRegresarPanelTabla1, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 20, -1, 20));
 
         jLabel45.setFont(new java.awt.Font("Sitka Banner", 1, 14)); // NOI18N
         jLabel45.setForeground(new java.awt.Color(51, 0, 51));
         jLabel45.setText("Código de Proyecto:");
-        panelAgregarProyecto.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
+        panelAgregarProyecto.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
         txtCodigoProyecto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCodigoProyectoKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCodigoProyectoKeyTyped(evt);
             }
         });
-        panelAgregarProyecto.add(txtCodigoProyecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 136, -1));
+        panelAgregarProyecto.add(txtCodigoProyecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 136, -1));
 
         lbAvisoCodigo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lbAvisoCodigo.setForeground(new java.awt.Color(255, 0, 0));
         lbAvisoCodigo.setText("*");
-        panelAgregarProyecto.add(lbAvisoCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, -1, 20));
+        panelAgregarProyecto.add(lbAvisoCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, -1, 20));
 
         lbAvisoNombre.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lbAvisoNombre.setForeground(new java.awt.Color(255, 0, 0));
         lbAvisoNombre.setText("*");
-        panelAgregarProyecto.add(lbAvisoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 80, -1, 20));
+        panelAgregarProyecto.add(lbAvisoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, -1, 20));
 
         lbAvisoFechaInicio.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lbAvisoFechaInicio.setForeground(new java.awt.Color(255, 0, 0));
         lbAvisoFechaInicio.setText("*");
-        panelAgregarProyecto.add(lbAvisoFechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 80, -1, 20));
+        panelAgregarProyecto.add(lbAvisoFechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 110, -1, 20));
 
         lbAvisoFechaFinal.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lbAvisoFechaFinal.setForeground(new java.awt.Color(255, 0, 0));
         lbAvisoFechaFinal.setText("*");
-        panelAgregarProyecto.add(lbAvisoFechaFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 80, -1, 20));
+        panelAgregarProyecto.add(lbAvisoFechaFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 110, -1, 20));
 
         lbAvisoDescripcion.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lbAvisoDescripcion.setForeground(new java.awt.Color(255, 0, 0));
         lbAvisoDescripcion.setText("*");
-        panelAgregarProyecto.add(lbAvisoDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 170, -1, 20));
+        panelAgregarProyecto.add(lbAvisoDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 200, -1, 20));
 
         btPermisoAgua.setText("Agregar Permiso de Agua");
         btPermisoAgua.addActionListener(new java.awt.event.ActionListener() {
@@ -281,7 +347,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
                 btPermisoAguaActionPerformed(evt);
             }
         });
-        panelAgregarProyecto.add(btPermisoAgua, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 190, 180, -1));
+        panelAgregarProyecto.add(btPermisoAgua, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 280, 180, -1));
 
         btMonitoreo.setText("Agregar Monitoreo");
         btMonitoreo.addActionListener(new java.awt.event.ActionListener() {
@@ -289,33 +355,20 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
                 btMonitoreoActionPerformed(evt);
             }
         });
-        panelAgregarProyecto.add(btMonitoreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 270, 180, -1));
+        panelAgregarProyecto.add(btMonitoreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 360, 180, -1));
 
-        lbAvisoMonitoreo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        lbAvisoMonitoreo.setForeground(new java.awt.Color(255, 0, 0));
-        lbAvisoMonitoreo.setText("*");
-        panelAgregarProyecto.add(lbAvisoMonitoreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 330, -1, 20));
+        lbAvisoActividades.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lbAvisoActividades.setForeground(new java.awt.Color(255, 0, 0));
+        lbAvisoActividades.setText("*");
+        panelAgregarProyecto.add(lbAvisoActividades, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 450, -1, 20));
 
         jLabel2.setBackground(new java.awt.Color(102, 102, 102));
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel2.setText("(Si aun no finaliza el proyecto seleccione en progreso)");
-        panelAgregarProyecto.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 140, -1, -1));
+        jLabel2.setText("(Seleccione si no desea agregar por el momento)");
+        panelAgregarProyecto.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 430, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/cloudup_icon-icons.com_54402.png"))); // NOI18N
-        panelAgregarProyecto.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 200, -1, -1));
-
-        jScrollPane1.setWheelScrollingEnabled(false);
-
-        jTextArea1.setEditable(false);
-        jTextArea1.setBackground(new java.awt.Color(204, 204, 255));
-        jTextArea1.setColumns(20);
-        jTextArea1.setForeground(new java.awt.Color(102, 102, 102));
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(2);
-        jTextArea1.setText("Si aun no posee los siguientes archivos,\nsuba un pdf en Blanco.");
-        jScrollPane1.setViewportView(jTextArea1);
-
-        panelAgregarProyecto.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 190, 250, 50));
+        panelAgregarProyecto.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 290, -1, -1));
 
         jTextArea2.setEditable(false);
         jTextArea2.setBackground(new java.awt.Color(204, 204, 255));
@@ -323,10 +376,10 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         jTextArea2.setForeground(new java.awt.Color(102, 102, 102));
         jTextArea2.setLineWrap(true);
         jTextArea2.setRows(3);
-        jTextArea2.setText("Puede agregar más\nactividades desde \nActualizar Proyecto");
+        jTextArea2.setText("Si no posee el pdf  puede cargar desde Actualizar Proyecto");
         jScrollPane2.setViewportView(jTextArea2);
 
-        panelAgregarProyecto.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 360, 140, 70));
+        panelAgregarProyecto.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 280, 120, 60));
 
         rdActividades.setForeground(new java.awt.Color(0, 0, 0));
         rdActividades.setText("No agregar actividades por ahora");
@@ -335,12 +388,40 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
                 rdActividadesActionPerformed(evt);
             }
         });
-        panelAgregarProyecto.add(rdActividades, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 330, -1, -1));
+        panelAgregarProyecto.add(rdActividades, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 450, -1, -1));
 
-        jLabel8.setFont(new java.awt.Font("Sitka Banner", 1, 30)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Sitka Banner", 1, 40)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 51, 51));
         jLabel8.setText("Agregar Proyecto");
-        panelAgregarProyecto.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 0, -1, -1));
+        panelAgregarProyecto.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, -1, -1));
+
+        jLabel3.setBackground(new java.awt.Color(102, 102, 102));
+        jLabel3.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel3.setText("(Si aun no finaliza el proyecto seleccione en progreso)");
+        panelAgregarProyecto.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 170, -1, -1));
+
+        jTextArea3.setEditable(false);
+        jTextArea3.setBackground(new java.awt.Color(204, 204, 255));
+        jTextArea3.setColumns(20);
+        jTextArea3.setForeground(new java.awt.Color(102, 102, 102));
+        jTextArea3.setLineWrap(true);
+        jTextArea3.setRows(3);
+        jTextArea3.setText("Puede agregar más\nactividades desde \nActualizar Proyecto");
+        jScrollPane3.setViewportView(jTextArea3);
+
+        panelAgregarProyecto.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 360, 120, 60));
+
+        lbMonitoreo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/accept_icon-icons.com_74428 (1).png"))); // NOI18N
+        panelAgregarProyecto.add(lbMonitoreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 350, -1, -1));
+
+        lbPermisoAmbiental.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/accept_icon-icons.com_74428 (1).png"))); // NOI18N
+        panelAgregarProyecto.add(lbPermisoAmbiental, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 230, -1, -1));
+
+        lbPermisoAgua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/accept_icon-icons.com_74428 (1).png"))); // NOI18N
+        panelAgregarProyecto.add(lbPermisoAgua, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 270, -1, -1));
+
+        lbAuditoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/accept_icon-icons.com_74428 (1).png"))); // NOI18N
+        panelAgregarProyecto.add(lbAuditoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 310, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -387,87 +468,67 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_rdEnProgresoActionPerformed
 
     private void btPermisoAmbientalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPermisoAmbientalActionPerformed
-        JFileChooser fileChooser = new JFileChooser();
-        int result = fileChooser.showOpenDialog(null);
-
-        if (result == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
-            JOptionPane.showMessageDialog(null, "Archivo seleccionado: " + selectedFile.getAbsolutePath());
-
-            try {
-                byte[] pdfBytes;
-                pdfBytes = Files.readAllBytes(Paths.get(selectedFile.getAbsolutePath()));
-                proyecto.setPermisoAmbiental(pdfBytes);
-            } catch (IOException ex) {
-                Logger.getLogger(AgregarProyecto.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(AgregarProyecto.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        byte[] pdfBytes = seleccionarArchivo();
+        if (pdfBytes != null) {
+            proyecto.setPermisoAmbiental(pdfBytes);
+            lbPermisoAmbiental.setVisible(true);
+        }
+
     }//GEN-LAST:event_btPermisoAmbientalActionPerformed
 
     private void btPermisoAguaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPermisoAguaActionPerformed
-        JFileChooser fileChooser = new JFileChooser();
-        int result = fileChooser.showOpenDialog(null);
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(AgregarProyecto.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-        if (result == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
-            JOptionPane.showMessageDialog(null, "Archivo seleccionado: " + selectedFile.getAbsolutePath());
-
-            try {
-                byte[] pdfBytes;
-                pdfBytes = Files.readAllBytes(Paths.get(selectedFile.getAbsolutePath()));
-                proyecto.setPermisoAgua(pdfBytes);
-            } catch (IOException ex) {
-                Logger.getLogger(AgregarProyecto.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+        byte[] pdfBytes = seleccionarArchivo();
+        if (pdfBytes != null) {
+            proyecto.setPermisoAgua(pdfBytes);
+            lbPermisoAgua.setVisible(true);
         }
     }//GEN-LAST:event_btPermisoAguaActionPerformed
 
     private void btAuditoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAuditoriasActionPerformed
-        JFileChooser fileChooser = new JFileChooser();
-        int result = fileChooser.showOpenDialog(null);
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(AgregarProyecto.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-        if (result == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
-            JOptionPane.showMessageDialog(null, "Archivo seleccionado: " + selectedFile.getAbsolutePath());
-
-            try {
-                byte[] pdfBytes;
-                pdfBytes = Files.readAllBytes(Paths.get(selectedFile.getAbsolutePath()));
-                proyecto.setAuditoria(pdfBytes);
-            } catch (IOException ex) {
-                Logger.getLogger(AgregarProyecto.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+        byte[] pdfBytes = seleccionarArchivo();
+        if (pdfBytes != null) {
+            proyecto.setAuditoria(pdfBytes);
         }
     }//GEN-LAST:event_btAuditoriasActionPerformed
 
     private void btMonitoreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMonitoreoActionPerformed
-        JFileChooser fileChooser = new JFileChooser();
-        int result = fileChooser.showOpenDialog(null);
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(AgregarProyecto.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-        if (result == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
-            JOptionPane.showMessageDialog(null, "Archivo seleccionado: " + selectedFile.getAbsolutePath());
-
-            try {
-                byte[] pdfBytes;
-                pdfBytes = Files.readAllBytes(Paths.get(selectedFile.getAbsolutePath()));
-                proyecto.setMonitoreo(pdfBytes);
-            } catch (IOException ex) {
-                Logger.getLogger(AgregarProyecto.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+        byte[] pdfBytes = seleccionarArchivo();
+        if (pdfBytes != null) {
+            proyecto.setMonitoreo(pdfBytes);
         }
     }//GEN-LAST:event_btMonitoreoActionPerformed
 
     private void btAgregarProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgregarProyectoActionPerformed
         if (validarDatos()) {
             ProyectoServicio.InsertarProyecto(proyecto);
-        }
-        else{
-            JOptionPane.showMessageDialog(null,"Ingrese los datos correctamente");
+            InterfazAdminJFrame.llenarTablaProyectos();
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingrese los datos correctamente");
         }
     }//GEN-LAST:event_btAgregarProyectoActionPerformed
 
@@ -477,15 +538,50 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
             getToolkit().beep();
             evt.consume();
             JOptionPane.showMessageDialog(null, "Ingresar solamente Letras");
-
         }
     }//GEN-LAST:event_txtActividadKeyTyped
 
     private void rdActividadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdActividadesActionPerformed
-        if(rdActividades.isSelected()){
-            panelActividades.setEnabled(false);
+        if (rdActividades.isSelected()) {
+            panelActividades.setVisible(false);
+            lbAvisoActividades.setVisible(false);
+        } else {
+            panelActividades.setVisible(true);
+            lbAvisoActividades.setVisible(true);
         }
     }//GEN-LAST:event_rdActividadesActionPerformed
+
+    private void txtCodigoProyectoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoProyectoKeyReleased
+        if (txtCodigoProyecto.getText().length() == 0) {
+            lbAvisoCodigo.setVisible(true);
+        } else {
+            lbAvisoCodigo.setVisible(false);
+        }
+    }//GEN-LAST:event_txtCodigoProyectoKeyReleased
+
+    private void txtNombreProyectoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreProyectoKeyReleased
+        if (txtNombreProyecto.getText().length() == 0) {
+            lbAvisoNombre.setVisible(true);
+        } else {
+            lbAvisoNombre.setVisible(false);
+        }
+    }//GEN-LAST:event_txtNombreProyectoKeyReleased
+
+    private void dcFechaInicioProyectoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dcFechaInicioProyectoPropertyChange
+        if (dcFechaInicioProyecto.getDate() == null) {
+            lbAvisoFechaInicio.setVisible(true);
+        } else {
+            lbAvisoFechaInicio.setVisible(false);
+        }
+    }//GEN-LAST:event_dcFechaInicioProyectoPropertyChange
+
+    private void dcFechaFinalProyectoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dcFechaFinalProyectoPropertyChange
+        if (dcFechaFinalProyecto.getDate() == null) {
+            lbAvisoFechaFinal.setVisible(true);
+        } else {
+            lbAvisoFechaFinal.setVisible(false);
+        }
+    }//GEN-LAST:event_dcFechaFinalProyectoPropertyChange
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -500,6 +596,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
     private com.toedter.calendar.JDateChooser dcFechaInicioProyecto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
@@ -508,18 +605,22 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextArea jTextArea3;
+    private javax.swing.JLabel lbAuditoria;
+    private javax.swing.JLabel lbAvisoActividades;
     private javax.swing.JLabel lbAvisoCodigo;
     private javax.swing.JLabel lbAvisoDescripcion;
     private javax.swing.JLabel lbAvisoFechaFinal;
     private javax.swing.JLabel lbAvisoFechaInicio;
-    private javax.swing.JLabel lbAvisoMonitoreo;
     private javax.swing.JLabel lbAvisoNombre;
+    private javax.swing.JLabel lbMonitoreo;
+    private javax.swing.JLabel lbPermisoAgua;
+    private javax.swing.JLabel lbPermisoAmbiental;
     private javax.swing.JPanel panelActividades;
     private javax.swing.JPanel panelAgregarProyecto;
     private javax.swing.JRadioButton rdActividades;
