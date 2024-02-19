@@ -45,7 +45,7 @@ public class TrabajadorMetodos implements ITrabajador {
             String cedula = documento.getString("cedula");
             String correo = documento.getString("correo");
             String nombre = documento.getString("nombre");
-            String contrasenia = documento.getString("contraseña");
+            String contrasenia = documento.getString("contrasenia");
             String cargo = documento.getString("cargo");
             Date fechanac = documento.getDate("fechaNacimiento");
 
@@ -122,5 +122,16 @@ public class TrabajadorMetodos implements ITrabajador {
         }    
     
     }
+
+    @Override
+    public PersonaTrabajador BuscarPorCodigo(String idTrabajador) {
+        Document filtro = new Document("id_Admin", idTrabajador);
+        Document resultado = coleccion.find(filtro).first();
+    return new PersonaTrabajador(idTrabajador, resultado.getString("contrasenia"),
+            resultado.getString("cedula"),
+            resultado.getString("correo"),
+            resultado.getString("nombre"),
+            resultado.getString("cargo"),
+            resultado.getDate("fechaNacimiento"));}
 
 }

@@ -10,5 +10,6 @@ public interface ICliente {
     public boolean InsertarClientes(PersonaCliente Cliente);
     public boolean ActualizarClientes(PersonaCliente Cliente);
     public boolean EliminarClientes(String idCliente);
-    public boolean VerificarCodigoRepetido(String idCliente);  
+    public boolean VerificarCodigoRepetido(String idCliente);
+    public PersonaCliente BuscarPorCodigo(String idCliente);
 }

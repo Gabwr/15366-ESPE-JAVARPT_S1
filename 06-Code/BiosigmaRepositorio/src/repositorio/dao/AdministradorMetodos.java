@@ -44,7 +44,7 @@ public class AdministradorMetodos implements IAdministrador {
             String cedula = documento.getString("cedula");
             String correo = documento.getString("correo");
             String nombre = documento.getString("nombre");
-            String contrasenia = documento.getString("contraseña");
+            String contrasenia = documento.getString("contrasenia");
             Date fechanac = documento.getDate("fechaNacimiento");
 
             PersonaAdmin admin = new PersonaAdmin(usuario, contrasenia, cedula, correo, nombre, fechanac);
@@ -116,5 +116,16 @@ public class AdministradorMetodos implements IAdministrador {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public PersonaAdmin BuscarPorCodigo(String idAdmin) {
+        Document filtro = new Document("id_Admin", idAdmin);
+        Document resultado = coleccion.find(filtro).first();
+    return new PersonaAdmin(idAdmin, resultado.getString("contrasenia"),
+            resultado.getString("cedula"),
+            resultado.getString("correo"),
+            resultado.getString("nombre"), 
+            resultado.getDate("fechaNacimiento"));
     }
 }

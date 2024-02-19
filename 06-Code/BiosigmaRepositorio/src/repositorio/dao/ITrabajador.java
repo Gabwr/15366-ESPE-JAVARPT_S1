@@ -9,5 +9,6 @@ public interface ITrabajador {
     public boolean InsertarTrabajadores(PersonaTrabajador Trabajador);
     public boolean ActualizarTrabajadores(PersonaTrabajador Trabajador);
     public boolean EliminarTrabajadores(String idTrabajador);
-    public boolean VerificarCodigoRepetido(String idTrabajador);  
+    public boolean VerificarCodigoRepetido(String idTrabajador);
+    public PersonaTrabajador BuscarPorCodigo(String idTrabajador);
 }
