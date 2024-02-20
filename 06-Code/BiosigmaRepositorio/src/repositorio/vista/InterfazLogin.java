@@ -58,16 +58,14 @@ public class InterfazLogin extends javax.swing.JFrame {
         jLabel1.setText("Iniciar Sesión");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Usuario:");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Contraseña:");
 
-        btnSesion.setBackground(new java.awt.Color(255, 51, 204));
+        btnSesion.setBackground(new java.awt.Color(255, 153, 153));
         btnSesion.setFont(new java.awt.Font("Microsoft YaHei UI Light", 1, 24)); // NOI18N
-        btnSesion.setForeground(new java.awt.Color(0, 0, 0));
+        btnSesion.setForeground(new java.awt.Color(51, 0, 0));
         btnSesion.setText("INICIAR SESIÓN");
         btnSesion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
