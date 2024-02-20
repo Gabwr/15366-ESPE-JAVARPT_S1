@@ -128,13 +128,19 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea3 = new javax.swing.JTextArea();
+        jLabel6 = new javax.swing.JLabel();
         lbMonitoreo = new javax.swing.JLabel();
         lbPermisoAmbiental = new javax.swing.JLabel();
         lbPermisoAgua = new javax.swing.JLabel();
         lbAuditoria = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
-        setBorder(null);
+        setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        setForeground(new java.awt.Color(255, 204, 204));
         setTitle("Agregar Proyecto");
+        setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
 
         panelAgregarProyecto.setBackground(new java.awt.Color(190, 231, 231));
         panelAgregarProyecto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -164,6 +170,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         });
         panelAgregarProyecto.add(rdEnProgreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 140, -1, -1));
 
+        dcFechaFinalProyecto.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         dcFechaFinalProyecto.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 dcFechaFinalProyectoPropertyChange(evt);
@@ -181,6 +188,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         jLabel42.setText("Fecha de Inicio:");
         panelAgregarProyecto.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 80, 136, -1));
 
+        dcFechaInicioProyecto.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         dcFechaInicioProyecto.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 dcFechaInicioProyectoPropertyChange(evt);
@@ -299,7 +307,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
                 btnRegresarPanelTabla1ActionPerformed(evt);
             }
         });
-        panelAgregarProyecto.add(btnRegresarPanelTabla1, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 20, -1, 20));
+        panelAgregarProyecto.add(btnRegresarPanelTabla1, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 20, -1, 20));
 
         jLabel45.setFont(new java.awt.Font("Sitka Banner", 1, 14)); // NOI18N
         jLabel45.setForeground(new java.awt.Color(51, 0, 51));
@@ -368,7 +376,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         panelAgregarProyecto.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 430, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/cloudup_icon-icons.com_54402.png"))); // NOI18N
-        panelAgregarProyecto.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 290, -1, -1));
+        panelAgregarProyecto.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 290, -1, -1));
 
         jTextArea2.setEditable(false);
         jTextArea2.setBackground(new java.awt.Color(204, 204, 255));
@@ -379,7 +387,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         jTextArea2.setText("Si no posee el pdf  puede cargar desde Actualizar Proyecto");
         jScrollPane2.setViewportView(jTextArea2);
 
-        panelAgregarProyecto.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 280, 120, 60));
+        panelAgregarProyecto.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 270, 120, 60));
 
         rdActividades.setForeground(new java.awt.Color(0, 0, 0));
         rdActividades.setText("No agregar actividades por ahora");
@@ -390,8 +398,9 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         });
         panelAgregarProyecto.add(rdActividades, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 450, -1, -1));
 
+        jLabel8.setBackground(new java.awt.Color(204, 255, 204));
         jLabel8.setFont(new java.awt.Font("Sitka Banner", 1, 40)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 51, 51));
+        jLabel8.setForeground(new java.awt.Color(204, 255, 204));
         jLabel8.setText("Agregar Proyecto");
         panelAgregarProyecto.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, -1, -1));
 
@@ -411,6 +420,9 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
 
         panelAgregarProyecto.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 360, 120, 60));
 
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/LogoBiosigmaTransparente.png"))); // NOI18N
+        panelAgregarProyecto.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
         lbMonitoreo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/accept_icon-icons.com_74428 (1).png"))); // NOI18N
         panelAgregarProyecto.add(lbMonitoreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 350, -1, -1));
 
@@ -422,16 +434,23 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
 
         lbAuditoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/accept_icon-icons.com_74428 (1).png"))); // NOI18N
         panelAgregarProyecto.add(lbAuditoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 310, -1, -1));
+        panelAgregarProyecto.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1040, 10));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/FondoProyectos.png"))); // NOI18N
+        panelAgregarProyecto.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 0, 250, 60));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/FondoProyectos.png"))); // NOI18N
+        panelAgregarProyecto.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelAgregarProyecto, javax.swing.GroupLayout.DEFAULT_SIZE, 1031, Short.MAX_VALUE)
+            .addComponent(panelAgregarProyecto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelAgregarProyecto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE)
+            .addComponent(panelAgregarProyecto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE)
         );
 
         pack();
@@ -597,6 +616,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
@@ -604,11 +624,14 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea jTextArea3;
     private javax.swing.JLabel lbAuditoria;
