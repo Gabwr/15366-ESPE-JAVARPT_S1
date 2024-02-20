@@ -92,6 +92,7 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         jTextArea5 = new javax.swing.JTextArea();
         jLabel10 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         panelProyectos = new javax.swing.JPanel();
         panelTablaProyectos = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -310,7 +311,7 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         tbPaneles.setBackground(new java.awt.Color(255, 255, 255));
         tbPaneles.setTabPlacement(javax.swing.JTabbedPane.RIGHT);
 
-        panelPresentacion.setBackground(new java.awt.Color(204, 255, 153));
+        panelPresentacion.setBackground(new java.awt.Color(190, 249, 132));
         panelPresentacion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelDescripcion.setBackground(new java.awt.Color(0, 0, 0));
@@ -340,7 +341,7 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         panelPresentacion.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(167, 22, -1, -1));
 
         jTextArea5.setEditable(false);
-        jTextArea5.setBackground(new java.awt.Color(204, 255, 153));
+        jTextArea5.setBackground(new java.awt.Color(255, 255, 204));
         jTextArea5.setColumns(20);
         jTextArea5.setFont(new java.awt.Font("Sitka Banner", 1, 16)); // NOI18N
         jTextArea5.setForeground(new java.awt.Color(0, 51, 0));
@@ -352,12 +353,27 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         panelPresentacion.add(jScrollPane11, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 97, 470, 254));
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/ImagenHidroabanico.jpg"))); // NOI18N
-        panelPresentacion.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 363, 470, 221));
+        panelPresentacion.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 363, 470, 230));
 
         jLabel37.setFont(new java.awt.Font("Sitka Banner", 1, 24)); // NOI18N
         jLabel37.setForeground(new java.awt.Color(51, 0, 0));
         jLabel37.setText("¿Qué significa Biosigma?");
         panelPresentacion.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(584, 116, -1, -1));
+
+        jPanel1.setBackground(new java.awt.Color(170, 228, 156));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 950, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 310, Short.MAX_VALUE)
+        );
+
+        panelPresentacion.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 310));
 
         tbPaneles.addTab("tab1", panelPresentacion);
 
@@ -946,6 +962,7 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
