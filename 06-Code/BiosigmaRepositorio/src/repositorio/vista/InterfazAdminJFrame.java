@@ -4,13 +4,20 @@ import java.awt.Color;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import repositorio.controlador.AdminServicio;
 import repositorio.controlador.ProyectoServicio;
 import repositorio.modelo.Proyecto;
 
 public class InterfazAdminJFrame extends javax.swing.JFrame {
+
     public InterfazAdminInsertarUsuario IntfzInsertar = new InterfazAdminInsertarUsuario();
     private int contador = 1;
+    int filaseleccionadaAdmin = -1;
+    int filaseleccionadaCliente = -1;
+    int filaseleccionadaTrabajador = -1;
     private static String codigoProyecto = "";
+    private static String codigoUsuario = "";
+    private DefaultTableModel dtm = null;
 
     public InterfazAdminJFrame() {
         initComponents();
@@ -553,6 +560,11 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tbAdmin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbAdminMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(tbAdmin);
 
         tbMiembros.addTab("Administradores", jScrollPane4);
@@ -573,6 +585,11 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tbClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbClientesMouseClicked(evt);
+            }
+        });
         jScrollPane5.setViewportView(tbClientes);
 
         tbMiembros.addTab("Clientes", jScrollPane5);
@@ -591,6 +608,11 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tbTrabajadores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbTrabajadoresMouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(tbTrabajadores);
@@ -819,6 +841,15 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
 
     private void btnActualizarusuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarusuariosActionPerformed
 
+        if (filaseleccionadaAdmin > -1) {
+            dtm = (DefaultTableModel) tbAdmin.getModel();
+        } else if (filaseleccionadaCliente > -1) {
+            dtm = (DefaultTableModel) tbClientes.getModel();
+        } else if (filaseleccionadaTrabajador > -1) {
+            dtm = (DefaultTableModel) tbTrabajadores.getModel();
+        } else {
+            JOptionPane.showMessageDialog(null, "Eliga un dato para eliminar");
+        }
     }//GEN-LAST:event_btnActualizarusuariosActionPerformed
 
     private void btAgregarMiembroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgregarMiembroActionPerformed
@@ -895,10 +926,22 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
 
     private void panelInsertarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_panelInsertarFocusGained
         // TODO add your handling code here:
-        if(IntfzInsertar.isClosed()){
+        if (IntfzInsertar.isClosed()) {
             tbPaneles.setSelectedIndex(0);
         }
     }//GEN-LAST:event_panelInsertarFocusGained
+
+    private void tbAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAdminMouseClicked
+        filaseleccionadaAdmin = tbAdmin.getSelectedRow();
+    }//GEN-LAST:event_tbAdminMouseClicked
+
+    private void tbClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbClientesMouseClicked
+        filaseleccionadaCliente = tbClientes.getSelectedRow();
+    }//GEN-LAST:event_tbClientesMouseClicked
+
+    private void tbTrabajadoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTrabajadoresMouseClicked
+        filaseleccionadaCliente = tbTrabajadores.getSelectedRow();
+    }//GEN-LAST:event_tbTrabajadoresMouseClicked
 
     public static void main(String args[]) {
 
