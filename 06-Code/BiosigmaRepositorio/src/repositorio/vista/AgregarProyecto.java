@@ -136,6 +136,8 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
         setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         setForeground(new java.awt.Color(255, 204, 204));
@@ -387,7 +389,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         jTextArea2.setText("Si no posee el pdf  puede cargar desde Actualizar Proyecto");
         jScrollPane2.setViewportView(jTextArea2);
 
-        panelAgregarProyecto.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 270, 120, 60));
+        panelAgregarProyecto.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 390, 120, 60));
 
         rdActividades.setForeground(new java.awt.Color(0, 0, 0));
         rdActividades.setText("No agregar actividades por ahora");
@@ -441,6 +443,24 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/FondoProyectos.png"))); // NOI18N
         panelAgregarProyecto.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 60));
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/Tiburon-martillo (1).png"))); // NOI18N
+        panelAgregarProyecto.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 210, 280, -1));
+
+        jPanel1.setBackground(new java.awt.Color(204, 219, 255));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1040, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 280, Short.MAX_VALUE)
+        );
+
+        panelAgregarProyecto.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1040, 280));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -626,7 +646,9 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane2;
