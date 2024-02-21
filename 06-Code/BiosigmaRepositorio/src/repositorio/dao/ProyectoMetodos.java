@@ -135,6 +135,7 @@ public class ProyectoMetodos implements IProyecto {
             return false;
         }
     }
+    
 
     @Override
     public boolean VerificarCodigoRepetido(String codigo) {
@@ -146,6 +147,44 @@ public class ProyectoMetodos implements IProyecto {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public Proyecto BuscarProyecto(String codigo) {
+        Document filtro = new Document("id_Proyecto", codigo);
+        Document documento = coleccion.find(filtro).first();
+           
+            byte[] pdfPermisoAmbiental = null;
+            if (documento.get("permisoAmbiental") != null) {
+                Object objetoPermisoAmbiental = documento.get("permisoAmbiental");
+                org.bson.types.Binary binarioPermisoAmbiental = (org.bson.types.Binary) objetoPermisoAmbiental;
+                pdfPermisoAmbiental = binarioPermisoAmbiental.getData();
+            }
+
+            byte[] pdfPermisoAgua = null;
+            if (documento.get("permisoAgua") != null) {
+                Object objetoPermisoAgua = documento.get("permisoAgua");
+                org.bson.types.Binary binarioPermisoAgua = (org.bson.types.Binary) objetoPermisoAgua;
+                pdfPermisoAgua = binarioPermisoAgua.getData();
+            }
+
+            byte[] pdfAuditoria = null;
+            if (documento.get("auditoria") != null) {
+                Object objetoAuditoria = documento.get("auditoria");
+                org.bson.types.Binary binarioAuditoria = (org.bson.types.Binary) objetoAuditoria;
+                pdfAuditoria = binarioAuditoria.getData();
+            }
+
+            byte[] pdfMonitoreo = null;
+            if (documento.get("monitoreo") != null) {
+                Object objetoMonitoreo = documento.get("monitoreo");
+                org.bson.types.Binary binarioMonitoreo = (org.bson.types.Binary) objetoMonitoreo;
+                pdfMonitoreo = binarioMonitoreo.getData();
+            }
+            
+            Proyecto proyecto = new Proyecto(documento.getString("id_Proyecto"), documento.getString("nombre"), documento.getString("descripcion"), documento.getString("recordatorio"), documento.getDate("fechaInicio"), documento.getDate("fechaFinal"), pdfPermisoAmbiental, pdfPermisoAgua, pdfAuditoria, pdfMonitoreo);
+            
+            return proyecto;
     }
 
 }

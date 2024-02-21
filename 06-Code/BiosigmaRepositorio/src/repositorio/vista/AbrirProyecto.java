@@ -1,13 +1,50 @@
 package repositorio.vista;
 
 import java.lang.System.Logger.Level;
+import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import org.bson.diagnostics.Logger;
+import repositorio.controlador.ProyectoServicio;
+import repositorio.modelo.Proyecto;
 
 public class AbrirProyecto extends javax.swing.JInternalFrame {
 
+    Proyecto proyecto;
+
     public AbrirProyecto() {
         initComponents();
+        consultarDatos();
+    }
+
+    private void consultarDatos() {
+        String codigo = InterfazAdminJFrame.getCodigoProyecto();
+        try {
+            proyecto = ProyectoServicio.BuscarProyecto(codigo);
+            txtCodigo.setText(proyecto.getIdProyecto());
+            txtNombre.setText(proyecto.getNombreProyecto());
+            String fechaInicio = new SimpleDateFormat("dd/MM/yyyy").format(proyecto.getFechaInicio());
+            String fechaFinal;
+            if (proyecto.getFechaFinal() != null) {
+                fechaFinal = new SimpleDateFormat("dd/MM/yyyy").format(proyecto.getFechaFinal());
+            } else {
+                fechaFinal = "En progreso";
+            }
+            txtFechaInicio.setText(fechaInicio);
+            txtFechaFinal.setText(fechaFinal);
+            txtDescripcion.setText(proyecto.getDescripcionProyecto());
+            String recordatorio;
+            if(proyecto.getRecordatorioProyecto() != null){
+                recordatorio = proyecto.getRecordatorioProyecto();
+            }
+            else{
+                recordatorio = "No existen recordatorios";
+            }
+            txtRecordatorio.setText(recordatorio);
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "No se ha podido cargar la información del proyecto");
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -18,18 +55,18 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        txtCodigo = new javax.swing.JTextField();
+        txtFechaInicio = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtDescripcion = new javax.swing.JTextArea();
         jLabel20 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        txtRecordatorio = new javax.swing.JTextArea();
         jLabel22 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        txtFechaFinal = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         btnRegresarPanelTabla1 = new javax.swing.JButton();
@@ -47,8 +84,9 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
         lbAuditoria = new javax.swing.JLabel();
         lbMonitoreo = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
-        panelAbrirProyecto.setBackground(new java.awt.Color(204, 255, 204));
+        panelAbrirProyecto.setBackground(new java.awt.Color(172, 250, 172));
         panelAbrirProyecto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel13.setFont(new java.awt.Font("Sitka Banner", 1, 14)); // NOI18N
@@ -66,29 +104,42 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
         jLabel17.setText("Descripción del proyecto:");
         panelAbrirProyecto.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, 156, -1));
 
-        jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtCodigo.setEditable(false);
+        txtCodigo.setBackground(new java.awt.Color(204, 204, 204));
+        txtCodigo.setForeground(new java.awt.Color(0, 0, 51));
+        txtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField3KeyTyped(evt);
+                txtCodigoKeyTyped(evt);
             }
         });
-        panelAbrirProyecto.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 136, -1));
+        panelAbrirProyecto.add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 136, -1));
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        txtFechaInicio.setEditable(false);
+        txtFechaInicio.setBackground(new java.awt.Color(204, 204, 204));
+        txtFechaInicio.setForeground(new java.awt.Color(0, 0, 51));
+        txtFechaInicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                txtFechaInicioActionPerformed(evt);
             }
         });
-        panelAbrirProyecto.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 136, -1));
-        panelAbrirProyecto.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 136, -1));
+        panelAbrirProyecto.add(txtFechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 136, -1));
+
+        txtNombre.setEditable(false);
+        txtNombre.setBackground(new java.awt.Color(204, 204, 204));
+        txtNombre.setForeground(new java.awt.Color(0, 0, 51));
+        panelAbrirProyecto.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 136, -1));
 
         jLabel18.setFont(new java.awt.Font("Sitka Banner", 1, 14)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(0, 0, 51));
         jLabel18.setText("Fecha de Inicio:");
         panelAbrirProyecto.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 136, -1));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane3.setViewportView(jTextArea1);
+        txtDescripcion.setEditable(false);
+        txtDescripcion.setBackground(new java.awt.Color(204, 204, 204));
+        txtDescripcion.setColumns(20);
+        txtDescripcion.setForeground(new java.awt.Color(0, 0, 51));
+        txtDescripcion.setRows(5);
+        jScrollPane3.setViewportView(txtDescripcion);
 
         panelAbrirProyecto.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, 254, -1));
 
@@ -97,9 +148,12 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
         jLabel20.setText("Recordatorios:");
         panelAbrirProyecto.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, 156, -1));
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane6.setViewportView(jTextArea2);
+        txtRecordatorio.setEditable(false);
+        txtRecordatorio.setBackground(new java.awt.Color(204, 204, 204));
+        txtRecordatorio.setColumns(20);
+        txtRecordatorio.setForeground(new java.awt.Color(0, 0, 51));
+        txtRecordatorio.setRows(5);
+        jScrollPane6.setViewportView(txtRecordatorio);
 
         panelAbrirProyecto.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 260, 254, -1));
 
@@ -112,7 +166,11 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
         jLabel30.setForeground(new java.awt.Color(0, 0, 51));
         jLabel30.setText("Fecha de Finalización:");
         panelAbrirProyecto.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 136, -1));
-        panelAbrirProyecto.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 136, -1));
+
+        txtFechaFinal.setEditable(false);
+        txtFechaFinal.setBackground(new java.awt.Color(204, 204, 204));
+        txtFechaFinal.setForeground(new java.awt.Color(0, 0, 51));
+        panelAbrirProyecto.add(txtFechaFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 136, -1));
 
         jLabel8.setBackground(new java.awt.Color(204, 255, 204));
         jLabel8.setFont(new java.awt.Font("Sitka Banner", 1, 40)); // NOI18N
@@ -211,7 +269,11 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
         panelAbrirProyecto.add(lbMonitoreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 310, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/bubo-bubo-buho-real.png"))); // NOI18N
-        panelAbrirProyecto.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 90, -1, -1));
+        panelAbrirProyecto.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 90, -1, -1));
+
+        jPanel1.setBackground(new java.awt.Color(229, 255, 204));
+        jPanel1.setLayout(null);
+        panelAbrirProyecto.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 1050, 320));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -223,34 +285,34 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelAbrirProyecto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE)
+            .addComponent(panelAbrirProyecto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped
+    private void txtCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyTyped
 
-    }//GEN-LAST:event_jTextField3KeyTyped
+    }//GEN-LAST:event_txtCodigoKeyTyped
 
     private void btnRegresarPanelTabla1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarPanelTabla1ActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnRegresarPanelTabla1ActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void txtFechaInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaInicioActionPerformed
 
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_txtFechaInicioActionPerformed
 
     private void btPermisoAmbientalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPermisoAmbientalActionPerformed
 
     }//GEN-LAST:event_btPermisoAmbientalActionPerformed
 
     private void btPermisoAguaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPermisoAguaActionPerformed
-       
+
     }//GEN-LAST:event_btPermisoAguaActionPerformed
 
     private void btAuditoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAuditoriasActionPerformed
-  
+
     }//GEN-LAST:event_btAuditoriasActionPerformed
 
     private void btMonitoreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMonitoreoActionPerformed
@@ -276,21 +338,22 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JLabel lbAuditoria;
     private javax.swing.JLabel lbMonitoreo;
     private javax.swing.JLabel lbPermisoAgua;
     private javax.swing.JLabel lbPermisoAmbiental;
     private javax.swing.JPanel panelAbrirProyecto;
     private javax.swing.JTable tbActividades;
+    private javax.swing.JTextField txtCodigo;
+    private javax.swing.JTextArea txtDescripcion;
+    private javax.swing.JTextField txtFechaFinal;
+    private javax.swing.JTextField txtFechaInicio;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextArea txtRecordatorio;
     // End of variables declaration//GEN-END:variables
 }

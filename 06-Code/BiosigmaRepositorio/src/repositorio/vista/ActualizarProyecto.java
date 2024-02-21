@@ -1,24 +1,54 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
 package repositorio.vista;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import repositorio.modelo.Proyecto;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import repositorio.controlador.ProyectoServicio;
 
 public class ActualizarProyecto extends javax.swing.JInternalFrame {
-    Proyecto proyecto = new Proyecto();
+
+    Proyecto proyecto;
 
     public ActualizarProyecto() {
         initComponents();
+        consultarDatos();
+    }
+
+    private void consultarDatos() {
+        String codigo = InterfazAdminJFrame.getCodigoProyecto();
+        try {
+            proyecto = ProyectoServicio.BuscarProyecto(codigo);
+            txtCodigo.setText(proyecto.getIdProyecto());
+            txtNombre.setText(proyecto.getNombreProyecto());
+            dcFechaInicio.setDate(proyecto.getFechaInicio());
+            
+            if(proyecto.getFechaFinal() != null){
+            dcFechaFinal.setDate(proyecto.getFechaFinal());
+            rdEnProgreso.setSelected(false);
+            }
+            else{
+                rdEnProgreso.setSelected(true);
+                dcFechaFinal.setEnabled(false);
+            }
+            txtDescripcion.setText(proyecto.getDescripcionProyecto());
+            String recordatorio;
+            if (proyecto.getRecordatorioProyecto() != null) {
+                recordatorio = proyecto.getRecordatorioProyecto();
+            } else {
+                recordatorio = "No existen recordatorios";
+            }
+            txtRecordatorio.setText(recordatorio);
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "No se ha podido cargar la información del proyecto");
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -30,18 +60,18 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         btnRegresarPanelTabla = new javax.swing.JButton();
         jLabel31 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
         jLabel32 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
+        txtCodigo = new javax.swing.JTextField();
         jLabel33 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
         jScrollPane8 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
+        txtDescripcion = new javax.swing.JTextArea();
         jLabel35 = new javax.swing.JLabel();
         jScrollPane9 = new javax.swing.JScrollPane();
-        jTextArea4 = new javax.swing.JTextArea();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        dcFechaFinalizado = new com.toedter.calendar.JDateChooser();
+        txtRecordatorio = new javax.swing.JTextArea();
+        dcFechaInicio = new com.toedter.calendar.JDateChooser();
+        dcFechaFinal = new com.toedter.calendar.JDateChooser();
         rdEnProgreso = new javax.swing.JRadioButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
@@ -67,7 +97,8 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
 
         PanelActualizarProyecto.setBackground(new java.awt.Color(255, 255, 204));
         PanelActualizarProyecto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -94,26 +125,26 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         jLabel23.setForeground(new java.awt.Color(51, 0, 51));
         jLabel23.setText("Nombre Del Proyecto:");
         PanelActualizarProyecto.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(243, 54, 136, -1));
-        PanelActualizarProyecto.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(243, 78, 136, -1));
+        PanelActualizarProyecto.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(243, 78, 136, -1));
 
         jLabel32.setFont(new java.awt.Font("Sitka Banner", 1, 14)); // NOI18N
         jLabel32.setForeground(new java.awt.Color(51, 0, 51));
         jLabel32.setText("Fecha de Inicio:");
         PanelActualizarProyecto.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 54, 136, -1));
 
-        jTextField10.setEditable(false);
-        jTextField10.setBackground(new java.awt.Color(153, 153, 153));
-        jTextField10.addActionListener(new java.awt.event.ActionListener() {
+        txtCodigo.setEditable(false);
+        txtCodigo.setBackground(new java.awt.Color(153, 153, 153));
+        txtCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField10ActionPerformed(evt);
+                txtCodigoActionPerformed(evt);
             }
         });
-        jTextField10.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField10KeyTyped(evt);
+                txtCodigoKeyTyped(evt);
             }
         });
-        PanelActualizarProyecto.add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 78, 136, -1));
+        PanelActualizarProyecto.add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 78, 136, -1));
 
         jLabel33.setFont(new java.awt.Font("Sitka Banner", 1, 14)); // NOI18N
         jLabel33.setForeground(new java.awt.Color(51, 0, 51));
@@ -125,9 +156,9 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         jLabel34.setText("Descripción del proyecto:");
         PanelActualizarProyecto.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 121, 156, -1));
 
-        jTextArea3.setColumns(20);
-        jTextArea3.setRows(5);
-        jScrollPane8.setViewportView(jTextArea3);
+        txtDescripcion.setColumns(20);
+        txtDescripcion.setRows(5);
+        jScrollPane8.setViewportView(txtDescripcion);
 
         PanelActualizarProyecto.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 145, 277, 133));
 
@@ -136,13 +167,13 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         jLabel35.setText("Recordatorios:");
         PanelActualizarProyecto.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, 156, -1));
 
-        jTextArea4.setColumns(20);
-        jTextArea4.setRows(5);
-        jScrollPane9.setViewportView(jTextArea4);
+        txtRecordatorio.setColumns(20);
+        txtRecordatorio.setRows(5);
+        jScrollPane9.setViewportView(txtRecordatorio);
 
         PanelActualizarProyecto.add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(372, 145, 270, 130));
-        PanelActualizarProyecto.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 78, 136, -1));
-        PanelActualizarProyecto.add(dcFechaFinalizado, new org.netbeans.lib.awtextra.AbsoluteConstraints(703, 78, 136, -1));
+        PanelActualizarProyecto.add(dcFechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 78, 136, -1));
+        PanelActualizarProyecto.add(dcFechaFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(703, 78, 136, -1));
 
         rdEnProgreso.setForeground(new java.awt.Color(51, 0, 51));
         rdEnProgreso.setText("En progreso");
@@ -261,7 +292,7 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
                 .addComponent(jRadioButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jRadioButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton3))
@@ -350,8 +381,28 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         jButton7.setText("Cambiar archivo");
         PanelActualizarProyecto.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 220, -1, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/cloudup_icon-icons.com_54402.png"))); // NOI18N
-        PanelActualizarProyecto.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 200, -1, -1));
+        jPanel2.setBackground(new java.awt.Color(255, 234, 204));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/jaguar_prueba_3_742563 (1).png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(764, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jLabel2)
+                .addContainerGap(75, Short.MAX_VALUE))
+        );
+
+        PanelActualizarProyecto.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 1070, 320));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -368,14 +419,14 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegresarPanelTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarPanelTablaActionPerformed
-        
+
     }//GEN-LAST:event_btnRegresarPanelTablaActionPerformed
 
-    private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
+    private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField10ActionPerformed
+    }//GEN-LAST:event_txtCodigoActionPerformed
 
-    private void jTextField10KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField10KeyTyped
+    private void txtCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyTyped
         char validacionnombre = evt.getKeyChar();
         if (Character.isLetter(validacionnombre)) {
             getToolkit().beep();
@@ -383,14 +434,14 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Ingresar solamente numeros");
 
         }
-    }//GEN-LAST:event_jTextField10KeyTyped
+    }//GEN-LAST:event_txtCodigoKeyTyped
 
     private void rdEnProgresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdEnProgresoActionPerformed
         if (rdEnProgreso.isSelected()) {
-            dcFechaFinalizado.setEnabled(false);
-            dcFechaFinalizado.setDate(null);
+            dcFechaFinal.setEnabled(false);
+            dcFechaFinal.setDate(null);
         } else {
-            dcFechaFinalizado.setEnabled(true);
+            dcFechaFinal.setEnabled(true);
         }
     }//GEN-LAST:event_rdEnProgresoActionPerformed
 
@@ -486,7 +537,8 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
     private javax.swing.JButton btPermisoAgua;
     private javax.swing.JButton btPermisoAmbiental;
     private javax.swing.JButton btnRegresarPanelTabla;
-    private com.toedter.calendar.JDateChooser dcFechaFinalizado;
+    private com.toedter.calendar.JDateChooser dcFechaFinal;
+    private com.toedter.calendar.JDateChooser dcFechaInicio;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
@@ -496,8 +548,7 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton9;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
@@ -508,6 +559,7 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
@@ -515,13 +567,13 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextArea jTextArea3;
-    private javax.swing.JTextArea jTextArea4;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     private javax.swing.JRadioButton rdEnProgreso;
     private javax.swing.JTable tbActividades;
+    private javax.swing.JTextField txtCodigo;
+    private javax.swing.JTextArea txtDescripcion;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextArea txtRecordatorio;
     // End of variables declaration//GEN-END:variables
 }

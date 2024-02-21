@@ -9,4 +9,5 @@ public interface IProyecto {
     public boolean ActualizarProyecto(Proyecto proyecto);
     public boolean EliminarProyecto(String idProyecto);
     public boolean VerificarCodigoRepetido(String codigo);
+    public Proyecto BuscarProyecto(String codigo);
 }

@@ -10,6 +10,7 @@ import repositorio.modelo.Proyecto;
 
 public class InterfazAdminJFrame extends javax.swing.JFrame {
 
+
     public InterfazAdminInsertarUsuario IntfzInsertar = new InterfazAdminInsertarUsuario();
     private int contador = 1;
     int filaseleccionadaAdmin = -1;
@@ -18,6 +19,11 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
     private static String codigoProyecto = "";
     private static String codigoUsuario = "";
     private DefaultTableModel dtm = null;
+
+    public static String getCodigoProyecto() {
+        return codigoProyecto;
+    }
+    
 
     public InterfazAdminJFrame() {
         initComponents();
@@ -879,7 +885,18 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegresarProyectosActionPerformed
 
     private void btnActualizarProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarProyectoActionPerformed
+        int fila = tbProyecto.getSelectedRow();
 
+        if (fila != -1) {
+            codigoProyecto = tbProyecto.getValueAt(fila, 0).toString();
+            ActualizarProyecto actualizar = new ActualizarProyecto();
+            escritorio.add(actualizar);
+            actualizar.show();
+
+        } else {
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "Seleccione una proyecto para poder abrir");
+        }
     }//GEN-LAST:event_btnActualizarProyectoActionPerformed
 
     private void btnAbrirProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirProyectoActionPerformed

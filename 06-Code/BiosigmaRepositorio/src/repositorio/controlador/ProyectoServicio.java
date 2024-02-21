@@ -25,4 +25,8 @@ public class ProyectoServicio {
     public static boolean VerificarCodigoRepetido(String codigo){
         return new ProyectoMetodos().VerificarCodigoRepetido(codigo);
     }
+    
+    public static Proyecto BuscarProyecto(String codigo){
+        return new ProyectoMetodos().BuscarProyecto(codigo);
+    }
 }
