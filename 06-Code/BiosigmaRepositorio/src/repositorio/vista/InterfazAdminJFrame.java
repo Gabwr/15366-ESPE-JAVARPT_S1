@@ -1,6 +1,7 @@
 package repositorio.vista;
 
 import java.awt.Color;
+import java.awt.HeadlessException;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -950,7 +951,25 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_BotonProyectosMouseClicked
 
     private void btnEliminarProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProyectoActionPerformed
-
+        int fila = tbProyecto.getSelectedRow();
+        DefaultTableModel dtm = (DefaultTableModel) tbProyecto.getModel();
+        if(fila != -1){
+            int resultado = JOptionPane.showConfirmDialog(null,"¿Esta segúro de eliminar el proyecto seleccionado?", "Eliminar",JOptionPane.YES_NO_OPTION);
+            try{
+            if(resultado == JOptionPane.YES_OPTION){
+                String codigoConfirmacion = JOptionPane.showInputDialog("Ingrese el código de seguridad para eliminar");
+                if("345@9".equals(codigoConfirmacion)){
+                    ProyectoServicio.EliminarProyecto(tbProyecto.getValueAt(fila,0).toString());
+                    dtm.removeRow(fila);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"El código ingresado no es el correcto", "Error al Eliminar", JOptionPane.ERROR_MESSAGE);
+                }    
+            }
+            }catch(HeadlessException ex){
+                JOptionPane.showMessageDialog(null, "Ha ocurrido un error: " + ex.toString());
+            }
+        }
     }//GEN-LAST:event_btnEliminarProyectoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

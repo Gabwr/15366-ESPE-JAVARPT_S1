@@ -144,7 +144,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         setTitle("Agregar Proyecto");
         setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
 
-        panelAgregarProyecto.setBackground(new java.awt.Color(190, 231, 231));
+        panelAgregarProyecto.setBackground(new java.awt.Color(172, 217, 229));
         panelAgregarProyecto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btAuditorias.setText("Agregar Auditoria");
@@ -429,6 +429,11 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         panelAgregarProyecto.add(lbMonitoreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 350, -1, -1));
 
         lbPermisoAmbiental.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/accept_icon-icons.com_74428 (1).png"))); // NOI18N
+        lbPermisoAmbiental.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbPermisoAmbientalMouseClicked(evt);
+            }
+        });
         panelAgregarProyecto.add(lbPermisoAmbiental, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 230, -1, -1));
 
         lbPermisoAgua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/accept_icon-icons.com_74428 (1).png"))); // NOI18N
@@ -447,7 +452,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/Tiburon-martillo (1).png"))); // NOI18N
         panelAgregarProyecto.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 210, 280, -1));
 
-        jPanel1.setBackground(new java.awt.Color(204, 219, 255));
+        jPanel1.setBackground(new java.awt.Color(204, 207, 255));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -503,6 +508,9 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         if (rdEnProgreso.isSelected()) {
             dcFechaFinalProyecto.setEnabled(false);
             lbAvisoFechaFinal.setVisible(false);
+        } else {
+            dcFechaFinalProyecto.setEnabled(true);
+            lbAvisoFechaFinal.setVisible(true);
         }
     }//GEN-LAST:event_rdEnProgresoActionPerformed
 
@@ -621,6 +629,10 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
             lbAvisoFechaFinal.setVisible(false);
         }
     }//GEN-LAST:event_dcFechaFinalProyectoPropertyChange
+
+    private void lbPermisoAmbientalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbPermisoAmbientalMouseClicked
+        
+    }//GEN-LAST:event_lbPermisoAmbientalMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

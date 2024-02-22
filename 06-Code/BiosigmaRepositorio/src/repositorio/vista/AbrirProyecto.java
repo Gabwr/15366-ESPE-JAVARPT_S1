@@ -41,6 +41,31 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
                 recordatorio = "No existen recordatorios";
             }
             txtRecordatorio.setText(recordatorio);
+            
+            if(proyecto.getPermisoAmbiental() != null){
+                lbPermisoAmbiental.setVisible(true);
+            }
+            else{
+                lbPermisoAmbiental.setVisible(false);
+            }
+            if(proyecto.getPermisoAgua() != null){
+                lbPermisoAgua.setVisible(true);
+            }
+            else{
+                lbPermisoAgua.setVisible(false);
+            }
+            if(proyecto.getAuditoria() != null){
+                lbAuditoria.setVisible(true);
+            }
+            else{
+                lbAuditoria.setVisible(false);
+            }
+            if(proyecto.getMonitoreo() != null){
+                lbMonitoreo.setVisible(true);
+            }
+            else{
+                lbMonitoreo.setVisible(false);
+            }
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "No se ha podido cargar la información del proyecto");
@@ -52,6 +77,7 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         panelAbrirProyecto = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
@@ -88,6 +114,9 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
 
         panelAbrirProyecto.setBackground(new java.awt.Color(172, 250, 172));
         panelAbrirProyecto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/1486486303-alert-bell-notification-education-christmas-bell-church-bell-ring_81235.png"))); // NOI18N
+        panelAbrirProyecto.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 250, -1, -1));
 
         jLabel13.setFont(new java.awt.Font("Sitka Banner", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 0, 51));
@@ -269,7 +298,7 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
         panelAbrirProyecto.add(lbMonitoreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 310, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/bubo-bubo-buho-real.png"))); // NOI18N
-        panelAbrirProyecto.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 90, -1, -1));
+        panelAbrirProyecto.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 110, -1, -1));
 
         jPanel1.setBackground(new java.awt.Color(229, 255, 204));
         jPanel1.setLayout(null);
@@ -326,6 +355,7 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
     private javax.swing.JButton btPermisoAgua;
     private javax.swing.JButton btPermisoAmbiental;
     private javax.swing.JButton btnRegresarPanelTabla1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel17;
