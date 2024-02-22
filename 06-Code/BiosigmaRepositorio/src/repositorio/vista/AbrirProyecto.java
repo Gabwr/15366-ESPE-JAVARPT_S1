@@ -110,11 +110,13 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
         lbAuditoria = new javax.swing.JLabel();
         lbMonitoreo = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jLabel23 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+
+        setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         panelAbrirProyecto.setBackground(new java.awt.Color(204, 204, 255));
         panelAbrirProyecto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -215,6 +217,7 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
         panelAbrirProyecto.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         btnRegresarPanelTabla1.setText("Regresar");
+        btnRegresarPanelTabla1.setToolTipText("volver al menú");
         btnRegresarPanelTabla1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresarPanelTabla1ActionPerformed(evt);
@@ -251,6 +254,7 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
 
         btPermisoAmbiental.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/ecoicon01_122073.png"))); // NOI18N
         btPermisoAmbiental.setText("Abrir Permiso Ambiental");
+        btPermisoAmbiental.setToolTipText("abrir archivo pdf");
         btPermisoAmbiental.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btPermisoAmbiental.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -261,6 +265,7 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
 
         btPermisoAgua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/water_23838.png"))); // NOI18N
         btPermisoAgua.setText("Abrir Permiso de Agua");
+        btPermisoAgua.setToolTipText("abrir archivo pdf");
         btPermisoAgua.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btPermisoAgua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -271,6 +276,7 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
 
         btAuditorias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/audit_icon_155782.png"))); // NOI18N
         btAuditorias.setText("Abrir Auditoria");
+        btAuditorias.setToolTipText("abrir archivo pdf");
         btAuditorias.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btAuditorias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -281,6 +287,7 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
 
         btMonitoreo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/monitoring-icon_icon-icons.com_55736.png"))); // NOI18N
         btMonitoreo.setText("Abrir Monitoreo");
+        btMonitoreo.setToolTipText("abrir archivo pdf");
         btMonitoreo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btMonitoreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -302,37 +309,31 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
         panelAbrirProyecto.add(lbMonitoreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 310, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/bubo-bubo-buho-real.png"))); // NOI18N
-        panelAbrirProyecto.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 110, -1, -1));
-
-        jPanel1.setBackground(new java.awt.Color(203, 182, 203));
-        jPanel1.setLayout(null);
-
-        jLabel24.setFont(new java.awt.Font("Sitka Banner", 1, 18)); // NOI18N
-        jLabel24.setForeground(new java.awt.Color(0, 0, 51));
-        jLabel24.setText("Actividad");
-        jPanel1.add(jLabel24);
-        jLabel24.setBounds(720, 140, 100, 23);
-        jPanel1.add(jTextField1);
-        jTextField1.setBounds(690, 170, 140, 22);
-
-        jButton1.setText("Abrir Evidencia");
-        jPanel1.add(jButton1);
-        jButton1.setBounds(690, 210, 140, 23);
-
-        panelAbrirProyecto.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 1050, 320));
+        panelAbrirProyecto.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 100, -1, -1));
 
         jLabel23.setFont(new java.awt.Font("Sitka Banner", 1, 18)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(0, 0, 51));
         jLabel23.setText("Plan de Manejo Ambiental");
         panelAbrirProyecto.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 390, -1, -1));
 
+        jLabel24.setFont(new java.awt.Font("Sitka Banner", 1, 18)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(0, 0, 51));
+        jLabel24.setText("Actividad");
+        panelAbrirProyecto.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 460, 100, -1));
+        panelAbrirProyecto.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 490, 140, -1));
+
+        jButton1.setText("Abrir Evidencia");
+        jButton1.setToolTipText("abrir pdf");
+        panelAbrirProyecto.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 530, 140, -1));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/ImagenFondoAbrirProyecto.png"))); // NOI18N
+        panelAbrirProyecto.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panelAbrirProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, 1051, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(panelAbrirProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, 1051, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -389,11 +390,11 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane6;

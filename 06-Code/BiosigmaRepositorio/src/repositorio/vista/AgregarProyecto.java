@@ -1,5 +1,6 @@
 package repositorio.vista;
 
+import java.awt.geom.RoundRectangle2D;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -20,7 +21,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
 
     public AgregarProyecto() {
         initComponents();
-        UIManager.put( "TextComponent.arc", 999 );
+        UIManager.put("TextComponent.arc", 999);
         limpiarCampos();
     }
 
@@ -83,7 +84,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         }
         return pdfBytes;
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -138,9 +139,9 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
 
-        setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        setBorder(javax.swing.BorderFactory.createEtchedBorder());
         setForeground(new java.awt.Color(255, 204, 204));
         setTitle("Agregar Proyecto");
         setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
@@ -149,6 +150,8 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         panelAgregarProyecto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btAuditorias.setText("Agregar Auditoria");
+        btAuditorias.setToolTipText("Subir un archivo pdf");
+        btAuditorias.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btAuditorias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAuditoriasActionPerformed(evt);
@@ -157,6 +160,8 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         panelAgregarProyecto.add(btAuditorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 320, 180, -1));
 
         btPermisoAmbiental.setText("Agregar Permiso Ambiental");
+        btPermisoAmbiental.setToolTipText("Subir un archivo pdf");
+        btPermisoAmbiental.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btPermisoAmbiental.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btPermisoAmbientalActionPerformed(evt);
@@ -166,6 +171,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
 
         rdEnProgreso.setForeground(new java.awt.Color(51, 0, 51));
         rdEnProgreso.setText("En progreso");
+        rdEnProgreso.setToolTipText("");
         rdEnProgreso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rdEnProgresoActionPerformed(evt);
@@ -199,6 +205,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         });
         panelAgregarProyecto.add(dcFechaInicioProyecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 110, 136, -1));
 
+        txtNombreProyecto.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtNombreProyecto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtNombreProyectoKeyReleased(evt);
@@ -221,6 +228,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
 
         txtDescripcionProyecto.setColumns(20);
         txtDescripcionProyecto.setRows(5);
+        txtDescripcionProyecto.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtDescripcionProyecto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtDescripcionProyectoKeyReleased(evt);
@@ -261,6 +269,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         jLabel47.setForeground(new java.awt.Color(51, 0, 51));
         jLabel47.setText("Actividad");
 
+        txtActividad.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtActividad.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtActividadKeyTyped(evt);
@@ -268,6 +277,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         });
 
         btActividad.setText("Agregar Actividad");
+        btActividad.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout panelActividadesLayout = new javax.swing.GroupLayout(panelActividades);
         panelActividades.setLayout(panelActividadesLayout);
@@ -302,6 +312,8 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
 
         btAgregarProyecto.setFont(new java.awt.Font("Sitka Banner", 1, 18)); // NOI18N
         btAgregarProyecto.setText("Agregar Proyecto");
+        btAgregarProyecto.setToolTipText("");
+        btAgregarProyecto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btAgregarProyecto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAgregarProyectoActionPerformed(evt);
@@ -310,6 +322,8 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         panelAgregarProyecto.add(btAgregarProyecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 530, -1, 49));
 
         btnRegresarPanelTabla1.setText("Regresar");
+        btnRegresarPanelTabla1.setToolTipText("salir al menú");
+        btnRegresarPanelTabla1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegresarPanelTabla1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresarPanelTabla1ActionPerformed(evt);
@@ -322,6 +336,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         jLabel45.setText("Código de Proyecto:");
         panelAgregarProyecto.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
+        txtCodigoProyecto.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtCodigoProyecto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtCodigoProyectoKeyReleased(evt);
@@ -358,6 +373,8 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         panelAgregarProyecto.add(lbAvisoDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 200, -1, 20));
 
         btPermisoAgua.setText("Agregar Permiso de Agua");
+        btPermisoAgua.setToolTipText("Subir un archivo pdf");
+        btPermisoAgua.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btPermisoAgua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btPermisoAguaActionPerformed(evt);
@@ -366,6 +383,8 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         panelAgregarProyecto.add(btPermisoAgua, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 280, 180, -1));
 
         btMonitoreo.setText("Agregar Monitoreo");
+        btMonitoreo.setToolTipText("Subir un archivo pdf");
+        btMonitoreo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btMonitoreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btMonitoreoActionPerformed(evt);
@@ -415,7 +434,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         jLabel3.setBackground(new java.awt.Color(102, 102, 102));
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
         jLabel3.setText("(Si aun no finaliza el proyecto seleccione en progreso)");
-        panelAgregarProyecto.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 170, -1, -1));
+        panelAgregarProyecto.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 170, -1, -1));
 
         jTextArea3.setEditable(false);
         jTextArea3.setBackground(new java.awt.Color(204, 204, 255));
@@ -432,9 +451,11 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         panelAgregarProyecto.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         lbMonitoreo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/accept_icon-icons.com_74428 (1).png"))); // NOI18N
+        lbMonitoreo.setToolTipText("Archivo cargado");
         panelAgregarProyecto.add(lbMonitoreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 350, -1, -1));
 
         lbPermisoAmbiental.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/accept_icon-icons.com_74428 (1).png"))); // NOI18N
+        lbPermisoAmbiental.setToolTipText("Archivo cargado");
         lbPermisoAmbiental.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbPermisoAmbientalMouseClicked(evt);
@@ -443,9 +464,11 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         panelAgregarProyecto.add(lbPermisoAmbiental, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 230, -1, -1));
 
         lbPermisoAgua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/accept_icon-icons.com_74428 (1).png"))); // NOI18N
+        lbPermisoAgua.setToolTipText("Archivo cargado");
         panelAgregarProyecto.add(lbPermisoAgua, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 270, -1, -1));
 
         lbAuditoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/accept_icon-icons.com_74428 (1).png"))); // NOI18N
+        lbAuditoria.setToolTipText("Archivo cargado");
         panelAgregarProyecto.add(lbAuditoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 310, -1, -1));
         panelAgregarProyecto.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1040, 10));
 
@@ -458,20 +481,9 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/Tiburon-martillo (1).png"))); // NOI18N
         panelAgregarProyecto.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 210, 280, -1));
 
-        jPanel1.setBackground(new java.awt.Color(204, 207, 255));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1040, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 280, Short.MAX_VALUE)
-        );
-
-        panelAgregarProyecto.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1040, 280));
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/ImagenFondoAgregarProyecto.png"))); // NOI18N
+        jLabel9.setText("jLabel9");
+        panelAgregarProyecto.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1040, 550));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -637,14 +649,13 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_dcFechaFinalProyectoPropertyChange
 
     private void lbPermisoAmbientalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbPermisoAmbientalMouseClicked
-        
+
     }//GEN-LAST:event_lbPermisoAmbientalMouseClicked
 
     private void txtDescripcionProyectoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionProyectoKeyReleased
-        if(txtDescripcionProyecto.getText().length() == 0){
+        if (txtDescripcionProyecto.getText().length() == 0) {
             lbAvisoDescripcion.setVisible(true);
-        }
-        else{
+        } else {
             lbAvisoDescripcion.setVisible(false);
         }
     }//GEN-LAST:event_txtDescripcionProyectoKeyReleased
@@ -675,7 +686,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane2;

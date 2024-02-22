@@ -2,14 +2,10 @@ package repositorio.vista;
 
 import java.awt.Color;
 import java.awt.HeadlessException;
-import java.awt.Shape;
-import java.awt.geom.FlatteningPathIterator;
 import java.awt.geom.RoundRectangle2D;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
-import repositorio.controlador.AdminServicio;
 import repositorio.controlador.ProyectoServicio;
 import repositorio.modelo.Proyecto;
 
@@ -223,6 +219,7 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         panelBotones1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 230, 100));
 
         BotonProyectos.setBackground(new java.awt.Color(0, 204, 153));
+        BotonProyectos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BotonProyectos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BotonProyectosMouseClicked(evt);
@@ -267,6 +264,7 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         panelBotones1.add(BotonProyectos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 230, 70));
 
         BotonAgregarMiembros.setBackground(new java.awt.Color(0, 204, 153));
+        BotonAgregarMiembros.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BotonAgregarMiembros.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BotonAgregarMiembrosMouseClicked(evt);
@@ -316,6 +314,7 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 51, 51));
         jButton1.setText("Cerrar Sesión");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -425,11 +424,13 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tbProyecto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane1.setViewportView(tbProyecto);
 
         btnAgregarProyecto.setFont(new java.awt.Font("Sitka Banner", 0, 14)); // NOI18N
         btnAgregarProyecto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/1814113_add_more_plus_icon.png"))); // NOI18N
         btnAgregarProyecto.setText("Agregar Proyecto");
+        btnAgregarProyecto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAgregarProyecto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarProyectoActionPerformed(evt);
@@ -439,6 +440,7 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         btnAbrirProyecto.setFont(new java.awt.Font("Sitka Banner", 0, 14)); // NOI18N
         btnAbrirProyecto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/3643772-archive-archives-document-folder-open_113445.png"))); // NOI18N
         btnAbrirProyecto.setText("Abrir Proyecto");
+        btnAbrirProyecto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAbrirProyecto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAbrirProyectoActionPerformed(evt);
@@ -448,6 +450,7 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         btnActualizarProyecto.setFont(new java.awt.Font("Sitka Banner", 0, 14)); // NOI18N
         btnActualizarProyecto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/185042_edit_modify_icon.png"))); // NOI18N
         btnActualizarProyecto.setText("Actualizar Proyecto");
+        btnActualizarProyecto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnActualizarProyecto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarProyectoActionPerformed(evt);
@@ -456,6 +459,7 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
 
         btnRegresarProyectos.setFont(new java.awt.Font("Sitka Banner", 0, 14)); // NOI18N
         btnRegresarProyectos.setText("Regresar");
+        btnRegresarProyectos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegresarProyectos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresarProyectosActionPerformed(evt);
@@ -468,6 +472,7 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Sitka Banner", 0, 14)); // NOI18N
         jButton2.setText("Limpiar Selección");
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -477,6 +482,7 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         btnEliminarProyecto.setFont(new java.awt.Font("Sitka Banner", 0, 14)); // NOI18N
         btnEliminarProyecto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/185090_delete_garbage_icon.png"))); // NOI18N
         btnEliminarProyecto.setText("Eliminar Proyecto");
+        btnEliminarProyecto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEliminarProyecto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarProyectoActionPerformed(evt);
@@ -493,7 +499,7 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
                     .addGroup(panelTablaProyectosLayout.createSequentialGroup()
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(43, 43, 43)
                         .addComponent(btnRegresarProyectos)
                         .addGap(18, 18, 18))
@@ -722,6 +728,7 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         panelSuperior.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         BotonOpciones.setBackground(new java.awt.Color(102, 255, 204));
+        BotonOpciones.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BotonOpciones.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BotonOpcionesMouseClicked(evt);
@@ -741,9 +748,8 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         BotonOpcionesLayout.setHorizontalGroup(
             BotonOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BotonOpcionesLayout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jLabel12)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 2, Short.MAX_VALUE))
         );
         BotonOpcionesLayout.setVerticalGroup(
             BotonOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -752,13 +758,14 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        panelSuperior.add(BotonOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 20, 60, -1));
+        panelSuperior.add(BotonOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 20, 50, -1));
 
         panelOpciones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btInfoProgramador.setBackground(new java.awt.Color(51, 51, 51));
         btInfoProgramador.setForeground(new java.awt.Color(204, 255, 255));
         btInfoProgramador.setText("Información del Programador");
+        btInfoProgramador.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btInfoProgramador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btInfoProgramadorActionPerformed(evt);

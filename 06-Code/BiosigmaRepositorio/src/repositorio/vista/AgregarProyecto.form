@@ -3,8 +3,8 @@
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
   <Properties>
     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-      <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
-        <BevelBorder/>
+      <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+        <EtchetBorder/>
       </Border>
     </Property>
     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -55,6 +55,10 @@
         <Component class="javax.swing.JButton" name="btAuditorias">
           <Properties>
             <Property name="text" type="java.lang.String" value="Agregar Auditoria"/>
+            <Property name="toolTipText" type="java.lang.String" value="Subir un archivo pdf"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btAuditoriasActionPerformed"/>
@@ -68,6 +72,10 @@
         <Component class="javax.swing.JButton" name="btPermisoAmbiental">
           <Properties>
             <Property name="text" type="java.lang.String" value="Agregar Permiso Ambiental"/>
+            <Property name="toolTipText" type="java.lang.String" value="Subir un archivo pdf"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btPermisoAmbientalActionPerformed"/>
@@ -84,6 +92,7 @@
               <Color blue="33" green="0" red="33" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="En progreso"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdEnProgresoActionPerformed"/>
@@ -161,6 +170,11 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JTextField" name="txtNombreProyecto">
+          <Properties>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Text Cursor"/>
+            </Property>
+          </Properties>
           <Events>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNombreProyectoKeyReleased"/>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNombreProyectoKeyTyped"/>
@@ -219,6 +233,9 @@
               <Properties>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="rows" type="int" value="5"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Text Cursor"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtDescripcionProyectoKeyReleased"/>
@@ -327,6 +344,11 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtActividad">
+              <Properties>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Text Cursor"/>
+                </Property>
+              </Properties>
               <Events>
                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtActividadKeyTyped"/>
               </Events>
@@ -334,6 +356,9 @@
             <Component class="javax.swing.JButton" name="btActividad">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Agregar Actividad"/>
+                <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                  <Color id="Hand Cursor"/>
+                </Property>
               </Properties>
             </Component>
           </SubComponents>
@@ -344,6 +369,10 @@
               <Font name="Sitka Banner" size="18" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Agregar Proyecto"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btAgregarProyectoActionPerformed"/>
@@ -357,6 +386,10 @@
         <Component class="javax.swing.JButton" name="btnRegresarPanelTabla1">
           <Properties>
             <Property name="text" type="java.lang.String" value="Regresar"/>
+            <Property name="toolTipText" type="java.lang.String" value="salir al men&#xfa;"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegresarPanelTabla1ActionPerformed"/>
@@ -384,6 +417,11 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JTextField" name="txtCodigoProyecto">
+          <Properties>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Text Cursor"/>
+            </Property>
+          </Properties>
           <Events>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCodigoProyectoKeyReleased"/>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCodigoProyectoKeyTyped"/>
@@ -477,6 +515,10 @@
         <Component class="javax.swing.JButton" name="btPermisoAgua">
           <Properties>
             <Property name="text" type="java.lang.String" value="Agregar Permiso de Agua"/>
+            <Property name="toolTipText" type="java.lang.String" value="Subir un archivo pdf"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btPermisoAguaActionPerformed"/>
@@ -490,6 +532,10 @@
         <Component class="javax.swing.JButton" name="btMonitoreo">
           <Properties>
             <Property name="text" type="java.lang.String" value="Agregar Monitoreo"/>
+            <Property name="toolTipText" type="java.lang.String" value="Subir un archivo pdf"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btMonitoreoActionPerformed"/>
@@ -620,7 +666,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="720" y="170" width="-1" height="-1"/>
+              <AbsoluteConstraints x="650" y="170" width="-1" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -670,6 +716,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/resource/accept_icon-icons.com_74428 (1).png"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Archivo cargado"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -682,6 +729,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/resource/accept_icon-icons.com_74428 (1).png"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Archivo cargado"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lbPermisoAmbientalMouseClicked"/>
@@ -697,6 +745,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/resource/accept_icon-icons.com_74428 (1).png"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Archivo cargado"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -709,6 +758,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/resource/accept_icon-icons.com_74428 (1).png"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Archivo cargado"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -759,31 +809,19 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Container class="javax.swing.JPanel" name="jPanel1">
+        <Component class="javax.swing.JLabel" name="jLabel9">
           <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="cf" red="cc" type="rgb"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/resource/ImagenFondoAgregarProyecto.png"/>
             </Property>
+            <Property name="text" type="java.lang.String" value="jLabel9"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="0" y="60" width="1040" height="280"/>
+              <AbsoluteConstraints x="0" y="60" width="1040" height="550"/>
             </Constraint>
           </Constraints>
-
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="1040" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="280" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-          </Layout>
-        </Container>
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>

@@ -106,6 +106,10 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         lbPermisoAgua = new javax.swing.JLabel();
         lbAuditoria = new javax.swing.JLabel();
         lbMonitoreo = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+
+        setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         PanelActualizarProyecto.setBackground(new java.awt.Color(255, 255, 204));
         PanelActualizarProyecto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -121,7 +125,7 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
                 btnRegresarPanelTablaActionPerformed(evt);
             }
         });
-        PanelActualizarProyecto.add(btnRegresarPanelTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 20, -1, -1));
+        PanelActualizarProyecto.add(btnRegresarPanelTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 10, -1, -1));
 
         jLabel31.setFont(new java.awt.Font("Sitka Banner", 1, 14)); // NOI18N
         jLabel31.setForeground(new java.awt.Color(51, 0, 51));
@@ -310,7 +314,7 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
 
         jTabbedPane1.addTab("Actualizar actividad", jPanel1);
 
-        PanelActualizarProyecto.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 370, 280, 230));
+        PanelActualizarProyecto.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 370, 280, 230));
 
         jButton10.setFont(new java.awt.Font("Sitka Banner", 1, 14)); // NOI18N
         jButton10.setText("Actualizar");
@@ -339,7 +343,7 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         });
         jScrollPane14.setViewportView(tbActividades);
 
-        PanelActualizarProyecto.add(jScrollPane14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 480, 230));
+        PanelActualizarProyecto.add(jScrollPane14, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, 480, 230));
 
         btPermisoAmbiental.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/ecoicon01_122073.png"))); // NOI18N
         btPermisoAmbiental.setText("Permiso Ambiental");
@@ -436,15 +440,23 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         lbMonitoreo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/accept_icon-icons.com_74428 (1).png"))); // NOI18N
         PanelActualizarProyecto.add(lbMonitoreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 310, -1, -1));
 
+        jLabel22.setFont(new java.awt.Font("Sitka Banner", 1, 18)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(0, 0, 51));
+        jLabel22.setText("Plan de Manejo Ambiental");
+        PanelActualizarProyecto.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 340, -1, 30));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/ImagenFondoActualizarProyecto.png"))); // NOI18N
+        PanelActualizarProyecto.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelActualizarProyecto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(PanelActualizarProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, 1056, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(PanelActualizarProyecto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE)
+            .addComponent(PanelActualizarProyecto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -600,7 +612,9 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton9;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel31;
