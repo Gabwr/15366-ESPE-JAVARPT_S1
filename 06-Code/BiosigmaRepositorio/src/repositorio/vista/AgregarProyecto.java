@@ -20,6 +20,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
 
     public AgregarProyecto() {
         initComponents();
+        UIManager.put( "TextComponent.arc", 999 );
         limpiarCampos();
     }
 
@@ -82,7 +83,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         }
         return pdfBytes;
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -220,6 +221,11 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
 
         txtDescripcionProyecto.setColumns(20);
         txtDescripcionProyecto.setRows(5);
+        txtDescripcionProyecto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtDescripcionProyectoKeyReleased(evt);
+            }
+        });
         jScrollPane12.setViewportView(txtDescripcionProyecto);
 
         panelAgregarProyecto.add(jScrollPane12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 310, 130));
@@ -633,6 +639,15 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
     private void lbPermisoAmbientalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbPermisoAmbientalMouseClicked
         
     }//GEN-LAST:event_lbPermisoAmbientalMouseClicked
+
+    private void txtDescripcionProyectoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionProyectoKeyReleased
+        if(txtDescripcionProyecto.getText().length() == 0){
+            lbAvisoDescripcion.setVisible(true);
+        }
+        else{
+            lbAvisoDescripcion.setVisible(false);
+        }
+    }//GEN-LAST:event_txtDescripcionProyectoKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

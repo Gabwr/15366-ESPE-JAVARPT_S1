@@ -2,8 +2,12 @@ package repositorio.vista;
 
 import java.awt.Color;
 import java.awt.HeadlessException;
+import java.awt.Shape;
+import java.awt.geom.FlatteningPathIterator;
+import java.awt.geom.RoundRectangle2D;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import repositorio.controlador.AdminServicio;
 import repositorio.controlador.ProyectoServicio;
@@ -29,6 +33,9 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
     public InterfazAdminJFrame() {
         initComponents();
         llenarTablaProyectos();
+        this.setLocationRelativeTo(null);
+        setShape(new RoundRectangle2D.Double(0,0,this.getBounds().width, this.getBounds().height, 27, 27));
+   
         PanelBiosigmaLogo.setBackground(new Color(0, 0, 0, 160));
         panelDescripcion.setBackground(new Color(0, 0, 0, 100));
         panelOpciones.setBackground(new Color(0, 0, 0, 160));
@@ -132,7 +139,8 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         tbClientes = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbTrabajadores = new javax.swing.JTable();
-        BtnLimpiarUsuarios = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
         panelInsertar = new javax.swing.JPanel();
         panelSuperior = new javax.swing.JPanel();
@@ -143,6 +151,7 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -535,6 +544,7 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
 
         jPanel10.setBackground(new java.awt.Color(255, 255, 204));
         jPanel10.setForeground(new java.awt.Color(153, 153, 255));
+        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btAgregarMiembro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/1814113_add_more_plus_icon.png"))); // NOI18N
         btAgregarMiembro.setText("Agregar Miembro");
@@ -543,6 +553,7 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
                 btAgregarMiembroActionPerformed(evt);
             }
         });
+        jPanel10.add(btAgregarMiembro, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 416, -1, -1));
 
         btnActualizarusuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/185042_edit_modify_icon.png"))); // NOI18N
         btnActualizarusuarios.setText("Actualizar Informacion");
@@ -551,6 +562,7 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
                 btnActualizarusuariosActionPerformed(evt);
             }
         });
+        jPanel10.add(btnActualizarusuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 416, -1, -1));
 
         btnEliminarUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/185090_delete_garbage_icon.png"))); // NOI18N
         btnEliminarUsuarios.setText("Eliminar Miembro");
@@ -559,6 +571,7 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
                 btnEliminarUsuariosActionPerformed(evt);
             }
         });
+        jPanel10.add(btnEliminarUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(508, 416, -1, -1));
 
         btnRegresarUsuarios.setText("Regresar");
         btnRegresarUsuarios.addActionListener(new java.awt.event.ActionListener() {
@@ -566,6 +579,7 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
                 btnRegresarUsuariosActionPerformed(evt);
             }
         });
+        jPanel10.add(btnRegresarUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 10, -1, 28));
 
         tbAdmin.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -642,58 +656,21 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
 
         tbMiembros.addTab("Trabajadores", jScrollPane2);
 
-        BtnLimpiarUsuarios.setText("Limpiar Seleccion");
-        BtnLimpiarUsuarios.addActionListener(new java.awt.event.ActionListener() {
+        jPanel10.add(tbMiembros, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 35, 732, 353));
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(0, 51, 51));
+        jLabel13.setText("Haga click en el miembro que desee para poder actualizar o eliminar");
+        jPanel10.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 6, 527, -1));
+
+        jButton3.setFont(new java.awt.Font("Sitka Banner", 0, 14)); // NOI18N
+        jButton3.setText("Limpiar Selección");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnLimpiarUsuariosActionPerformed(evt);
+                jButton3ActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(btAgregarMiembro)
-                        .addGap(35, 35, 35)
-                        .addComponent(btnActualizarusuarios)
-                        .addGap(44, 44, 44)
-                        .addComponent(btnEliminarUsuarios))
-                    .addComponent(tbMiembros, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnRegresarUsuarios)
-                        .addGap(19, 19, 19))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(BtnLimpiarUsuarios)
-                        .addContainerGap(18, Short.MAX_VALUE))))
-        );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addContainerGap(35, Short.MAX_VALUE)
-                        .addComponent(tbMiembros, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(btnRegresarUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(174, 174, 174)
-                        .addComponent(BtnLimpiarUsuarios)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btAgregarMiembro)
-                    .addComponent(btnActualizarusuarios)
-                    .addComponent(btnEliminarUsuarios))
-                .addGap(59, 59, 59))
-        );
+        jPanel10.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 20, -1, -1));
 
         panelMiembros.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 910, 530));
 
@@ -851,9 +828,6 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BotonOpcionesMouseClicked
 
-    private void BtnLimpiarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLimpiarUsuariosActionPerformed
-    }//GEN-LAST:event_BtnLimpiarUsuariosActionPerformed
-
     private void btnRegresarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarUsuariosActionPerformed
         tbPaneles.setSelectedIndex(0);
     }//GEN-LAST:event_btnRegresarUsuariosActionPerformed
@@ -923,6 +897,8 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarProyectoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        InterfazLogin login = new InterfazLogin();
+        login.show();
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -995,6 +971,10 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         filaseleccionadaCliente = tbTrabajadores.getSelectedRow();
     }//GEN-LAST:event_tbTrabajadoresMouseClicked
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -1008,7 +988,6 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel BotonAgregarMiembros;
     private javax.swing.JPanel BotonOpciones;
     private javax.swing.JPanel BotonProyectos;
-    private javax.swing.JButton BtnLimpiarUsuarios;
     private javax.swing.JPanel PanelBiosigmaLogo;
     private javax.swing.JButton btAgregarMiembro;
     private javax.swing.JButton btInfoProgramador;
@@ -1023,12 +1002,14 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLImgUsuarios;
     private javax.swing.JLabel jLUsuarios;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel21;

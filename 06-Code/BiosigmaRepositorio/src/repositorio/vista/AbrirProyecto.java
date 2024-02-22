@@ -111,8 +111,12 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
         lbMonitoreo = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        jLabel24 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jLabel23 = new javax.swing.JLabel();
 
-        panelAbrirProyecto.setBackground(new java.awt.Color(172, 250, 172));
+        panelAbrirProyecto.setBackground(new java.awt.Color(204, 204, 255));
         panelAbrirProyecto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/1486486303-alert-bell-notification-education-christmas-bell-church-bell-ring_81235.png"))); // NOI18N
@@ -300,9 +304,27 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/bubo-bubo-buho-real.png"))); // NOI18N
         panelAbrirProyecto.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 110, -1, -1));
 
-        jPanel1.setBackground(new java.awt.Color(229, 255, 204));
+        jPanel1.setBackground(new java.awt.Color(203, 182, 203));
         jPanel1.setLayout(null);
+
+        jLabel24.setFont(new java.awt.Font("Sitka Banner", 1, 18)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(0, 0, 51));
+        jLabel24.setText("Actividad");
+        jPanel1.add(jLabel24);
+        jLabel24.setBounds(720, 140, 100, 23);
+        jPanel1.add(jTextField1);
+        jTextField1.setBounds(690, 170, 140, 22);
+
+        jButton1.setText("Abrir Evidencia");
+        jPanel1.add(jButton1);
+        jButton1.setBounds(690, 210, 140, 23);
+
         panelAbrirProyecto.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 1050, 320));
+
+        jLabel23.setFont(new java.awt.Font("Sitka Banner", 1, 18)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(0, 0, 51));
+        jLabel23.setText("Plan de Manejo Ambiental");
+        panelAbrirProyecto.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 390, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -355,6 +377,7 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
     private javax.swing.JButton btPermisoAgua;
     private javax.swing.JButton btPermisoAmbiental;
     private javax.swing.JButton btnRegresarPanelTabla1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -363,6 +386,8 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -373,6 +398,7 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lbAuditoria;
     private javax.swing.JLabel lbMonitoreo;
     private javax.swing.JLabel lbPermisoAgua;

@@ -28,12 +28,11 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
             txtCodigo.setText(proyecto.getIdProyecto());
             txtNombre.setText(proyecto.getNombreProyecto());
             dcFechaInicio.setDate(proyecto.getFechaInicio());
-            
-            if(proyecto.getFechaFinal() != null){
-            dcFechaFinal.setDate(proyecto.getFechaFinal());
-            rdEnProgreso.setSelected(false);
-            }
-            else{
+
+            if (proyecto.getFechaFinal() != null) {
+                dcFechaFinal.setDate(proyecto.getFechaFinal());
+                rdEnProgreso.setSelected(false);
+            } else {
                 rdEnProgreso.setSelected(true);
                 dcFechaFinal.setEnabled(false);
             }
@@ -102,6 +101,11 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        jLabel3 = new javax.swing.JLabel();
+        lbPermisoAmbiental = new javax.swing.JLabel();
+        lbPermisoAgua = new javax.swing.JLabel();
+        lbAuditoria = new javax.swing.JLabel();
+        lbMonitoreo = new javax.swing.JLabel();
 
         PanelActualizarProyecto.setBackground(new java.awt.Color(255, 255, 204));
         PanelActualizarProyecto.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -168,13 +172,13 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         jLabel35.setFont(new java.awt.Font("Sitka Banner", 1, 14)); // NOI18N
         jLabel35.setForeground(new java.awt.Color(51, 0, 51));
         jLabel35.setText("Recordatorios:");
-        PanelActualizarProyecto.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 160, 156, -1));
+        PanelActualizarProyecto.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 160, 156, -1));
 
         txtRecordatorio.setColumns(20);
         txtRecordatorio.setRows(5);
         jScrollPane9.setViewportView(txtRecordatorio);
 
-        PanelActualizarProyecto.add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 180, 270, 130));
+        PanelActualizarProyecto.add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, 270, 130));
         PanelActualizarProyecto.add(dcFechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, 136, -1));
         PanelActualizarProyecto.add(dcFechaFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 100, 136, -1));
 
@@ -202,26 +206,26 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(101, 101, 101)
+                        .addComponent(jButton9))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(105, 105, 105)
+                        .addGap(104, 104, 104)
                         .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(101, 101, 101)
-                        .addComponent(jButton9)))
-                .addContainerGap(41, Short.MAX_VALUE))
+                        .addGap(30, 30, 30)
+                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(47, 47, 47)
+                .addGap(23, 23, 23)
                 .addComponent(jLabel40)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(18, 18, 18)
                 .addComponent(jButton9)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Agregar actividad", jPanel3);
@@ -310,6 +314,11 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
 
         jButton10.setFont(new java.awt.Font("Sitka Banner", 1, 14)); // NOI18N
         jButton10.setText("Actualizar");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
         PanelActualizarProyecto.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 550, -1, 45));
 
         tbActividades.setModel(new javax.swing.table.DefaultTableModel(
@@ -340,7 +349,7 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
                 btPermisoAmbientalActionPerformed(evt);
             }
         });
-        PanelActualizarProyecto.add(btPermisoAmbiental, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 150, 170, -1));
+        PanelActualizarProyecto.add(btPermisoAmbiental, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 160, 170, -1));
 
         btPermisoAgua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/water_23838.png"))); // NOI18N
         btPermisoAgua.setText("Permiso de Agua");
@@ -380,7 +389,7 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         jButton5.setBackground(new java.awt.Color(204, 204, 255));
         jButton5.setForeground(new java.awt.Color(0, 0, 0));
         jButton5.setText("Cambiar archivo");
-        PanelActualizarProyecto.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 160, -1, -1));
+        PanelActualizarProyecto.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 170, -1, -1));
 
         jButton6.setBackground(new java.awt.Color(204, 204, 255));
         jButton6.setForeground(new java.awt.Color(0, 0, 0));
@@ -404,6 +413,28 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/FondoProyectos.png"))); // NOI18N
         PanelActualizarProyecto.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 50));
         PanelActualizarProyecto.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 50, 1080, -1));
+
+        jLabel3.setBackground(new java.awt.Color(102, 102, 102));
+        jLabel3.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel3.setText("(Si aun no finaliza el proyecto seleccione en progreso)");
+        PanelActualizarProyecto.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 130, -1, -1));
+
+        lbPermisoAmbiental.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/accept_icon-icons.com_74428 (1).png"))); // NOI18N
+        lbPermisoAmbiental.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbPermisoAmbientalMouseClicked(evt);
+            }
+        });
+        PanelActualizarProyecto.add(lbPermisoAmbiental, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 160, -1, -1));
+
+        lbPermisoAgua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/accept_icon-icons.com_74428 (1).png"))); // NOI18N
+        PanelActualizarProyecto.add(lbPermisoAgua, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 210, -1, -1));
+
+        lbAuditoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/accept_icon-icons.com_74428 (1).png"))); // NOI18N
+        PanelActualizarProyecto.add(lbAuditoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 260, -1, -1));
+
+        lbMonitoreo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/accept_icon-icons.com_74428 (1).png"))); // NOI18N
+        PanelActualizarProyecto.add(lbMonitoreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 310, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -530,6 +561,26 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        int resultado = JOptionPane.showConfirmDialog(null, "¿Esta seguro de actualizar el proyecto?", "Confirmación", JOptionPane.YES_NO_OPTION);
+        if (resultado == JOptionPane.YES_OPTION) {
+            proyecto.setNombreProyecto(txtNombre.getText());
+            proyecto.setDescripcionProyecto(txtDescripcion.getText());
+            proyecto.setFechaInicio(dcFechaInicio.getDate());
+
+            if (rdEnProgreso.isSelected()) {
+                proyecto.setFechaFinal(null);
+            } else {
+                proyecto.setFechaFinal(dcFechaFinal.getDate());
+            }
+            ProyectoServicio.ActualizarProyecto(proyecto);
+        }
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void lbPermisoAmbientalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbPermisoAmbientalMouseClicked
+
+    }//GEN-LAST:event_lbPermisoAmbientalMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelActualizarProyecto;
@@ -551,6 +602,7 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
@@ -573,6 +625,10 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
+    private javax.swing.JLabel lbAuditoria;
+    private javax.swing.JLabel lbMonitoreo;
+    private javax.swing.JLabel lbPermisoAgua;
+    private javax.swing.JLabel lbPermisoAmbiental;
     private javax.swing.JRadioButton rdEnProgreso;
     private javax.swing.JTable tbActividades;
     private javax.swing.JTextField txtCodigo;
