@@ -140,6 +140,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
         setForeground(new java.awt.Color(255, 204, 204));
@@ -485,6 +486,9 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         jLabel9.setText("jLabel9");
         panelAgregarProyecto.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1040, 550));
 
+        jLabel10.setText("jLabel10");
+        panelAgregarProyecto.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 350, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -672,6 +676,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
     private com.toedter.calendar.JDateChooser dcFechaFinalProyecto;
     private com.toedter.calendar.JDateChooser dcFechaInicioProyecto;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

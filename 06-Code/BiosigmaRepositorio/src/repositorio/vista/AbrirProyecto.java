@@ -1,6 +1,12 @@
 package repositorio.vista;
 
+import java.awt.Desktop;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.lang.System.Logger.Level;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -34,41 +40,51 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
             txtFechaFinal.setText(fechaFinal);
             txtDescripcion.setText(proyecto.getDescripcionProyecto());
             String recordatorio;
-            if(proyecto.getRecordatorioProyecto() != null){
+            if (proyecto.getRecordatorioProyecto() != null) {
                 recordatorio = proyecto.getRecordatorioProyecto();
-            }
-            else{
+            } else {
                 recordatorio = "No existen recordatorios";
             }
             txtRecordatorio.setText(recordatorio);
-            
-            if(proyecto.getPermisoAmbiental() != null){
+
+            if (proyecto.getPermisoAmbiental() != null) {
                 lbPermisoAmbiental.setVisible(true);
-            }
-            else{
+            } else {
                 lbPermisoAmbiental.setVisible(false);
             }
-            if(proyecto.getPermisoAgua() != null){
+            if (proyecto.getPermisoAgua() != null) {
                 lbPermisoAgua.setVisible(true);
-            }
-            else{
+            } else {
                 lbPermisoAgua.setVisible(false);
             }
-            if(proyecto.getAuditoria() != null){
+            if (proyecto.getAuditoria() != null) {
                 lbAuditoria.setVisible(true);
-            }
-            else{
+            } else {
                 lbAuditoria.setVisible(false);
             }
-            if(proyecto.getMonitoreo() != null){
+            if (proyecto.getMonitoreo() != null) {
                 lbMonitoreo.setVisible(true);
-            }
-            else{
+            } else {
                 lbMonitoreo.setVisible(false);
             }
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "No se ha podido cargar la información del proyecto");
+        }
+    }
+
+    private void abrirArchivoProyecto(byte[] archivo) {
+        if (archivo != null) {
+            try{
+                Path tempPdf = Files.createTempFile("Archivo Guardado",".pdf");
+                Files.copy(new ByteArrayInputStream(archivo),tempPdf, StandardCopyOption.REPLACE_EXISTING);
+                
+                Desktop.getDesktop().open(tempPdf.toFile());
+            }catch(IOException ex){
+                
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No se ha cargado el documento aún");
         }
     }
 
@@ -356,19 +372,19 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtFechaInicioActionPerformed
 
     private void btPermisoAmbientalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPermisoAmbientalActionPerformed
-
+        abrirArchivoProyecto(proyecto.getPermisoAmbiental());
     }//GEN-LAST:event_btPermisoAmbientalActionPerformed
 
     private void btPermisoAguaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPermisoAguaActionPerformed
-
+        abrirArchivoProyecto(proyecto.getPermisoAgua());
     }//GEN-LAST:event_btPermisoAguaActionPerformed
 
     private void btAuditoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAuditoriasActionPerformed
-
+        abrirArchivoProyecto(proyecto.getAuditoria());
     }//GEN-LAST:event_btAuditoriasActionPerformed
 
     private void btMonitoreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMonitoreoActionPerformed
-
+        abrirArchivoProyecto(proyecto.getMonitoreo());
     }//GEN-LAST:event_btMonitoreoActionPerformed
 
 
