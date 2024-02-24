@@ -21,10 +21,24 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         consultarDatos();
     }
 
+    private String obtenercodigointerfacez() {
+        String codigo="";
+        if (InterfazAdminJFrame.getCodigoProyecto() != "") {
+            codigo = InterfazAdminJFrame.getCodigoProyecto();
+            
+
+        } else if (InterfazTrabajadorJFrame.getCodigoProyecto() != "") {
+            codigo = InterfazTrabajadorJFrame.getCodigoProyecto();
+            
+
+        }
+        return codigo;
+    }
+
     private void consultarDatos() {
-        String codigo = InterfazAdminJFrame.getCodigoProyecto();
+
         try {
-            proyecto = ProyectoServicio.BuscarProyecto(codigo);
+            proyecto = ProyectoServicio.BuscarProyecto(obtenercodigointerfacez());
             txtCodigo.setText(proyecto.getIdProyecto());
             txtNombre.setText(proyecto.getNombreProyecto());
             dcFechaInicio.setDate(proyecto.getFechaInicio());

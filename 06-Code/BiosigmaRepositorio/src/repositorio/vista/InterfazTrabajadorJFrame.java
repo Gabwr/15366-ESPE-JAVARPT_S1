@@ -9,7 +9,7 @@ import repositorio.controlador.AdminServicio;
 import repositorio.controlador.ProyectoServicio;
 import repositorio.modelo.Proyecto;
 
-public class InterfazTrabajadorAdmin extends javax.swing.JFrame {
+public class InterfazTrabajadorJFrame extends javax.swing.JFrame {
 
 
     public InterfazAdminInsertarUsuario IntfzInsertar = new InterfazAdminInsertarUsuario();
@@ -26,7 +26,7 @@ public class InterfazTrabajadorAdmin extends javax.swing.JFrame {
     }
     
 
-    public InterfazTrabajadorAdmin() {
+    public InterfazTrabajadorJFrame() {
         initComponents();
         llenarTablaProyectos();
         PanelBiosigmaLogo.setBackground(new Color(0, 0, 0, 160));
@@ -711,7 +711,7 @@ public class InterfazTrabajadorAdmin extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InterfazTrabajadorAdmin().setVisible(true);
+                new InterfazTrabajadorJFrame().setVisible(true);
             }
         });
     }
