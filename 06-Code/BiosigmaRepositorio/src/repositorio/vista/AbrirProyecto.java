@@ -30,8 +30,11 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
 
         } else if (InterfazTrabajadorJFrame.getCodigoProyecto() != "") {
             codigo = InterfazTrabajadorJFrame.getCodigoProyecto();
-            
-
+          
+        }
+         else if (InterfazCliente1JFrame.getCodigoProyecto() != "") {
+             
+            codigo = InterfazCliente1JFrame.getCodigoProyecto();
         }
         return codigo;
     }
