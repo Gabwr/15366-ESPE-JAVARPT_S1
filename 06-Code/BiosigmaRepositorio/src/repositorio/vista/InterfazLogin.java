@@ -159,31 +159,33 @@ public class InterfazLogin extends javax.swing.JFrame {
 
     private void btnSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSesionActionPerformed
         InterfazInicioAdministrador interfaz = null;
+        //Administrador
         if ((txtContra.getText().equals("0650160203")) && (txtUsuario.getText().equals("A10001")) && interfaz == null) {
-            interfaz = new InterfazInicioAdministrador("Admnistrador");
-            escritorio.add(interfaz);
-            interfaz.show();
-            limpiar();
+            InterfazAdminJFrame modificar = new InterfazAdminJFrame();
 
+            modificar.setVisible(true);
+            setVisible(false);
+            limpiar();
+            //Cliente
         } else if ((txtContra.getText().equals("12345")) && (txtUsuario.getText().equals("T10001")) && interfaz == null) {
-            interfaz = new InterfazInicioAdministrador("Trabajador");
-            escritorio.add(interfaz);
-            interfaz.show();
-            limpiar();
+            InterfazCliente1JFrame modificar = new InterfazCliente1JFrame();
 
+            modificar.setVisible(true);
+            setVisible(false);
+            limpiar();
+          
         } else if ((txtContra.getText().equals("54321")) && (txtUsuario.getText().equals("C10001")) && interfaz == null) {
-            interfaz = new InterfazInicioAdministrador("Cliente");
-            escritorio.add(interfaz);
-            interfaz.show();
-            limpiar();
-            
-        } else if ((txtContra.getText().equals("")) && (txtUsuario.getText().equals("")) && interfaz == null) {
-            interfaz = new InterfazInicioAdministrador("Admnistrador");
-            escritorio.add(interfaz);
-            interfaz.show();
+            InterfazTrabajadorJFrame modificar = new InterfazTrabajadorJFrame ();
+
+            modificar.setVisible(true);
+            setVisible(false); 
             limpiar();
 
-        }else {
+        } else if ((txtContra.getText().equals("")) && (txtUsuario.getText().equals("")) && interfaz == null) {
+            JOptionPane.showMessageDialog(null, "Escriba un usuario y contraseña");
+            limpiar();
+
+        } else {
             getToolkit().beep();
             lbAvisoLogin.setVisible(true);
         }
