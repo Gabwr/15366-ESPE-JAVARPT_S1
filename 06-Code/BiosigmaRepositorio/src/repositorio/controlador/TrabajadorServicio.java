@@ -7,19 +7,19 @@ import repositorio.modelo.PersonaTrabajador;
 
 
 public class TrabajadorServicio {
-    public List<PersonaTrabajador> ListarTrabajadores(){
+    public static List<PersonaTrabajador> ListarTrabajadores(){
         return new TrabajadorMetodos().ListarTrabajadores();
     }
-    public boolean InsertarTrabajadores(PersonaTrabajador Trabajador){
+    public static boolean InsertarTrabajadores(PersonaTrabajador Trabajador){
         return new TrabajadorMetodos().InsertarTrabajadores(Trabajador);
     }
-    public boolean ActualizarTrabajadores(PersonaTrabajador Trabajador){
+    public static boolean ActualizarTrabajadores(PersonaTrabajador Trabajador){
         return new TrabajadorMetodos().ActualizarTrabajadores(Trabajador);
     }
-    public boolean EliminarTrabajadores(String idTrabajador){
+    public static boolean EliminarTrabajadores(String idTrabajador){
         return new TrabajadorMetodos().EliminarTrabajadores(idTrabajador);
     }
-    public boolean VerificarCodigoRepetido(String idTrabajador){
+    public static boolean VerificarCodigoRepetido(String idTrabajador){
         return new TrabajadorMetodos().VerificarCodigoRepetido(idTrabajador);
     } 
 }

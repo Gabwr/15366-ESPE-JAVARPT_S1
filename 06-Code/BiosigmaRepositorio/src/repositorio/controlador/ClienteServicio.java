@@ -7,19 +7,19 @@ import repositorio.modelo.PersonaCliente;
 
 
 public class ClienteServicio {
-     public List<PersonaCliente> ListarCliente(){
+     public static List<PersonaCliente> ListarCliente(){
          return new ClienteMetodos().ListarCliente();
      }
-    public boolean InsertarClientes(PersonaCliente Cliente){
+    public static boolean InsertarClientes(PersonaCliente Cliente){
          return new ClienteMetodos().InsertarClientes(Cliente);
      }
-    public boolean ActualizarClientes(PersonaCliente Cliente){
+    public static boolean ActualizarClientes(PersonaCliente Cliente){
          return new ClienteMetodos().ActualizarClientes(Cliente);
      }
-    public boolean EliminarClientes(String idCliente){
+    public static boolean EliminarClientes(String idCliente){
          return new ClienteMetodos().EliminarClientes(idCliente);
      }
-    public boolean VerificarCodigoRepetido(String idCliente){
+    public static boolean VerificarCodigoRepetido(String idCliente){
          return new ClienteMetodos().VerificarCodigoRepetido(idCliente);
      } 
 }

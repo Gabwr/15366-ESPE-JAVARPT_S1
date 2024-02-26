@@ -1,6 +1,7 @@
 
 package repositorio.vista;
 
+import com.mongodb.MongoException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
@@ -8,6 +9,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import repositorio.controlador.AdminServicio;
+import repositorio.modelo.PersonaAdmin;
 
 public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
     
@@ -515,21 +518,27 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
 
     private void btAgregarMiembroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgregarMiembroActionPerformed
 
-
         String nombre = txtNombre.getText();
         String cedula = txtCedulA.getText();
         String correo = txtCorreo.getText();
         String edad = txtEdad.getText();
-
+        Date fechaNacimiento = dcFecha.getDate();
         if (validarDatos() && validarCedula()) {
             if (CargoIngreso.equals("Administrador")) {
-  
                 JOptionPane.showMessageDialog(null, "Usuario guardado correctamente.");
             } else if (CargoIngreso.equals("Trabajador")) {
                 JOptionPane.showMessageDialog(null, "Usuario guardado correctamente.");
             } else if (CargoIngreso.equals("Cliente")) {
                 JOptionPane.showMessageDialog(null, "Usuario guardado correctamente.");
             }
+            PersonaAdmin AdminNuevo = new PersonaAdmin(correo, cedula, cedula, correo, nombre, fechaNacimiento);
+            
+            if (AdminServicio.InsertarAdmins(AdminNuevo)) {
+                JOptionPane.showMessageDialog(null, "Datos Ingresados");
+            } else {
+                JOptionPane.showMessageDialog(null, "Datos no Ingresados");
+            }
+            limpiar();
         } else {
             JOptionPane.showMessageDialog(null, "Ingrese los datos correctamente");
         }
