@@ -1,4 +1,3 @@
-
 package repositorio.vista;
 
 import com.mongodb.MongoException;
@@ -10,20 +9,44 @@ import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import repositorio.controlador.AdminServicio;
+import repositorio.controlador.ClienteServicio;
+import repositorio.controlador.TrabajadorServicio;
 import repositorio.modelo.PersonaAdmin;
+import repositorio.modelo.PersonaCliente;
+import repositorio.modelo.PersonaTrabajador;
 
 public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
-    
+
     String CargoIngreso;
     private int contador = 1;
-    
+    private String idInicial;
+
     public InterfazAdminInsertarUsuario() {
+        this.idInicial = "10000000";
         initComponents();
         txtCodigo.setVisible(false);
+        lbCargo.setVisible(false);
+        cbCargo.setVisible(false);
+        lbAvisoCargo.setVisible(false);
     }
-        private boolean validarDatos() {
+
+    private boolean validarDatosTrabajador() {
         boolean validacion = false;
-        if ((txtNombre.getText().length() > 0) && validarCedula() && (dcFecha.getDate() != null) && validarCorreo(txtCorreo.getText()) && (!"Seleccione un cargo".equals(cbTipoPersona.getSelectedItem().toString()))) {
+        if ((txtNombre.getText().length() > 0) && validarCedula()
+                && (dcFecha.getDate() != null) && validarCorreo(txtCorreo.getText())
+                && (!"Seleccione un cargo".equals(cbTipoPersona.getSelectedItem().toString()))) {
+            validacion = true;
+            return validacion;
+        } else {
+            return validacion;
+        }
+    }
+
+    private boolean validarDatosOtros() {
+        boolean validacion = false;
+        if ((txtNombre.getText().length() > 0) && validarCedula()
+                && (dcFecha.getDate() != null) && validarCorreo(txtCorreo.getText())
+                && (!"Seleccione un cargo".equals(cbTipoPersona.getSelectedItem().toString()))) {
             validacion = true;
             return validacion;
         } else {
@@ -31,7 +54,8 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
         }
 
     }
-            private void limpiar() {
+
+    private void limpiar() {
         txtCedulA.setText("");
         txtCodigo.setText("");
         txtCorreo.setText("");
@@ -40,8 +64,8 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
         cbTipoPersona.setSelectedIndex(0);
         dcFecha.setDate(null);
     }
-            
-     private boolean validarCedula() {
+
+    private boolean validarCedula() {
         if (txtCedulA.getText().isEmpty()) {
             return false;
         } else {
@@ -88,13 +112,15 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
             }
         }
     }
-         private int recuperarAnioNacimiento(Date anioNacimiento) {
+
+    private int recuperarAnioNacimiento(Date anioNacimiento) {
         SimpleDateFormat f1 = new SimpleDateFormat("yyyy");
         String anioNacimientoCadena = f1.format(anioNacimiento);
         int anio = Integer.parseInt(anioNacimientoCadena);
         return anio;
     }
-         private void calcularEdad(int anioNacimiento) {
+
+    private void calcularEdad(int anioNacimiento) {
         LocalDate actual = LocalDate.now();
 
         int anioActual = actual.getYear();
@@ -110,6 +136,7 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
         Matcher mat = patron.matcher(correo);
         return mat.find();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -521,19 +548,31 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
         String nombre = txtNombre.getText();
         String cedula = txtCedulA.getText();
         String correo = txtCorreo.getText();
-        String edad = txtEdad.getText();
         Date fechaNacimiento = dcFecha.getDate();
-        if (validarDatos() && validarCedula()) {
-            if (CargoIngreso.equals("Administrador")) {
-                JOptionPane.showMessageDialog(null, "Usuario guardado correctamente.");
-            } else if (CargoIngreso.equals("Trabajador")) {
-                JOptionPane.showMessageDialog(null, "Usuario guardado correctamente.");
-            } else if (CargoIngreso.equals("Cliente")) {
-                JOptionPane.showMessageDialog(null, "Usuario guardado correctamente.");
-            }
+        
+            if (validarDatosOtros()&& validarCedula()&&CargoIngreso.equals("Administrador")) {
             PersonaAdmin AdminNuevo = new PersonaAdmin(correo, cedula, cedula, correo, nombre, fechaNacimiento);
-            
+
             if (AdminServicio.InsertarAdmins(AdminNuevo)) {
+                JOptionPane.showMessageDialog(null, "Datos Ingresados");
+            } else {
+                JOptionPane.showMessageDialog(null, "Datos no Ingresados");
+            }
+            }else if (validarDatosOtros()&& validarCedula()&&CargoIngreso.equals("Trabajador")) {
+            PersonaTrabajador  TrabajadorNuevo = new PersonaTrabajador(correo, cedula, 
+                    cedula, correo, nombre, cbCargo.getSelectedItem().toString(),fechaNacimiento);
+
+            if (TrabajadorServicio.InsertarTrabajadores(TrabajadorNuevo)) {
+                JOptionPane.showMessageDialog(null, "Datos Ingresados");
+            } else {
+                JOptionPane.showMessageDialog(null, "Datos no Ingresados");
+            }
+            }
+    else if (validarDatosOtros()&& validarCedula()&&CargoIngreso.equals("Cliente")) {
+            PersonaCliente  ClienteNuevo = new PersonaCliente(correo, cedula, 
+                    cedula, correo, nombre,fechaNacimiento);
+
+            if (ClienteServicio.InsertarClientes(ClienteNuevo)) {
                 JOptionPane.showMessageDialog(null, "Datos Ingresados");
             } else {
                 JOptionPane.showMessageDialog(null, "Datos no Ingresados");
