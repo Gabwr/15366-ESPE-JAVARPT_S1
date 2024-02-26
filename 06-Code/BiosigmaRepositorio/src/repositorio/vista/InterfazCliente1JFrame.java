@@ -113,7 +113,6 @@ public class InterfazCliente1JFrame extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
-        panelInsertar = new javax.swing.JPanel();
         panelSuperior = new javax.swing.JPanel();
         BotonOpciones = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
@@ -430,25 +429,6 @@ public class InterfazCliente1JFrame extends javax.swing.JFrame {
 
         tbPaneles.addTab("tab4", panelProyectos);
 
-        panelInsertar.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                panelInsertarFocusGained(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panelInsertarLayout = new javax.swing.GroupLayout(panelInsertar);
-        panelInsertar.setLayout(panelInsertarLayout);
-        panelInsertarLayout.setHorizontalGroup(
-            panelInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 955, Short.MAX_VALUE)
-        );
-        panelInsertarLayout.setVerticalGroup(
-            panelInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 610, Short.MAX_VALUE)
-        );
-
-        tbPaneles.addTab("tab4", panelInsertar);
-
         javax.swing.GroupLayout panelPestañasLayout = new javax.swing.GroupLayout(panelPestañas);
         panelPestañas.setLayout(panelPestañasLayout);
         panelPestañasLayout.setHorizontalGroup(
@@ -616,13 +596,6 @@ public class InterfazCliente1JFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void panelInsertarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_panelInsertarFocusGained
-        // TODO add your handling code here:
-        if (IntfzInsertar.isClosed()) {
-            tbPaneles.setSelectedIndex(0);
-        }
-    }//GEN-LAST:event_panelInsertarFocusGained
-
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -667,7 +640,6 @@ public class InterfazCliente1JFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JPanel panelBotones1;
     private javax.swing.JPanel panelDescripcion;
-    private javax.swing.JPanel panelInsertar;
     private javax.swing.JPanel panelOpciones;
     private javax.swing.JPanel panelPestañas;
     private javax.swing.JPanel panelPresentacion;

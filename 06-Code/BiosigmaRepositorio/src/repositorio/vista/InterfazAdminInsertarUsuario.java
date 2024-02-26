@@ -16,6 +16,7 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
     
     public InterfazAdminInsertarUsuario() {
         initComponents();
+        txtCodigo.setVisible(false);
     }
         private boolean validarDatos() {
         boolean validacion = false;
