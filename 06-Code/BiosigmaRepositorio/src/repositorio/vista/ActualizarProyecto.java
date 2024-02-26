@@ -1,9 +1,13 @@
 package repositorio.vista;
 
+import java.awt.Desktop;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -22,17 +26,70 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
     }
 
     private String obtenercodigointerfacez() {
-        String codigo="";
+        String codigo = "";
         if (InterfazAdminJFrame.getCodigoProyecto() != "") {
             codigo = InterfazAdminJFrame.getCodigoProyecto();
-            
 
         } else if (InterfazTrabajadorJFrame.getCodigoProyecto() != "") {
             codigo = InterfazTrabajadorJFrame.getCodigoProyecto();
-            
 
         }
         return codigo;
+    }
+
+    private boolean validarDatos() {
+        if ((txtNombreProyecto.getText().length() > 0) && (txtDescripcionProyecto.getText().length() > 0) && (dcFechaInicioProyecto.getDate() != null) && (rdEnProgreso.isSelected() || dcFechaFinalProyecto != null)) {
+            return true;
+        } else {
+            if (txtNombreProyecto.getText().length() == 0) {
+                JOptionPane.showMessageDialog(null, "No puede dejar el Nombre vacío");
+            }
+            if (txtDescripcionProyecto.getText().length() == 0) {
+                JOptionPane.showMessageDialog(null, "No puede dejar la descipción vacía");
+            }
+            if (dcFechaInicioProyecto.getDate() == null) {
+                JOptionPane.showMessageDialog(null, "No puede dejar la fecha de inicio vacía");
+            }
+            if (!rdEnProgreso.isSelected() && dcFechaFinalProyecto == null) {
+                JOptionPane.showMessageDialog(null, "Si aun no ha finalizado el proyecto, sleccione en progreso");
+            }
+            return false;
+        }
+    }
+
+    private void abrirArchivoProyecto(byte[] archivo) {
+        if (archivo != null) {
+            try {
+                Path tempPdf = Files.createTempFile("Archivo Guardado", ".pdf");
+                Files.copy(new ByteArrayInputStream(archivo), tempPdf, StandardCopyOption.REPLACE_EXISTING);
+
+                Desktop.getDesktop().open(tempPdf.toFile());
+            } catch (IOException ex) {
+
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No se ha cargado el documento aún");
+        }
+    }
+
+    private byte[] seleccionarArchivo() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Seleccione un archivo");
+
+        int result = fileChooser.showOpenDialog(null);
+        byte[] pdfBytes = null;
+
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            JOptionPane.showMessageDialog(null, "Archivo seleccionado: " + selectedFile.getAbsolutePath());
+
+            try {
+                pdfBytes = Files.readAllBytes(Paths.get(selectedFile.getAbsolutePath()));
+            } catch (IOException ex) {
+                Logger.getLogger(AgregarProyecto.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return pdfBytes;
     }
 
     private void consultarDatos() {
@@ -40,17 +97,21 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         try {
             proyecto = ProyectoServicio.BuscarProyecto(obtenercodigointerfacez());
             txtCodigo.setText(proyecto.getIdProyecto());
-            txtNombre.setText(proyecto.getNombreProyecto());
-            dcFechaInicio.setDate(proyecto.getFechaInicio());
+            txtNombreProyecto.setText(proyecto.getNombreProyecto());
+            dcFechaInicioProyecto.setDate(proyecto.getFechaInicio());
+            lbPermisoAmbiental.setVisible(false);
+            lbPermisoAgua.setVisible(false);
+            lbAuditoria.setVisible(false);
+            lbMonitoreo.setVisible(false);
 
             if (proyecto.getFechaFinal() != null) {
-                dcFechaFinal.setDate(proyecto.getFechaFinal());
+                dcFechaFinalProyecto.setDate(proyecto.getFechaFinal());
                 rdEnProgreso.setSelected(false);
             } else {
                 rdEnProgreso.setSelected(true);
-                dcFechaFinal.setEnabled(false);
+                dcFechaFinalProyecto.setEnabled(false);
             }
-            txtDescripcion.setText(proyecto.getDescripcionProyecto());
+            txtDescripcionProyecto.setText(proyecto.getDescripcionProyecto());
             String recordatorio;
             if (proyecto.getRecordatorioProyecto() != null) {
                 recordatorio = proyecto.getRecordatorioProyecto();
@@ -58,6 +119,19 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
                 recordatorio = "No existen recordatorios";
             }
             txtRecordatorio.setText(recordatorio);
+
+            if (proyecto.getPermisoAmbiental() != null) {
+                lbPermisoAmbiental.setVisible(true);
+            }
+            if (proyecto.getPermisoAgua() != null) {
+                lbPermisoAgua.setVisible(true);
+            }
+            if (proyecto.getAuditoria() != null) {
+                lbAuditoria.setVisible(true);
+            }
+            if (proyecto.getMonitoreo() != null) {
+                lbMonitoreo.setVisible(true);
+            }
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "No se ha podido cargar la información del proyecto");
@@ -73,18 +147,18 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         btnRegresarPanelTabla = new javax.swing.JButton();
         jLabel31 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
+        txtNombreProyecto = new javax.swing.JTextField();
         jLabel32 = new javax.swing.JLabel();
         txtCodigo = new javax.swing.JTextField();
         jLabel33 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
         jScrollPane8 = new javax.swing.JScrollPane();
-        txtDescripcion = new javax.swing.JTextArea();
+        txtDescripcionProyecto = new javax.swing.JTextArea();
         jLabel35 = new javax.swing.JLabel();
         jScrollPane9 = new javax.swing.JScrollPane();
         txtRecordatorio = new javax.swing.JTextArea();
-        dcFechaInicio = new com.toedter.calendar.JDateChooser();
-        dcFechaFinal = new com.toedter.calendar.JDateChooser();
+        dcFechaInicioProyecto = new com.toedter.calendar.JDateChooser();
+        dcFechaFinalProyecto = new com.toedter.calendar.JDateChooser();
         rdEnProgreso = new javax.swing.JRadioButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
@@ -106,10 +180,10 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         btPermisoAgua = new javax.swing.JButton();
         btAuditorias = new javax.swing.JButton();
         btMonitoreo = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        cambiarMonitoreo = new javax.swing.JButton();
+        cambiarAmbiental = new javax.swing.JButton();
+        cambiarAgua = new javax.swing.JButton();
+        cambiarAuditoria = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -150,7 +224,7 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         jLabel23.setForeground(new java.awt.Color(51, 0, 51));
         jLabel23.setText("Nombre Del Proyecto:");
         PanelActualizarProyecto.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 70, 136, -1));
-        PanelActualizarProyecto.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, 136, -1));
+        PanelActualizarProyecto.add(txtNombreProyecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, 136, -1));
 
         jLabel32.setFont(new java.awt.Font("Sitka Banner", 1, 14)); // NOI18N
         jLabel32.setForeground(new java.awt.Color(51, 0, 51));
@@ -181,9 +255,9 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         jLabel34.setText("Descripción del proyecto:");
         PanelActualizarProyecto.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 156, -1));
 
-        txtDescripcion.setColumns(20);
-        txtDescripcion.setRows(5);
-        jScrollPane8.setViewportView(txtDescripcion);
+        txtDescripcionProyecto.setColumns(20);
+        txtDescripcionProyecto.setRows(5);
+        jScrollPane8.setViewportView(txtDescripcionProyecto);
 
         PanelActualizarProyecto.add(jScrollPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 277, 133));
 
@@ -197,8 +271,8 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         jScrollPane9.setViewportView(txtRecordatorio);
 
         PanelActualizarProyecto.add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, 270, 130));
-        PanelActualizarProyecto.add(dcFechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, 136, -1));
-        PanelActualizarProyecto.add(dcFechaFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 100, 136, -1));
+        PanelActualizarProyecto.add(dcFechaInicioProyecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, 136, -1));
+        PanelActualizarProyecto.add(dcFechaFinalProyecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 100, 136, -1));
 
         rdEnProgreso.setForeground(new java.awt.Color(51, 0, 51));
         rdEnProgreso.setText("En progreso");
@@ -256,7 +330,6 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
 
         jButton11.setText("Actualizar");
 
-        jRadioButton1.setForeground(new java.awt.Color(0, 0, 0));
         jRadioButton1.setText("Completada");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -264,7 +337,6 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
             }
         });
 
-        jRadioButton2.setForeground(new java.awt.Color(0, 0, 0));
         jRadioButton2.setText("En progreso");
         jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -275,7 +347,6 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         jButton1.setText("Evidencia");
 
         jButton3.setBackground(new java.awt.Color(204, 204, 255));
-        jButton3.setForeground(new java.awt.Color(0, 0, 0));
         jButton3.setText("Cambiar archivo");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -399,25 +470,41 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         });
         PanelActualizarProyecto.add(btMonitoreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 310, 170, -1));
 
-        jButton2.setBackground(new java.awt.Color(204, 204, 255));
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setText("Cambiar archivo");
-        PanelActualizarProyecto.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 320, -1, -1));
+        cambiarMonitoreo.setBackground(new java.awt.Color(204, 204, 255));
+        cambiarMonitoreo.setText("Cambiar archivo");
+        cambiarMonitoreo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cambiarMonitoreoActionPerformed(evt);
+            }
+        });
+        PanelActualizarProyecto.add(cambiarMonitoreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 320, -1, -1));
 
-        jButton5.setBackground(new java.awt.Color(204, 204, 255));
-        jButton5.setForeground(new java.awt.Color(0, 0, 0));
-        jButton5.setText("Cambiar archivo");
-        PanelActualizarProyecto.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 170, -1, -1));
+        cambiarAmbiental.setBackground(new java.awt.Color(204, 204, 255));
+        cambiarAmbiental.setText("Cambiar archivo");
+        cambiarAmbiental.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cambiarAmbientalActionPerformed(evt);
+            }
+        });
+        PanelActualizarProyecto.add(cambiarAmbiental, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 170, -1, -1));
 
-        jButton6.setBackground(new java.awt.Color(204, 204, 255));
-        jButton6.setForeground(new java.awt.Color(0, 0, 0));
-        jButton6.setText("Cambiar archivo");
-        PanelActualizarProyecto.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 220, -1, -1));
+        cambiarAgua.setBackground(new java.awt.Color(204, 204, 255));
+        cambiarAgua.setText("Cambiar archivo");
+        cambiarAgua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cambiarAguaActionPerformed(evt);
+            }
+        });
+        PanelActualizarProyecto.add(cambiarAgua, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 220, -1, -1));
 
-        jButton7.setBackground(new java.awt.Color(204, 204, 255));
-        jButton7.setForeground(new java.awt.Color(0, 0, 0));
-        jButton7.setText("Cambiar archivo");
-        PanelActualizarProyecto.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 270, -1, -1));
+        cambiarAuditoria.setBackground(new java.awt.Color(204, 204, 255));
+        cambiarAuditoria.setText("Cambiar archivo");
+        cambiarAuditoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cambiarAuditoriaActionPerformed(evt);
+            }
+        });
+        PanelActualizarProyecto.add(cambiarAuditoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 270, -1, -1));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/LogoBiosigmaTransparente.png"))); // NOI18N
         PanelActualizarProyecto.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -438,11 +525,6 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         PanelActualizarProyecto.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 130, -1, -1));
 
         lbPermisoAmbiental.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/accept_icon-icons.com_74428 (1).png"))); // NOI18N
-        lbPermisoAmbiental.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbPermisoAmbientalMouseClicked(evt);
-            }
-        });
         PanelActualizarProyecto.add(lbPermisoAmbiental, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 160, -1, -1));
 
         lbPermisoAgua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/accept_icon-icons.com_74428 (1).png"))); // NOI18N
@@ -496,87 +578,27 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
 
     private void rdEnProgresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdEnProgresoActionPerformed
         if (rdEnProgreso.isSelected()) {
-            dcFechaFinal.setEnabled(false);
-            dcFechaFinal.setDate(null);
+            dcFechaFinalProyecto.setEnabled(false);
+            dcFechaFinalProyecto.setDate(null);
         } else {
-            dcFechaFinal.setEnabled(true);
+            dcFechaFinalProyecto.setEnabled(true);
         }
     }//GEN-LAST:event_rdEnProgresoActionPerformed
 
     private void btPermisoAmbientalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPermisoAmbientalActionPerformed
-        JFileChooser fileChooser = new JFileChooser();
-        int result = fileChooser.showOpenDialog(null);
-
-        if (result == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
-            JOptionPane.showMessageDialog(null, "Archivo seleccionado: " + selectedFile.getAbsolutePath());
-
-            try {
-                byte[] pdfBytes;
-                pdfBytes = Files.readAllBytes(Paths.get(selectedFile.getAbsolutePath()));
-                proyecto.setPermisoAmbiental(pdfBytes);
-            } catch (IOException ex) {
-                Logger.getLogger(AgregarProyecto.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        }
+        abrirArchivoProyecto(proyecto.getPermisoAmbiental());
     }//GEN-LAST:event_btPermisoAmbientalActionPerformed
 
     private void btPermisoAguaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPermisoAguaActionPerformed
-        JFileChooser fileChooser = new JFileChooser();
-        int result = fileChooser.showOpenDialog(null);
-
-        if (result == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
-            JOptionPane.showMessageDialog(null, "Archivo seleccionado: " + selectedFile.getAbsolutePath());
-
-            try {
-                byte[] pdfBytes;
-                pdfBytes = Files.readAllBytes(Paths.get(selectedFile.getAbsolutePath()));
-                proyecto.setPermisoAgua(pdfBytes);
-            } catch (IOException ex) {
-                Logger.getLogger(AgregarProyecto.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        }
+        abrirArchivoProyecto(proyecto.getPermisoAgua());
     }//GEN-LAST:event_btPermisoAguaActionPerformed
 
     private void btAuditoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAuditoriasActionPerformed
-        JFileChooser fileChooser = new JFileChooser();
-        int result = fileChooser.showOpenDialog(null);
-
-        if (result == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
-            JOptionPane.showMessageDialog(null, "Archivo seleccionado: " + selectedFile.getAbsolutePath());
-
-            try {
-                byte[] pdfBytes;
-                pdfBytes = Files.readAllBytes(Paths.get(selectedFile.getAbsolutePath()));
-                proyecto.setAuditoria(pdfBytes);
-            } catch (IOException ex) {
-                Logger.getLogger(AgregarProyecto.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        }
+        abrirArchivoProyecto(proyecto.getAuditoria());
     }//GEN-LAST:event_btAuditoriasActionPerformed
 
     private void btMonitoreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMonitoreoActionPerformed
-        JFileChooser fileChooser = new JFileChooser();
-        int result = fileChooser.showOpenDialog(null);
-
-        if (result == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
-            JOptionPane.showMessageDialog(null, "Archivo seleccionado: " + selectedFile.getAbsolutePath());
-
-            try {
-                byte[] pdfBytes;
-                pdfBytes = Files.readAllBytes(Paths.get(selectedFile.getAbsolutePath()));
-                proyecto.setMonitoreo(pdfBytes);
-            } catch (IOException ex) {
-                Logger.getLogger(AgregarProyecto.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        }
+        abrirArchivoProyecto(proyecto.getMonitoreo());
     }//GEN-LAST:event_btMonitoreoActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
@@ -588,24 +610,52 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        int resultado = JOptionPane.showConfirmDialog(null, "¿Esta seguro de actualizar el proyecto?", "Confirmación", JOptionPane.YES_NO_OPTION);
-        if (resultado == JOptionPane.YES_OPTION) {
-            proyecto.setNombreProyecto(txtNombre.getText());
-            proyecto.setDescripcionProyecto(txtDescripcion.getText());
-            proyecto.setFechaInicio(dcFechaInicio.getDate());
+        if (validarDatos()) {
+            int resultado = JOptionPane.showConfirmDialog(null, "¿Esta seguro de actualizar el proyecto?", "Confirmación", JOptionPane.YES_NO_OPTION);
+            if (resultado == JOptionPane.YES_OPTION) {
+                proyecto.setNombreProyecto(txtNombreProyecto.getText());
+                proyecto.setDescripcionProyecto(txtDescripcionProyecto.getText());
+                proyecto.setFechaInicio(dcFechaInicioProyecto.getDate());
 
-            if (rdEnProgreso.isSelected()) {
-                proyecto.setFechaFinal(null);
-            } else {
-                proyecto.setFechaFinal(dcFechaFinal.getDate());
+                if (rdEnProgreso.isSelected()) {
+                    proyecto.setFechaFinal(null);
+                } else {
+                    proyecto.setFechaFinal(dcFechaFinalProyecto.getDate());
+                }
+                ProyectoServicio.ActualizarProyecto(proyecto);
             }
-            ProyectoServicio.ActualizarProyecto(proyecto);
         }
     }//GEN-LAST:event_jButton10ActionPerformed
 
-    private void lbPermisoAmbientalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbPermisoAmbientalMouseClicked
+    private void cambiarAmbientalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarAmbientalActionPerformed
+        byte[] pdfBytes = seleccionarArchivo();
+        if (pdfBytes != null) {
+            proyecto.setPermisoAmbiental(pdfBytes);
+            lbPermisoAmbiental.setVisible(true);
+        }
+    }//GEN-LAST:event_cambiarAmbientalActionPerformed
 
-    }//GEN-LAST:event_lbPermisoAmbientalMouseClicked
+    private void cambiarAguaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarAguaActionPerformed
+        byte[] pdfBytes = seleccionarArchivo();
+        if (pdfBytes != null) {
+            proyecto.setPermisoAgua(pdfBytes);
+            lbPermisoAgua.setVisible(true);
+        }
+    }//GEN-LAST:event_cambiarAguaActionPerformed
+
+    private void cambiarAuditoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarAuditoriaActionPerformed
+        byte[] pdfBytes = seleccionarArchivo();
+        if (pdfBytes != null) {
+            proyecto.setAuditoria(pdfBytes);
+        }
+    }//GEN-LAST:event_cambiarAuditoriaActionPerformed
+
+    private void cambiarMonitoreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarMonitoreoActionPerformed
+        byte[] pdfBytes = seleccionarArchivo();
+        if (pdfBytes != null) {
+            proyecto.setMonitoreo(pdfBytes);
+        }
+    }//GEN-LAST:event_cambiarMonitoreoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -615,16 +665,16 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
     private javax.swing.JButton btPermisoAgua;
     private javax.swing.JButton btPermisoAmbiental;
     private javax.swing.JButton btnRegresarPanelTabla;
-    private com.toedter.calendar.JDateChooser dcFechaFinal;
-    private com.toedter.calendar.JDateChooser dcFechaInicio;
+    private javax.swing.JButton cambiarAgua;
+    private javax.swing.JButton cambiarAmbiental;
+    private javax.swing.JButton cambiarAuditoria;
+    private javax.swing.JButton cambiarMonitoreo;
+    private com.toedter.calendar.JDateChooser dcFechaFinalProyecto;
+    private com.toedter.calendar.JDateChooser dcFechaInicioProyecto;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -660,8 +710,8 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton rdEnProgreso;
     private javax.swing.JTable tbActividades;
     private javax.swing.JTextField txtCodigo;
-    private javax.swing.JTextArea txtDescripcion;
-    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextArea txtDescripcionProyecto;
+    private javax.swing.JTextField txtNombreProyecto;
     private javax.swing.JTextArea txtRecordatorio;
     // End of variables declaration//GEN-END:variables
 }

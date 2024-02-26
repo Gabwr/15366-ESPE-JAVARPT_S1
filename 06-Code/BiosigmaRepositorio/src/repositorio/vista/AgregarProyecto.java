@@ -1,6 +1,5 @@
 package repositorio.vista;
 
-import java.awt.geom.RoundRectangle2D;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -537,12 +536,6 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_rdEnProgresoActionPerformed
 
     private void btPermisoAmbientalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPermisoAmbientalActionPerformed
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(AgregarProyecto.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
         byte[] pdfBytes = seleccionarArchivo();
         if (pdfBytes != null) {
             proyecto.setPermisoAmbiental(pdfBytes);
@@ -552,12 +545,6 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btPermisoAmbientalActionPerformed
 
     private void btPermisoAguaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPermisoAguaActionPerformed
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(AgregarProyecto.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
         byte[] pdfBytes = seleccionarArchivo();
         if (pdfBytes != null) {
             proyecto.setPermisoAgua(pdfBytes);
@@ -566,12 +553,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btPermisoAguaActionPerformed
 
     private void btAuditoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAuditoriasActionPerformed
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(AgregarProyecto.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        
         byte[] pdfBytes = seleccionarArchivo();
         if (pdfBytes != null) {
             proyecto.setAuditoria(pdfBytes);
@@ -579,11 +561,6 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btAuditoriasActionPerformed
 
     private void btMonitoreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMonitoreoActionPerformed
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(AgregarProyecto.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
         byte[] pdfBytes = seleccionarArchivo();
         if (pdfBytes != null) {
