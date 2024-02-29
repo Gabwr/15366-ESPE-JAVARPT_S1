@@ -1,4 +1,4 @@
-package repositorio.vista;
+package repositorio.vista.Proyecto;
 
 import java.awt.Desktop;
 import java.io.ByteArrayInputStream;
@@ -14,6 +14,8 @@ import repositorio.modelo.Proyecto;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import repositorio.controlador.ProyectoServicio;
+import repositorio.vista.Admin.InterfazAdminJFrame;
+import repositorio.vista.trabajador.InterfazTrabajadorJFrame;
 
 public class ActualizarProyecto extends javax.swing.JInternalFrame {
 

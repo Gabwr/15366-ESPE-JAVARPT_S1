@@ -1,4 +1,4 @@
-package repositorio.vista;
+package repositorio.vista.Proyecto;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,6 +12,7 @@ import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import repositorio.controlador.ProyectoServicio;
 import repositorio.modelo.Proyecto;
+import repositorio.vista.Admin.InterfazAdminJFrame;
 
 public class AgregarProyecto extends javax.swing.JInternalFrame {
 
@@ -428,7 +429,6 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
 
         panelAgregarProyecto.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 390, 120, 60));
 
-        rdActividades.setForeground(new java.awt.Color(0, 0, 0));
         rdActividades.setText("No agregar actividades por ahora");
         rdActividades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

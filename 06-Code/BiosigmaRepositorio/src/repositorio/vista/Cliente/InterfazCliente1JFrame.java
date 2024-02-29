@@ -1,11 +1,12 @@
-package repositorio.vista;
+package repositorio.vista.Cliente;
 
+import repositorio.vista.Admin.InterfazAdminInsertarUsuario;
+import repositorio.vista.Proyecto.AbrirProyecto;
 import java.awt.Color;
 import java.awt.HeadlessException;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import repositorio.controlador.AdminServicio;
 import repositorio.controlador.ProyectoServicio;
 import repositorio.modelo.Proyecto;
 

@@ -1,15 +1,18 @@
-package repositorio.vista;
+package repositorio.vista.trabajador;
 
+import repositorio.vista.Admin.InterfazAdminInsertarUsuario;
+import repositorio.vista.Proyecto.AbrirProyecto;
+import repositorio.vista.Proyecto.AgregarProyecto;
+import repositorio.vista.Proyecto.ActualizarProyecto;
 import java.awt.Color;
 import java.awt.HeadlessException;
-import java.awt.geom.RoundRectangle2D;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import repositorio.controlador.ProyectoServicio;
 import repositorio.modelo.Proyecto;
 
-public class InterfazAdminJFrame extends javax.swing.JFrame {
+public class InterfazTrabajadorJFrame extends javax.swing.JFrame {
 
 
     public InterfazAdminInsertarUsuario IntfzInsertar = new InterfazAdminInsertarUsuario();
@@ -26,12 +29,9 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
     }
     
 
-    public InterfazAdminJFrame() {
+    public InterfazTrabajadorJFrame() {
         initComponents();
         llenarTablaProyectos();
-        this.setLocationRelativeTo(null);
-        setShape(new RoundRectangle2D.Double(0,0,this.getBounds().width, this.getBounds().height, 27, 27));
-   
         PanelBiosigmaLogo.setBackground(new Color(0, 0, 0, 160));
         panelDescripcion.setBackground(new Color(0, 0, 0, 100));
         panelOpciones.setBackground(new Color(0, 0, 0, 160));
@@ -93,9 +93,6 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         BotonProyectos = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        BotonAgregarMiembros = new javax.swing.JPanel();
-        jLImgUsuarios = new javax.swing.JLabel();
-        jLUsuarios = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel29 = new javax.swing.JLabel();
@@ -109,7 +106,7 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         jTextArea5 = new javax.swing.JTextArea();
         jLabel10 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         panelProyectos = new javax.swing.JPanel();
         panelTablaProyectos = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -122,22 +119,7 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         btnEliminarProyecto = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
-        panelMiembros = new javax.swing.JPanel();
-        jPanel10 = new javax.swing.JPanel();
-        btAgregarMiembro = new javax.swing.JButton();
-        btnActualizarusuarios = new javax.swing.JButton();
-        btnEliminarUsuarios = new javax.swing.JButton();
-        btnRegresarUsuarios = new javax.swing.JButton();
-        tbMiembros = new javax.swing.JTabbedPane();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        tbAdmin = new javax.swing.JTable();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        tbClientes = new javax.swing.JTable();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tbTrabajadores = new javax.swing.JTable();
-        jLabel13 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jLabel21 = new javax.swing.JLabel();
+        panelInsertar = new javax.swing.JPanel();
         panelSuperior = new javax.swing.JPanel();
         BotonOpciones = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
@@ -146,7 +128,6 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
 
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -218,7 +199,6 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         panelBotones1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 230, 100));
 
         BotonProyectos.setBackground(new java.awt.Color(0, 204, 153));
-        BotonProyectos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BotonProyectos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BotonProyectosMouseClicked(evt);
@@ -262,50 +242,6 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
 
         panelBotones1.add(BotonProyectos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 230, 70));
 
-        BotonAgregarMiembros.setBackground(new java.awt.Color(0, 204, 153));
-        BotonAgregarMiembros.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        BotonAgregarMiembros.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BotonAgregarMiembrosMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                BotonAgregarMiembrosMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                BotonAgregarMiembrosMouseExited(evt);
-            }
-        });
-
-        jLImgUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/BotonAgregarMiembro.png"))); // NOI18N
-
-        jLUsuarios.setBackground(new java.awt.Color(51, 0, 51));
-        jLUsuarios.setFont(new java.awt.Font("Sitka Banner", 1, 36)); // NOI18N
-        jLUsuarios.setForeground(new java.awt.Color(51, 51, 51));
-        jLUsuarios.setText("Usuarios");
-
-        javax.swing.GroupLayout BotonAgregarMiembrosLayout = new javax.swing.GroupLayout(BotonAgregarMiembros);
-        BotonAgregarMiembros.setLayout(BotonAgregarMiembrosLayout);
-        BotonAgregarMiembrosLayout.setHorizontalGroup(
-            BotonAgregarMiembrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BotonAgregarMiembrosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLImgUsuarios)
-                .addGap(18, 18, 18)
-                .addComponent(jLUsuarios)
-                .addContainerGap(37, Short.MAX_VALUE))
-        );
-        BotonAgregarMiembrosLayout.setVerticalGroup(
-            BotonAgregarMiembrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BotonAgregarMiembrosLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(BotonAgregarMiembrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLImgUsuarios)
-                    .addComponent(jLUsuarios))
-                .addContainerGap())
-        );
-
-        panelBotones1.add(BotonAgregarMiembros, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 240, 60));
-
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/colibri_png.png"))); // NOI18N
         panelBotones1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 520, 160, 170));
 
@@ -313,7 +249,6 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 51, 51));
         jButton1.setText("Cerrar Sesión");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -357,12 +292,12 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(255, 153, 102));
         jLabel1.setFont(new java.awt.Font("Cambria Math", 1, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 0, 0));
+        jLabel1.setForeground(new java.awt.Color(0, 102, 102));
         jLabel1.setText("BIOSIGMA RESPOSITORIO");
         panelPresentacion.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(167, 22, -1, -1));
 
         jTextArea5.setEditable(false);
-        jTextArea5.setBackground(new java.awt.Color(204, 255, 204));
+        jTextArea5.setBackground(new java.awt.Color(255, 255, 204));
         jTextArea5.setColumns(20);
         jTextArea5.setFont(new java.awt.Font("Sitka Banner", 1, 16)); // NOI18N
         jTextArea5.setForeground(new java.awt.Color(0, 51, 0));
@@ -377,12 +312,24 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         panelPresentacion.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 363, 470, 230));
 
         jLabel37.setFont(new java.awt.Font("Sitka Banner", 1, 24)); // NOI18N
-        jLabel37.setForeground(new java.awt.Color(51, 0, 51));
+        jLabel37.setForeground(new java.awt.Color(51, 0, 0));
         jLabel37.setText("¿Qué significa Biosigma?");
-        panelPresentacion.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 140, -1, -1));
+        panelPresentacion.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(584, 116, -1, -1));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/ImagenFondoPresentacion.png"))); // NOI18N
-        panelPresentacion.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, -1));
+        jPanel1.setBackground(new java.awt.Color(170, 228, 156));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 950, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 310, Short.MAX_VALUE)
+        );
+
+        panelPresentacion.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 310));
 
         tbPaneles.addTab("tab1", panelPresentacion);
 
@@ -411,13 +358,11 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tbProyecto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane1.setViewportView(tbProyecto);
 
         btnAgregarProyecto.setFont(new java.awt.Font("Sitka Banner", 0, 14)); // NOI18N
         btnAgregarProyecto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/1814113_add_more_plus_icon.png"))); // NOI18N
         btnAgregarProyecto.setText("Agregar Proyecto");
-        btnAgregarProyecto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAgregarProyecto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarProyectoActionPerformed(evt);
@@ -427,7 +372,6 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         btnAbrirProyecto.setFont(new java.awt.Font("Sitka Banner", 0, 14)); // NOI18N
         btnAbrirProyecto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/3643772-archive-archives-document-folder-open_113445.png"))); // NOI18N
         btnAbrirProyecto.setText("Abrir Proyecto");
-        btnAbrirProyecto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAbrirProyecto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAbrirProyectoActionPerformed(evt);
@@ -437,7 +381,6 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         btnActualizarProyecto.setFont(new java.awt.Font("Sitka Banner", 0, 14)); // NOI18N
         btnActualizarProyecto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/185042_edit_modify_icon.png"))); // NOI18N
         btnActualizarProyecto.setText("Actualizar Proyecto");
-        btnActualizarProyecto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnActualizarProyecto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarProyectoActionPerformed(evt);
@@ -446,7 +389,6 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
 
         btnRegresarProyectos.setFont(new java.awt.Font("Sitka Banner", 0, 14)); // NOI18N
         btnRegresarProyectos.setText("Regresar");
-        btnRegresarProyectos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegresarProyectos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresarProyectosActionPerformed(evt);
@@ -459,7 +401,6 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Sitka Banner", 0, 14)); // NOI18N
         jButton2.setText("Limpiar Selección");
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -469,7 +410,6 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         btnEliminarProyecto.setFont(new java.awt.Font("Sitka Banner", 0, 14)); // NOI18N
         btnEliminarProyecto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/185090_delete_garbage_icon.png"))); // NOI18N
         btnEliminarProyecto.setText("Eliminar Proyecto");
-        btnEliminarProyecto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEliminarProyecto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarProyectoActionPerformed(evt);
@@ -486,7 +426,7 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
                     .addGroup(panelTablaProyectosLayout.createSequentialGroup()
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton2)
                         .addGap(43, 43, 43)
                         .addComponent(btnRegresarProyectos)
                         .addGap(18, 18, 18))
@@ -532,148 +472,24 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
 
         tbPaneles.addTab("tab4", panelProyectos);
 
-        panelMiembros.setBackground(new java.awt.Color(28, 0, 51));
-        panelMiembros.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel10.setBackground(new java.awt.Color(255, 255, 204));
-        jPanel10.setForeground(new java.awt.Color(153, 153, 255));
-        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btAgregarMiembro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/1814113_add_more_plus_icon.png"))); // NOI18N
-        btAgregarMiembro.setText("Agregar Miembro");
-        btAgregarMiembro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btAgregarMiembroActionPerformed(evt);
+        panelInsertar.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                panelInsertarFocusGained(evt);
             }
         });
-        jPanel10.add(btAgregarMiembro, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 416, -1, -1));
 
-        btnActualizarusuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/185042_edit_modify_icon.png"))); // NOI18N
-        btnActualizarusuarios.setText("Actualizar Informacion");
-        btnActualizarusuarios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActualizarusuariosActionPerformed(evt);
-            }
-        });
-        jPanel10.add(btnActualizarusuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 416, -1, -1));
+        javax.swing.GroupLayout panelInsertarLayout = new javax.swing.GroupLayout(panelInsertar);
+        panelInsertar.setLayout(panelInsertarLayout);
+        panelInsertarLayout.setHorizontalGroup(
+            panelInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 955, Short.MAX_VALUE)
+        );
+        panelInsertarLayout.setVerticalGroup(
+            panelInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 610, Short.MAX_VALUE)
+        );
 
-        btnEliminarUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/185090_delete_garbage_icon.png"))); // NOI18N
-        btnEliminarUsuarios.setText("Eliminar Miembro");
-        btnEliminarUsuarios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarUsuariosActionPerformed(evt);
-            }
-        });
-        jPanel10.add(btnEliminarUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(508, 416, -1, -1));
-
-        btnRegresarUsuarios.setText("Regresar");
-        btnRegresarUsuarios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegresarUsuariosActionPerformed(evt);
-            }
-        });
-        jPanel10.add(btnRegresarUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 10, -1, 28));
-
-        tbAdmin.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Cédula", "Nombre", "Correo", "Edad"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tbAdmin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbAdminMouseClicked(evt);
-            }
-        });
-        jScrollPane4.setViewportView(tbAdmin);
-
-        tbMiembros.addTab("Administradores", jScrollPane4);
-
-        tbClientes.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Cédula", "Nombre", "Correo", "Edad"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tbClientes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbClientesMouseClicked(evt);
-            }
-        });
-        jScrollPane5.setViewportView(tbClientes);
-
-        tbMiembros.addTab("Clientes", jScrollPane5);
-
-        tbTrabajadores.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Cédula", "Nombre", "Correo", "Edad"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tbTrabajadores.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbTrabajadoresMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(tbTrabajadores);
-
-        tbMiembros.addTab("Trabajadores", jScrollPane2);
-
-        jPanel10.add(tbMiembros, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 35, 732, 353));
-
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(0, 51, 51));
-        jLabel13.setText("Haga click en el miembro que desee para poder actualizar o eliminar");
-        jPanel10.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 6, 527, -1));
-
-        jButton3.setFont(new java.awt.Font("Sitka Banner", 0, 14)); // NOI18N
-        jButton3.setText("Limpiar Selección");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jPanel10.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 20, -1, -1));
-
-        panelMiembros.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 910, 530));
-
-        jLabel21.setBackground(new java.awt.Color(51, 51, 0));
-        jLabel21.setFont(new java.awt.Font("Rockwell", 0, 36)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(0, 255, 204));
-        jLabel21.setText("REGISTRO");
-        panelMiembros.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 10, -1, 40));
-
-        tbPaneles.addTab("tab2", panelMiembros);
+        tbPaneles.addTab("tab4", panelInsertar);
 
         javax.swing.GroupLayout panelPestañasLayout = new javax.swing.GroupLayout(panelPestañas);
         panelPestañas.setLayout(panelPestañasLayout);
@@ -696,7 +512,6 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         panelSuperior.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         BotonOpciones.setBackground(new java.awt.Color(102, 255, 204));
-        BotonOpciones.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BotonOpciones.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BotonOpcionesMouseClicked(evt);
@@ -716,8 +531,9 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         BotonOpcionesLayout.setHorizontalGroup(
             BotonOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BotonOpcionesLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel12)
-                .addGap(0, 2, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         BotonOpcionesLayout.setVerticalGroup(
             BotonOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -726,14 +542,13 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        panelSuperior.add(BotonOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 20, 50, -1));
+        panelSuperior.add(BotonOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 20, 60, -1));
 
         panelOpciones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btInfoProgramador.setBackground(new java.awt.Color(51, 51, 51));
         btInfoProgramador.setForeground(new java.awt.Color(204, 255, 255));
         btInfoProgramador.setText("Información del Programador");
-        btInfoProgramador.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btInfoProgramador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btInfoProgramadorActionPerformed(evt);
@@ -803,32 +618,6 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BotonOpcionesMouseClicked
 
-    private void btnRegresarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarUsuariosActionPerformed
-        tbPaneles.setSelectedIndex(0);
-    }//GEN-LAST:event_btnRegresarUsuariosActionPerformed
-
-    private void btnEliminarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarUsuariosActionPerformed
-
-    }//GEN-LAST:event_btnEliminarUsuariosActionPerformed
-
-    private void btnActualizarusuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarusuariosActionPerformed
-
-        if (filaseleccionadaAdmin > -1) {
-            dtm = (DefaultTableModel) tbAdmin.getModel();
-        } else if (filaseleccionadaCliente > -1) {
-            dtm = (DefaultTableModel) tbClientes.getModel();
-        } else if (filaseleccionadaTrabajador > -1) {
-            dtm = (DefaultTableModel) tbTrabajadores.getModel();
-        } else {
-            JOptionPane.showMessageDialog(null, "Eliga un dato para eliminar");
-        }
-    }//GEN-LAST:event_btnActualizarusuariosActionPerformed
-
-    private void btAgregarMiembroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgregarMiembroActionPerformed
-        escritorio.add(IntfzInsertar);
-        IntfzInsertar.show();
-    }//GEN-LAST:event_btAgregarMiembroActionPerformed
-
     private void btnRegresarProyectosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarProyectosActionPerformed
         tbPaneles.setSelectedIndex(0);
     }//GEN-LAST:event_btnRegresarProyectosActionPerformed
@@ -871,22 +660,8 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarProyectoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        InterfazLogin login = new InterfazLogin();
-        login.show();
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void BotonAgregarMiembrosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonAgregarMiembrosMouseExited
-        BotonAgregarMiembros.setBackground(new Color(0, 204, 153));
-    }//GEN-LAST:event_BotonAgregarMiembrosMouseExited
-
-    private void BotonAgregarMiembrosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonAgregarMiembrosMouseEntered
-        BotonAgregarMiembros.setBackground(new Color(204, 255, 204));
-    }//GEN-LAST:event_BotonAgregarMiembrosMouseEntered
-
-    private void BotonAgregarMiembrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonAgregarMiembrosMouseClicked
-        tbPaneles.setSelectedIndex(2);
-    }//GEN-LAST:event_BotonAgregarMiembrosMouseClicked
 
     private void BotonProyectosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonProyectosMouseExited
         BotonProyectos.setBackground(new Color(0, 204, 153));
@@ -919,6 +694,8 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
             }catch(HeadlessException ex){
                 JOptionPane.showMessageDialog(null, "Ha ocurrido un error: " + ex.toString());
             }
+        }else{
+            JOptionPane.showMessageDialog(null, "Seleccione el proyecto a eliminar");
         }
     }//GEN-LAST:event_btnEliminarProyectoActionPerformed
 
@@ -926,61 +703,41 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void tbAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAdminMouseClicked
-        filaseleccionadaAdmin = tbAdmin.getSelectedRow();
-    }//GEN-LAST:event_tbAdminMouseClicked
-
-    private void tbClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbClientesMouseClicked
-        filaseleccionadaCliente = tbClientes.getSelectedRow();
-    }//GEN-LAST:event_tbClientesMouseClicked
-
-    private void tbTrabajadoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTrabajadoresMouseClicked
-        filaseleccionadaCliente = tbTrabajadores.getSelectedRow();
-    }//GEN-LAST:event_tbTrabajadoresMouseClicked
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void panelInsertarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_panelInsertarFocusGained
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+        if (IntfzInsertar.isClosed()) {
+            tbPaneles.setSelectedIndex(0);
+        }
+    }//GEN-LAST:event_panelInsertarFocusGained
 
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InterfazAdminJFrame().setVisible(true);
+                new InterfazTrabajadorJFrame().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel BotonAgregarMiembros;
     private javax.swing.JPanel BotonOpciones;
     private javax.swing.JPanel BotonProyectos;
     private javax.swing.JPanel PanelBiosigmaLogo;
-    private javax.swing.JButton btAgregarMiembro;
     private javax.swing.JButton btInfoProgramador;
     private javax.swing.JButton btnAbrirProyecto;
     private javax.swing.JButton btnActualizarProyecto;
-    private javax.swing.JButton btnActualizarusuarios;
     private javax.swing.JButton btnAgregarProyecto;
     private javax.swing.JButton btnEliminarProyecto;
-    private javax.swing.JButton btnEliminarUsuarios;
     private javax.swing.JButton btnRegresarProyectos;
-    private javax.swing.JButton btnRegresarUsuarios;
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLImgUsuarios;
-    private javax.swing.JLabel jLUsuarios;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel37;
@@ -990,31 +747,24 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane11;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTextArea jTextArea5;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JPanel panelBotones1;
     private javax.swing.JPanel panelDescripcion;
-    private javax.swing.JPanel panelMiembros;
+    private javax.swing.JPanel panelInsertar;
     private javax.swing.JPanel panelOpciones;
     private javax.swing.JPanel panelPestañas;
     private javax.swing.JPanel panelPresentacion;
     private javax.swing.JPanel panelProyectos;
     private javax.swing.JPanel panelSuperior;
     private javax.swing.JPanel panelTablaProyectos;
-    private javax.swing.JTable tbAdmin;
-    private javax.swing.JTable tbClientes;
-    private javax.swing.JTabbedPane tbMiembros;
     private javax.swing.JTabbedPane tbPaneles;
     private static javax.swing.JTable tbProyecto;
-    private javax.swing.JTable tbTrabajadores;
     // End of variables declaration//GEN-END:variables
 }

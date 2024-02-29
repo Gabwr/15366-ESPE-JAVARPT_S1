@@ -22,7 +22,7 @@ public class ConsultarPerfil extends javax.swing.JFrame {
     private static void consultarDatos() {
         DefaultTableModel modeloTabla = (DefaultTableModel) tbDatos.getModel();
         modeloTabla.setRowCount(0);
-        List<Perfil> listaPerfiles = PerfilServicio.listarPerfiles();
+        List<Perfil> listaPerfiles = new PerfilServicio().ListarPerfiles();
 
         for (Perfil perfil : listaPerfiles) {
             modeloTabla.addRow(new Object[]{perfil.getId(), perfil.getNombrePerfil()});

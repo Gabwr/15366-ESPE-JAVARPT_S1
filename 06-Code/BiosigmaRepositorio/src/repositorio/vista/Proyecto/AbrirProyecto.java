@@ -1,4 +1,4 @@
-package repositorio.vista;
+package repositorio.vista.Proyecto;
 
 import java.awt.Desktop;
 import java.io.ByteArrayInputStream;
@@ -13,6 +13,9 @@ import javax.swing.UIManager;
 import org.bson.diagnostics.Logger;
 import repositorio.controlador.ProyectoServicio;
 import repositorio.modelo.Proyecto;
+import repositorio.vista.Admin.InterfazAdminJFrame;
+import repositorio.vista.Cliente.InterfazCliente1JFrame;
+import repositorio.vista.trabajador.InterfazTrabajadorJFrame;
 
 public class AbrirProyecto extends javax.swing.JInternalFrame {
 

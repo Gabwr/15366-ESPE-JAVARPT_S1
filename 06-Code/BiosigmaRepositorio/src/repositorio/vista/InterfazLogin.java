@@ -1,5 +1,9 @@
 package repositorio.vista;
 
+import repositorio.vista.trabajador.InterfazTrabajadorJFrame;
+import repositorio.vista.Cliente.InterfazCliente1JFrame;
+import repositorio.vista.Admin.InterfazAdminJFrame;
+import repositorio.vista.Admin.InterfazInicioAdministrador;
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
