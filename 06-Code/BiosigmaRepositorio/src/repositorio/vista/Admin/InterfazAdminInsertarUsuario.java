@@ -20,7 +20,6 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
     public InterfazAdminInsertarUsuario() {
         this.idInicial = "10000000";
         initComponents();
-        txtCodigo.setVisible(false);
         lbCargo.setVisible(false);
         cbCargo.setVisible(false);
         lbAvisoCargo.setVisible(false);
@@ -37,12 +36,25 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
             return validacion;
         }
     }
-
+    public String algoritmousuario(String nombre, String Cedula){
+        String usuario = null;
+        char  pasador;
+        for(int inicio=0;inicio<3;inicio++){
+            pasador = nombre.charAt(inicio);
+            usuario+=pasador;
+        }
+        for(int inicio=3;inicio>0;inicio--){
+            pasador = nombre.charAt(inicio);
+            usuario+=pasador;
+        }
+        return usuario;
+        
+    }
+    
     private boolean validarDatosOtros() {
         boolean validacion = false;
         if ((txtNombre.getText().length() > 0) && validarCedula()
-                && (dcFecha.getDate() != null) && validarCorreo(txtCorreo.getText())
-                && (!"Seleccione un cargo".equals(cbTipoPersona.getSelectedItem().toString()))) {
+                && (dcFecha.getDate() != null) && validarCorreo(txtCorreo.getText())) {
             validacion = true;
             return validacion;
         } else {
@@ -50,10 +62,19 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
         }
 
     }
+    private boolean validarcontrasenia() {
+        boolean validacion = false; 
+        if(pswfContrasenia.getText().isEmpty()){
+            return true;
+        }else{
+        return validacion;
+    }
+    }
+    
+    
 
     private void limpiar() {
         txtCedulA.setText("");
-        txtCodigo.setText("");
         txtCorreo.setText("");
         txtEdad.setText("");
         txtNombre.setText("");
@@ -148,7 +169,6 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         btnRegresarUsuarios = new javax.swing.JButton();
-        txtCodigo = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
         cbTipoPersona = new javax.swing.JComboBox<>();
         txtCorreo = new javax.swing.JTextField();
@@ -163,6 +183,9 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
         btAgregarCargo = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
         BtnLimpiarUsuarios = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        pswfContrasenia = new javax.swing.JPasswordField();
+        lbAvisoContrasenia = new javax.swing.JLabel();
 
         JPInsertar.setBackground(new java.awt.Color(255, 255, 204));
         JPInsertar.setForeground(new java.awt.Color(153, 153, 255));
@@ -213,13 +236,6 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
         btnRegresarUsuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresarUsuariosActionPerformed(evt);
-            }
-        });
-
-        txtCodigo.setEditable(false);
-        txtCodigo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCodigoActionPerformed(evt);
             }
         });
 
@@ -299,6 +315,12 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel1.setText("Contraseña");
+
+        lbAvisoContrasenia.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lbAvisoContrasenia.setForeground(new java.awt.Color(255, 0, 0));
+        lbAvisoContrasenia.setText("*");
+
         javax.swing.GroupLayout JPInsertarLayout = new javax.swing.GroupLayout(JPInsertar);
         JPInsertar.setLayout(JPInsertarLayout);
         JPInsertarLayout.setHorizontalGroup(
@@ -309,31 +331,10 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
                     .addGroup(JPInsertarLayout.createSequentialGroup()
                         .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(JPInsertarLayout.createSequentialGroup()
-                                .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(JPInsertarLayout.createSequentialGroup()
-                                        .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, JPInsertarLayout.createSequentialGroup()
-                                                .addComponent(jLabel25)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(dcFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, JPInsertarLayout.createSequentialGroup()
-                                                .addComponent(jLabel15)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lbAvisoNombre)
-                                            .addComponent(lbAvisoFecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(JPInsertarLayout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(btAgregarCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(JPInsertarLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPInsertarLayout.createSequentialGroup()
-                                        .addGap(189, 189, 189)
-                                        .addComponent(lbCargo))))
+                                .addGap(6, 6, 6)
+                                .addComponent(btAgregarCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(189, 189, 189)
+                                .addComponent(lbCargo))
                             .addGroup(JPInsertarLayout.createSequentialGroup()
                                 .addComponent(jLabel26)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -344,13 +345,31 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel28, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, JPInsertarLayout.createSequentialGroup()
                                         .addGap(8, 8, 8)
-                                        .addComponent(jLabel24)))))
+                                        .addComponent(jLabel24))))
+                            .addGroup(JPInsertarLayout.createSequentialGroup()
+                                .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel1)
+                                    .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, JPInsertarLayout.createSequentialGroup()
+                                            .addComponent(jLabel15)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, JPInsertarLayout.createSequentialGroup()
+                                            .addComponent(jLabel25)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(dcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbAvisoFecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbAvisoNombre)
+                                    .addComponent(pswfContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtCedulA, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cbTipoPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(cbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbAvisoContrasenia, javax.swing.GroupLayout.Alignment.LEADING)))
                     .addGroup(JPInsertarLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btAgregarMiembro)
@@ -364,7 +383,7 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
                             .addComponent(lbAvisoCargo)
                             .addComponent(lbAvisoCorreo)
                             .addComponent(lbAvisoCedula))
-                        .addContainerGap(12, Short.MAX_VALUE))
+                        .addContainerGap(76, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPInsertarLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnRegresarUsuarios)
@@ -378,33 +397,26 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
             JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JPInsertarLayout.createSequentialGroup()
                 .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(JPInsertarLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                        .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel15)
-                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lbAvisoNombre)
-                                .addComponent(jLabel24))
-                            .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtCedulA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lbAvisoCedula)))
-                        .addGap(68, 68, 68))
-                    .addGroup(JPInsertarLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel15)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lbAvisoNombre)
+                        .addComponent(jLabel24))
+                    .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtCedulA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lbAvisoCedula)))
+                .addGap(18, 18, 18)
                 .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel25)
+                    .addComponent(dcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lbAvisoFecha)
                         .addComponent(jLabel28)
                         .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lbAvisoCorreo)
-                        .addComponent(lbAvisoFecha))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel25)
-                        .addComponent(dcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbAvisoCorreo)))
+                .addGap(38, 38, 38)
                 .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(JPInsertarLayout.createSequentialGroup()
                         .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -413,12 +425,17 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
                             .addComponent(jLabel27)
                             .addComponent(cbTipoPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbAvisoCargo))
-                        .addGap(98, 98, 98)
+                        .addGap(34, 34, 34)
                         .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbCargo)
                             .addComponent(cbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btAgregarCargo))
-                        .addGap(74, 74, 74)
+                        .addGap(18, 18, 18)
+                        .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(pswfContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbAvisoContrasenia))
+                        .addGap(37, 37, 37)
                         .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btAgregarMiembro, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(BtnLimpiarUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -540,35 +557,40 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btAgregarCargoActionPerformed
 
     private void btAgregarMiembroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgregarMiembroActionPerformed
-
+        
+        String contrasenia = ServicioPersonas.encriptar(pswfContrasenia.getText());
         String nombre = txtNombre.getText();
         String cedula = txtCedulA.getText();
         String correo = txtCorreo.getText();
         Date fechaNacimiento = dcFecha.getDate();
-        
-            if (validarDatosOtros()&& validarCedula()&&CargoIngreso.equals("Administrador")) {
-            Personas Admin/Clientes = new Personas(correo, cedula, cedula, correo, nombre, fechaNacimiento);
+        String usuario = algoritmousuario(nombre, cedula);
+        int PerfilId=0;
+        int cargoId=0;
+            if (validarDatosOtros()&& validarCedula()&&CargoIngreso.equals("Administrador")&&validarcontrasenia()) {
+                PerfilId = 1;
+            Personas AdminNuevo = new Personas(PerfilId,usuario,contrasenia, 
+                    cedula, correo, nombre, fechaNacimiento);
 
             if (ServicioPersonas.InsertarPersonasClienteyAdmin(AdminNuevo)) {
                 JOptionPane.showMessageDialog(null, "Datos Ingresados");
             } else {
                 JOptionPane.showMessageDialog(null, "Datos no Ingresados");
             }
-            }else if (validarDatosOtros()&& validarCedula()&&CargoIngreso.equals("Trabajador")) {
-            PersonaTrabajador  TrabajadorNuevo = new PersonaTrabajador(correo, cedula, 
-                    cedula, correo, nombre, cbCargo.getSelectedItem().toString(),fechaNacimiento);
+            }else if (validarDatosTrabajador()&& validarCedula()&&CargoIngreso.equals("Trabajador")) {
+            Personas TrabajadorNuevo = new Personas(PerfilId,usuario,contrasenia, cedula, correo, nombre, fechaNacimiento);
 
-            if (TrabajadorServicio.InsertarTrabajadores(TrabajadorNuevo)) {
+            if (ServicioPersonas.InsertarPersonasTrabajadores(TrabajadorNuevo)) {
                 JOptionPane.showMessageDialog(null, "Datos Ingresados");
             } else {
                 JOptionPane.showMessageDialog(null, "Datos no Ingresados");
             }
             }
     else if (validarDatosOtros()&& validarCedula()&&CargoIngreso.equals("Cliente")) {
-            PersonaCliente  ClienteNuevo = new PersonaCliente(correo, cedula, 
-                    cedula, correo, nombre,fechaNacimiento);
+        
+            Personas  ClienteNuevo = new Personas(PerfilId,usuario,contrasenia, 
+                    cedula, correo, nombre, fechaNacimiento);
 
-            if (ClienteServicio.InsertarClientes(ClienteNuevo)) {
+            if (ServicioPersonas.InsertarPersonasClienteyAdmin(ClienteNuevo)) {
                 JOptionPane.showMessageDialog(null, "Datos Ingresados");
             } else {
                 JOptionPane.showMessageDialog(null, "Datos no Ingresados");
@@ -584,10 +606,6 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
         limpiar();
     }//GEN-LAST:event_BtnLimpiarUsuariosActionPerformed
 
-    private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCodigoActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnLimpiarUsuarios;
@@ -598,6 +616,7 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> cbCargo;
     private javax.swing.JComboBox<String> cbTipoPersona;
     private com.toedter.calendar.JDateChooser dcFecha;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel24;
@@ -607,12 +626,13 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel lbAvisoCargo;
     private javax.swing.JLabel lbAvisoCedula;
+    private javax.swing.JLabel lbAvisoContrasenia;
     private javax.swing.JLabel lbAvisoCorreo;
     private javax.swing.JLabel lbAvisoFecha;
     private javax.swing.JLabel lbAvisoNombre;
     private javax.swing.JLabel lbCargo;
+    private javax.swing.JPasswordField pswfContrasenia;
     private javax.swing.JTextField txtCedulA;
-    private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtEdad;
     private javax.swing.JTextField txtNombre;

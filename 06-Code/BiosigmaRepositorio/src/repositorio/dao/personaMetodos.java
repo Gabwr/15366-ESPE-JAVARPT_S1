@@ -7,10 +7,16 @@ import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.eq;
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.UpdateResult;
+import java.security.MessageDigest;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 import javax.swing.JOptionPane;
+import org.apache.commons.codec.binary.Base64;
 import org.bson.Document;
 import repositorio.modelo.Personas;
 
@@ -223,5 +229,44 @@ public class personaMetodos implements IPersonas {
         }
         return null;
     }
+
+    @Override
+      public String encriptar(String contrasenia){
+        String Encriptado = "";
+        String Cadena = "Encriptados";
+        try {
+            MessageDigest gestor = MessageDigest.getInstance("MD5");
+            byte[] llaveClave = gestor.digest(contrasenia.getBytes("utf-8"));
+            byte[] clavebyte = Arrays.copyOf(llaveClave, 24);
+            SecretKey llave = new SecretKeySpec(clavebyte,"DESede");
+            Cipher cifrado  = Cipher.getInstance("DESede");
+            cifrado.init(Cipher.ENCRYPT_MODE, llave);
+            
+            byte[] textoPlano = Cadena.getBytes("utf-8");
+            byte[] buffer = cifrado.doFinal(textoPlano);
+            byte[] base64 = Base64.encodeBase64(buffer);
+            Encriptado = new String(base64);
+        } catch (Exception e) {
+        }
+        return Encriptado;
+    }
+
+    @Override
+    public String desencriptar(String contrasenia) {
+            String desEncriptado = "";
+        String Cadena = "Encriptados";
+        try {
+            byte[] mensaje = Base64.decodeBase64(contrasenia.getBytes());
+            MessageDigest digestor = MessageDigest.getInstance("MD5");
+            byte[] gestionado = digestor.digest(Cadena.getBytes());
+            byte[] llaveenBytes = Arrays.copyOf(gestionado, 24);
+            SecretKey llave = new SecretKeySpec(llaveenBytes, "DESede");
+            Cipher descifrado  = Cipher.getInstance("DESede");
+            descifrado.init(Cipher.DECRYPT_MODE, llave);
+            byte[] textoPlano = descifrado.doFinal(mensaje);
+            desEncriptado = new String(textoPlano,"UTF-8");
+        } catch (Exception e) {
+        }
+        return desEncriptado;}
 
 }

@@ -8,7 +8,7 @@ public class Personas {
         private String usuario, contrasenia, cedula, correo, nombre;
     private Date fechaNacimiento;
     
-    //constructor trabajador
+    //constructor trabajador para inserción
     public Personas(int idPerfil,String usuario, String contrasenia, String cedula, String correo, String nombre, int cargo, Date fechaNacimiento) {
         this.idPerfil = idPerfil;
         this.usuario = usuario;
@@ -19,7 +19,7 @@ public class Personas {
         this.iDcargo = cargo;
         this.fechaNacimiento = fechaNacimiento;
     }
-        //constructor admin y cliente
+        //constructor admin y cliente para inserción
 
     public Personas(int idPerfil, String usuario, String contrasenia, String cedula, String correo, String nombre, Date fechaNacimiento) {
         this.idPerfil = idPerfil;

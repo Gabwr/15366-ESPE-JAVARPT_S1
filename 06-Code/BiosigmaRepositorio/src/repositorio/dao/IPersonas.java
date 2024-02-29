@@ -14,4 +14,6 @@ public interface IPersonas {
     public boolean VerificarCodigoRepetido(String idpersona);
     public Personas BuscarPorCodigoTrabajadores(String idpersona);
     public Personas BuscarPorCodigoClienteyAdmin(String idpersona);
+    public String encriptar(String contrasenia);
+    public String desencriptar(String contrasenia);
 }
