@@ -15,14 +15,13 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
 
     String CargoIngreso;
     private int contador = 1;
-    private String idInicial;
 
     public InterfazAdminInsertarUsuario() {
-        this.idInicial = "10000000";
         initComponents();
         lbCargo.setVisible(false);
         cbCargo.setVisible(false);
         lbAvisoCargo.setVisible(false);
+        btAgregarCargo.setVisible(false);
     }
 
     private boolean validarDatosTrabajador() {
@@ -36,21 +35,22 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
             return validacion;
         }
     }
-    public String algoritmousuario(String nombre, String Cedula){
+
+    public String algoritmousuario(String nombre, String Cedula) {
         String usuario = null;
-        char  pasador;
-        for(int inicio=0;inicio<3;inicio++){
+        char pasador;
+        for (int inicio = 0; inicio < 3; inicio++) {
             pasador = nombre.charAt(inicio);
-            usuario+=pasador;
+            usuario += pasador;
         }
-        for(int inicio=3;inicio>0;inicio--){
+        for (int inicio = 3; inicio > 0; inicio--) {
             pasador = nombre.charAt(inicio);
-            usuario+=pasador;
+            usuario += pasador;
         }
         return usuario;
-        
+
     }
-    
+
     private boolean validarDatosOtros() {
         boolean validacion = false;
         if ((txtNombre.getText().length() > 0) && validarCedula()
@@ -62,16 +62,17 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
         }
 
     }
+
     private boolean validarcontrasenia() {
-        boolean validacion = false; 
-        if(pswfContrasenia.getText().isEmpty()){
-            return true;
-        }else{
+        boolean validacion = false;
+        String contrasenia = pswfContrasenia.getText();
+        if (contrasenia.isEmpty() && contrasenia.length() < 5) {
+            validacion = true;
+        } else {
+            validacion = false;
+        }
         return validacion;
     }
-    }
-    
-    
 
     private void limpiar() {
         txtCedulA.setText("");
@@ -80,6 +81,10 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
         txtNombre.setText("");
         cbTipoPersona.setSelectedIndex(0);
         dcFecha.setDate(null);
+        lbCargo.setVisible(false);
+        cbCargo.setVisible(false);
+        lbAvisoCargo.setVisible(false);
+        btAgregarCargo.setVisible(false);
     }
 
     private boolean validarCedula() {
@@ -317,6 +322,15 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Contraseña");
 
+        pswfContrasenia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                pswfContraseniaKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                pswfContraseniaKeyReleased(evt);
+            }
+        });
+
         lbAvisoContrasenia.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lbAvisoContrasenia.setForeground(new java.awt.Color(255, 0, 0));
         lbAvisoContrasenia.setText("*");
@@ -515,16 +529,29 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
         String cargo = (String) cbTipoPersona.getSelectedItem();
         if (cargo.equals("Seleccione un cargo")) {
             CargoIngreso = "";
-            lbAvisoCargo.setVisible(true);
+            lbCargo.setVisible(false);
+            cbCargo.setVisible(false);
+            lbAvisoCargo.setVisible(false);
+            btAgregarCargo.setVisible(false);
         } else if (cargo.equals("Administrador")) {
             CargoIngreso = "Administrador";
+            lbCargo.setVisible(false);
+            cbCargo.setVisible(false);
             lbAvisoCargo.setVisible(false);
+            btAgregarCargo.setVisible(false);
+
         } else if (cargo.equals("Trabajador")) {
             CargoIngreso = "Trabajador";
-            lbAvisoCargo.setVisible(false);
+            lbCargo.setVisible(true);
+            cbCargo.setVisible(true);
+            lbAvisoCargo.setVisible(true);
+            btAgregarCargo.setVisible(true);
         } else if (cargo.equals("Cliente")) {
             CargoIngreso = "Cliente";
+            lbCargo.setVisible(false);
+            cbCargo.setVisible(false);
             lbAvisoCargo.setVisible(false);
+            btAgregarCargo.setVisible(false);
         }
     }//GEN-LAST:event_cbTipoPersonaActionPerformed
 
@@ -557,18 +584,18 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btAgregarCargoActionPerformed
 
     private void btAgregarMiembroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgregarMiembroActionPerformed
-        
-        String contrasenia = ServicioPersonas.encriptar(pswfContrasenia.getText());
+
         String nombre = txtNombre.getText();
         String cedula = txtCedulA.getText();
         String correo = txtCorreo.getText();
         Date fechaNacimiento = dcFecha.getDate();
         String usuario = algoritmousuario(nombre, cedula);
-        int PerfilId=0;
-        int cargoId=0;
-            if (validarDatosOtros()&& validarCedula()&&CargoIngreso.equals("Administrador")&&validarcontrasenia()) {
-                PerfilId = 1;
-            Personas AdminNuevo = new Personas(PerfilId,usuario,contrasenia, 
+        int PerfilId = 0;
+        int cargoId = 0;
+        if (validarDatosOtros() && validarCedula() && CargoIngreso.equals("Administrador") && validarcontrasenia()) {
+            String contrasenia = ServicioPersonas.encriptar(pswfContrasenia.getText());
+            PerfilId = 1;
+            Personas AdminNuevo = new Personas(PerfilId, usuario, contrasenia,
                     cedula, correo, nombre, fechaNacimiento);
 
             if (ServicioPersonas.InsertarPersonasClienteyAdmin(AdminNuevo)) {
@@ -576,18 +603,21 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Datos no Ingresados");
             }
-            }else if (validarDatosTrabajador()&& validarCedula()&&CargoIngreso.equals("Trabajador")) {
-            Personas TrabajadorNuevo = new Personas(PerfilId,usuario,contrasenia, cedula, correo, nombre, fechaNacimiento);
+        } else if (validarDatosTrabajador() && validarCedula() && CargoIngreso.equals("Trabajador") && validarcontrasenia()) {
+            String contrasenia = ServicioPersonas.encriptar(pswfContrasenia.getText());
+            PerfilId = 3;
+            Personas TrabajadorNuevo = new Personas(PerfilId, usuario, contrasenia, cedula, correo, nombre, fechaNacimiento);
 
             if (ServicioPersonas.InsertarPersonasTrabajadores(TrabajadorNuevo)) {
                 JOptionPane.showMessageDialog(null, "Datos Ingresados");
             } else {
                 JOptionPane.showMessageDialog(null, "Datos no Ingresados");
             }
-            }
-    else if (validarDatosOtros()&& validarCedula()&&CargoIngreso.equals("Cliente")) {
-        
-            Personas  ClienteNuevo = new Personas(PerfilId,usuario,contrasenia, 
+        } else if (validarDatosOtros() && validarCedula() && CargoIngreso.equals("Cliente")
+                && validarcontrasenia()) {
+            String contrasenia = ServicioPersonas.encriptar(pswfContrasenia.getText());
+            PerfilId = 2;
+            Personas ClienteNuevo = new Personas(PerfilId, usuario, contrasenia,
                     cedula, correo, nombre, fechaNacimiento);
 
             if (ServicioPersonas.InsertarPersonasClienteyAdmin(ClienteNuevo)) {
@@ -597,7 +627,7 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
             }
             limpiar();
         } else {
-            JOptionPane.showMessageDialog(null, "Ingrese los datos correctamente");
+            JOptionPane.showMessageDialog(null, "complete los campos");
         }
     }//GEN-LAST:event_btAgregarMiembroActionPerformed
 
@@ -605,6 +635,23 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         limpiar();
     }//GEN-LAST:event_BtnLimpiarUsuariosActionPerformed
+
+    private void pswfContraseniaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pswfContraseniaKeyPressed
+        if (validarcontrasenia()) {
+            lbAvisoContrasenia.setVisible(false);
+        } else {
+            lbAvisoContrasenia.setVisible(true);
+        }
+
+    }//GEN-LAST:event_pswfContraseniaKeyPressed
+
+    private void pswfContraseniaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pswfContraseniaKeyReleased
+        if (validarcontrasenia()) {
+            lbAvisoContrasenia.setVisible(false);
+        } else {
+            lbAvisoContrasenia.setVisible(true);
+        }
+    }//GEN-LAST:event_pswfContraseniaKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

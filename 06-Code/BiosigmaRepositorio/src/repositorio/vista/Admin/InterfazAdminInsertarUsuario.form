@@ -422,6 +422,10 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JPasswordField" name="pswfContrasenia">
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="pswfContraseniaKeyPressed"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="pswfContraseniaKeyReleased"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbAvisoContrasenia">
           <Properties>
