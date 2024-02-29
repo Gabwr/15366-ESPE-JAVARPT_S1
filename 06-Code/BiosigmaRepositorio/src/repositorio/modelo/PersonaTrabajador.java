@@ -17,6 +17,8 @@ public class PersonaTrabajador {
         this.fechaNacimiento = fechaNacimiento;
     }
     
+    
+    
     public String getUsuario() {
         return usuario;
     }

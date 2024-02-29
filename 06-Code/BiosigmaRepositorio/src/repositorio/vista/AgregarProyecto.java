@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 import repositorio.controlador.ProyectoServicio;
 import repositorio.modelo.Proyecto;
@@ -41,6 +40,18 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
             }
             return true;
         } else {
+            if (txtNombreProyecto.getText().length() == 0) {
+                JOptionPane.showMessageDialog(null, "No puede dejar el Nombre vacío");
+            }
+            if (txtDescripcionProyecto.getText().length() == 0) {
+                JOptionPane.showMessageDialog(null, "No puede dejar la descipción vacía");
+            }
+            if (dcFechaInicioProyecto.getDate() == null) {
+                JOptionPane.showMessageDialog(null, "No puede dejar la fecha de inicio vacía");
+            }
+            if (!rdEnProgreso.isSelected() && dcFechaFinalProyecto == null) {
+                JOptionPane.showMessageDialog(null, "Si aun no ha finalizado el proyecto, sleccione en progreso");
+            }
             return false;
         }
     }
@@ -134,6 +145,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         lbPermisoAmbiental = new javax.swing.JLabel();
         lbPermisoAgua = new javax.swing.JLabel();
         lbAuditoria = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -470,6 +482,9 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         lbAuditoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/accept_icon-icons.com_74428 (1).png"))); // NOI18N
         lbAuditoria.setToolTipText("Archivo cargado");
         panelAgregarProyecto.add(lbAuditoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 310, -1, -1));
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/view_search_find_9565 (1).png"))); // NOI18N
+        panelAgregarProyecto.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 230, -1, -1));
         panelAgregarProyecto.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1040, 10));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/FondoProyectos.png"))); // NOI18N
@@ -629,10 +644,6 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_dcFechaFinalProyectoPropertyChange
 
-    private void lbPermisoAmbientalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbPermisoAmbientalMouseClicked
-
-    }//GEN-LAST:event_lbPermisoAmbientalMouseClicked
-
     private void txtDescripcionProyectoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionProyectoKeyReleased
         if (txtDescripcionProyecto.getText().length() == 0) {
             lbAvisoDescripcion.setVisible(true);
@@ -640,6 +651,10 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
             lbAvisoDescripcion.setVisible(false);
         }
     }//GEN-LAST:event_txtDescripcionProyectoKeyReleased
+
+    private void lbPermisoAmbientalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbPermisoAmbientalMouseClicked
+
+    }//GEN-LAST:event_lbPermisoAmbientalMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -654,6 +669,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
     private com.toedter.calendar.JDateChooser dcFechaInicioProyecto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

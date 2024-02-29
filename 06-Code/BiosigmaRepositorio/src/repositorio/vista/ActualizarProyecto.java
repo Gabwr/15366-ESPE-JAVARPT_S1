@@ -8,7 +8,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.text.SimpleDateFormat;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import repositorio.modelo.Proyecto;

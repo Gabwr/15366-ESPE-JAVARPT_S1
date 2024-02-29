@@ -351,6 +351,8 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
         jLabel24.setForeground(new java.awt.Color(0, 0, 51));
         jLabel24.setText("Actividad");
         panelAbrirProyecto.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 460, 100, -1));
+
+        jTextField1.setEditable(false);
         panelAbrirProyecto.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 490, 140, -1));
 
         jButton1.setText("Abrir Evidencia");
