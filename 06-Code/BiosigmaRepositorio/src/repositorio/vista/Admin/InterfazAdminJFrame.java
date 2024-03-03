@@ -12,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import repositorio.controlador.ProyectoServicio;
 import repositorio.modelo.Proyecto;
 import repositorio.vista.InterfazLogin;
+import repositorio.vista.cargo.ConsultarCargo;
 import repositorio.vista.perfil.ConsultarPerfil;
 
 public class InterfazAdminJFrame extends javax.swing.JFrame {
@@ -148,7 +149,8 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         panelOpciones = new javax.swing.JPanel();
         btInfoProgramador = new javax.swing.JButton();
-        btInfoProgramador1 = new javax.swing.JButton();
+        btVerPerfiles = new javax.swing.JButton();
+        btVerCargos = new javax.swing.JButton();
         jLabel19 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -745,20 +747,31 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
                 btInfoProgramadorActionPerformed(evt);
             }
         });
-        panelOpciones.add(btInfoProgramador, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, -1, -1));
+        panelOpciones.add(btInfoProgramador, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, -1, -1));
 
-        btInfoProgramador1.setBackground(new java.awt.Color(51, 51, 51));
-        btInfoProgramador1.setForeground(new java.awt.Color(204, 255, 255));
-        btInfoProgramador1.setText("Ver Perfiles");
-        btInfoProgramador1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btInfoProgramador1.addActionListener(new java.awt.event.ActionListener() {
+        btVerPerfiles.setBackground(new java.awt.Color(51, 51, 51));
+        btVerPerfiles.setForeground(new java.awt.Color(204, 255, 255));
+        btVerPerfiles.setText("Ver Perfiles");
+        btVerPerfiles.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btVerPerfiles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btInfoProgramador1ActionPerformed(evt);
+                btVerPerfilesActionPerformed(evt);
             }
         });
-        panelOpciones.add(btInfoProgramador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        panelOpciones.add(btVerPerfiles, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, -1, -1));
 
-        panelSuperior.add(panelOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, 370, 50));
+        btVerCargos.setBackground(new java.awt.Color(51, 51, 51));
+        btVerCargos.setForeground(new java.awt.Color(204, 255, 255));
+        btVerCargos.setText("Ver Cargos");
+        btVerCargos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btVerCargos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btVerCargosActionPerformed(evt);
+            }
+        });
+        panelOpciones.add(btVerCargos, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
+
+        panelSuperior.add(panelOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, 490, 50));
 
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/Vólcan_Cotopaxi.jpg"))); // NOI18N
         panelSuperior.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 6, -1, 180));
@@ -959,10 +972,15 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void btInfoProgramador1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInfoProgramador1ActionPerformed
+    private void btVerPerfilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVerPerfilesActionPerformed
         ConsultarPerfil consultaPerfil = new ConsultarPerfil();
         consultaPerfil.setVisible(true);
-    }//GEN-LAST:event_btInfoProgramador1ActionPerformed
+    }//GEN-LAST:event_btVerPerfilesActionPerformed
+
+    private void btVerCargosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVerCargosActionPerformed
+        ConsultarCargo consultarCargo = new ConsultarCargo();
+        consultarCargo.setVisible(true);
+    }//GEN-LAST:event_btVerCargosActionPerformed
 
     public static void main(String args[]) {
 
@@ -980,7 +998,8 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel PanelBiosigmaLogo;
     private javax.swing.JButton btAgregarMiembro;
     private javax.swing.JButton btInfoProgramador;
-    private javax.swing.JButton btInfoProgramador1;
+    private javax.swing.JButton btVerCargos;
+    private javax.swing.JButton btVerPerfiles;
     private javax.swing.JButton btnAbrirProyecto;
     private javax.swing.JButton btnActualizarProyecto;
     private javax.swing.JButton btnActualizarusuarios;

@@ -25,9 +25,9 @@ public class ConsultarCargo extends javax.swing.JFrame {
         modeloTabla.setRowCount(0);
         List<Cargo> listaCargos = new CargoServicio().ListarCargos();
 
-        for (Cargo cargo: listaCargos) {
+        for (Cargo cargo : listaCargos) {
             System.out.println(cargo.getCargo());
-            modeloTabla.addRow(new Object[]{cargo.getIdCargo(),cargo.getCargo(),cargo.getDescripcion()});
+            modeloTabla.addRow(new Object[]{cargo.getIdCargo(), cargo.getCargo(), cargo.getDescripcion()});
         }
     }
 
@@ -192,8 +192,11 @@ public class ConsultarCargo extends javax.swing.JFrame {
     private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarActionPerformed
         int fila = tbDatos.getSelectedRow();
         if (fila != -1) {
-            CargoServicio.EliminarCargo(Integer.parseInt(tbDatos.getValueAt(fila,0).toString()));
-            consultarDatos();
+            int resultado = JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar el registro?", "Eliminar cargo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (resultado == JOptionPane.YES_OPTION) {
+                CargoServicio.EliminarCargo(Integer.parseInt(tbDatos.getValueAt(fila, 0).toString()));
+                consultarDatos();
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione la fila que desea Eliminar");
         }

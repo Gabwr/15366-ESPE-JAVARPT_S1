@@ -3,6 +3,7 @@ package repositorio.vista.perfil;
 import javax.swing.JOptionPane;
 import repositorio.controlador.PerfilServicio;
 import repositorio.modelo.Perfil;
+import repositorio.vista.admin.InterfazAdminInsertarUsuario;
 
 public class AgregarPerfil extends javax.swing.JInternalFrame {
 
@@ -143,6 +144,7 @@ public class AgregarPerfil extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Datos Ingresados correctamente");
                 limpiarDatos();
                 ConsultarPerfil.consultarDatos();
+                InterfazAdminInsertarUsuario.cargarComboPerfil();
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "no se pudo agregar los datos");

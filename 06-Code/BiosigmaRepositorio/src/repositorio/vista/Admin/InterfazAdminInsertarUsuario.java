@@ -9,29 +9,39 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import repositorio.controlador.CargoServicio;
 import repositorio.controlador.PerfilServicio;
 import repositorio.controlador.ServicioPersonas;
+import repositorio.modelo.Cargo;
 import repositorio.modelo.Perfil;
 import repositorio.modelo.Personas;
 
 public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
 
-    String CargoIngreso;
+    private Perfil perfilIngreso;
     private int contador = 1;
 
     public InterfazAdminInsertarUsuario() {
         initComponents();
         cargarComboPerfil();
+        cargarComboCargo();
         lbCargo.setVisible(false);
         cbCargo.setVisible(false);
         lbAvisoCargo.setVisible(false);
         btAgregarCargo.setVisible(false);
     }
-    
-    public void cargarComboPerfil(){
+
+    public static void cargarComboPerfil() {
         List<Perfil> listaPerfiles = PerfilServicio.ListarPerfiles();
-        for(Perfil temp: listaPerfiles){
+        for (Perfil temp : listaPerfiles) {
             cbTipoPersona.addItem(temp.getId() + " - " + temp.getNombrePerfil());
+        }
+    }
+
+    public static void cargarComboCargo() {
+        List<Cargo> listaCargos = CargoServicio.ListarCargos();
+        for (Cargo temp : listaCargos) {
+            cbCargo.addItem(temp.getIdCargo() + " - " + temp.getCargo());
         }
     }
 
@@ -77,7 +87,7 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
     private boolean validarcontrasenia() {
         boolean validacion = false;
         String contrasenia = pswfContrasenia.getText();
-        if (contrasenia.isEmpty() && contrasenia.length() < 5) {
+        if (contrasenia.isEmpty() || contrasenia.length() < 5) {
             validacion = false;
         } else {
             validacion = true;
@@ -203,8 +213,9 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
         pswfContrasenia = new javax.swing.JPasswordField();
         lbAvisoContrasenia = new javax.swing.JLabel();
 
-        JPInsertar.setBackground(new java.awt.Color(255, 255, 204));
+        JPInsertar.setBackground(new java.awt.Color(206, 206, 232));
         JPInsertar.setForeground(new java.awt.Color(153, 153, 255));
+        JPInsertar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btAgregarMiembro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/1814113_add_more_plus_icon.png"))); // NOI18N
         btAgregarMiembro.setText("Agregar");
@@ -213,14 +224,17 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
                 btAgregarMiembroActionPerformed(evt);
             }
         });
+        JPInsertar.add(btAgregarMiembro, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 370, -1, 50));
 
         txtEdad.setEditable(false);
+        JPInsertar.add(txtEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 90, -1));
 
         dcFecha.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 dcFechaPropertyChange(evt);
             }
         });
+        JPInsertar.add(dcFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(159, 124, 140, -1));
 
         txtCedulA.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -230,6 +244,7 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
                 txtCedulAKeyTyped(evt);
             }
         });
+        JPInsertar.add(txtCedulA, new org.netbeans.lib.awtextra.AbsoluteConstraints(471, 84, 165, -1));
 
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -239,14 +254,23 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
                 txtNombreKeyTyped(evt);
             }
         });
+        JPInsertar.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 140, -1));
 
+        jLabel15.setForeground(new java.awt.Color(0, 51, 51));
         jLabel15.setText("Nombre Completo");
+        JPInsertar.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
+        jLabel24.setForeground(new java.awt.Color(0, 51, 51));
         jLabel24.setText("N° Cédula");
+        JPInsertar.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(391, 87, -1, -1));
 
+        jLabel25.setForeground(new java.awt.Color(0, 51, 51));
         jLabel25.setText("Fecha de Nacimiento");
+        JPInsertar.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
 
+        jLabel26.setForeground(new java.awt.Color(0, 51, 51));
         jLabel26.setText("Edad");
+        JPInsertar.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, -1, -1));
 
         btnRegresarUsuarios.setText("Regresar");
         btnRegresarUsuarios.addActionListener(new java.awt.event.ActionListener() {
@@ -254,8 +278,11 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
                 btnRegresarUsuariosActionPerformed(evt);
             }
         });
+        JPInsertar.add(btnRegresarUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 10, -1, -1));
 
+        jLabel27.setForeground(new java.awt.Color(0, 51, 51));
         jLabel27.setText("Tipo de Usuario");
+        JPInsertar.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(383, 207, -1, -1));
 
         cbTipoPersona.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Seleccione una opción --" }));
         cbTipoPersona.addActionListener(new java.awt.event.ActionListener() {
@@ -268,38 +295,49 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
                 cbTipoPersonaPropertyChange(evt);
             }
         });
+        JPInsertar.add(cbTipoPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(471, 204, 165, -1));
 
         txtCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtCorreoKeyReleased(evt);
             }
         });
+        JPInsertar.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(471, 134, 165, -1));
 
+        jLabel28.setForeground(new java.awt.Color(0, 51, 51));
         jLabel28.setText("Correo");
+        JPInsertar.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 140, -1, -1));
 
         lbAvisoCorreo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbAvisoCorreo.setForeground(new java.awt.Color(255, 0, 0));
         lbAvisoCorreo.setText("*Correo Inválido");
+        JPInsertar.add(lbAvisoCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(642, 134, -1, -1));
 
         lbAvisoNombre.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lbAvisoNombre.setForeground(new java.awt.Color(255, 0, 0));
         lbAvisoNombre.setText("*");
+        JPInsertar.add(lbAvisoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 70, -1, -1));
 
         lbAvisoCedula.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lbAvisoCedula.setForeground(new java.awt.Color(255, 0, 0));
         lbAvisoCedula.setText("*");
+        JPInsertar.add(lbAvisoCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(642, 74, -1, -1));
 
         lbAvisoFecha.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lbAvisoFecha.setForeground(new java.awt.Color(255, 0, 0));
         lbAvisoFecha.setText("*");
+        JPInsertar.add(lbAvisoFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 110, -1, -1));
 
         lbAvisoCargo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lbAvisoCargo.setForeground(new java.awt.Color(255, 0, 0));
         lbAvisoCargo.setText("*");
+        JPInsertar.add(lbAvisoCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(642, 194, -1, -1));
 
+        lbCargo.setForeground(new java.awt.Color(0, 51, 51));
         lbCargo.setText("Cargo:");
+        JPInsertar.add(lbCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, -1, -1));
 
-        cbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un tipo", "Administrador", "Trabajador", "Cliente", " " }));
+        cbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Seleccione una opción --", " " }));
         cbCargo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbCargoActionPerformed(evt);
@@ -310,6 +348,7 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
                 cbCargoPropertyChange(evt);
             }
         });
+        JPInsertar.add(cbCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 260, 165, -1));
 
         btAgregarCargo.setText("Agregar Cargo");
         btAgregarCargo.addActionListener(new java.awt.event.ActionListener() {
@@ -317,11 +356,13 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
                 btAgregarCargoActionPerformed(evt);
             }
         });
+        JPInsertar.add(btAgregarCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 260, 121, -1));
 
         jLabel21.setBackground(new java.awt.Color(51, 51, 0));
-        jLabel21.setFont(new java.awt.Font("Rockwell", 0, 36)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(0, 51, 204));
+        jLabel21.setFont(new java.awt.Font("Sitka Banner", 1, 36)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(51, 0, 51));
         jLabel21.setText("Insertar Usuario");
+        JPInsertar.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, -1, 40));
 
         BtnLimpiarUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/limpiar.png"))); // NOI18N
         BtnLimpiarUsuarios.setText("Limpiar datos");
@@ -330,8 +371,11 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
                 BtnLimpiarUsuariosActionPerformed(evt);
             }
         });
+        JPInsertar.add(BtnLimpiarUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 370, -1, 50));
 
+        jLabel1.setForeground(new java.awt.Color(0, 51, 51));
         jLabel1.setText("Contraseña");
+        JPInsertar.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(229, 314, -1, -1));
 
         pswfContrasenia.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -341,150 +385,26 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
                 pswfContraseniaKeyReleased(evt);
             }
         });
+        JPInsertar.add(pswfContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(295, 311, 170, -1));
 
         lbAvisoContrasenia.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lbAvisoContrasenia.setForeground(new java.awt.Color(255, 0, 0));
         lbAvisoContrasenia.setText("*");
-
-        javax.swing.GroupLayout JPInsertarLayout = new javax.swing.GroupLayout(JPInsertar);
-        JPInsertar.setLayout(JPInsertarLayout);
-        JPInsertarLayout.setHorizontalGroup(
-            JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(JPInsertarLayout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(JPInsertarLayout.createSequentialGroup()
-                        .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(JPInsertarLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(btAgregarCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(189, 189, 189)
-                                .addComponent(lbCargo))
-                            .addGroup(JPInsertarLayout.createSequentialGroup()
-                                .addComponent(jLabel26)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel27)
-                                    .addComponent(jLabel28, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, JPInsertarLayout.createSequentialGroup()
-                                        .addGap(8, 8, 8)
-                                        .addComponent(jLabel24))))
-                            .addGroup(JPInsertarLayout.createSequentialGroup()
-                                .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel1)
-                                    .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, JPInsertarLayout.createSequentialGroup()
-                                            .addComponent(jLabel15)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, JPInsertarLayout.createSequentialGroup()
-                                            .addComponent(jLabel25)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(dcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbAvisoFecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbAvisoNombre)
-                                    .addComponent(pswfContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCedulA, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbTipoPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbAvisoContrasenia, javax.swing.GroupLayout.Alignment.LEADING)))
-                    .addGroup(JPInsertarLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btAgregarMiembro)
-                        .addGap(104, 104, 104)
-                        .addComponent(BtnLimpiarUsuarios)
-                        .addGap(115, 115, 115)))
-                .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(JPInsertarLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbAvisoCargo)
-                            .addComponent(lbAvisoCorreo)
-                            .addComponent(lbAvisoCedula))
-                        .addContainerGap(76, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPInsertarLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnRegresarUsuarios)
-                        .addContainerGap())))
-            .addGroup(JPInsertarLayout.createSequentialGroup()
-                .addGap(275, 275, 275)
-                .addComponent(jLabel21)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        JPInsertarLayout.setVerticalGroup(
-            JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(JPInsertarLayout.createSequentialGroup()
-                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel15)
-                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lbAvisoNombre)
-                        .addComponent(jLabel24))
-                    .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtCedulA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lbAvisoCedula)))
-                .addGap(18, 18, 18)
-                .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel25)
-                    .addComponent(dcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lbAvisoFecha)
-                        .addComponent(jLabel28)
-                        .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lbAvisoCorreo)))
-                .addGap(38, 38, 38)
-                .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(JPInsertarLayout.createSequentialGroup()
-                        .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel26)
-                            .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel27)
-                            .addComponent(cbTipoPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbAvisoCargo))
-                        .addGap(34, 34, 34)
-                        .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbCargo)
-                            .addComponent(cbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btAgregarCargo))
-                        .addGap(18, 18, 18)
-                        .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(pswfContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbAvisoContrasenia))
-                        .addGap(37, 37, 37)
-                        .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btAgregarMiembro, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BtnLimpiarUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(22, 22, 22))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPInsertarLayout.createSequentialGroup()
-                        .addComponent(btnRegresarUsuarios)
-                        .addContainerGap())))
-        );
+        JPInsertar.add(lbAvisoContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(471, 301, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(JPInsertar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(JPInsertar, javax.swing.GroupLayout.PREFERRED_SIZE, 839, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(JPInsertar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(JPInsertar, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE))
         );
 
         pack();
@@ -537,28 +457,17 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnRegresarUsuariosActionPerformed
 
     private void cbTipoPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoPersonaActionPerformed
-        String cargo = (String) cbTipoPersona.getSelectedItem();
-        if (cargo.equals("Seleccione un cargo")) {
-            CargoIngreso = "";
-            lbCargo.setVisible(false);
-            cbCargo.setVisible(false);
-            lbAvisoCargo.setVisible(false);
-            btAgregarCargo.setVisible(false);
-        } else if (cargo.equals("Administrador")) {
-            CargoIngreso = "Administrador";
-            lbCargo.setVisible(false);
-            cbCargo.setVisible(false);
-            lbAvisoCargo.setVisible(false);
-            btAgregarCargo.setVisible(false);
-
-        } else if (cargo.equals("Trabajador")) {
-            CargoIngreso = "Trabajador";
+        String dato = cbTipoPersona.getSelectedItem().toString();
+        String perfil[] = dato.split("-");
+        int idPerfil = Integer.parseInt(perfil[0].trim());
+        perfilIngreso = PerfilServicio.BuscarPerfil(idPerfil);
+        
+        if (perfilIngreso.getId() == 2) {
             lbCargo.setVisible(true);
             cbCargo.setVisible(true);
             lbAvisoCargo.setVisible(true);
             btAgregarCargo.setVisible(true);
-        } else if (cargo.equals("Cliente")) {
-            CargoIngreso = "Cliente";
+        } else {
             lbCargo.setVisible(false);
             cbCargo.setVisible(false);
             lbAvisoCargo.setVisible(false);
@@ -567,7 +476,7 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbTipoPersonaActionPerformed
 
     private void cbTipoPersonaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cbTipoPersonaPropertyChange
-        if ("Seleccione un cargo".equals(cbTipoPersona.getSelectedItem().toString())) {
+        if ("-- Seleccione una opción --".equals(cbTipoPersona.getSelectedItem().toString())) {
             lbAvisoCargo.setVisible(true);
         } else {
             lbAvisoCargo.setVisible(false);
@@ -601,9 +510,9 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
         String correo = txtCorreo.getText();
         Date fechaNacimiento = dcFecha.getDate();
         String usuario = algoritmousuario(nombre, cedula);
+        
         int PerfilId = 0;
-        int cargoId = 0;
-        if (validarDatosOtros() && validarCedula() && CargoIngreso.equals("Administrador") && validarcontrasenia()) {
+        if (validarDatosOtros() && validarCedula() && (perfilIngreso.getId() == 1) && validarcontrasenia()) {
             String contrasenia = ServicioPersonas.encriptar(pswfContrasenia.getText());
             PerfilId = 1;
             Personas AdminNuevo = new Personas(PerfilId, usuario, contrasenia,
@@ -614,7 +523,7 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Datos no Ingresados");
             }
-        } else if (validarDatosTrabajador() && validarCedula() && CargoIngreso.equals("Trabajador") && validarcontrasenia()) {
+        } else if (validarDatosTrabajador() && validarCedula() && (perfilIngreso.getId() == 2) && validarcontrasenia()) {
             String contrasenia = ServicioPersonas.encriptar(pswfContrasenia.getText());
             PerfilId = 3;
             Personas TrabajadorNuevo = new Personas(PerfilId, usuario, contrasenia, cedula, correo, nombre, fechaNacimiento);
@@ -624,8 +533,7 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Datos no Ingresados");
             }
-        } else if (validarDatosOtros() && validarCedula() && CargoIngreso.equals("Cliente")
-                && validarcontrasenia()) {
+        } else if (validarDatosOtros() && validarCedula() && (perfilIngreso.getId() != 1) && (perfilIngreso.getId() != 2) && validarcontrasenia()) {
             String contrasenia = ServicioPersonas.encriptar(pswfContrasenia.getText());
             PerfilId = 2;
             Personas ClienteNuevo = new Personas(PerfilId, usuario, contrasenia,
@@ -671,8 +579,8 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JButton btAgregarCargo;
     private javax.swing.JButton btAgregarMiembro;
     private javax.swing.JButton btnRegresarUsuarios;
-    private javax.swing.JComboBox<String> cbCargo;
-    private javax.swing.JComboBox<String> cbTipoPersona;
+    private static javax.swing.JComboBox<String> cbCargo;
+    private static javax.swing.JComboBox<String> cbTipoPersona;
     private com.toedter.calendar.JDateChooser dcFecha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;

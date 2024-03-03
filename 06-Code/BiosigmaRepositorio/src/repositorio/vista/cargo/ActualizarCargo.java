@@ -21,8 +21,8 @@ public class ActualizarCargo extends javax.swing.JInternalFrame {
         }
         return validacion;
     }
-    
-    private void llenarCampos(){
+
+    private void llenarCampos() {
         Cargo cargo = CargoServicio.BuscarCargo(ConsultarCargo.idCargo);
         txtId.setText(cargo.getIdCargo() + "");
         txtNombre.setText(cargo.getCargo());
@@ -153,14 +153,18 @@ public class ActualizarCargo extends javax.swing.JInternalFrame {
 
     private void btActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btActualizarActionPerformed
         if (validarDatos()) {
-            Cargo cargo = new Cargo(txtNombre.getText(), txtDescripcion.getText(), Integer.parseInt(txtId.getText()));
+            int resultado = JOptionPane.showConfirmDialog(null, "¿Está seguro de actualizar los datos?", "Actualizar cargo", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
-            if (CargoServicio.ActualizrCargo(cargo)) {
-                JOptionPane.showMessageDialog(null, "Datos actualizados correctamente");
-                ConsultarCargo.consultarDatos();
-                this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(null, "no se pudo agregar los datos");
+            if (resultado == JOptionPane.YES_OPTION) {
+                Cargo cargo = new Cargo(txtNombre.getText(), txtDescripcion.getText(), Integer.parseInt(txtId.getText()));
+
+                if (CargoServicio.ActualizrCargo(cargo)) {
+                    JOptionPane.showMessageDialog(null, "Datos actualizados correctamente");
+                    ConsultarCargo.consultarDatos();
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "no se pudo agregar los datos");
+                }
             }
         }
     }//GEN-LAST:event_btActualizarActionPerformed
