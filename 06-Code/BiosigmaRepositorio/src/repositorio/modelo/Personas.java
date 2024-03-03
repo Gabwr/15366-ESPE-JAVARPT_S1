@@ -1,15 +1,15 @@
-
 package repositorio.modelo;
 
 import java.util.Date;
 
 public class Personas {
-    private int idPerfil,iDcargo;
-        private String usuario, contrasenia, cedula, correo, nombre;
+
+    private int idPerfil, iDcargo;
+    private String usuario, contrasenia, cedula, correo, nombre;
     private Date fechaNacimiento;
-    
+
     //constructor trabajador para inserción
-    public Personas(int idPerfil,String usuario, String contrasenia, String cedula, String correo, String nombre, int cargo, Date fechaNacimiento) {
+    public Personas(int idPerfil, String usuario, String contrasenia, String cedula, String correo, String nombre, int cargo, Date fechaNacimiento) {
         this.idPerfil = idPerfil;
         this.usuario = usuario;
         this.contrasenia = contrasenia;
@@ -19,7 +19,7 @@ public class Personas {
         this.iDcargo = cargo;
         this.fechaNacimiento = fechaNacimiento;
     }
-        //constructor admin y cliente para inserción
+    //constructor admin y cliente para inserción
 
     public Personas(int idPerfil, String usuario, String contrasenia, String cedula, String correo, String nombre, Date fechaNacimiento) {
         this.idPerfil = idPerfil;
@@ -30,7 +30,7 @@ public class Personas {
         this.nombre = nombre;
         this.fechaNacimiento = fechaNacimiento;
     }
-    
+
     //constructor sin contrasenia admins/clientes
     public Personas(int idPerfil, String usuario, String cedula, String correo, String nombre, Date fechaNacimiento) {
         this.idPerfil = idPerfil;
@@ -40,7 +40,7 @@ public class Personas {
         this.nombre = nombre;
         this.fechaNacimiento = fechaNacimiento;
     }
-    
+
     //constructor sin contrasenia trabajadores
     public Personas(int idPerfil, String usuario, String cedula, String correo, String nombre, Date fechaNacimiento,
             int cargo) {
@@ -52,15 +52,13 @@ public class Personas {
         this.fechaNacimiento = fechaNacimiento;
         this.iDcargo = cargo;
     }
-      
+
     //para actualizar contraseña
     public Personas(String contrasenia, String cedula) {
         this.contrasenia = contrasenia;
         this.cedula = cedula;
     }
-    
-    
-    
+
     public String getUsuario() {
         return usuario;
     }
@@ -125,8 +123,8 @@ public class Personas {
         this.idPerfil = idPerfil;
     }
 
-    public String toString(){
-        return  idPerfil+ usuario+ contrasenia+ cedula+ correo+ nombre+iDcargo+ fechaNacimiento;
+    public String toString() {
+        return idPerfil + usuario + contrasenia + cedula + correo + nombre + iDcargo + fechaNacimiento;
     }
-    
+
 }

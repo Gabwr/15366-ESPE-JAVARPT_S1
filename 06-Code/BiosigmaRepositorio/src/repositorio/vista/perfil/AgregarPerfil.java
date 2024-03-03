@@ -4,7 +4,6 @@ import javax.swing.JOptionPane;
 import repositorio.controlador.PerfilServicio;
 import repositorio.modelo.Perfil;
 import repositorio.vista.admin.InterfazAdminInsertarUsuario;
-
 public class AgregarPerfil extends javax.swing.JInternalFrame {
 
     public AgregarPerfil() {

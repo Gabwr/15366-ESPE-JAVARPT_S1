@@ -6,7 +6,7 @@ import repositorio.modelo.Proyecto;
 
 public class PruebaUnitaria {
     public static void main(String[] args) {
-        agregarProyectoTest();
+        //agregarProyectoTest();
         
     }
     

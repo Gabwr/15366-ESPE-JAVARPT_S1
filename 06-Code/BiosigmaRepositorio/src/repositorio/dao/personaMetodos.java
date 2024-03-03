@@ -57,19 +57,19 @@ public class personaMetodos implements IPersonas {
             String cedula = documento.getString("cedula");
             String correo = documento.getString("correo");
             String nombre = documento.getString("nombre");
-            int cargo = 0;
-            cargo = documento.getInteger("cargo");
+
             Date fechanac = documento.getDate("fechaNacimiento");
-            if(cargo!=0){
-            Personas persona = new Personas(IDPerfil, usuario, cedula, correo, nombre, fechanac,cargo);
-            listapersonas.add(persona);
-            }else{
-            Personas persona = new Personas(IDPerfil, usuario, cedula, correo, nombre, fechanac);
-            listapersonas.add(persona);
+            if (documento.getInteger("cargo") != null) {
+                int cargo = documento.getInteger("cargo");
+                Personas persona = new Personas(IDPerfil, usuario, cedula, correo, nombre, fechanac, cargo);
+                listapersonas.add(persona);
+            } else {
+                Personas persona = new Personas(IDPerfil, usuario, cedula, correo, nombre, fechanac);
+                listapersonas.add(persona);
             }
-            
-            }
-        
+
+        }
+
         return listapersonas;
     }
 
@@ -136,8 +136,9 @@ public class personaMetodos implements IPersonas {
 
         }
     }
+
     @Override
-    public boolean ActualizarPersonasTrabajador(Personas persona){
+    public boolean ActualizarPersonasTrabajador(Personas persona) {
         Document filtro = new Document("cedula", persona.getUsuario());
         Document documento = new Document("$set", new Document()
                 .append("id_Perfil", persona.getIdPerfil())
@@ -157,6 +158,7 @@ public class personaMetodos implements IPersonas {
 
         }
     }
+
     @Override
     public boolean EliminarPersonas(String idpersona) {
         Document filtro = new Document("cedula", idpersona);
@@ -231,17 +233,17 @@ public class personaMetodos implements IPersonas {
     }
 
     @Override
-      public String encriptar(String contrasenia){
+    public String encriptar(String contrasenia) {
         String Encriptado = "";
         String Cadena = "Encriptados";
         try {
             MessageDigest gestor = MessageDigest.getInstance("MD5");
             byte[] llaveClave = gestor.digest(contrasenia.getBytes("utf-8"));
             byte[] clavebyte = Arrays.copyOf(llaveClave, 24);
-            SecretKey llave = new SecretKeySpec(clavebyte,"DESede");
-            Cipher cifrado  = Cipher.getInstance("DESede");
+            SecretKey llave = new SecretKeySpec(clavebyte, "DESede");
+            Cipher cifrado = Cipher.getInstance("DESede");
             cifrado.init(Cipher.ENCRYPT_MODE, llave);
-            
+
             byte[] textoPlano = Cadena.getBytes("utf-8");
             byte[] buffer = cifrado.doFinal(textoPlano);
             byte[] base64 = Base64.encodeBase64(buffer);
@@ -253,7 +255,7 @@ public class personaMetodos implements IPersonas {
 
     @Override
     public String desencriptar(String contrasenia) {
-            String desEncriptado = "";
+        String desEncriptado = "";
         String Cadena = "Encriptados";
         try {
             byte[] mensaje = Base64.decodeBase64(contrasenia.getBytes());
@@ -261,12 +263,13 @@ public class personaMetodos implements IPersonas {
             byte[] gestionado = digestor.digest(Cadena.getBytes());
             byte[] llaveenBytes = Arrays.copyOf(gestionado, 24);
             SecretKey llave = new SecretKeySpec(llaveenBytes, "DESede");
-            Cipher descifrado  = Cipher.getInstance("DESede");
+            Cipher descifrado = Cipher.getInstance("DESede");
             descifrado.init(Cipher.DECRYPT_MODE, llave);
             byte[] textoPlano = descifrado.doFinal(mensaje);
-            desEncriptado = new String(textoPlano,"UTF-8");
+            desEncriptado = new String(textoPlano, "UTF-8");
         } catch (Exception e) {
         }
-        return desEncriptado;}
+        return desEncriptado;
+    }
 
 }

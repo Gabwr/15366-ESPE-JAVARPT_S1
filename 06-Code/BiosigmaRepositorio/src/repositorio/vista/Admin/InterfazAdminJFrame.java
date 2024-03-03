@@ -7,18 +7,25 @@ import java.awt.Color;
 import java.awt.HeadlessException;
 import java.awt.geom.RoundRectangle2D;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import repositorio.controlador.CargoServicio;
+import repositorio.controlador.PerfilServicio;
 import repositorio.controlador.ProyectoServicio;
+import repositorio.controlador.ServicioPersonas;
+import repositorio.modelo.Cargo;
+import repositorio.modelo.Perfil;
+import repositorio.modelo.Personas;
 import repositorio.modelo.Proyecto;
 import repositorio.vista.InterfazLogin;
 import repositorio.vista.cargo.ConsultarCargo;
 import repositorio.vista.perfil.ConsultarPerfil;
 
 public class InterfazAdminJFrame extends javax.swing.JFrame {
-
-
-    public InterfazAdminInsertarUsuario IntfzInsertar = new InterfazAdminInsertarUsuario();
+    
     private int contador = 1;
     int filaseleccionadaAdmin = -1;
     int filaseleccionadaCliente = -1;
@@ -30,14 +37,14 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
     public static String getCodigoProyecto() {
         return codigoProyecto;
     }
-    
 
     public InterfazAdminJFrame() {
         initComponents();
         llenarTablaProyectos();
+        llenarPersonas();
         this.setLocationRelativeTo(null);
-        setShape(new RoundRectangle2D.Double(0,0,this.getBounds().width, this.getBounds().height, 27, 27));
-   
+        setShape(new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 27, 27));
+
         PanelBiosigmaLogo.setBackground(new Color(0, 0, 0, 160));
         panelDescripcion.setBackground(new Color(0, 0, 0, 100));
         panelOpciones.setBackground(new Color(0, 0, 0, 160));
@@ -80,6 +87,51 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
 
             dtm.addRow(new Object[]{proyecto.getIdProyecto(), proyecto.getNombreProyecto(), fechaaInicio, fechaFinal, permisoAmbiental, permisoAgua, auditoria, monitoreo});
         }
+    }
+
+    public static void llenarPersonas() {
+        List<Personas> listaPersonas = new ServicioPersonas().ListarPersonas();
+        DefaultTableModel dtm1 = (DefaultTableModel) tbAdmin.getModel();
+        dtm1.setRowCount(0);
+        DefaultTableModel dtm2 = (DefaultTableModel) tbTrabajadores.getModel();
+        dtm2.setRowCount(0);
+        DefaultTableModel dtm3 = (DefaultTableModel) tbClientes.getModel();
+        dtm3.setRowCount(0);
+        for (Personas temp : listaPersonas) {
+            int anioNacimiento = recuperarAnioNacimiento(temp.getFechaNacimiento());
+            int edad = calcularEdad(anioNacimiento);
+            
+            switch (temp.getIdPerfil()) {
+                case 1:
+                    dtm1.addRow(new Object[]{temp.getCedula(), temp.getNombre(), temp.getCorreo(), edad});
+                    break;
+                case 2:
+                    Cargo cargo = CargoServicio.BuscarCargo(temp.getCargo());
+                    dtm2.addRow(new Object[]{temp.getCedula(), temp.getNombre(), temp.getCorreo(), edad, cargo.getCargo()});
+                    break;
+                default:
+                    Perfil perfil = PerfilServicio.BuscarPerfil(temp.getIdPerfil());
+                    dtm3.addRow(new Object[]{temp.getCedula(),temp.getNombre(),temp.getCorreo(),edad,perfil.getNombrePerfil()});
+                    break;
+            }
+            
+        }
+    }
+
+    private static int recuperarAnioNacimiento(Date anioNacimiento) {
+        SimpleDateFormat f1 = new SimpleDateFormat("yyyy");
+        String anioNacimientoCadena = f1.format(anioNacimiento);
+        int anio = Integer.parseInt(anioNacimientoCadena);
+        return anio;
+    }
+    
+       private static int calcularEdad(int anioNacimiento) {
+        LocalDate actual = LocalDate.now();
+
+        int anioActual = actual.getYear();
+
+        int edad = anioActual - anioNacimiento;
+        return edad;
     }
 
     @SuppressWarnings("unchecked")
@@ -137,10 +189,10 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         tbMiembros = new javax.swing.JTabbedPane();
         jScrollPane4 = new javax.swing.JScrollPane();
         tbAdmin = new javax.swing.JTable();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        tbClientes = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbTrabajadores = new javax.swing.JTable();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tbClientes = new javax.swing.JTable();
         jLabel13 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
@@ -607,41 +659,16 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
 
         tbMiembros.addTab("Administradores", jScrollPane4);
 
-        tbClientes.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Cédula", "Nombre", "Correo", "Edad"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tbClientes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbClientesMouseClicked(evt);
-            }
-        });
-        jScrollPane5.setViewportView(tbClientes);
-
-        tbMiembros.addTab("Clientes", jScrollPane5);
-
         tbTrabajadores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Cédula", "Nombre", "Correo", "Edad"
+                "Cédula", "Nombre", "Correo", "Edad", "Cargo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -656,6 +683,31 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tbTrabajadores);
 
         tbMiembros.addTab("Trabajadores", jScrollPane2);
+
+        tbClientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Cédula", "Nombre", "Correo", "Edad", "Perfil"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tbClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbClientesMouseClicked(evt);
+            }
+        });
+        jScrollPane5.setViewportView(tbClientes);
+
+        tbMiembros.addTab("Clientes", jScrollPane5);
 
         jPanel10.add(tbMiembros, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 35, 732, 353));
 
@@ -855,6 +907,7 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnActualizarusuariosActionPerformed
 
     private void btAgregarMiembroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgregarMiembroActionPerformed
+        InterfazAdminInsertarUsuario IntfzInsertar = new InterfazAdminInsertarUsuario();
         escritorio.add(IntfzInsertar);
         IntfzInsertar.show();
     }//GEN-LAST:event_btAgregarMiembroActionPerformed
@@ -933,20 +986,19 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
     private void btnEliminarProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProyectoActionPerformed
         int fila = tbProyecto.getSelectedRow();
         DefaultTableModel dtm = (DefaultTableModel) tbProyecto.getModel();
-        if(fila != -1){
-            int resultado = JOptionPane.showConfirmDialog(null,"¿Esta segúro de eliminar el proyecto seleccionado?", "Eliminar",JOptionPane.YES_NO_OPTION);
-            try{
-            if(resultado == JOptionPane.YES_OPTION){
-                String codigoConfirmacion = JOptionPane.showInputDialog("Ingrese el código de seguridad para eliminar");
-                if("345@9".equals(codigoConfirmacion)){
-                    ProyectoServicio.EliminarProyecto(tbProyecto.getValueAt(fila,0).toString());
-                    dtm.removeRow(fila);
+        if (fila != -1) {
+            int resultado = JOptionPane.showConfirmDialog(null, "¿Esta segúro de eliminar el proyecto seleccionado?", "Eliminar", JOptionPane.YES_NO_OPTION);
+            try {
+                if (resultado == JOptionPane.YES_OPTION) {
+                    String codigoConfirmacion = JOptionPane.showInputDialog("Ingrese el código de seguridad para eliminar");
+                    if ("345@9".equals(codigoConfirmacion)) {
+                        ProyectoServicio.EliminarProyecto(tbProyecto.getValueAt(fila, 0).toString());
+                        dtm.removeRow(fila);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "El código ingresado no es el correcto", "Error al Eliminar", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
-                else{
-                    JOptionPane.showMessageDialog(null,"El código ingresado no es el correcto", "Error al Eliminar", JOptionPane.ERROR_MESSAGE);
-                }    
-            }
-            }catch(HeadlessException ex){
+            } catch (HeadlessException ex) {
                 JOptionPane.showMessageDialog(null, "Ha ocurrido un error: " + ex.toString());
             }
         }
@@ -1052,11 +1104,11 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel panelProyectos;
     private javax.swing.JPanel panelSuperior;
     private javax.swing.JPanel panelTablaProyectos;
-    private javax.swing.JTable tbAdmin;
-    private javax.swing.JTable tbClientes;
+    private static javax.swing.JTable tbAdmin;
+    private static javax.swing.JTable tbClientes;
     private javax.swing.JTabbedPane tbMiembros;
     private javax.swing.JTabbedPane tbPaneles;
     private static javax.swing.JTable tbProyecto;
-    private javax.swing.JTable tbTrabajadores;
+    private static javax.swing.JTable tbTrabajadores;
     // End of variables declaration//GEN-END:variables
 }

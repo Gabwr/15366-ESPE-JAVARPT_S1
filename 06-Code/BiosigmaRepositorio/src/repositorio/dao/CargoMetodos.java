@@ -101,8 +101,8 @@ public class CargoMetodos implements ICargo {
         Document filtro = new Document("id_Cargo", idCargo);
         Cargo cargo = new Cargo();
         Document documento = coleccion.find(filtro).first();
-        cargo.setIdCargo(documento.getInteger("id_Perfil"));
-        cargo.setCargo(documento.getString("nombrePerfil"));
+        cargo.setIdCargo(idCargo);
+        cargo.setCargo(documento.getString("nombreCargo"));
         cargo.setDescripcion(documento.getString("descripcionCargo"));
         return cargo;    
     }

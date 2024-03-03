@@ -1,6 +1,5 @@
 package repositorio.vista.admin;
 
-import com.mongodb.MongoException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
@@ -8,7 +7,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 import repositorio.controlador.CargoServicio;
 import repositorio.controlador.PerfilServicio;
 import repositorio.controlador.ServicioPersonas;
@@ -19,7 +17,6 @@ import repositorio.modelo.Personas;
 public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
 
     private Perfil perfilIngreso;
-    private int contador = 1;
 
     public InterfazAdminInsertarUsuario() {
         initComponents();
@@ -32,14 +29,14 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
     }
 
     public static void cargarComboPerfil() {
-        List<Perfil> listaPerfiles = PerfilServicio.ListarPerfiles();
+        List<Perfil> listaPerfiles = new PerfilServicio().ListarPerfiles();
         for (Perfil temp : listaPerfiles) {
             cbTipoPersona.addItem(temp.getId() + " - " + temp.getNombrePerfil());
         }
     }
 
     public static void cargarComboCargo() {
-        List<Cargo> listaCargos = CargoServicio.ListarCargos();
+        List<Cargo> listaCargos = new CargoServicio().ListarCargos();
         for (Cargo temp : listaCargos) {
             cbCargo.addItem(temp.getIdCargo() + " - " + temp.getCargo());
         }
@@ -49,7 +46,7 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
         boolean validacion = false;
         if ((txtNombre.getText().length() > 0) && validarCedula()
                 && (dcFecha.getDate() != null) && validarCorreo(txtCorreo.getText())
-                && (!"Seleccione un cargo".equals(cbTipoPersona.getSelectedItem().toString()))) {
+                && (!"-- Seleccione una opción --".equals(cbTipoPersona.getSelectedItem().toString()))) {
             validacion = true;
             return validacion;
         } else {
@@ -69,13 +66,11 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
             usuario += pasador;
         }
         return usuario;
-
     }
 
     private boolean validarDatosOtros() {
         boolean validacion = false;
-        if ((txtNombre.getText().length() > 0) && validarCedula()
-                && (dcFecha.getDate() != null) && validarCorreo(txtCorreo.getText())) {
+        if ((txtNombre.getText().length() > 0) && validarCedula() && (dcFecha.getDate() != null) && validarCorreo(txtCorreo.getText())) {
             validacion = true;
             return validacion;
         } else {
@@ -212,6 +207,8 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         pswfContrasenia = new javax.swing.JPasswordField();
         lbAvisoContrasenia = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         JPInsertar.setBackground(new java.awt.Color(206, 206, 232));
         JPInsertar.setForeground(new java.awt.Color(153, 153, 255));
@@ -227,6 +224,8 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
         JPInsertar.add(btAgregarMiembro, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 370, -1, 50));
 
         txtEdad.setEditable(false);
+        txtEdad.setBackground(new java.awt.Color(255, 204, 204));
+        txtEdad.setForeground(new java.awt.Color(0, 51, 51));
         JPInsertar.add(txtEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 90, -1));
 
         dcFecha.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -278,7 +277,7 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
                 btnRegresarUsuariosActionPerformed(evt);
             }
         });
-        JPInsertar.add(btnRegresarUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 10, -1, -1));
+        JPInsertar.add(btnRegresarUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 10, -1, -1));
 
         jLabel27.setForeground(new java.awt.Color(0, 51, 51));
         jLabel27.setText("Tipo de Usuario");
@@ -337,17 +336,7 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
         lbCargo.setText("Cargo:");
         JPInsertar.add(lbCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, -1, -1));
 
-        cbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Seleccione una opción --", " " }));
-        cbCargo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbCargoActionPerformed(evt);
-            }
-        });
-        cbCargo.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                cbCargoPropertyChange(evt);
-            }
-        });
+        cbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Seleccione una opción --" }));
         JPInsertar.add(cbCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 260, 165, -1));
 
         btAgregarCargo.setText("Agregar Cargo");
@@ -360,7 +349,7 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
 
         jLabel21.setBackground(new java.awt.Color(51, 51, 0));
         jLabel21.setFont(new java.awt.Font("Sitka Banner", 1, 36)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(51, 0, 51));
+        jLabel21.setForeground(new java.awt.Color(255, 204, 204));
         jLabel21.setText("Insertar Usuario");
         JPInsertar.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, -1, 40));
 
@@ -392,19 +381,23 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
         lbAvisoContrasenia.setText("*");
         JPInsertar.add(lbAvisoContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(471, 301, -1, -1));
 
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/LogoBiosigmaTransparente.png"))); // NOI18N
+        JPInsertar.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/FondoProyectos.png"))); // NOI18N
+        JPInsertar.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 50));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(JPInsertar, javax.swing.GroupLayout.PREFERRED_SIZE, 839, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(JPInsertar, javax.swing.GroupLayout.PREFERRED_SIZE, 790, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(JPInsertar, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE))
+            .addComponent(JPInsertar, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE)
         );
 
         pack();
@@ -461,7 +454,7 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
         String perfil[] = dato.split("-");
         int idPerfil = Integer.parseInt(perfil[0].trim());
         perfilIngreso = PerfilServicio.BuscarPerfil(idPerfil);
-        
+
         if (perfilIngreso.getId() == 2) {
             lbCargo.setVisible(true);
             cbCargo.setVisible(true);
@@ -491,14 +484,6 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txtCorreoKeyReleased
 
-    private void cbCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCargoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbCargoActionPerformed
-
-    private void cbCargoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_cbCargoPropertyChange
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbCargoPropertyChange
-
     private void btAgregarCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgregarCargoActionPerformed
 
     }//GEN-LAST:event_btAgregarCargoActionPerformed
@@ -510,37 +495,44 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
         String correo = txtCorreo.getText();
         Date fechaNacimiento = dcFecha.getDate();
         String usuario = algoritmousuario(nombre, cedula);
-        
-        int PerfilId = 0;
+
         if (validarDatosOtros() && validarCedula() && (perfilIngreso.getId() == 1) && validarcontrasenia()) {
             String contrasenia = ServicioPersonas.encriptar(pswfContrasenia.getText());
-            PerfilId = 1;
-            Personas AdminNuevo = new Personas(PerfilId, usuario, contrasenia,
-                    cedula, correo, nombre, fechaNacimiento);
+            Personas AdminNuevo = new Personas(perfilIngreso.getId(), usuario, contrasenia, cedula, correo, nombre, fechaNacimiento);
 
             if (ServicioPersonas.InsertarPersonasClienteyAdmin(AdminNuevo)) {
                 JOptionPane.showMessageDialog(null, "Datos Ingresados");
+                InterfazAdminJFrame.llenarPersonas();
+                this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Datos no Ingresados");
             }
-        } else if (validarDatosTrabajador() && validarCedula() && (perfilIngreso.getId() == 2) && validarcontrasenia()) {
-            String contrasenia = ServicioPersonas.encriptar(pswfContrasenia.getText());
-            PerfilId = 3;
-            Personas TrabajadorNuevo = new Personas(PerfilId, usuario, contrasenia, cedula, correo, nombre, fechaNacimiento);
 
+        } else if (validarDatosTrabajador() && validarCedula() && (perfilIngreso.getId() == 2) && validarcontrasenia()) {
+
+            String dato = cbCargo.getSelectedItem().toString();
+            String cargo[] = dato.split("-");
+            int idCargo = Integer.parseInt(cargo[0].trim());
+            JOptionPane.showMessageDialog(null, perfilIngreso + "cargo:" + idCargo);
+            Cargo cargoIngreso = CargoServicio.BuscarCargo(idCargo);
+
+            String contrasenia = ServicioPersonas.encriptar(pswfContrasenia.getText());
+            Personas TrabajadorNuevo = new Personas(perfilIngreso.getId(), usuario, contrasenia, cedula, correo, nombre, cargoIngreso.getIdCargo(), fechaNacimiento);
             if (ServicioPersonas.InsertarPersonasTrabajadores(TrabajadorNuevo)) {
                 JOptionPane.showMessageDialog(null, "Datos Ingresados");
+                InterfazAdminJFrame.llenarPersonas();
+                this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Datos no Ingresados");
             }
         } else if (validarDatosOtros() && validarCedula() && (perfilIngreso.getId() != 1) && (perfilIngreso.getId() != 2) && validarcontrasenia()) {
             String contrasenia = ServicioPersonas.encriptar(pswfContrasenia.getText());
-            PerfilId = 2;
-            Personas ClienteNuevo = new Personas(PerfilId, usuario, contrasenia,
-                    cedula, correo, nombre, fechaNacimiento);
+            Personas ClienteNuevo = new Personas(perfilIngreso.getId(), usuario, contrasenia, cedula, correo, nombre, fechaNacimiento);
 
             if (ServicioPersonas.InsertarPersonasClienteyAdmin(ClienteNuevo)) {
                 JOptionPane.showMessageDialog(null, "Datos Ingresados");
+                InterfazAdminJFrame.llenarPersonas();
+                this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Datos no Ingresados");
             }
@@ -590,6 +582,8 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel lbAvisoCargo;
     private javax.swing.JLabel lbAvisoCedula;
     private javax.swing.JLabel lbAvisoContrasenia;
