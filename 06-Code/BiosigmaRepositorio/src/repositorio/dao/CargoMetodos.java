@@ -57,7 +57,7 @@ public class CargoMetodos implements ICargo {
         Document documento;
         try {
             documento = new Document("id_Cargo", cargo.getIdCargo())
-                    .append("nombrePerfil", cargo.getCargo())
+                    .append("nombreCargo", cargo.getCargo())
                     .append("descripcionCargo", cargo.getDescripcion());
             coleccion.insertOne(documento);
             return true;
