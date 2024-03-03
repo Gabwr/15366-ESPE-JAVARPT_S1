@@ -7,6 +7,9 @@ import repositorio.vista.admin.InterfazInicioAdministrador;
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
+import repositorio.controlador.ServicioPersonas;
+import repositorio.dao.personaMetodos;
+import repositorio.modelo.Personas;
 
 public class InterfazLogin extends javax.swing.JFrame {
 
@@ -162,38 +165,52 @@ public class InterfazLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSesionActionPerformed
-        InterfazInicioAdministrador interfaz = null;
-        //Administrador
-        if ((txtContra.getText().equals("0650160203")) && (txtUsuario.getText().equals("A10001")) && interfaz == null) {
-            InterfazAdminJFrame modificar = new InterfazAdminJFrame();
 
-            modificar.setVisible(true);
-            setVisible(false);
-            limpiar();
-            //Cliente
-        } else if ((txtContra.getText().equals("12345")) && (txtUsuario.getText().equals("T10001")) && interfaz == null) {
-            InterfazCliente1JFrame modificar = new InterfazCliente1JFrame();
+        String contrasenia = null;
+        String usuario = null;
+        if (!txtUsuario.getText().isEmpty() && !txtContra.getText().isEmpty()) {
+            usuario = txtUsuario.getText();
+            contrasenia = txtContra.getText();
+            Personas personacomparada = ServicioPersonas.desencrpitaryAutentificar(usuario, contrasenia);
+            if(personacomparada!=null){
+            Personas Admin_cliente = null;
+            Personas Trabajador = null;
+            if (personacomparada.getIdPerfil() == 1 || personacomparada.getIdPerfil() == 3) {
+                Admin_cliente = ServicioPersonas.BuscarPorCodigoClienteyAdmin(personacomparada.getCedula());
+            } else {
+                Trabajador = ServicioPersonas.BuscarPorCodigoTrabajadores(personacomparada.getCedula());
+            }
+            if (personacomparada != null && personacomparada.getIdPerfil() == 1
+                    && personacomparada.getUsuario().equals(Admin_cliente.getUsuario())
+                    && contrasenia.equals(ServicioPersonas.desencriptar(Admin_cliente.getContrasenia(),contrasenia))) {
+                InterfazAdminJFrame modificar = new InterfazAdminJFrame();
+                modificar.setVisible(true);
+                setVisible(false);
+                limpiar();
+            } else if (personacomparada != null && personacomparada.getIdPerfil() == 2
+                    && personacomparada.getUsuario().equals(Trabajador.getUsuario())
+                    && contrasenia.equals(ServicioPersonas.desencriptar(Trabajador.getContrasenia(),contrasenia))) {
+                InterfazTrabajadorJFrame modificar = new InterfazTrabajadorJFrame();
+                modificar.setVisible(true);
+                setVisible(false);
+                limpiar();
 
-            modificar.setVisible(true);
-            setVisible(false);
-            limpiar();
-          
-        } else if ((txtContra.getText().equals("54321")) && (txtUsuario.getText().equals("C10001")) && interfaz == null) {
-            InterfazTrabajadorJFrame modificar = new InterfazTrabajadorJFrame ();
-
-            modificar.setVisible(true);
-            setVisible(false); 
-            limpiar();
-
-        } else if ((txtContra.getText().equals("")) && (txtUsuario.getText().equals("")) && interfaz == null) {
-            JOptionPane.showMessageDialog(null, "Escriba un usuario y contraseña");
-            limpiar();
-
-        } else {
-            getToolkit().beep();
-            lbAvisoLogin.setVisible(true);
+            } else if (personacomparada != null && personacomparada.getIdPerfil() == 3
+                    && personacomparada.getUsuario().equals(Admin_cliente.getUsuario())
+                    && contrasenia.equals(ServicioPersonas.desencriptar(Admin_cliente.getContrasenia(),contrasenia))) {
+                InterfazCliente1JFrame modificar = new InterfazCliente1JFrame();
+                modificar.setVisible(true);
+                setVisible(false);
+                limpiar();
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuario o contraseña no encontrado");
+                getToolkit().beep();
+                lbAvisoLogin.setVisible(true);
+            }
+        }else{
+                JOptionPane.showMessageDialog(null, "Usuario o contraseña no encontrado");
+            }
         }
-
     }//GEN-LAST:event_btnSesionActionPerformed
 
     private void btnSesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSesionMouseEntered

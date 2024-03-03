@@ -2,6 +2,7 @@
 package repositorio.dao;
 
 import java.util.List;
+import repositorio.modelo.Perfil;
 import repositorio.modelo.Personas;
 
 public interface IPersonas {
@@ -15,5 +16,6 @@ public interface IPersonas {
     public Personas BuscarPorCodigoTrabajadores(String idpersona);
     public Personas BuscarPorCodigoClienteyAdmin(String idpersona);
     public String encriptar(String contrasenia);
-    public String desencriptar(String contrasenia);
+    public String desencriptar(String contrasenia,String contraseniausada);
+    public Personas desencriptaryAutentificar(String usuario, String Contrasenia);
 }

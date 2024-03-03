@@ -55,14 +55,14 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
     }
 
     public String algoritmousuario(String nombre, String Cedula) {
-        String usuario = null;
+        String usuario = "";
         char pasador;
         for (int inicio = 0; inicio < 3; inicio++) {
-            pasador = nombre.charAt(inicio);
+            pasador = nombre.trim().charAt(inicio);
             usuario += pasador;
         }
-        for (int inicio = 3; inicio > 0; inicio--) {
-            pasador = nombre.charAt(inicio);
+        for (int inicio = 0; inicio < 3; inicio++) {
+            pasador = Cedula.trim().charAt(inicio);
             usuario += pasador;
         }
         return usuario;
@@ -515,7 +515,7 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
             int idCargo = Integer.parseInt(cargo[0].trim());
             JOptionPane.showMessageDialog(null, perfilIngreso + "cargo:" + idCargo);
             Cargo cargoIngreso = CargoServicio.BuscarCargo(idCargo);
-
+            
             String contrasenia = ServicioPersonas.encriptar(pswfContrasenia.getText());
             Personas TrabajadorNuevo = new Personas(perfilIngreso.getId(), usuario, contrasenia, cedula, correo, nombre, cargoIngreso.getIdCargo(), fechaNacimiento);
             if (ServicioPersonas.InsertarPersonasTrabajadores(TrabajadorNuevo)) {

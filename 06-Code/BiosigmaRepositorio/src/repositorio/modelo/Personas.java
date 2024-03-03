@@ -8,6 +8,11 @@ public class Personas {
     private String usuario, contrasenia, cedula, correo, nombre;
     private Date fechaNacimiento;
 
+    public Personas() {
+    }
+    
+
+      
     //constructor trabajador para inserción
     public Personas(int idPerfil, String usuario, String contrasenia, String cedula, String correo, String nombre, int cargo, Date fechaNacimiento) {
         this.idPerfil = idPerfil;

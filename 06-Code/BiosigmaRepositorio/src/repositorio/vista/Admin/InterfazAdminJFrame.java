@@ -109,7 +109,7 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
                     Cargo cargo = CargoServicio.BuscarCargo(temp.getCargo());
                     dtm2.addRow(new Object[]{temp.getCedula(), temp.getNombre(), temp.getCorreo(), edad, cargo.getCargo()});
                     break;
-                default:
+                case 3:
                     Perfil perfil = PerfilServicio.BuscarPerfil(temp.getIdPerfil());
                     dtm3.addRow(new Object[]{temp.getCedula(),temp.getNombre(),temp.getCorreo(),edad,perfil.getNombrePerfil()});
                     break;

@@ -102,7 +102,7 @@ public class PerfilMetodos implements IPerfil {
     public Perfil BuscarPerfil(int idPerfil) {
         Document filtro = new Document("id_Perfil", idPerfil);
         Perfil perfil = new Perfil();
-        Document documento = coleccion.find(filtro).first();
+        Document documento = (Document) coleccion.find(filtro).first();
         perfil.setId(documento.getInteger("id_Perfil"));
         perfil.setNombrePerfil(documento.getString("nombrePerfil"));
         return perfil;
