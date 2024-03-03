@@ -1,5 +1,5 @@
 
-package repositorio.vista.Admin;
+package repositorio.vista.admin;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;

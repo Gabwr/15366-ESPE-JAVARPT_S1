@@ -1,14 +1,17 @@
-package repositorio.vista.Admin;
+package repositorio.vista.admin;
 
 import com.mongodb.MongoException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import repositorio.controlador.PerfilServicio;
 import repositorio.controlador.ServicioPersonas;
+import repositorio.modelo.Perfil;
 import repositorio.modelo.Personas;
 
 public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
@@ -18,10 +21,18 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
 
     public InterfazAdminInsertarUsuario() {
         initComponents();
+        cargarComboPerfil();
         lbCargo.setVisible(false);
         cbCargo.setVisible(false);
         lbAvisoCargo.setVisible(false);
         btAgregarCargo.setVisible(false);
+    }
+    
+    public void cargarComboPerfil(){
+        List<Perfil> listaPerfiles = PerfilServicio.ListarPerfiles();
+        for(Perfil temp: listaPerfiles){
+            cbTipoPersona.addItem(temp.getId() + " - " + temp.getNombrePerfil());
+        }
     }
 
     private boolean validarDatosTrabajador() {
@@ -67,9 +78,9 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
         boolean validacion = false;
         String contrasenia = pswfContrasenia.getText();
         if (contrasenia.isEmpty() && contrasenia.length() < 5) {
-            validacion = true;
-        } else {
             validacion = false;
+        } else {
+            validacion = true;
         }
         return validacion;
     }
@@ -246,7 +257,7 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
 
         jLabel27.setText("Tipo de Usuario");
 
-        cbTipoPersona.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un tipo", "Administrador", "Trabajador", "Cliente", " " }));
+        cbTipoPersona.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Seleccione una opción --" }));
         cbTipoPersona.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbTipoPersonaActionPerformed(evt);

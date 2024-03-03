@@ -1,4 +1,4 @@
-package repositorio.vista.Proyecto;
+package repositorio.vista.proyecto;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,7 +12,7 @@ import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import repositorio.controlador.ProyectoServicio;
 import repositorio.modelo.Proyecto;
-import repositorio.vista.Admin.InterfazAdminJFrame;
+import repositorio.vista.admin.InterfazAdminJFrame;
 
 public class AgregarProyecto extends javax.swing.JInternalFrame {
 

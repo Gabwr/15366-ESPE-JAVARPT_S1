@@ -1,8 +1,8 @@
-package repositorio.vista.Admin;
+package repositorio.vista.admin;
 
-import repositorio.vista.Proyecto.AbrirProyecto;
-import repositorio.vista.Proyecto.AgregarProyecto;
-import repositorio.vista.Proyecto.ActualizarProyecto;
+import repositorio.vista.proyecto.AbrirProyecto;
+import repositorio.vista.proyecto.AgregarProyecto;
+import repositorio.vista.proyecto.ActualizarProyecto;
 import java.awt.Color;
 import java.awt.HeadlessException;
 import java.awt.geom.RoundRectangle2D;
@@ -12,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import repositorio.controlador.ProyectoServicio;
 import repositorio.modelo.Proyecto;
 import repositorio.vista.InterfazLogin;
+import repositorio.vista.perfil.ConsultarPerfil;
 
 public class InterfazAdminJFrame extends javax.swing.JFrame {
 
@@ -147,6 +148,7 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         panelOpciones = new javax.swing.JPanel();
         btInfoProgramador = new javax.swing.JButton();
+        btInfoProgramador1 = new javax.swing.JButton();
         jLabel19 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -311,7 +313,7 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         panelBotones1.add(BotonAgregarMiembros, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 240, 60));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/colibri_png.png"))); // NOI18N
-        panelBotones1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 520, 160, 170));
+        panelBotones1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 540, 160, 170));
 
         jButton1.setBackground(new java.awt.Color(255, 204, 255));
         jButton1.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
@@ -323,7 +325,7 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        panelBotones1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 470, -1, -1));
+        panelBotones1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 510, -1, -1));
 
         jLabel29.setBackground(new java.awt.Color(255, 51, 51));
         jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/FondoBienvenidos.png"))); // NOI18N
@@ -743,9 +745,20 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
                 btInfoProgramadorActionPerformed(evt);
             }
         });
-        panelOpciones.add(btInfoProgramador, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
+        panelOpciones.add(btInfoProgramador, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, -1, -1));
 
-        panelSuperior.add(panelOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 20, 260, 50));
+        btInfoProgramador1.setBackground(new java.awt.Color(51, 51, 51));
+        btInfoProgramador1.setForeground(new java.awt.Color(204, 255, 255));
+        btInfoProgramador1.setText("Ver Perfiles");
+        btInfoProgramador1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btInfoProgramador1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btInfoProgramador1ActionPerformed(evt);
+            }
+        });
+        panelOpciones.add(btInfoProgramador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        panelSuperior.add(panelOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, 370, 50));
 
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/Vólcan_Cotopaxi.jpg"))); // NOI18N
         panelSuperior.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 6, -1, 180));
@@ -946,6 +959,11 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void btInfoProgramador1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInfoProgramador1ActionPerformed
+        ConsultarPerfil consultaPerfil = new ConsultarPerfil();
+        consultaPerfil.setVisible(true);
+    }//GEN-LAST:event_btInfoProgramador1ActionPerformed
+
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -962,6 +980,7 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel PanelBiosigmaLogo;
     private javax.swing.JButton btAgregarMiembro;
     private javax.swing.JButton btInfoProgramador;
+    private javax.swing.JButton btInfoProgramador1;
     private javax.swing.JButton btnAbrirProyecto;
     private javax.swing.JButton btnActualizarProyecto;
     private javax.swing.JButton btnActualizarusuarios;

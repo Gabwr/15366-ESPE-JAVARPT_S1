@@ -18,11 +18,11 @@ public class AgregarPerfil extends javax.swing.JInternalFrame {
     private boolean validarDatos() {
         boolean validacion = false;
         if ((txtId.getText().length() > 0) && (txtNombre.getText().length() > 0)) {
-            if (PerfilServicio.BuscarPerfil(Integer.parseInt(txtId.getText())) != null) {
+            if (PerfilServicio.ValidarCodigo(Integer.parseInt(txtId.getText()))) {
+                validacion = true;
+            } else {
                 JOptionPane.showMessageDialog(null, "El id ya está registrado");
                 validacion = false;
-            } else {
-                validacion = true;
             }
         } else {
             validacion = false;
@@ -42,6 +42,7 @@ public class AgregarPerfil extends javax.swing.JInternalFrame {
         txtNombre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         btAgregar = new javax.swing.JButton();
+        btRegresar = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -67,15 +68,19 @@ public class AgregarPerfil extends javax.swing.JInternalFrame {
             }
         });
 
+        btRegresar.setText("Regresar");
+        btRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRegresarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(135, 135, 135)
-                        .addComponent(btAgregar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -88,7 +93,12 @@ public class AgregarPerfil extends javax.swing.JInternalFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtNombre)
                                     .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(9, 9, 9)))))
+                                .addGap(9, 9, 9))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(86, 86, 86)
+                        .addComponent(btAgregar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btRegresar)))
                 .addGap(0, 103, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -104,9 +114,11 @@ public class AgregarPerfil extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                .addComponent(btAgregar)
-                .addGap(16, 16, 16))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btAgregar)
+                    .addComponent(btRegresar))
+                .addGap(14, 14, 14))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -130,6 +142,7 @@ public class AgregarPerfil extends javax.swing.JInternalFrame {
             if (PerfilServicio.InsertarPerfil(perfil)) {
                 JOptionPane.showMessageDialog(null, "Datos Ingresados correctamente");
                 limpiarDatos();
+                ConsultarPerfil.consultarDatos();
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "no se pudo agregar los datos");
@@ -137,9 +150,14 @@ public class AgregarPerfil extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btAgregarActionPerformed
 
+    private void btRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegresarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btRegresarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAgregar;
+    private javax.swing.JButton btRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

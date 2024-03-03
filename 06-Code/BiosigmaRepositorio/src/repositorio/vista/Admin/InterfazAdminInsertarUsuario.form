@@ -276,12 +276,8 @@
         <Component class="javax.swing.JComboBox" name="cbTipoPersona">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="5">
-                <StringItem index="0" value="Seleccione un tipo"/>
-                <StringItem index="1" value="Administrador"/>
-                <StringItem index="2" value="Trabajador"/>
-                <StringItem index="3" value="Cliente"/>
-                <StringItem index="4" value=" "/>
+              <StringArray count="1">
+                <StringItem index="0" value="-- Seleccione una opci&#xf3;n --"/>
               </StringArray>
             </Property>
           </Properties>

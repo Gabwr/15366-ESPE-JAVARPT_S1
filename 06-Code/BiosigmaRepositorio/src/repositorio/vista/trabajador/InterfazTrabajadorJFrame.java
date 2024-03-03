@@ -1,9 +1,9 @@
 package repositorio.vista.trabajador;
 
-import repositorio.vista.Admin.InterfazAdminInsertarUsuario;
-import repositorio.vista.Proyecto.AbrirProyecto;
-import repositorio.vista.Proyecto.AgregarProyecto;
-import repositorio.vista.Proyecto.ActualizarProyecto;
+import repositorio.vista.admin.InterfazAdminInsertarUsuario;
+import repositorio.vista.proyecto.AbrirProyecto;
+import repositorio.vista.proyecto.AgregarProyecto;
+import repositorio.vista.proyecto.ActualizarProyecto;
 import java.awt.Color;
 import java.awt.HeadlessException;
 import java.text.SimpleDateFormat;

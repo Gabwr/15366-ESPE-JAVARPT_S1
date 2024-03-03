@@ -1,6 +1,6 @@
-package repositorio.vista.Admin;
+package repositorio.vista.admin;
 
-import repositorio.vista.Proyecto.AgregarProyecto;
+import repositorio.vista.proyecto.AgregarProyecto;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;

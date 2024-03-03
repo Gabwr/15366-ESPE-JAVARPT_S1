@@ -11,4 +11,5 @@ public interface IPerfil {
     public boolean ActualizrPerfil(Perfil perfil);
     public boolean EliminarPerfil(int idPerfil);
     public Perfil BuscarPerfil(int idPerfil);
+    public boolean validarCodigo(int idPerfil);
 }

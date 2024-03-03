@@ -1,7 +1,7 @@
-package repositorio.vista.Cliente;
+package repositorio.vista.cliente;
 
-import repositorio.vista.Admin.InterfazAdminInsertarUsuario;
-import repositorio.vista.Proyecto.AbrirProyecto;
+import repositorio.vista.admin.InterfazAdminInsertarUsuario;
+import repositorio.vista.proyecto.AbrirProyecto;
 import java.awt.Color;
 import java.awt.HeadlessException;
 import java.text.SimpleDateFormat;

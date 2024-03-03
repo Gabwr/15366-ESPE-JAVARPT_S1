@@ -22,4 +22,7 @@ public class PerfilServicio {
     public static Perfil BuscarPerfil(int idPerfil){
         return new PerfilMetodos().BuscarPerfil(idPerfil);
     }
+    public static boolean ValidarCodigo(int idPerfil){
+        return new PerfilMetodos().validarCodigo(idPerfil);
+    }
 }
