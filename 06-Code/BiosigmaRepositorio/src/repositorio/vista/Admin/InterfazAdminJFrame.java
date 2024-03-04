@@ -31,7 +31,7 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
     int filaseleccionadaCliente = -1;
     int filaseleccionadaTrabajador = -1;
     private static String codigoProyecto = "";
-    private static String codigoUsuario = "";
+    public static String codigoUsuario = "";
     private DefaultTableModel dtm = null;
 
     public static String getCodigoProyecto() {
