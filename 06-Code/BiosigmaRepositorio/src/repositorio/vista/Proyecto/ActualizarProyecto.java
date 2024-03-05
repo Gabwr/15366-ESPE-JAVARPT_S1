@@ -8,12 +8,16 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.text.SimpleDateFormat;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import repositorio.modelo.Proyecto;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+import repositorio.controlador.ActividadServicio;
 import repositorio.controlador.ProyectoServicio;
+import repositorio.modelo.PlanAmbiental;
 import repositorio.vista.admin.InterfazAdminJFrame;
 import repositorio.vista.trabajador.InterfazTrabajadorJFrame;
 
@@ -24,6 +28,34 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
     public ActualizarProyecto() {
         initComponents();
         consultarDatos();
+        llenarTablaActividades();
+    }
+        public  void llenarTablaActividades() {
+
+        DefaultTableModel dtm= (DefaultTableModel) tbActividades.getModel();
+        String id ="112";
+        dtm.setRowCount(0);
+        System.out.println("Por aqui todo bienn");
+        for (PlanAmbiental actividades : ActividadServicio.ListaActividades(obtenercodigointerfacez())) {
+            String fechaaInicio, fechaFinal, evidencia, permisoAgua, auditoria, monitoreo;
+            
+            fechaaInicio = new SimpleDateFormat("dd/MM/yyyy").format(actividades.getFechaRealizada());
+           
+            System.out.println("ErrorActualizarProyecto");
+            
+            
+
+        
+            if (actividades.getEvidencias() == null) {
+                evidencia= "Por cargar";
+            } else {
+                evidencia = "Cargado";
+            }
+            
+
+
+            dtm.addRow(new Object[]{actividades.getActividad(), fechaaInicio, evidencia});
+        }
     }
 
     private String obtenercodigointerfacez() {

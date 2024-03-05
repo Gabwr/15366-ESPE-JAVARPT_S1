@@ -1,8 +1,8 @@
 package repositorio.vista;
 
 import repositorio.vista.trabajador.InterfazTrabajadorJFrame;
-import repositorio.vista.cliente.InterfazCliente1JFrame;
-import repositorio.vista.admin.InterfazAdminJFrame;
+
+
 import repositorio.vista.admin.InterfazInicioAdministrador;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -10,6 +10,8 @@ import javax.swing.JOptionPane;
 import repositorio.controlador.ServicioPersonas;
 import repositorio.dao.personaMetodos;
 import repositorio.modelo.Personas;
+import repositorio.vista.admin.InterfazAdminJFrame;
+import repositorio.vista.cliente.InterfazCliente1JFrame;
 
 public class InterfazLogin extends javax.swing.JFrame {
 

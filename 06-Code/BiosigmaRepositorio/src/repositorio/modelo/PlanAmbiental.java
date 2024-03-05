@@ -5,6 +5,47 @@ import java.util.Date;
 public class PlanAmbiental {
     private String actividad, id;
     private int indicador;
+     private byte[] evidencias;
+
+    public PlanAmbiental() {
+    }
+
+    public PlanAmbiental(String actividad, int indicador, byte[] evidencias, boolean completado, Date fechaRealizada) {
+        this.actividad = actividad;
+        this.indicador = indicador;
+        this.evidencias = evidencias;
+        this.completado = completado;
+        this.fechaRealizada = fechaRealizada;
+    }
+
+     
+     
+     
+     
+    public PlanAmbiental(String actividad, String id, int indicador, byte[] evidencias, Date fechaRealizada) {
+        this.actividad = actividad;
+        this.id = id;
+        this.indicador = indicador;
+        this.evidencias = evidencias;
+        
+        this.fechaRealizada = fechaRealizada;
+    }
+
+     
+     
+     
+     
+     
+    public byte[] getEvidencias() {
+        return evidencias;
+    }
+
+    public void setEvidencias(byte[] evidencias) {
+        this.evidencias = evidencias;
+    }
+
+   
+    
     boolean completado;
     Date fechaRealizada;
 
@@ -47,7 +88,5 @@ public class PlanAmbiental {
     public void setFechaRealizada(Date fechaRealizada) {
         this.fechaRealizada = fechaRealizada;
     }
-    
-    
     
 }

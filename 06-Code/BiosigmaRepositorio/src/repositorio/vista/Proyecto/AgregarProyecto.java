@@ -4,26 +4,65 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
+import repositorio.controlador.ActividadServicio;
 import repositorio.controlador.ProyectoServicio;
+import repositorio.modelo.PlanAmbiental;
 import repositorio.modelo.Proyecto;
 import repositorio.vista.admin.InterfazAdminJFrame;
 
 public class AgregarProyecto extends javax.swing.JInternalFrame {
-
     private Proyecto proyecto = new Proyecto();
 
+    private static DefaultTableModel dtm = null;
+    List<PlanAmbiental> listaActividades = new ArrayList<>();
     public AgregarProyecto() {
         initComponents();
         UIManager.put("TextComponent.arc", 999);
         limpiarCampos();
     }
+    
+    private boolean validarDatosactividad() {
+        PlanAmbiental actividades = new PlanAmbiental();
 
+        DefaultTableModel dtm = (DefaultTableModel) tbActividades.getModel();
+        if ((txtCodigoProyecto.getText().length() > 0) && (txtNombreProyecto.getText().length() > 0) && (txtDescripcionProyecto.getText().length() > 0) && (dcFechaInicioProyecto.getDate() != null) && (rdEnProgreso.isSelected() || dcFechaFinalProyecto != null)) {
+            if (ProyectoServicio.VerificarCodigoRepetido(txtCodigoProyecto.getText())) {
+                JOptionPane.showMessageDialog(null, "El códgio ingresado ya esta registrado");
+                return false;
+            }
+            actividades.setEvidencias(null);
+            String fechaaInicio, fechaFinal, evidencia, permisoAgua, auditoria, monitoreo;
+
+            fechaaInicio = new SimpleDateFormat("dd/MM/yyyy").format(dcFechaInicioProyecto.getDate());
+            actividades.setFechaRealizada(dcFechaInicioProyecto.getDate());
+            actividades.setActividad(txtActividad.getText());
+            dtm.addRow(new Object[]{actividades.getActividad(), fechaaInicio, actividades.getEvidencias()});
+
+            listaActividades.add(actividades);
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+    private void cagarDatosActividades() {
+        for (PlanAmbiental actividad : listaActividades) {
+            System.out.println(actividad.getActividad());
+            actividad.setId(txtCodigoProyecto.getText());
+
+            ActividadServicio.InsertarActividades(actividad);
+
+        }
+    }
     private boolean validarDatos() {
         DefaultTableModel dtm = (DefaultTableModel) tbActividades.getModel();
         if ((txtCodigoProyecto.getText().length() > 0) && (txtNombreProyecto.getText().length() > 0) && (txtDescripcionProyecto.getText().length() > 0) && (dcFechaInicioProyecto.getDate() != null) && (rdEnProgreso.isSelected() || dcFechaFinalProyecto != null) && (rdActividades.isSelected() || (dtm.getRowCount() != 0))) {
@@ -291,6 +330,11 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
 
         btActividad.setText("Agregar Actividad");
         btActividad.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btActividad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btActividadActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelActividadesLayout = new javax.swing.GroupLayout(panelActividades);
         panelActividades.setLayout(panelActividadesLayout);
@@ -586,6 +630,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
     private void btAgregarProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgregarProyectoActionPerformed
         if (validarDatos()) {
             ProyectoServicio.InsertarProyecto(proyecto);
+            cagarDatosActividades();
             InterfazAdminJFrame.llenarTablaProyectos();
             this.dispose();
         } else {
@@ -655,6 +700,18 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
     private void lbPermisoAmbientalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbPermisoAmbientalMouseClicked
 
     }//GEN-LAST:event_lbPermisoAmbientalMouseClicked
+
+    private void btActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btActividadActionPerformed
+                if (validarDatosactividad()) {
+
+            DefaultTableModel dtm = (DefaultTableModel) tbActividades.getModel();
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingrese los datos correctamente");
+        }
+
+
+    }//GEN-LAST:event_btActividadActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
