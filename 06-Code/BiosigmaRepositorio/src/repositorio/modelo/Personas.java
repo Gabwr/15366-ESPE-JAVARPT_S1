@@ -63,6 +63,7 @@ public class Personas {
         this.contrasenia = contrasenia;
         this.cedula = cedula;
     }
+    
 
     public String getUsuario() {
         return usuario;

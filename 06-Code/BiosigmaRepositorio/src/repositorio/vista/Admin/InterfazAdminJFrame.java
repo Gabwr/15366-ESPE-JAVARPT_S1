@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import repositorio.controlador.CargoServicio;
 import repositorio.controlador.PerfilServicio;
@@ -863,7 +864,6 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
                 + "\n1.- Gabriel López"
                 + "\n2.- Mateo Medranda"
                 + "\n3.- Alejandro Obando"
-                + "\n4.- Joselyn Morocho"
                 + "\n==============================================");
     }//GEN-LAST:event_btInfoProgramadorActionPerformed
 
@@ -894,16 +894,37 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarUsuariosActionPerformed
 
     private void btnActualizarusuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarusuariosActionPerformed
-
         if (filaseleccionadaAdmin > -1) {
             dtm = (DefaultTableModel) tbAdmin.getModel();
+            codigoUsuario=(String) dtm.getValueAt(filaseleccionadaAdmin, 0);
+            InterfazAdminActualizarUsuario actualizar= new InterfazAdminActualizarUsuario();
+            escritorio.add(actualizar);
+            actualizar.show();
+            filaseleccionadaAdmin=-1;
+            ListSelectionModel seleccionado = tbAdmin.getSelectionModel();
+                seleccionado.clearSelection();
         } else if (filaseleccionadaCliente > -1) {
             dtm = (DefaultTableModel) tbClientes.getModel();
+            codigoUsuario=(String) dtm.getValueAt(filaseleccionadaCliente, 0);
+            InterfazAdminActualizarUsuario actualizar= new InterfazAdminActualizarUsuario();
+            escritorio.add(actualizar);
+            actualizar.show();
+            filaseleccionadaCliente=-1;
+            ListSelectionModel seleccionado = tbClientes.getSelectionModel();
+                seleccionado.clearSelection();
         } else if (filaseleccionadaTrabajador > -1) {
             dtm = (DefaultTableModel) tbTrabajadores.getModel();
+            codigoUsuario=(String) dtm.getValueAt(filaseleccionadaTrabajador, 0);
+            InterfazAdminActualizarUsuario actualizar= new InterfazAdminActualizarUsuario();
+            escritorio.add(actualizar);
+            actualizar.show();
+            filaseleccionadaTrabajador=-1;
+            ListSelectionModel seleccionado = tbTrabajadores.getSelectionModel();
+                seleccionado.clearSelection();
         } else {
-            JOptionPane.showMessageDialog(null, "Eliga un dato para eliminar");
+            JOptionPane.showMessageDialog(null, "Eliga un dato para actualizar");
         }
+        
     }//GEN-LAST:event_btnActualizarusuariosActionPerformed
 
     private void btAgregarMiembroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgregarMiembroActionPerformed

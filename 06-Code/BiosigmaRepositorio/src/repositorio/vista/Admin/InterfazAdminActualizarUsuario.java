@@ -13,23 +13,50 @@ import repositorio.controlador.ServicioPersonas;
 import repositorio.modelo.Cargo;
 import repositorio.modelo.Perfil;
 import repositorio.modelo.Personas;
+import repositorio.vista.Admin.InterfazCambiarContrasenia;
 
 public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
-
+     private Perfil perfilIngreso;
     String CargoIngreso;
     private int contador = 1;
-    private String cedulapersona=null;
-    
+     String cedulapersona = null;
+     public static String cedulaContrasenia= null;
     public InterfazAdminActualizarUsuario() {
         initComponents();
         cbCargo.setVisible(false);
         lbAvisoCargo.setVisible(false);
         btAgregarCargo.setVisible(false);
+        lbCargo.setVisible(false);
         cargarComboCargo();
         cargarComboPerfil();
         InterfazAdminJFrame interfaz_Admin = new InterfazAdminJFrame();
-        cedulapersona= interfaz_Admin.codigoUsuario;
-        
+        cedulapersona = interfaz_Admin.codigoUsuario;
+        cargarPersona();
+    }
+     public String algoritmousuario(String nombre, String Cedula) {
+        String usuario = "";
+        char pasador;
+        for (int inicio = 0; inicio < 3; inicio++) {
+            pasador = nombre.trim().charAt(inicio);
+            usuario += pasador;
+        }
+        for (int inicio = 0; inicio < 3; inicio++) {
+            pasador = Cedula.trim().charAt(inicio);
+            usuario += pasador;
+        }
+        return usuario;
+    }
+
+    private boolean validarDatosTrabajador() {
+        boolean validacion = false;
+        if ((txtNombre.getText().length() > 0) && validarCedula()
+                && (dcFecha.getDate() != null) && validarCorreo(txtCorreo.getText())
+                && (!"-- Seleccione una opción --".equals(cbTipoPersona.getSelectedItem().toString()))) {
+            validacion = true;
+            return validacion;
+        } else {
+            return validacion;
+        }
     }
 
     private boolean validarDatos() {
@@ -42,12 +69,35 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
         }
 
     }
-    
+
+    private boolean validarDatosOtros() {
+        boolean validacion = false;
+        if ((txtNombre.getText().length() > 0) && validarCedula() && (dcFecha.getDate() != null) && validarCorreo(txtCorreo.getText())) {
+            validacion = true;
+            return validacion;
+        } else {
+            return validacion;
+        }
+
+    }
+
     public static void cargarComboPerfil() {
         List<Perfil> listaPerfiles = new PerfilServicio().ListarPerfiles();
         for (Perfil temp : listaPerfiles) {
             cbTipoPersona.addItem(temp.getId() + " - " + temp.getNombrePerfil());
         }
+    }
+
+    public boolean comprobarExistencia(String cedula) {
+        boolean comprobar = false;
+        List<Personas> listaComprobar = ServicioPersonas.ListarPersonas();
+        for (Personas comprobador : listaComprobar) {
+            if (cedula.equals(comprobador.getCedula())) {
+                comprobar = true;
+            }
+
+        }
+        return comprobar;
     }
 
     public static void cargarComboCargo() {
@@ -56,23 +106,24 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
             cbCargo.addItem(temp.getIdCargo() + " - " + temp.getCargo());
         }
     }
-    
-    public void cargarPersona(){
+
+    public void cargarPersona() {
         Personas persona = ServicioPersonas.BuscarPorCodigoClienteyAdmin(cedulapersona);
         txtCedulA.setText(persona.getCedula());
         txtCorreo.setText(persona.getCorreo());
         calcularEdad(persona.getFechaNacimiento().getYear());
         txtNombre.setText(persona.getNombre());
-        if(persona.getIdPerfil()==1){
+        if (persona.getIdPerfil() == 1) {
             cbTipoPersona.setSelectedIndex(persona.getIdPerfil());
-        }else if(persona.getIdPerfil()==2){
+        } else if (persona.getIdPerfil() == 2) {
             cbTipoPersona.setSelectedIndex(persona.getIdPerfil());
             cbCargo.setSelectedIndex(persona.getCargo());
-        }else{
+        } else {
             cbTipoPersona.setSelectedIndex(persona.getIdPerfil());
         }
         dcFecha.setDate(persona.getFechaNacimiento());
     }
+
     private void limpiar() {
         txtCedulA.setText("");
         txtCorreo.setText("");
@@ -158,8 +209,9 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Dp_Contrasenia = new javax.swing.JDesktopPane();
         JPInsertar = new javax.swing.JPanel();
-        btAgregarMiembro = new javax.swing.JButton();
+        btActualizarMiembro = new javax.swing.JButton();
         txtEdad = new javax.swing.JTextField();
         dcFecha = new com.toedter.calendar.JDateChooser();
         txtCedulA = new javax.swing.JTextField();
@@ -182,27 +234,43 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
         cbCargo = new javax.swing.JComboBox<>();
         btAgregarCargo = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
-        BtnLimpiarUsuarios = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+
+        javax.swing.GroupLayout Dp_ContraseniaLayout = new javax.swing.GroupLayout(Dp_Contrasenia);
+        Dp_Contrasenia.setLayout(Dp_ContraseniaLayout);
+        Dp_ContraseniaLayout.setHorizontalGroup(
+            Dp_ContraseniaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 790, Short.MAX_VALUE)
+        );
+        Dp_ContraseniaLayout.setVerticalGroup(
+            Dp_ContraseniaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
 
         JPInsertar.setBackground(new java.awt.Color(102, 102, 255));
         JPInsertar.setForeground(new java.awt.Color(153, 153, 255));
+        JPInsertar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btAgregarMiembro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/1814113_add_more_plus_icon.png"))); // NOI18N
-        btAgregarMiembro.setText("Agregar");
-        btAgregarMiembro.addActionListener(new java.awt.event.ActionListener() {
+        btActualizarMiembro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/1814113_add_more_plus_icon.png"))); // NOI18N
+        btActualizarMiembro.setText("Actualizar");
+        btActualizarMiembro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btAgregarMiembroActionPerformed(evt);
+                btActualizarMiembroActionPerformed(evt);
             }
         });
+        JPInsertar.add(btActualizarMiembro, new org.netbeans.lib.awtextra.AbsoluteConstraints(177, 339, -1, 43));
 
         txtEdad.setEditable(false);
+        JPInsertar.add(txtEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, 77, -1));
 
         dcFecha.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 dcFechaPropertyChange(evt);
             }
         });
+        JPInsertar.add(dcFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 143, 106, -1));
 
         txtCedulA.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -212,6 +280,7 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
                 txtCedulAKeyTyped(evt);
             }
         });
+        JPInsertar.add(txtCedulA, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 80, 165, -1));
 
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -221,14 +290,19 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
                 txtNombreKeyTyped(evt);
             }
         });
+        JPInsertar.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(112, 84, 118, -1));
 
         jLabel15.setText("Nombre Completo");
+        JPInsertar.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 87, -1, -1));
 
         jLabel24.setText("N° Cédula");
+        JPInsertar.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, -1, -1));
 
         jLabel25.setText("Fecha de Nacimiento");
+        JPInsertar.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 143, -1, -1));
 
         jLabel26.setText("Edad");
+        JPInsertar.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 210, -1, -1));
 
         btnRegresarUsuarios.setText("Regresar");
         btnRegresarUsuarios.addActionListener(new java.awt.event.ActionListener() {
@@ -236,8 +310,10 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
                 btnRegresarUsuariosActionPerformed(evt);
             }
         });
+        JPInsertar.add(btnRegresarUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 20, -1, -1));
 
         jLabel27.setText("Tipo de Usuario");
+        JPInsertar.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(321, 210, -1, -1));
 
         cbTipoPersona.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un tipo", "Administrador", "Trabajador", "Cliente", " " }));
         cbTipoPersona.addActionListener(new java.awt.event.ActionListener() {
@@ -250,36 +326,45 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
                 cbTipoPersonaPropertyChange(evt);
             }
         });
+        JPInsertar.add(cbTipoPersona, new org.netbeans.lib.awtextra.AbsoluteConstraints(415, 207, 165, -1));
 
         txtCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtCorreoKeyReleased(evt);
             }
         });
+        JPInsertar.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 140, 165, -1));
 
         jLabel28.setText("Correo");
+        JPInsertar.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, -1, -1));
 
         lbAvisoCorreo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbAvisoCorreo.setForeground(new java.awt.Color(255, 0, 0));
         lbAvisoCorreo.setText("*Correo Inválido");
+        JPInsertar.add(lbAvisoCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 140, -1, -1));
 
         lbAvisoNombre.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lbAvisoNombre.setForeground(new java.awt.Color(255, 0, 0));
         lbAvisoNombre.setText("*");
+        JPInsertar.add(lbAvisoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(236, 74, 12, -1));
 
         lbAvisoCedula.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lbAvisoCedula.setForeground(new java.awt.Color(255, 0, 0));
         lbAvisoCedula.setText("*");
+        JPInsertar.add(lbAvisoCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 70, -1, -1));
 
         lbAvisoFecha.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lbAvisoFecha.setForeground(new java.awt.Color(255, 0, 0));
         lbAvisoFecha.setText("*");
+        JPInsertar.add(lbAvisoFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(236, 133, -1, -1));
 
         lbAvisoCargo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lbAvisoCargo.setForeground(new java.awt.Color(255, 0, 0));
         lbAvisoCargo.setText("*");
+        JPInsertar.add(lbAvisoCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(586, 210, -1, -1));
 
         lbCargo.setText("Cargo:");
+        JPInsertar.add(lbCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(357, 263, -1, -1));
 
         cbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un tipo", "Administrador", "Trabajador", "Cliente", " " }));
         cbCargo.addActionListener(new java.awt.event.ActionListener() {
@@ -292,6 +377,7 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
                 cbCargoPropertyChange(evt);
             }
         });
+        JPInsertar.add(cbCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(415, 260, 165, -1));
 
         btAgregarCargo.setText("Agregar Cargo");
         btAgregarCargo.addActionListener(new java.awt.event.ActionListener() {
@@ -299,149 +385,28 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
                 btAgregarCargoActionPerformed(evt);
             }
         });
+        JPInsertar.add(btAgregarCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(101, 275, 121, -1));
 
         jLabel21.setBackground(new java.awt.Color(255, 255, 102));
         jLabel21.setFont(new java.awt.Font("Rockwell", 0, 36)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(255, 255, 102));
         jLabel21.setText("Actualizar Usuario");
-
-        BtnLimpiarUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/limpiar.png"))); // NOI18N
-        BtnLimpiarUsuarios.setText("Limpiar datos");
-        BtnLimpiarUsuarios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnLimpiarUsuariosActionPerformed(evt);
-            }
-        });
+        JPInsertar.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 0, -1, 40));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/restablecer-la-contrasena.png"))); // NOI18N
         jButton1.setText("Cambiar Contraseña");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        JPInsertar.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(412, 341, -1, -1));
 
-        javax.swing.GroupLayout JPInsertarLayout = new javax.swing.GroupLayout(JPInsertar);
-        JPInsertar.setLayout(JPInsertarLayout);
-        JPInsertarLayout.setHorizontalGroup(
-            JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(JPInsertarLayout.createSequentialGroup()
-                .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(JPInsertarLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(JPInsertarLayout.createSequentialGroup()
-                                .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(JPInsertarLayout.createSequentialGroup()
-                                        .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, JPInsertarLayout.createSequentialGroup()
-                                                .addComponent(jLabel25)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(dcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, JPInsertarLayout.createSequentialGroup()
-                                                .addComponent(jLabel15)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lbAvisoFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lbAvisoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(53, 53, 53))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPInsertarLayout.createSequentialGroup()
-                                        .addGap(86, 86, 86)
-                                        .addComponent(jLabel26)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(61, 61, 61)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                                .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel27, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPInsertarLayout.createSequentialGroup()
-                                        .addComponent(jLabel28)
-                                        .addGap(6, 6, 6))))
-                            .addGroup(JPInsertarLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(JPInsertarLayout.createSequentialGroup()
-                                        .addComponent(btAgregarCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(24, 24, 24)
-                                        .addComponent(lbCargo))
-                                    .addComponent(jLabel24)))))
-                    .addGroup(JPInsertarLayout.createSequentialGroup()
-                        .addGap(81, 81, 81)
-                        .addComponent(btAgregarMiembro)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BtnLimpiarUsuarios)))
-                .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(JPInsertarLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(JPInsertarLayout.createSequentialGroup()
-                                .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtCedulA, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbTipoPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(6, 6, 6)
-                                .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbAvisoCargo)
-                                    .addComponent(lbAvisoCorreo)
-                                    .addComponent(lbAvisoCedula)))
-                            .addComponent(cbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(JPInsertarLayout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(jButton1)))
-                .addContainerGap(23, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPInsertarLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel21)
-                .addGap(192, 192, 192))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPInsertarLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnRegresarUsuarios)
-                .addContainerGap())
-        );
-        JPInsertarLayout.setVerticalGroup(
-            JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(JPInsertarLayout.createSequentialGroup()
-                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel15)
-                        .addComponent(lbAvisoNombre)
-                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtCedulA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lbAvisoCedula)
-                        .addComponent(jLabel24)))
-                .addGap(27, 27, 27)
-                .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel28)
-                        .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lbAvisoCorreo)
-                        .addComponent(lbAvisoFecha))
-                    .addGroup(JPInsertarLayout.createSequentialGroup()
-                        .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(dcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel25))
-                        .addGap(6, 6, 6)))
-                .addGap(42, 42, 42)
-                .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel26)
-                    .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel27)
-                    .addComponent(cbTipoPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbAvisoCargo))
-                .addGap(36, 36, 36)
-                .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbCargo)
-                    .addComponent(btAgregarCargo))
-                .addGap(41, 41, 41)
-                .addGroup(JPInsertarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btAgregarMiembro, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnLimpiarUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addGap(10, 10, 10)
-                .addComponent(btnRegresarUsuarios)
-                .addContainerGap())
-        );
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/LogoBiosigmaTransparente.png"))); // NOI18N
+        JPInsertar.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 50));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/FondoProyectos.png"))); // NOI18N
+        JPInsertar.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -451,24 +416,39 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(JPInsertar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(Dp_Contrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(JPInsertar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(JPInsertar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(Dp_Contrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btAgregarMiembroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgregarMiembroActionPerformed
+    private void btActualizarMiembroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btActualizarMiembroActionPerformed
 
         String nombre = txtNombre.getText();
         String cedula = txtCedulA.getText();
         String correo = txtCorreo.getText();
         String edad = txtEdad.getText();
+        String usuario = algoritmousuario(nombre, cedula);
+        String dato = cbTipoPersona.getSelectedItem().toString();
+        String perfil[] = dato.split("-");
+        int idPerfil = Integer.parseInt(perfil[0].trim());
+        Date fechaNacimiento = dcFecha.getDate();
+        perfilIngreso = PerfilServicio.BuscarPerfil(idPerfil);
 
         if (validarDatos() && validarCedula()) {
             if (CargoIngreso.equals("Administrador")) {
@@ -481,7 +461,48 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Ingrese los datos correctamente");
         }
-    }//GEN-LAST:event_btAgregarMiembroActionPerformed
+        if (validarDatosOtros() && validarCedula() && (perfilIngreso.getId() == 1)  && comprobarExistencia(cedula)) {
+            
+            Personas AdminNuevo = new Personas(perfilIngreso.getId(), usuario, cedula, correo, nombre, fechaNacimiento);
+
+            if (ServicioPersonas.ActualizarPersonasClientesAdmin(AdminNuevo)) {
+                JOptionPane.showMessageDialog(null, "Datos Ingresados");
+                InterfazAdminJFrame.llenarPersonas();
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Datos no Ingresados");
+            }
+
+        } else if (validarDatosTrabajador() && validarCedula() && (perfilIngreso.getId() == 2) ) {
+
+            dato = cbCargo.getSelectedItem().toString();
+            String cargo[] = dato.split("-");
+            int idCargo = Integer.parseInt(cargo[0].trim());
+            Cargo cargoIngreso = CargoServicio.BuscarCargo(idCargo);
+
+            Personas TrabajadorNuevo = new Personas(perfilIngreso.getId(), usuario, cedula, correo, nombre, fechaNacimiento ,cargoIngreso.getIdCargo());
+            if (ServicioPersonas.ActualizarPersonasTrabajador(TrabajadorNuevo)) {
+                JOptionPane.showMessageDialog(null, "Datos Ingresados");
+                InterfazAdminJFrame.llenarPersonas();
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Datos no Ingresados");
+            }
+        } else if (validarDatosOtros() && validarCedula() && (perfilIngreso.getId() != 1) && (perfilIngreso.getId() != 2)) {
+            Personas ClienteNuevo = new Personas(perfilIngreso.getId(), usuario, cedula, correo, nombre, fechaNacimiento);
+
+            if (ServicioPersonas.ActualizarPersonasClientesAdmin(ClienteNuevo)) {
+                JOptionPane.showMessageDialog(null, "Datos Ingresados");
+                InterfazAdminJFrame.llenarPersonas();
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Datos no Ingresados");
+            }
+            limpiar();
+        } else {
+            JOptionPane.showMessageDialog(null, "complete los campos");
+        }
+    }//GEN-LAST:event_btActualizarMiembroActionPerformed
 
     private void dcFechaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dcFechaPropertyChange
         if (dcFecha.getDate() != null) {
@@ -527,7 +548,6 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
 
     private void btnRegresarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarUsuariosActionPerformed
         this.dispose();
-        this.setVisible(false);
     }//GEN-LAST:event_btnRegresarUsuariosActionPerformed
 
     private void cbTipoPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoPersonaActionPerformed
@@ -537,21 +557,25 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
             cbCargo.setVisible(false);
             lbAvisoCargo.setVisible(false);
             btAgregarCargo.setVisible(false);
+            lbCargo.setVisible(false);
         } else if (cargo.equals("Administrador")) {
             CargoIngreso = "Administrador";
             cbCargo.setVisible(false);
             lbAvisoCargo.setVisible(false);
             btAgregarCargo.setVisible(false);
+            lbCargo.setVisible(false);
         } else if (cargo.equals("Trabajador")) {
             CargoIngreso = "Trabajador";
             cbCargo.setVisible(true);
             lbAvisoCargo.setVisible(true);
             btAgregarCargo.setVisible(true);
+            lbCargo.setVisible(true);
         } else if (cargo.equals("Cliente")) {
             CargoIngreso = "Cliente";
             cbCargo.setVisible(false);
             lbAvisoCargo.setVisible(false);
             btAgregarCargo.setVisible(false);
+            lbCargo.setVisible(false);
         }
     }//GEN-LAST:event_cbTipoPersonaActionPerformed
 
@@ -583,17 +607,20 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_btAgregarCargoActionPerformed
 
-    private void BtnLimpiarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLimpiarUsuariosActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        limpiar();
-    }//GEN-LAST:event_BtnLimpiarUsuariosActionPerformed
+        cedulaContrasenia=txtCedulA.getText();
+        InterfazCambiarContrasenia contrasenia = new InterfazCambiarContrasenia();
+        Dp_Contrasenia.add(contrasenia);
+        contrasenia.show();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnLimpiarUsuarios;
+    private javax.swing.JDesktopPane Dp_Contrasenia;
     private javax.swing.JPanel JPInsertar;
+    private javax.swing.JButton btActualizarMiembro;
     private javax.swing.JButton btAgregarCargo;
-    private javax.swing.JButton btAgregarMiembro;
     private javax.swing.JButton btnRegresarUsuarios;
     private static javax.swing.JComboBox<String> cbCargo;
     private static javax.swing.JComboBox<String> cbTipoPersona;
@@ -606,6 +633,8 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel lbAvisoCargo;
     private javax.swing.JLabel lbAvisoCedula;
     private javax.swing.JLabel lbAvisoCorreo;

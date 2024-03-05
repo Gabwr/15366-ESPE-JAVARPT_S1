@@ -97,7 +97,7 @@ public class personaMetodos implements IPersonas {
             coleccionPersonas.insertOne(documento);
             return true;
         } catch (MongoException ex) {
-            JOptionPane.showMessageDialog(null, "No se ha podido agregar un proyecto, error: " + ex.toString());
+            JOptionPane.showMessageDialog(null, "No se ha podido agregar la persona, error: " + ex.toString());
             return false;
         } finally {
             cerrarConexion();
@@ -118,7 +118,7 @@ public class personaMetodos implements IPersonas {
             coleccionPersonas.insertOne(documento);
             return true;
         } catch (MongoException ex) {
-            JOptionPane.showMessageDialog(null, "No se ha podido insertar la persona, error: " + ex.toString());
+            JOptionPane.showMessageDialog(null, "No se ha podido agregar la persona, error: " + ex.toString());
             return false;
         } finally {
             cerrarConexion();

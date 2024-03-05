@@ -28,6 +28,20 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
         btAgregarCargo.setVisible(false);
     }
 
+    public boolean comprobarExistencia(String cedula) {
+        boolean comprobar = true;
+        List<Personas> listaComprobar = ServicioPersonas.ListarPersonas();
+        for (Personas comprobador : listaComprobar) {
+            if (cedula.equals(comprobador.getCedula())) {
+                comprobar = false;
+            }
+        }
+        if(comprobar==false){
+            JOptionPane.showMessageDialog(null, "Cedula existente");
+        }
+        return comprobar;
+    }
+
     public static void cargarComboPerfil() {
         List<Perfil> listaPerfiles = new PerfilServicio().ListarPerfiles();
         for (Perfil temp : listaPerfiles) {
@@ -496,7 +510,7 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
         Date fechaNacimiento = dcFecha.getDate();
         String usuario = algoritmousuario(nombre, cedula);
 
-        if (validarDatosOtros() && validarCedula() && (perfilIngreso.getId() == 1) && validarcontrasenia()) {
+        if (validarDatosOtros() && validarCedula() && (perfilIngreso.getId() == 1) && validarcontrasenia()&&comprobarExistencia(cedula)) {
             String contrasenia = ServicioPersonas.encriptar(pswfContrasenia.getText());
             Personas AdminNuevo = new Personas(perfilIngreso.getId(), usuario, contrasenia, cedula, correo, nombre, fechaNacimiento);
 
@@ -513,9 +527,8 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
             String dato = cbCargo.getSelectedItem().toString();
             String cargo[] = dato.split("-");
             int idCargo = Integer.parseInt(cargo[0].trim());
-            JOptionPane.showMessageDialog(null, perfilIngreso + "cargo:" + idCargo);
             Cargo cargoIngreso = CargoServicio.BuscarCargo(idCargo);
-            
+
             String contrasenia = ServicioPersonas.encriptar(pswfContrasenia.getText());
             Personas TrabajadorNuevo = new Personas(perfilIngreso.getId(), usuario, contrasenia, cedula, correo, nombre, cargoIngreso.getIdCargo(), fechaNacimiento);
             if (ServicioPersonas.InsertarPersonasTrabajadores(TrabajadorNuevo)) {
