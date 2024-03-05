@@ -545,6 +545,7 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
             if (ServicioPersonas.InsertarPersonasClienteyAdmin(ClienteNuevo)) {
                 JOptionPane.showMessageDialog(null, "Datos Ingresados");
                 InterfazAdminJFrame.llenarPersonas();
+                JOptionPane.showMessageDialog(null, "   Su usuario:"+usuario);
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Datos no Ingresados");
