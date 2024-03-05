@@ -15,4 +15,8 @@ public class PruebaUnitaria {
         proyecto.setIdProyecto("Hola como estas");
         ProyectoServicio.InsertarProyecto(proyecto);
     }
+    
+    public static void agregarPerfilTest(){
+        
+    }
 }
