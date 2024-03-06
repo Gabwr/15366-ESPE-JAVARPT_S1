@@ -50,12 +50,21 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
                 return false;
             }
             actividades.setEvidencias(null);
-            String fechaaInicio, fechaFinal, evidencia, permisoAgua, auditoria, monitoreo;
-
-            fechaaInicio = new SimpleDateFormat("dd/MM/yyyy").format(dcFechaInicioProyecto.getDate());
-            actividades.setFechaRealizada(dcFechaInicioProyecto.getDate());
             actividades.setActividad(txtActividad.getText());
-            dtm.addRow(new Object[]{actividades.getActividad(), fechaaInicio, actividades.getEvidencias()});
+            
+            String completado, fechaFinal, permisoAgua, auditoria, monitoreo;
+            
+            if(dcFechaFinalProyecto.getDate()==null){
+              actividades.setFechaRealizada(dcFechaFinalProyecto.getDate());
+              completado="Por completar";
+              fechaFinal="En progreso";
+            }else{
+            completado="Completado";
+            fechaFinal = new SimpleDateFormat("dd/MM/yyyy").format(dcFechaFinalProyecto.getDate());
+            actividades.setFechaRealizada(dcFechaFinalProyecto.getDate());
+            
+            }
+            dtm.addRow(new Object[]{actividades.getActividad(), completado, fechaFinal, actividades.getEvidencias()});
 
             listaActividades.add(actividades);
             return true;
@@ -310,11 +319,11 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Actividades", "Completado", "Fecha realizada", "Evidencia"
+                "Actividades", "Completado", "Fecha realizada"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
