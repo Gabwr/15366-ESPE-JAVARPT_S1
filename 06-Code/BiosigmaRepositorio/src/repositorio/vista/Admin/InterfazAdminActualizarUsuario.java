@@ -25,11 +25,13 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
 
     public InterfazAdminActualizarUsuario() {
         initComponents();
+
         cbCargo.setVisible(false);
         lbAvisoCargo.setVisible(false);
         btAgregarCargo.setVisible(false);
         lbCargo.setVisible(false);
         cedulapersona = InterfazAdminJFrame.codigoUsuario;
+        JOptionPane.showMessageDialog(null, cedulapersona);
         cargarPersona();
     }
 
@@ -118,7 +120,7 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
         calcularEdad(persona.getFechaNacimiento().getYear());
         txtNombre.setText(persona.getNombre());
         Perfil perfil = PerfilServicio.BuscarPerfil(persona.getIdPerfil());
-        
+
         cbTipoPersona.addItem(perfil.getId() + " - " + perfil.getNombrePerfil());
         if (persona.getIdPerfil() != 2) {
             cargarComboCargo(-1);
