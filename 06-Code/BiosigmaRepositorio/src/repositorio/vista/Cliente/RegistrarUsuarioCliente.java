@@ -2,6 +2,7 @@ package repositorio.vista.Cliente;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -12,11 +13,17 @@ import repositorio.modelo.Perfil;
 import repositorio.modelo.Personas;
 
 public class RegistrarUsuarioCliente extends javax.swing.JInternalFrame {
-
+    Calendar hoy = null;
     public RegistrarUsuarioCliente() {
         initComponents();
+        restringirJcalendar();
     }
-
+    public void restringirJcalendar(){
+        hoy = Calendar.getInstance();
+        hoy.add(Calendar.YEAR, -18);
+        Date restriccion =hoy.getTime();
+        dcFecha.setMaxSelectableDate(restriccion);
+    }
     public boolean comprobarExistencia(String cedula) {
         boolean comprobar = true;
         List<Personas> listaComprobar = ServicioPersonas.ListarPersonas();

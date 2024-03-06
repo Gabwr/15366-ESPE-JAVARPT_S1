@@ -6,6 +6,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,13 +23,21 @@ import repositorio.vista.admin.InterfazAdminJFrame;
 
 public class AgregarProyecto extends javax.swing.JInternalFrame {
     private Proyecto proyecto = new Proyecto();
-
+    
     private static DefaultTableModel dtm = null;
     List<PlanAmbiental> listaActividades = new ArrayList<>();
+    private Calendar hoy= null;
     public AgregarProyecto() {
         initComponents();
         UIManager.put("TextComponent.arc", 999);
+        restringirJcalendar();
         limpiarCampos();
+    }
+    
+        public void restringirJcalendar(){
+        hoy = Calendar.getInstance();
+        Date restriccion =hoy.getTime();
+        dcFechaFinalProyecto.setMinSelectableDate(restriccion);
     }
     
     private boolean validarDatosactividad() {

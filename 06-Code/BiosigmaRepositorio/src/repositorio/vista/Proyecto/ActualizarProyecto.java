@@ -9,6 +9,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import repositorio.modelo.Proyecto;
@@ -24,12 +26,19 @@ import repositorio.vista.trabajador.InterfazTrabajadorJFrame;
 public class ActualizarProyecto extends javax.swing.JInternalFrame {
 
     Proyecto proyecto;
-
+    private Calendar hoy= null;
+    
     public ActualizarProyecto() {
         initComponents();
         consultarDatos();
         llenarTablaActividades();
     }
+        public void restringirJcalendar(){
+        hoy = Calendar.getInstance();
+        Date restriccion =hoy.getTime();
+        dcFechaFinalProyecto.setMinSelectableDate(restriccion);
+    }
+        
         public  void llenarTablaActividades() {
 
         DefaultTableModel dtm= (DefaultTableModel) tbActividades.getModel();

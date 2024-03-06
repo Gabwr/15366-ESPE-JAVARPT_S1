@@ -2,6 +2,7 @@ package repositorio.vista.admin;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -17,11 +18,13 @@ import repositorio.modelo.Personas;
 public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
 
     private Perfil perfilIngreso;
-
+    private Calendar hoy= null;
+    
     public InterfazAdminInsertarUsuario() {
         initComponents();
         cargarComboPerfil();
         cargarComboCargo();
+        restringirJcalendar();
         lbCargo.setVisible(false);
         cbCargo.setVisible(false);
         lbAvisoCargo.setVisible(false);
@@ -41,7 +44,12 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
         }
         return comprobar;
     }
-
+    public void restringirJcalendar(){
+        hoy = Calendar.getInstance();
+        hoy.add(Calendar.YEAR, -18);
+        Date restriccion =hoy.getTime();
+        dcFecha.setMaxSelectableDate(restriccion);
+    }
     public static void cargarComboPerfil() {
         List<Perfil> listaPerfiles = new PerfilServicio().ListarPerfiles();
         for (Perfil temp : listaPerfiles) {
@@ -181,6 +189,7 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
         String edadCalculada = edad + "";
         txtEdad.setText(edadCalculada);
     }
+    
 
     private boolean validarCorreo(String correo) {
         Pattern patron = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
@@ -242,6 +251,7 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
         txtEdad.setForeground(new java.awt.Color(0, 51, 51));
         JPInsertar.add(txtEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 90, -1));
 
+        dcFecha.setMinSelectableDate(new java.util.Date(-62135747925000L));
         dcFecha.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 dcFechaPropertyChange(evt);
