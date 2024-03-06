@@ -19,15 +19,13 @@ public class RegistrarUsuarioCliente extends javax.swing.JInternalFrame {
 
     public boolean comprobarExistencia(String cedula) {
         boolean comprobar = true;
-        List<Personas> listaComprobar = ServicioPersonas.ListarPersonas();
-        for (Personas comprobador : listaComprobar) {
-            if (cedula.equals(comprobador.getCedula())) {
-                comprobar = false;
-            }
+        if ((ServicioPersonas.BuscarPorCodigoClienteyAdmin(cedula) != null) || (ServicioPersonas.BuscarPorCodigoTrabajadores(cedula) != null)) {
+
+            comprobar = false;
+        } else {
+            comprobar = true;
         }
-        if(comprobar==false){
-            JOptionPane.showMessageDialog(null, "Cedula existente");
-        }
+
         return comprobar;
     }
 
@@ -394,13 +392,13 @@ public class RegistrarUsuarioCliente extends javax.swing.JInternalFrame {
         Date fechaNacimiento = dcFecha.getDate();
         String usuario = algoritmousuario(nombre, cedula);
 
-        if (validarDatosOtros() && validarCedula() && validarcontrasenia()) {
+        if (validarDatosOtros() && comprobarExistencia(cedula) && validarCedula() && validarcontrasenia()) {
             String contrasenia = ServicioPersonas.encriptar(pswfContrasenia.getText());
             Personas ClienteNuevo = new Personas(3, usuario, contrasenia, cedula, correo, nombre, fechaNacimiento);
 
             if (ServicioPersonas.InsertarPersonasClienteyAdmin(ClienteNuevo)) {
                 JOptionPane.showMessageDialog(null, "Datos Ingresados");
-                JOptionPane.showMessageDialog(null, "   Su usuario:"+usuario);
+                JOptionPane.showMessageDialog(null, "   Su usuario:" + usuario);
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Datos no Ingresados");
