@@ -890,11 +890,40 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegresarUsuariosActionPerformed
 
     private void btnEliminarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarUsuariosActionPerformed
+        if (filaseleccionadaAdmin > -1 || filaseleccionadaCliente > -1 || filaseleccionadaTrabajador > -1) {
+            int resultado = JOptionPane.showConfirmDialog(null, "¿Seguro de eliminar el registro?", "Confirmación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
+            if (resultado == JOptionPane.YES_OPTION) {
+                if (filaseleccionadaAdmin > -1) {
+                    dtm = (DefaultTableModel) tbAdmin.getModel();
+                    codigoUsuario = (String) dtm.getValueAt(filaseleccionadaAdmin, 0);
+                    ServicioPersonas.EliminarPersonas(codigoUsuario);
+                    dtm.removeRow(filaseleccionadaAdmin);
+                    ListSelectionModel seleccionado = tbAdmin.getSelectionModel();
+                    seleccionado.clearSelection();
+                } else if (filaseleccionadaCliente > -1) {
+                    dtm = (DefaultTableModel) tbClientes.getModel();
+                    codigoUsuario = (String) dtm.getValueAt(filaseleccionadaCliente, 0);
+                    ServicioPersonas.EliminarPersonas(codigoUsuario);
+                    dtm.removeRow(filaseleccionadaCliente);
+                    ListSelectionModel seleccionado = tbClientes.getSelectionModel();
+                    seleccionado.clearSelection();
+                } else if (filaseleccionadaTrabajador > -1) {
+                    dtm = (DefaultTableModel) tbTrabajadores.getModel();
+                    codigoUsuario = (String) dtm.getValueAt(filaseleccionadaTrabajador, 0);
+                    ServicioPersonas.EliminarPersonas(codigoUsuario);
+                    dtm.removeRow(filaseleccionadaTrabajador);
+                    ListSelectionModel seleccionado = tbTrabajadores.getSelectionModel();
+                    seleccionado.clearSelection();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Eliga un dato para eliminar");
+                }
+            }
+        }
     }//GEN-LAST:event_btnEliminarUsuariosActionPerformed
 
     private void btnActualizarusuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarusuariosActionPerformed
-        
+
         if (filaseleccionadaAdmin > -1) {
             dtm = (DefaultTableModel) tbAdmin.getModel();
             codigoUsuario = (String) dtm.getValueAt(filaseleccionadaAdmin, 0);
