@@ -13,27 +13,27 @@ import repositorio.controlador.ServicioPersonas;
 import repositorio.modelo.Cargo;
 import repositorio.modelo.Perfil;
 import repositorio.modelo.Personas;
-import repositorio.vista.Admin.InterfazCambiarContrasenia;
+import repositorio.vista.admin.InterfazCambiarContrasenia;
 
 public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
-     private Perfil perfilIngreso;
+
+    private Perfil perfilIngreso;
     String CargoIngreso;
     private int contador = 1;
-     String cedulapersona = null;
-     public static String cedulaContrasenia= null;
+    String cedulapersona = null;
+    public static String cedulaContrasenia = null;
+
     public InterfazAdminActualizarUsuario() {
         initComponents();
         cbCargo.setVisible(false);
         lbAvisoCargo.setVisible(false);
         btAgregarCargo.setVisible(false);
         lbCargo.setVisible(false);
-        cargarComboCargo();
-        cargarComboPerfil();
-        InterfazAdminJFrame interfaz_Admin = new InterfazAdminJFrame();
-        cedulapersona = interfaz_Admin.codigoUsuario;
+        cedulapersona = InterfazAdminJFrame.codigoUsuario;
         cargarPersona();
     }
-     public String algoritmousuario(String nombre, String Cedula) {
+
+    public String algoritmousuario(String nombre, String Cedula) {
         String usuario = "";
         char pasador;
         for (int inicio = 0; inicio < 3; inicio++) {
@@ -61,7 +61,7 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
 
     private boolean validarDatos() {
         boolean validacion = false;
-        if ((txtNombre.getText().length() > 0) && validarCedula() && (dcFecha.getDate() != null) && validarCorreo(txtCorreo.getText()) && (!"Seleccione un cargo".equals(cbTipoPersona.getSelectedItem().toString()))) {
+        if ((txtNombre.getText().length() > 0) && validarCedula() && (dcFecha.getDate() != null) && validarCorreo(txtCorreo.getText())) {
             validacion = true;
             return validacion;
         } else {
@@ -81,10 +81,12 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
 
     }
 
-    public static void cargarComboPerfil() {
+    public static void cargarComboPerfil(int idPerfil) {
         List<Perfil> listaPerfiles = new PerfilServicio().ListarPerfiles();
         for (Perfil temp : listaPerfiles) {
-            cbTipoPersona.addItem(temp.getId() + " - " + temp.getNombrePerfil());
+            if (temp.getId() != idPerfil) {
+                cbTipoPersona.addItem(temp.getId() + " - " + temp.getNombrePerfil());
+            }
         }
     }
 
@@ -100,10 +102,12 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
         return comprobar;
     }
 
-    public static void cargarComboCargo() {
+    public static void cargarComboCargo(int idCargo) {
         List<Cargo> listaCargos = new CargoServicio().ListarCargos();
         for (Cargo temp : listaCargos) {
-            cbCargo.addItem(temp.getIdCargo() + " - " + temp.getCargo());
+            if (temp.getIdCargo() != idCargo) {
+                cbCargo.addItem(temp.getIdCargo() + " - " + temp.getCargo());
+            }
         }
     }
 
@@ -113,14 +117,17 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
         txtCorreo.setText(persona.getCorreo());
         calcularEdad(persona.getFechaNacimiento().getYear());
         txtNombre.setText(persona.getNombre());
-        if (persona.getIdPerfil() == 1) {
-            cbTipoPersona.setSelectedIndex(persona.getIdPerfil());
-        } else if (persona.getIdPerfil() == 2) {
-            cbTipoPersona.setSelectedIndex(persona.getIdPerfil());
-            cbCargo.setSelectedIndex(persona.getCargo());
+        Perfil perfil = PerfilServicio.BuscarPerfil(persona.getIdPerfil());
+        
+        cbTipoPersona.addItem(perfil.getId() + " - " + perfil.getNombrePerfil());
+        if (persona.getIdPerfil() != 2) {
+            cargarComboCargo(-1);
         } else {
-            cbTipoPersona.setSelectedIndex(persona.getIdPerfil());
+            Cargo cargo = CargoServicio.BuscarCargo(persona.getCargo());
+            cbCargo.addItem(cargo.getIdCargo() + " - " + cargo.getCargo());
+            cargarComboCargo(persona.getCargo());
         }
+        cargarComboPerfil(persona.getIdPerfil());
         dcFecha.setDate(persona.getFechaNacimiento());
     }
 
@@ -238,17 +245,6 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout Dp_ContraseniaLayout = new javax.swing.GroupLayout(Dp_Contrasenia);
-        Dp_Contrasenia.setLayout(Dp_ContraseniaLayout);
-        Dp_ContraseniaLayout.setHorizontalGroup(
-            Dp_ContraseniaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 790, Short.MAX_VALUE)
-        );
-        Dp_ContraseniaLayout.setVerticalGroup(
-            Dp_ContraseniaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-
         JPInsertar.setBackground(new java.awt.Color(102, 102, 255));
         JPInsertar.setForeground(new java.awt.Color(153, 153, 255));
         JPInsertar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -315,7 +311,6 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
         jLabel27.setText("Tipo de Usuario");
         JPInsertar.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(321, 210, -1, -1));
 
-        cbTipoPersona.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un tipo", "Administrador", "Trabajador", "Cliente", " " }));
         cbTipoPersona.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbTipoPersonaActionPerformed(evt);
@@ -366,7 +361,6 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
         lbCargo.setText("Cargo:");
         JPInsertar.add(lbCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(357, 263, -1, -1));
 
-        cbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un tipo", "Administrador", "Trabajador", "Cliente", " " }));
         cbCargo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbCargoActionPerformed(evt);
@@ -408,30 +402,34 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/FondoProyectos.png"))); // NOI18N
         JPInsertar.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 50));
 
+        Dp_Contrasenia.setLayer(JPInsertar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout Dp_ContraseniaLayout = new javax.swing.GroupLayout(Dp_Contrasenia);
+        Dp_Contrasenia.setLayout(Dp_ContraseniaLayout);
+        Dp_ContraseniaLayout.setHorizontalGroup(
+            Dp_ContraseniaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 779, Short.MAX_VALUE)
+            .addGroup(Dp_ContraseniaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(JPInsertar, javax.swing.GroupLayout.PREFERRED_SIZE, 779, Short.MAX_VALUE))
+        );
+        Dp_ContraseniaLayout.setVerticalGroup(
+            Dp_ContraseniaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 412, Short.MAX_VALUE)
+            .addGroup(Dp_ContraseniaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(JPInsertar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(JPInsertar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(Dp_Contrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addComponent(Dp_Contrasenia)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(JPInsertar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(Dp_Contrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 6, Short.MAX_VALUE)
+                .addComponent(Dp_Contrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -442,7 +440,6 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
         String nombre = txtNombre.getText();
         String cedula = txtCedulA.getText();
         String correo = txtCorreo.getText();
-        String edad = txtEdad.getText();
         String usuario = algoritmousuario(nombre, cedula);
         String dato = cbTipoPersona.getSelectedItem().toString();
         String perfil[] = dato.split("-");
@@ -450,19 +447,8 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
         Date fechaNacimiento = dcFecha.getDate();
         perfilIngreso = PerfilServicio.BuscarPerfil(idPerfil);
 
-        if (validarDatos() && validarCedula()) {
-            if (CargoIngreso.equals("Administrador")) {
-                JOptionPane.showMessageDialog(null, "Usuario guardado correctamente.");
-            } else if (CargoIngreso.equals("Trabajador")) {
-                JOptionPane.showMessageDialog(null, "Usuario guardado correctamente.");
-            } else if (CargoIngreso.equals("Cliente")) {
-                JOptionPane.showMessageDialog(null, "Usuario guardado correctamente.");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Ingrese los datos correctamente");
-        }
-        if (validarDatosOtros() && validarCedula() && (perfilIngreso.getId() == 1)  && comprobarExistencia(cedula)) {
-            
+        if (validarDatosOtros() && validarCedula() && (perfilIngreso.getId() == 1) && comprobarExistencia(cedula)) {
+
             Personas AdminNuevo = new Personas(perfilIngreso.getId(), usuario, cedula, correo, nombre, fechaNacimiento);
 
             if (ServicioPersonas.ActualizarPersonasClientesAdmin(AdminNuevo)) {
@@ -473,14 +459,14 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Datos no Ingresados");
             }
 
-        } else if (validarDatosTrabajador() && validarCedula() && (perfilIngreso.getId() == 2) ) {
+        } else if (validarDatosTrabajador() && validarCedula() && (perfilIngreso.getId() == 2)) {
 
             dato = cbCargo.getSelectedItem().toString();
             String cargo[] = dato.split("-");
             int idCargo = Integer.parseInt(cargo[0].trim());
             Cargo cargoIngreso = CargoServicio.BuscarCargo(idCargo);
 
-            Personas TrabajadorNuevo = new Personas(perfilIngreso.getId(), usuario, cedula, correo, nombre, fechaNacimiento ,cargoIngreso.getIdCargo());
+            Personas TrabajadorNuevo = new Personas(perfilIngreso.getId(), usuario, cedula, correo, nombre, fechaNacimiento, cargoIngreso.getIdCargo());
             if (ServicioPersonas.ActualizarPersonasTrabajador(TrabajadorNuevo)) {
                 JOptionPane.showMessageDialog(null, "Datos Ingresados");
                 InterfazAdminJFrame.llenarPersonas();
@@ -488,6 +474,7 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Datos no Ingresados");
             }
+
         } else if (validarDatosOtros() && validarCedula() && (perfilIngreso.getId() != 1) && (perfilIngreso.getId() != 2)) {
             Personas ClienteNuevo = new Personas(perfilIngreso.getId(), usuario, cedula, correo, nombre, fechaNacimiento);
 
@@ -609,7 +596,7 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        cedulaContrasenia=txtCedulA.getText();
+        cedulaContrasenia = txtCedulA.getText();
         InterfazCambiarContrasenia contrasenia = new InterfazCambiarContrasenia();
         Dp_Contrasenia.add(contrasenia);
         contrasenia.show();

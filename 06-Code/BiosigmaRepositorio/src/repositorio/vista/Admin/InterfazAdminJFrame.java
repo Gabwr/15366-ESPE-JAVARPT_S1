@@ -26,11 +26,11 @@ import repositorio.vista.cargo.ConsultarCargo;
 import repositorio.vista.perfil.ConsultarPerfil;
 
 public class InterfazAdminJFrame extends javax.swing.JFrame {
-    
+
     private int contador = 1;
-    int filaseleccionadaAdmin = -1;
-    int filaseleccionadaCliente = -1;
-    int filaseleccionadaTrabajador = -1;
+    int filaseleccionadaAdmin;
+    int filaseleccionadaCliente;
+    int filaseleccionadaTrabajador;
     private static String codigoProyecto = "";
     public static String codigoUsuario = "";
     private DefaultTableModel dtm = null;
@@ -101,7 +101,7 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         for (Personas temp : listaPersonas) {
             int anioNacimiento = recuperarAnioNacimiento(temp.getFechaNacimiento());
             int edad = calcularEdad(anioNacimiento);
-            
+
             switch (temp.getIdPerfil()) {
                 case 1:
                     dtm1.addRow(new Object[]{temp.getCedula(), temp.getNombre(), temp.getCorreo(), edad});
@@ -112,10 +112,10 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
                     break;
                 case 3:
                     Perfil perfil = PerfilServicio.BuscarPerfil(temp.getIdPerfil());
-                    dtm3.addRow(new Object[]{temp.getCedula(),temp.getNombre(),temp.getCorreo(),edad,perfil.getNombrePerfil()});
+                    dtm3.addRow(new Object[]{temp.getCedula(), temp.getNombre(), temp.getCorreo(), edad, perfil.getNombrePerfil()});
                     break;
             }
-            
+
         }
     }
 
@@ -125,8 +125,8 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         int anio = Integer.parseInt(anioNacimientoCadena);
         return anio;
     }
-    
-       private static int calcularEdad(int anioNacimiento) {
+
+    private static int calcularEdad(int anioNacimiento) {
         LocalDate actual = LocalDate.now();
 
         int anioActual = actual.getYear();
@@ -894,37 +894,37 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarUsuariosActionPerformed
 
     private void btnActualizarusuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarusuariosActionPerformed
+        
         if (filaseleccionadaAdmin > -1) {
             dtm = (DefaultTableModel) tbAdmin.getModel();
-            codigoUsuario=(String) dtm.getValueAt(filaseleccionadaAdmin, 0);
-            InterfazAdminActualizarUsuario actualizar= new InterfazAdminActualizarUsuario();
+            codigoUsuario = (String) dtm.getValueAt(filaseleccionadaAdmin, 0);
+            InterfazAdminActualizarUsuario actualizar = new InterfazAdminActualizarUsuario();
             escritorio.add(actualizar);
             actualizar.show();
-            filaseleccionadaAdmin=-1;
+            filaseleccionadaAdmin = -1;
             ListSelectionModel seleccionado = tbAdmin.getSelectionModel();
-                seleccionado.clearSelection();
+            seleccionado.clearSelection();
         } else if (filaseleccionadaCliente > -1) {
             dtm = (DefaultTableModel) tbClientes.getModel();
-            codigoUsuario=(String) dtm.getValueAt(filaseleccionadaCliente, 0);
-            InterfazAdminActualizarUsuario actualizar= new InterfazAdminActualizarUsuario();
+            codigoUsuario = (String) dtm.getValueAt(filaseleccionadaCliente, 0);
+            InterfazAdminActualizarUsuario actualizar = new InterfazAdminActualizarUsuario();
             escritorio.add(actualizar);
             actualizar.show();
-            filaseleccionadaCliente=-1;
+            filaseleccionadaCliente = -1;
             ListSelectionModel seleccionado = tbClientes.getSelectionModel();
-                seleccionado.clearSelection();
+            seleccionado.clearSelection();
         } else if (filaseleccionadaTrabajador > -1) {
             dtm = (DefaultTableModel) tbTrabajadores.getModel();
-            codigoUsuario=(String) dtm.getValueAt(filaseleccionadaTrabajador, 0);
-            InterfazAdminActualizarUsuario actualizar= new InterfazAdminActualizarUsuario();
+            codigoUsuario = (String) dtm.getValueAt(filaseleccionadaTrabajador, 0);
+            InterfazAdminActualizarUsuario actualizar = new InterfazAdminActualizarUsuario();
             escritorio.add(actualizar);
             actualizar.show();
-            filaseleccionadaTrabajador=-1;
+            filaseleccionadaTrabajador = -1;
             ListSelectionModel seleccionado = tbTrabajadores.getSelectionModel();
-                seleccionado.clearSelection();
+            seleccionado.clearSelection();
         } else {
             JOptionPane.showMessageDialog(null, "Eliga un dato para actualizar");
         }
-        
     }//GEN-LAST:event_btnActualizarusuariosActionPerformed
 
     private void btAgregarMiembroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgregarMiembroActionPerformed
@@ -1031,14 +1031,35 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
 
     private void tbAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAdminMouseClicked
         filaseleccionadaAdmin = tbAdmin.getSelectedRow();
+        filaseleccionadaCliente = -1;
+        filaseleccionadaTrabajador = -1;
+        ListSelectionModel selectionModel;
+        selectionModel = tbClientes.getSelectionModel();
+        selectionModel.clearSelection();
+        selectionModel = tbTrabajadores.getSelectionModel();
+        selectionModel.clearSelection();
     }//GEN-LAST:event_tbAdminMouseClicked
 
     private void tbClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbClientesMouseClicked
         filaseleccionadaCliente = tbClientes.getSelectedRow();
+        filaseleccionadaAdmin = -1;
+        filaseleccionadaTrabajador = -1;
+        ListSelectionModel selectionModel;
+        selectionModel = tbAdmin.getSelectionModel();
+        selectionModel.clearSelection();
+        selectionModel = tbTrabajadores.getSelectionModel();
+        selectionModel.clearSelection();
     }//GEN-LAST:event_tbClientesMouseClicked
 
     private void tbTrabajadoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbTrabajadoresMouseClicked
-        filaseleccionadaCliente = tbTrabajadores.getSelectedRow();
+        filaseleccionadaTrabajador = tbTrabajadores.getSelectedRow();
+        filaseleccionadaCliente = -1;
+        filaseleccionadaAdmin = -1;
+        ListSelectionModel selectionModel;
+        selectionModel = tbClientes.getSelectionModel();
+        selectionModel.clearSelection();
+        selectionModel = tbAdmin.getSelectionModel();
+        selectionModel.clearSelection();
     }//GEN-LAST:event_tbTrabajadoresMouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

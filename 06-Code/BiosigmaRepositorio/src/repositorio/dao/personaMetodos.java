@@ -127,7 +127,7 @@ public class personaMetodos implements IPersonas {
 
     @Override
     public boolean ActualizarPersonasClientesAdmin(Personas persona) {
-        Document filtro = new Document("cedula", persona.getUsuario());
+        Document filtro = new Document("cedula", persona.getCedula());
         Document documento = new Document("$set", new Document()
                 .append("id_Perfil", persona.getIdPerfil())
                 .append("nombre", persona.getNombre())
