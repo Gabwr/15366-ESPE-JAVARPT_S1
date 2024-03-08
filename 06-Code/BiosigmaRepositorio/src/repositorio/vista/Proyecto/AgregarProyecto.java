@@ -22,24 +22,26 @@ import repositorio.modelo.Proyecto;
 import repositorio.vista.admin.InterfazAdminJFrame;
 
 public class AgregarProyecto extends javax.swing.JInternalFrame {
+
     private Proyecto proyecto = new Proyecto();
-    
+
     private static DefaultTableModel dtm = null;
     List<PlanAmbiental> listaActividades = new ArrayList<>();
-    private Calendar hoy= null;
+    private Calendar hoy = null;
+
     public AgregarProyecto() {
         initComponents();
         UIManager.put("TextComponent.arc", 999);
         restringirJcalendar();
         limpiarCampos();
     }
-    
-        public void restringirJcalendar(){
+
+    public void restringirJcalendar() {
         hoy = Calendar.getInstance();
-        Date restriccion =hoy.getTime();
+        Date restriccion = hoy.getTime();
         dcFechaFinalProyecto.setMinSelectableDate(restriccion);
     }
-    
+
     private boolean validarDatosactividad() {
         PlanAmbiental actividades = new PlanAmbiental();
 
@@ -49,20 +51,29 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "El códgio ingresado ya esta registrado");
                 return false;
             }
+            int aleatorio_id = 0;
+            aleatorio_id = (int) (Math.random() * 100);
+
+            while (ActividadServicio.VerificarCodigoRepetido(aleatorio_id)) {
+                aleatorio_id = (int) (Math.random() * 100);
+
+            }
+            actividades.setIndicador(aleatorio_id);
             actividades.setEvidencias(null);
             actividades.setActividad(txtActividad.getText());
-            
+            actividades.setCompletado(false);
+
             String completado, fechaFinal, permisoAgua, auditoria, monitoreo;
-            
-            if(dcFechaFinalProyecto.getDate()==null){
-              actividades.setFechaRealizada(dcFechaFinalProyecto.getDate());
-              completado="Por completar";
-              fechaFinal="En progreso";
-            }else{
-            completado="Completado";
-            fechaFinal = new SimpleDateFormat("dd/MM/yyyy").format(dcFechaFinalProyecto.getDate());
-            actividades.setFechaRealizada(dcFechaFinalProyecto.getDate());
-            
+            completado = "Por completar";
+            if (dcFechaFinalProyecto.getDate() == null) {
+                actividades.setFechaRealizada(dcFechaFinalProyecto.getDate());
+
+                fechaFinal = "En progreso";
+            } else {
+
+                fechaFinal = new SimpleDateFormat("dd/MM/yyyy").format(dcFechaFinalProyecto.getDate());
+                actividades.setFechaRealizada(dcFechaFinalProyecto.getDate());
+
             }
             dtm.addRow(new Object[]{actividades.getActividad(), completado, fechaFinal, actividades.getEvidencias()});
 
@@ -73,6 +84,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         }
 
     }
+
     private void cagarDatosActividades() {
         for (PlanAmbiental actividad : listaActividades) {
             System.out.println(actividad.getActividad());
@@ -82,6 +94,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
 
         }
     }
+
     private boolean validarDatos() {
         DefaultTableModel dtm = (DefaultTableModel) tbActividades.getModel();
         if ((txtCodigoProyecto.getText().length() > 0) && (txtNombreProyecto.getText().length() > 0) && (txtDescripcionProyecto.getText().length() > 0) && (dcFechaInicioProyecto.getDate() != null) && (rdEnProgreso.isSelected() || dcFechaFinalProyecto != null) && (rdActividades.isSelected() || (dtm.getRowCount() != 0))) {
@@ -413,6 +426,11 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         panelAgregarProyecto.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
         txtCodigoProyecto.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtCodigoProyecto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodigoProyectoActionPerformed(evt);
+            }
+        });
         txtCodigoProyecto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtCodigoProyectoKeyReleased(evt);
@@ -631,7 +649,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btPermisoAguaActionPerformed
 
     private void btAuditoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAuditoriasActionPerformed
-        
+
         byte[] pdfBytes = seleccionarArchivo();
         if (pdfBytes != null) {
             proyecto.setAuditoria(pdfBytes);
@@ -721,7 +739,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_lbPermisoAmbientalMouseClicked
 
     private void btActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btActividadActionPerformed
-                if (validarDatosactividad()) {
+        if (validarDatosactividad()) {
 
             DefaultTableModel dtm = (DefaultTableModel) tbActividades.getModel();
 
@@ -731,6 +749,10 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
 
 
     }//GEN-LAST:event_btActividadActionPerformed
+
+    private void txtCodigoProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoProyectoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodigoProyectoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

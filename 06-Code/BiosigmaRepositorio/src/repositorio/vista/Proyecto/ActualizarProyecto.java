@@ -21,50 +21,65 @@ import repositorio.controlador.ActividadServicio;
 import repositorio.controlador.ProyectoServicio;
 import repositorio.modelo.PlanAmbiental;
 import repositorio.vista.admin.InterfazAdminJFrame;
+import static repositorio.vista.admin.InterfazAdminJFrame.codigoUsuario;
 import repositorio.vista.trabajador.InterfazTrabajadorJFrame;
 
 public class ActualizarProyecto extends javax.swing.JInternalFrame {
 
     Proyecto proyecto;
-    private Calendar hoy= null;
-    
+    PlanAmbiental actividad=new PlanAmbiental();
+    private Calendar hoy = null;
+    static int filaseleccionadaActividad = -1;
+    private DefaultTableModel dtm = null;
+
     public ActualizarProyecto() {
         initComponents();
         consultarDatos();
         llenarTablaActividades();
+
     }
-        public void restringirJcalendar(){
+
+    public void restringirJcalendar() {
         hoy = Calendar.getInstance();
-        Date restriccion =hoy.getTime();
+        Date restriccion = hoy.getTime();
         dcFechaFinalProyecto.setMinSelectableDate(restriccion);
     }
-        
-        public  void llenarTablaActividades() {
 
-        DefaultTableModel dtm= (DefaultTableModel) tbActividades.getModel();
-        String id ="112";
+    public void llenarTablaActividades() {
+
+        DefaultTableModel dtm = (DefaultTableModel) tbActividades.getModel();
+
         dtm.setRowCount(0);
-        System.out.println("Por aqui todo bienn");
+        System.out.println("Error llenar tabla actualizar");
         for (PlanAmbiental actividades : ActividadServicio.ListaActividades(obtenercodigointerfacez())) {
-            String fechaaInicio, fechaFinal, evidencia, permisoAgua, auditoria, monitoreo;
-            
-            fechaaInicio = new SimpleDateFormat("dd/MM/yyyy").format(actividades.getFechaRealizada());
-           
-            System.out.println("ErrorActualizarProyecto");
-            
-            
+            String fechaafinal, fechaFinal, evidencia, permisoAgua, auditoria, completado;
+            System.out.println("Aqui hay problemaactualizar");
 
-        
+            System.out.println("ErrorActualizarProyecto");
+            if (actividades.getFechaRealizada() == null) {
+                fechaafinal = "Indefinida";
+            } else {
+                fechaafinal = new SimpleDateFormat("dd/MM/yyyy").format(actividades.getFechaRealizada());
+
+            }
+            if (actividades.getCompletado()) {
+                completado = "Completado";
+            } else {
+                completado = "En progreso";
+            }
+
             if (actividades.getEvidencias() == null) {
-                evidencia= "Por cargar";
+                evidencia = "Por cargar";
             } else {
                 evidencia = "Cargado";
             }
-            
 
-
-            dtm.addRow(new Object[]{actividades.getActividad(), fechaaInicio, evidencia});
+            dtm.addRow(new Object[]{actividades.getIndicador(), actividades.getActividad(), completado, fechaafinal, evidencia});
         }
+    }
+
+    private void cargaralabase() {
+
     }
 
     private String obtenercodigointerfacez() {
@@ -95,6 +110,28 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
             if (!rdEnProgreso.isSelected() && dcFechaFinalProyecto == null) {
                 JOptionPane.showMessageDialog(null, "Si aun no ha finalizado el proyecto, sleccione en progreso");
             }
+            return false;
+        }
+    }
+
+    private boolean validarDatosActividad() {
+        if ((txtActividadActualizar.getText().length() > 0) && (rbtProgreso.isSelected() || rbtCompletada.isSelected()) && (filaseleccionadaActividad >= 0)) {
+
+            return true;
+
+        } else {
+            if (txtActividadActualizar.getText().length() == 0) {
+                JOptionPane.showMessageDialog(null, "No puede dejar la actividad vacia");
+            }
+
+            if (!rbtCompletada.isSelected() && !rbtProgreso.isSelected()) {
+                JOptionPane.showMessageDialog(null, "No ha seleccionado");
+            }
+            if (filaseleccionadaActividad == -1) {
+                JOptionPane.showMessageDialog(null, "Seleccione el elemento a actualizar");
+
+            }
+
             return false;
         }
     }
@@ -134,8 +171,27 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         return pdfBytes;
     }
 
-    private void consultarDatos() {
+    private void fecharealizada() {
+        if (rdEnProgreso.getAction() != null) {
+            actividad.setFechaRealizada(dcFechaFinalProyecto.getDate());
 
+        } else {
+            actividad.setFechaRealizada(null);
+        }
+
+    }
+
+    private void opcionCompletado() {
+        if (rbtCompletada.isSelected()) {
+            actividad.setCompletado(true);
+        } else if (rbtProgreso.isSelected()) {
+            actividad.setCompletado(false);
+        }
+
+    }
+
+    private void consultarDatos() {
+        System.out.println("AquiProblemas");
         try {
             proyecto = ProyectoServicio.BuscarProyecto(obtenercodigointerfacez());
             txtCodigo.setText(proyecto.getIdProyecto());
@@ -184,6 +240,7 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btngCompletado = new javax.swing.ButtonGroup();
         PanelActualizarProyecto = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         btnRegresarPanelTabla = new javax.swing.JButton();
@@ -209,10 +266,10 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         jButton9 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel38 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        txtActividadActualizar = new javax.swing.JTextField();
         jButton11 = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        rbtCompletada = new javax.swing.JRadioButton();
+        rbtProgreso = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
@@ -332,6 +389,11 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         jLabel40.setText("Actividad");
 
         jButton9.setText("Agregar");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -340,15 +402,16 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(101, 101, 101)
-                        .addComponent(jButton9))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(104, 104, 104)
                         .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(45, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton9)
+                .addGap(86, 86, 86))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -371,18 +434,25 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         jLabel38.setText("Actividad");
 
         jButton11.setText("Actualizar");
-
-        jRadioButton1.setText("Completada");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                jButton11ActionPerformed(evt);
             }
         });
 
-        jRadioButton2.setText("En progreso");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        btngCompletado.add(rbtCompletada);
+        rbtCompletada.setText("Completada");
+        rbtCompletada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                rbtCompletadaActionPerformed(evt);
+            }
+        });
+
+        btngCompletado.add(rbtProgreso);
+        rbtProgreso.setText("En progreso");
+        rbtProgreso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtProgresoActionPerformed(evt);
             }
         });
 
@@ -398,26 +468,26 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
-                        .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(93, 93, 93)
-                        .addComponent(jButton11)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton2)
-                            .addComponent(jRadioButton1)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(rbtProgreso)
+                            .addComponent(rbtCompletada)
+                            .addComponent(txtActividadActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton3)))
                 .addGap(0, 16, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(100, 100, 100)
+                        .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addComponent(jButton11)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -425,11 +495,11 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel38)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtActividadActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton1)
+                .addComponent(rbtCompletada)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton2)
+                .addComponent(rbtProgreso)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -457,15 +527,20 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Actividades", "Completado", "Fecha realizada", "Evidencia"
+                "Indicador", "Actividades", "Completado", "Fecha realizada", "Evidencia"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tbActividades.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbActividadesMouseClicked(evt);
             }
         });
         jScrollPane14.setViewportView(tbActividades);
@@ -643,16 +718,17 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         abrirArchivoProyecto(proyecto.getMonitoreo());
     }//GEN-LAST:event_btMonitoreoActionPerformed
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void rbtCompletadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtCompletadaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_rbtCompletadaActionPerformed
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+    private void rbtProgresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtProgresoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+    }//GEN-LAST:event_rbtProgresoActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         if (validarDatos()) {
+
             int resultado = JOptionPane.showConfirmDialog(null, "¿Esta seguro de actualizar el proyecto?", "Confirmación", JOptionPane.YES_NO_OPTION);
             if (resultado == JOptionPane.YES_OPTION) {
                 proyecto.setNombreProyecto(txtNombreProyecto.getText());
@@ -701,6 +777,42 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_cambiarMonitoreoActionPerformed
 
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        if (validarDatosActividad()) {
+            int resultado = JOptionPane.showConfirmDialog(null, "¿Esta seguro de actualizar", "Confirmación", JOptionPane.YES_NO_OPTION);
+            if (resultado == JOptionPane.YES_OPTION) {
+                if (filaseleccionadaActividad > -1) {
+                    dtm = (DefaultTableModel) tbActividades.getModel();
+                    String indicadorActividad =   dtm.getValueAt(filaseleccionadaActividad, 0).toString();
+                    System.out.println(indicadorActividad);
+                    
+                   
+                    int indicador = Integer.parseInt(indicadorActividad);
+                   
+                   
+                   actividad.setActividad(txtActividadActualizar.getText());
+                    actividad.setIndicador(indicador);
+                    actividad.setId(InterfazAdminJFrame.getCodigoProyecto());
+                    fecharealizada();
+                    opcionCompletado();
+                    actividad.setEvidencias(null);
+                    System.out.println("Pregunta aqui hay un error en el boton actualizar");
+                    ActividadServicio.ActualizarActividad(actividad);
+                }
+
+            }
+        }
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void tbActividadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbActividadesMouseClicked
+        filaseleccionadaActividad = tbActividades.getSelectedRow();
+        System.out.println(filaseleccionadaActividad);
+    }//GEN-LAST:event_tbActividadesMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelActualizarProyecto;
@@ -709,6 +821,7 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
     private javax.swing.JButton btPermisoAgua;
     private javax.swing.JButton btPermisoAmbiental;
     private javax.swing.JButton btnRegresarPanelTabla;
+    private javax.swing.ButtonGroup btngCompletado;
     private javax.swing.JButton cambiarAgua;
     private javax.swing.JButton cambiarAmbiental;
     private javax.swing.JButton cambiarAuditoria;
@@ -738,21 +851,21 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     private javax.swing.JLabel lbAuditoria;
     private javax.swing.JLabel lbMonitoreo;
     private javax.swing.JLabel lbPermisoAgua;
     private javax.swing.JLabel lbPermisoAmbiental;
+    private javax.swing.JRadioButton rbtCompletada;
+    private javax.swing.JRadioButton rbtProgreso;
     private javax.swing.JRadioButton rdEnProgreso;
-    private javax.swing.JTable tbActividades;
+    private static javax.swing.JTable tbActividades;
+    private javax.swing.JTextField txtActividadActualizar;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextArea txtDescripcionProyecto;
     private javax.swing.JTextField txtNombreProyecto;

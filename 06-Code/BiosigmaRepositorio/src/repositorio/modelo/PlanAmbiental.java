@@ -6,30 +6,26 @@ public class PlanAmbiental {
     private String actividad, id;
     private int indicador;
      private byte[] evidencias;
+     private boolean completado;
+     
 
     public PlanAmbiental() {
     }
 
-    public PlanAmbiental(String actividad, int indicador, byte[] evidencias, boolean completado, Date fechaRealizada) {
+    public PlanAmbiental(String actividad, String id, int indicador, byte[] evidencias, boolean completado, Date fechaRealizada) {
         this.actividad = actividad;
+        this.id = id;
         this.indicador = indicador;
         this.evidencias = evidencias;
         this.completado = completado;
         this.fechaRealizada = fechaRealizada;
     }
 
+
      
      
      
-     
-    public PlanAmbiental(String actividad, String id, int indicador, byte[] evidencias, Date fechaRealizada) {
-        this.actividad = actividad;
-        this.id = id;
-        this.indicador = indicador;
-        this.evidencias = evidencias;
-        
-        this.fechaRealizada = fechaRealizada;
-    }
+
 
      
      
@@ -46,7 +42,7 @@ public class PlanAmbiental {
 
    
     
-    boolean completado;
+   
     Date fechaRealizada;
 
     public String getActividad() {
@@ -64,16 +60,16 @@ public class PlanAmbiental {
     public void setId(String id) {
         this.id = id;
     }
+    public void setIndicador(int indicador) {
+        this.indicador = indicador;
+    }
 
     public int getIndicador() {
         return indicador;
     }
 
-    public void setIndicador(int indicador) {
-        this.indicador = indicador;
-    }
 
-    public boolean isCompletado() {
+    public boolean getCompletado() {
         return completado;
     }
 

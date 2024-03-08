@@ -23,5 +23,12 @@ public class ActividadServicio {
         public static boolean InsertarActividades(PlanAmbiental proyecto){
         return new ActividadMetodos().InsertarActividad(proyecto);
     }
+     public static boolean VerificarCodigoRepetido(int codigo){
+         return new ActividadMetodos().VerificarCodigoRepetido(codigo);
+     }
+      public static boolean ActualizarActividad(PlanAmbiental actividad) {
+          return new ActividadMetodos().ActualizarActividad(actividad);
+          
+      }
     
 }
