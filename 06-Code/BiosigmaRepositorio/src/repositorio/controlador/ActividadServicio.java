@@ -2,6 +2,7 @@ package repositorio.controlador;
 
 import java.util.List;
 import repositorio.dao.ActividadMetodos;
+import repositorio.dao.ProyectoMetodos;
 import repositorio.modelo.PlanAmbiental;
 
 /**
@@ -13,6 +14,9 @@ public class ActividadServicio {
     public static List<PlanAmbiental> ListaActividades(String idProyecto) {
         return new ActividadMetodos().ListarActividades(idProyecto);
 
+    }
+        public static boolean EliminarActividad(Object idProyecto){
+        return new ActividadMetodos().EliminarActividad(idProyecto);
     }
 
     public static boolean InsertarActividades(PlanAmbiental proyecto) {

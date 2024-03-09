@@ -4,6 +4,7 @@ import com.mongodb.MongoException;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.UpdateResult;
 import java.util.ArrayList;
 import java.util.List;
@@ -128,5 +129,19 @@ public class ActividadMetodos implements IActividades {
 
         PlanAmbiental proyecto = new PlanAmbiental(documento.getString("actividad"), documento.getString("id_Proyecto"), documento.get("_id"), pdfPermisoAmbiental, documento.getBoolean("completado"), documento.getDate("Fecha_Realizada"));
         return proyecto;
+    }
+
+    @Override
+    public boolean EliminarActividad(Object idActividad) {
+                Document filtro = new Document("_id", idActividad);
+        DeleteResult resultado = coleccion.deleteOne(filtro);
+        if (resultado.getDeletedCount() > 0) {
+            JOptionPane.showMessageDialog(null, "El registro se ha eliminado correctamente");
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(null, "No se pudo eliminar el registro");
+            return false;
+        }
+     
     }
 }

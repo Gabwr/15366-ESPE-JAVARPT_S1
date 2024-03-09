@@ -275,6 +275,10 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         rbtProgreso = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        txtActividadEliminar = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         jScrollPane14 = new javax.swing.JScrollPane();
         tbActividades = new javax.swing.JTable();
@@ -409,12 +413,11 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
                         .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(96, 96, 96)
+                        .addComponent(jButton9)))
                 .addContainerGap(45, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton9)
-                .addGap(86, 86, 86))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -425,7 +428,7 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
                 .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton9)
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Agregar actividad", jPanel3);
@@ -524,7 +527,52 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
 
         jTabbedPane1.addTab("Actualizar actividad", jPanel1);
 
-        PanelActualizarProyecto.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 370, 280, 230));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 204));
+
+        jLabel4.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
+        jLabel4.setText("Actividad");
+
+        txtActividadEliminar.setEditable(false);
+
+        jButton2.setText("Eliminar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(104, 104, 104)
+                        .addComponent(jLabel4))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(97, 97, 97)
+                        .addComponent(jButton2))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addComponent(txtActividadEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(76, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtActividadEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addContainerGap(76, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Eliminar Actividad", jPanel2);
+
+        PanelActualizarProyecto.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 370, 280, 240));
 
         jButton10.setFont(new java.awt.Font("Sitka Banner", 1, 14)); // NOI18N
         jButton10.setText("Actualizar");
@@ -821,6 +869,7 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         if (filaseleccionadaActividad >= 0) {
             actividad = ActividadServicio.BuscarActividad(tbActividades.getValueAt(filaseleccionadaActividad, 0));
             txtActividadActualizar.setText(actividad.getActividad());
+            txtActividadEliminar.setText(actividad.getActividad());
             if (actividad.getCompletado()) {
                 rbtCompletada.setSelected(true);
                 rbtProgreso.setSelected(false);
@@ -855,6 +904,20 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        int resultado = JOptionPane.showConfirmDialog(null, "¿Esta seguro de eliminar", "Confirmación", JOptionPane.YES_NO_OPTION);
+        if (resultado == JOptionPane.YES_OPTION) {
+            if (filaseleccionadaActividad > -1) {
+                dtm = (DefaultTableModel) tbActividades.getModel();
+                Object idActividad = dtm.getValueAt(filaseleccionadaActividad, 0);
+
+                ActividadServicio.EliminarActividad(idActividad);
+                llenarTablaActividades();
+            }
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelActualizarProyecto;
@@ -873,6 +936,7 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
     private com.toedter.calendar.JDateChooser dcFechaInicioProyecto;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
@@ -886,12 +950,14 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane8;
@@ -908,6 +974,7 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton rdEnProgreso;
     private static javax.swing.JTable tbActividades;
     private javax.swing.JTextField txtActividadActualizar;
+    private javax.swing.JTextField txtActividadEliminar;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextArea txtDescripcionProyecto;
     private javax.swing.JTextField txtNombreProyecto;

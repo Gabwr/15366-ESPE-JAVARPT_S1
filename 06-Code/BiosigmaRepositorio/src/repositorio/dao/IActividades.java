@@ -18,4 +18,5 @@ public interface IActividades {
     
     public PlanAmbiental BuscarActividad(Object idActividad);
 
+    public boolean EliminarActividad(Object idActividad);
 }
