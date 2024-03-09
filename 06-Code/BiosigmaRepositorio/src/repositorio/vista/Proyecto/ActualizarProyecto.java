@@ -18,6 +18,8 @@ import repositorio.modelo.Proyecto;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import repositorio.controlador.ActividadServicio;
 import repositorio.controlador.ProyectoServicio;
 import repositorio.modelo.PlanAmbiental;
@@ -28,7 +30,7 @@ import repositorio.vista.trabajador.InterfazTrabajadorJFrame;
 public class ActualizarProyecto extends javax.swing.JInternalFrame {
 
     Proyecto proyecto;
-    PlanAmbiental actividad=new PlanAmbiental();
+    PlanAmbiental actividad = new PlanAmbiental();
     private Calendar hoy = null;
     static int filaseleccionadaActividad = -1;
     private DefaultTableModel dtm = null;
@@ -40,7 +42,7 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
 
     }
 
-       public void restringirJcalendar() {
+    public void restringirJcalendar() {
         hoy = Calendar.getInstance();
         Date restriccion = hoy.getTime();
         dcFechaFinalProyecto.setMinSelectableDate(restriccion);
@@ -52,16 +54,15 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
     }
 
     public void llenarTablaActividades() {
-
-        DefaultTableModel dtm = (DefaultTableModel) tbActividades.getModel();
+        dtm = (DefaultTableModel) tbActividades.getModel();
+        TableColumnModel columnModel = tbActividades.getColumnModel();
+        TableColumn columna = columnModel.getColumn(0);
+        columna.setMinWidth(0);
+        columna.setMaxWidth(0);
 
         dtm.setRowCount(0);
-        System.out.println("Error llenar tabla actualizar");
         for (PlanAmbiental actividades : ActividadServicio.ListaActividades(obtenercodigointerfacez())) {
-            String fechaafinal, fechaFinal, evidencia, permisoAgua, auditoria, completado;
-            System.out.println("Aqui hay problemaactualizar");
-
-            System.out.println("ErrorActualizarProyecto");
+            String fechaafinal, evidencia, completado;
             if (actividades.getFechaRealizada() == null) {
                 fechaafinal = "Indefinida";
             } else {
@@ -80,12 +81,8 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
                 evidencia = "Cargado";
             }
 
-            dtm.addRow(new Object[]{actividades.getIndicador(), actividades.getActividad(), completado, fechaafinal, evidencia});
+            dtm.addRow(new Object[]{actividades.getIdActividad(), actividades.getActividad(), completado, fechaafinal, evidencia});
         }
-    }
-
-    private void cargaralabase() {
-
     }
 
     private String obtenercodigointerfacez() {
@@ -273,7 +270,7 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel38 = new javax.swing.JLabel();
         txtActividadActualizar = new javax.swing.JTextField();
-        jButton11 = new javax.swing.JButton();
+        btActualizarActividad = new javax.swing.JButton();
         rbtCompletada = new javax.swing.JRadioButton();
         rbtProgreso = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
@@ -439,10 +436,10 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         jLabel38.setForeground(new java.awt.Color(51, 0, 51));
         jLabel38.setText("Actividad");
 
-        jButton11.setText("Actualizar");
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
+        btActualizarActividad.setText("Actualizar");
+        btActualizarActividad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
+                btActualizarActividadActionPerformed(evt);
             }
         });
 
@@ -463,9 +460,19 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         });
 
         jButton1.setText("Evidencia");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(204, 204, 255));
         jButton3.setText("Cambiar archivo");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -492,7 +499,7 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
                         .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(75, 75, 75)
-                        .addComponent(jButton11)))
+                        .addComponent(btActualizarActividad)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -511,7 +518,7 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
                     .addComponent(jButton1)
                     .addComponent(jButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton11)
+                .addComponent(btActualizarActividad)
                 .addGap(17, 17, 17))
         );
 
@@ -533,7 +540,7 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Indicador", "Actividades", "Completado", "Fecha realizada", "Evidencia"
+                "id", "Actividades", "Completado", "Fecha realizada", "Evidencia"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -783,46 +790,74 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_cambiarMonitoreoActionPerformed
 
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+    private void btActualizarActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btActualizarActividadActionPerformed
         if (validarDatosActividad()) {
             int resultado = JOptionPane.showConfirmDialog(null, "¿Esta seguro de actualizar", "Confirmación", JOptionPane.YES_NO_OPTION);
             if (resultado == JOptionPane.YES_OPTION) {
                 if (filaseleccionadaActividad > -1) {
                     dtm = (DefaultTableModel) tbActividades.getModel();
-                    String indicadorActividad =   dtm.getValueAt(filaseleccionadaActividad, 0).toString();
-                    System.out.println(indicadorActividad);
-                    
-                   
-                    int indicador = Integer.parseInt(indicadorActividad);
-                   
-                   
-                   actividad.setActividad(txtActividadActualizar.getText());
-                    actividad.setIndicador(indicador);
+                    Object idActividad = dtm.getValueAt(filaseleccionadaActividad, 0);
+
+                    actividad.setActividad(txtActividadActualizar.getText());
                     actividad.setId(InterfazAdminJFrame.getCodigoProyecto());
+                    actividad.setIdActividad(idActividad);
                     fecharealizada();
                     opcionCompletado();
-                    actividad.setEvidencias(null);
-                    System.out.println("Pregunta aqui hay un error en el boton actualizar");
                     ActividadServicio.ActualizarActividad(actividad);
                 }
 
             }
         }
-    }//GEN-LAST:event_jButton11ActionPerformed
+    }//GEN-LAST:event_btActualizarActividadActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void tbActividadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbActividadesMouseClicked
         filaseleccionadaActividad = tbActividades.getSelectedRow();
-        System.out.println(filaseleccionadaActividad);
+        if (filaseleccionadaActividad >= 0) {
+            actividad = ActividadServicio.BuscarActividad(tbActividades.getValueAt(filaseleccionadaActividad, 0));
+            txtActividadActualizar.setText(actividad.getActividad());
+            if (actividad.getCompletado()) {
+                rbtCompletada.setSelected(true);
+                rbtProgreso.setSelected(false);
+            } else {
+                rbtProgreso.setSelected(true);
+                rbtCompletada.setSelected(false);
+            }
+        }
+
     }//GEN-LAST:event_tbActividadesMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (filaseleccionadaActividad >= 0) {
+            if (actividad.getEvidencias() != null) {
+                abrirArchivoProyecto(actividad.getEvidencias());
+            } else {
+                JOptionPane.showMessageDialog(null, "No se han cargado evidencias");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione una actividad para ver la evidencia");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        if (filaseleccionadaActividad >= 0) {
+            byte[] pdfBytes = seleccionarArchivo();
+            if (pdfBytes != null) {
+                actividad.setEvidencias(pdfBytes);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione una actividad para cambiar el archivo");
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelActualizarProyecto;
+    private javax.swing.JButton btActualizarActividad;
     private javax.swing.JButton btAuditorias;
     private javax.swing.JButton btMonitoreo;
     private javax.swing.JButton btPermisoAgua;
@@ -837,7 +872,6 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
     private com.toedter.calendar.JDateChooser dcFechaInicioProyecto;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;

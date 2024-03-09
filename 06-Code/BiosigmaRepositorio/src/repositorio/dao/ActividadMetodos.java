@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package repositorio.dao;
 
 import com.mongodb.MongoException;
@@ -46,7 +42,6 @@ public class ActividadMetodos implements IActividades {
     @Override
     public List<PlanAmbiental> ListarActividades(String idProyecto) {
 
-        PlanAmbiental actividad = new PlanAmbiental();
         Document filtro = null;
         Document resultado = null;
 
@@ -69,7 +64,7 @@ public class ActividadMetodos implements IActividades {
 
             }
 
-            proyecto = new PlanAmbiental(documento.getString("actividad"), documento.getString("id_Proyecto"), documento.getInteger("indicador"), pdfPermisoAmbiental, documento.getBoolean("completado"), documento.getDate("Fecha_Realizada"));
+            proyecto = new PlanAmbiental(documento.getString("actividad"), documento.getString("id_Proyecto"), documento.get("_id"), pdfPermisoAmbiental, documento.getBoolean("completado"), documento.getDate("Fecha_Realizada"));
             listaActividades.add(proyecto);
 
         }
@@ -83,7 +78,6 @@ public class ActividadMetodos implements IActividades {
         try {
             documento = new Document("id_Proyecto", actividad.getId())
                     .append("actividad", actividad.getActividad())
-                    .append("indicador", actividad.getIndicador())
                     .append("Fecha_Realizada", actividad.getFechaRealizada())
                     .append("evidencias", actividad.getEvidencias())
                     .append("completado", actividad.getCompletado());
@@ -100,7 +94,7 @@ public class ActividadMetodos implements IActividades {
     @Override
     public boolean ActualizarActividad(PlanAmbiental actividad) {
 
-        Document filtro = new Document("indicador", actividad.getIndicador());
+        Document filtro = new Document("_id", actividad.getIdActividad());
         Document documento = new Document("$set", new Document()
                 .append("actividad", actividad.getActividad())
                 .append("id_Proyecto", actividad.getId())
@@ -119,15 +113,20 @@ public class ActividadMetodos implements IActividades {
     }
 
     @Override
-    public boolean VerificarCodigoRepetido(int codigo) {
+    public PlanAmbiental BuscarActividad(Object idActividad) {
+        Document filtro = new Document("_id", idActividad);
+        Document documento = coleccion.find(filtro).first();
+        
+        byte[] pdfPermisoAmbiental = null;
+        
+        if (documento.get("evidencias") != null) {
+            Object objetoPermisoAmbiental = documento.get("evidencias");
+            org.bson.types.Binary binarioPermisoAmbiental = (org.bson.types.Binary) objetoPermisoAmbiental;
+            pdfPermisoAmbiental = binarioPermisoAmbiental.getData();
 
-        Document filtro = new Document("indicador", codigo);
-        Document resultado = coleccion.find(filtro).first();
-
-        if (resultado != null) {
-            return true;
-        } else {
-            return false;
         }
+
+        PlanAmbiental proyecto = new PlanAmbiental(documento.getString("actividad"), documento.getString("id_Proyecto"), documento.get("_id"), pdfPermisoAmbiental, documento.getBoolean("completado"), documento.getDate("Fecha_Realizada"));
+        return proyecto;
     }
 }

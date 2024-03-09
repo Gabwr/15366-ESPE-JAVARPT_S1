@@ -48,51 +48,18 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
 
     }
 
-    private boolean validarDatosactividad() {
+    private void agregarActividadTabla() {
         PlanAmbiental actividades = new PlanAmbiental();
+        actividades.setEvidencias(null);
+        actividades.setActividad(txtActividad.getText());
+        actividades.setCompletado(false);
+        actividades.setFechaRealizada(null);
+        dtm = (DefaultTableModel) tbActividades.getModel();
+        dtm.addRow(new Object[]{actividades.getActividad(), "Por actualizar", "En progreso"});
 
-        DefaultTableModel dtm = (DefaultTableModel) tbActividades.getModel();
-        if ((txtCodigoProyecto.getText().length() > 0) && (txtNombreProyecto.getText().length() > 0) && (txtDescripcionProyecto.getText().length() > 0) && (dcFechaInicioProyecto.getDate() != null) && (rdEnProgreso.isSelected() || dcFechaFinalProyecto != null)) {
-            if (ProyectoServicio.VerificarCodigoRepetido(txtCodigoProyecto.getText())) {
-                JOptionPane.showMessageDialog(null, "El códgio ingresado ya esta registrado");
-                return false;
-            }
-            int aleatorio_id = 0;
-            aleatorio_id = (int) (Math.random() * 100);
-
-            while (ActividadServicio.VerificarCodigoRepetido(aleatorio_id)) {
-                aleatorio_id = (int) (Math.random() * 100);
-
-            }
-            actividades.setIndicador(aleatorio_id);
-            actividades.setEvidencias(null);
-            actividades.setActividad(txtActividad.getText());
-            actividades.setCompletado(false);
-
-            String completado, fechaFinal, permisoAgua, auditoria, monitoreo;
-            completado = "Por completar";
-            if (dcFechaFinalProyecto.getDate() == null) {
-                actividades.setFechaRealizada(dcFechaFinalProyecto.getDate());
-
-                fechaFinal = "En progreso";
-            } else {
-
-                fechaFinal = new SimpleDateFormat("dd/MM/yyyy").format(dcFechaFinalProyecto.getDate());
-                actividades.setFechaRealizada(dcFechaFinalProyecto.getDate());
-
-            }
-            dtm.addRow(new Object[]{actividades.getActividad(), completado, fechaFinal, actividades.getEvidencias()});
-
-            listaActividades.add(actividades);
-            return true;
-        } else {
-            return false;
-        }
-
+        listaActividades.add(actividades);
     }
 
-
-        
     private void cagarDatosActividades() {
         for (PlanAmbiental actividad : listaActividades) {
             System.out.println(actividad.getActividad());
@@ -434,11 +401,6 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         panelAgregarProyecto.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
         txtCodigoProyecto.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        txtCodigoProyecto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCodigoProyectoActionPerformed(evt);
-            }
-        });
         txtCodigoProyecto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtCodigoProyectoKeyReleased(evt);
@@ -747,20 +709,16 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_lbPermisoAmbientalMouseClicked
 
     private void btActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btActividadActionPerformed
-        if (validarDatosactividad()) {
+        if (txtActividad.getText().length() > 0) {
 
-            DefaultTableModel dtm = (DefaultTableModel) tbActividades.getModel();
+            agregarActividadTabla();
 
         } else {
-            JOptionPane.showMessageDialog(null, "Ingrese los datos correctamente");
+            JOptionPane.showMessageDialog(null, "Ingrese el nombre de la actividad");
         }
 
 
     }//GEN-LAST:event_btActividadActionPerformed
-
-    private void txtCodigoProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoProyectoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCodigoProyectoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

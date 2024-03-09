@@ -360,6 +360,11 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
 
         jButton1.setText("Abrir Evidencia");
         jButton1.setToolTipText("abrir pdf");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         panelAbrirProyecto.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 530, 140, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/ImagenFondoAbrirProyecto.png"))); // NOI18N
@@ -406,6 +411,10 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
     private void btMonitoreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMonitoreoActionPerformed
         abrirArchivoProyecto(proyecto.getMonitoreo());
     }//GEN-LAST:event_btMonitoreoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

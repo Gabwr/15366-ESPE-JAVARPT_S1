@@ -3,35 +3,24 @@ package repositorio.modelo;
 import java.util.Date;
 
 public class PlanAmbiental {
+
     private String actividad, id;
-    private int indicador;
-     private byte[] evidencias;
-     private boolean completado;
-     
+    private Object idActividad;
+    private byte[] evidencias;
+    private boolean completado;
 
     public PlanAmbiental() {
     }
 
-    public PlanAmbiental(String actividad, String id, int indicador, byte[] evidencias, boolean completado, Date fechaRealizada) {
+    public PlanAmbiental(String actividad, String id, Object idActividad, byte[] evidencias, boolean completado, Date fechaRealizada) {
         this.actividad = actividad;
         this.id = id;
-        this.indicador = indicador;
+        this.idActividad = idActividad;
         this.evidencias = evidencias;
         this.completado = completado;
         this.fechaRealizada = fechaRealizada;
     }
 
-
-     
-     
-     
-
-
-     
-     
-     
-     
-     
     public byte[] getEvidencias() {
         return evidencias;
     }
@@ -40,9 +29,6 @@ public class PlanAmbiental {
         this.evidencias = evidencias;
     }
 
-   
-    
-   
     Date fechaRealizada;
 
     public String getActividad() {
@@ -60,14 +46,14 @@ public class PlanAmbiental {
     public void setId(String id) {
         this.id = id;
     }
-    public void setIndicador(int indicador) {
-        this.indicador = indicador;
+
+    public Object getIdActividad() {
+        return idActividad;
     }
 
-    public int getIndicador() {
-        return indicador;
+    public void setIdActividad(Object idActividad) {
+        this.idActividad = idActividad;
     }
-
 
     public boolean getCompletado() {
         return completado;
@@ -84,5 +70,5 @@ public class PlanAmbiental {
     public void setFechaRealizada(Date fechaRealizada) {
         this.fechaRealizada = fechaRealizada;
     }
-    
+
 }
