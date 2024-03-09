@@ -52,7 +52,8 @@ public class RegistrarUsuarioCliente extends javax.swing.JInternalFrame {
 
     private boolean validarDatosOtros() {
         boolean validacion = false;
-        if ((txtNombre.getText().length() > 0) && validarCedula() && (dcFecha.getDate() != null) && validarCorreo(txtCorreo.getText())) {
+        if ((txtNombre.getText().length() > 0) && validarCedula() && (dcFecha.getDate() != null)
+                && validarCorreo(txtCorreo.getText())) {
             validacion = true;
             return validacion;
         } else {
@@ -397,9 +398,10 @@ public class RegistrarUsuarioCliente extends javax.swing.JInternalFrame {
         String cedula = txtCedulA.getText();
         String correo = txtCorreo.getText();
         Date fechaNacimiento = dcFecha.getDate();
-        String usuario = algoritmousuario(nombre, cedula);
-
-        if (validarDatosOtros() && comprobarExistencia(cedula) && validarCedula() && validarcontrasenia()) {
+        if (validarDatosOtros()){
+            if( comprobarExistencia(cedula)){
+            String usuario = algoritmousuario(nombre, cedula);
+            if( validarCedula() && validarcontrasenia() ) {
             String contrasenia = ServicioPersonas.encriptar(pswfContrasenia.getText());
             Personas ClienteNuevo = new Personas(3, usuario, contrasenia, cedula, correo, nombre, fechaNacimiento);
 
@@ -411,7 +413,9 @@ public class RegistrarUsuarioCliente extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Datos no Ingresados");
             }
             limpiar();
-        } else {
+            }
+        } 
+        }else{
             JOptionPane.showMessageDialog(null, "complete los campos");
         }
     }//GEN-LAST:event_btAgregarMiembroActionPerformed

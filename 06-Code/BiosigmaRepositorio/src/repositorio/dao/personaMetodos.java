@@ -76,7 +76,6 @@ public class personaMetodos implements IPersonas {
                 Personas persona = new Personas(IDPerfil, usuario, cedula, correo, nombre, fechanac);
                 listapersonas.add(persona);
             }
-
         }
 
         return listapersonas;

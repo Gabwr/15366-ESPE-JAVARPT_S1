@@ -28,9 +28,9 @@ import repositorio.vista.perfil.ConsultarPerfil;
 public class InterfazAdminJFrame extends javax.swing.JFrame {
 
     private int contador = 1;
-    int filaseleccionadaAdmin;
-    int filaseleccionadaCliente;
-    int filaseleccionadaTrabajador;
+    int filaseleccionadaAdmin=-1;
+    int filaseleccionadaCliente=-1;
+    int filaseleccionadaTrabajador=-1;
     private static String codigoProyecto = "";
     public static String codigoUsuario = "";
     private DefaultTableModel dtm = null;

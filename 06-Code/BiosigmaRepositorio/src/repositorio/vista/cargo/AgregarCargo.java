@@ -55,6 +55,12 @@ public class AgregarCargo extends javax.swing.JInternalFrame {
         jLabel1.setForeground(new java.awt.Color(51, 0, 51));
         jLabel1.setText("Agregar Cargo");
 
+        txtId.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                soloNumeros(evt);
+            }
+        });
+
         jLabel2.setBackground(new java.awt.Color(0, 0, 0));
         jLabel2.setFont(new java.awt.Font("Sitka Banner", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 0, 51));
@@ -169,6 +175,15 @@ public class AgregarCargo extends javax.swing.JInternalFrame {
     private void btRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegresarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btRegresarActionPerformed
+
+    private void soloNumeros(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_soloNumeros
+        char validacion = evt.getKeyChar();
+        if (Character.isLetter(validacion)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Coloque solo números");
+        }
+    }//GEN-LAST:event_soloNumeros
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

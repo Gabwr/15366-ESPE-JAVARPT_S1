@@ -25,6 +25,7 @@ public class Conexion {
         this.mongo = mongoClient;
         this.dataB = database;
     }
+    
     public Conexion crearConexion(){
     String servidor = "localhost";
     int puerto = 27017;

@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 import repositorio.controlador.PerfilServicio;
 import repositorio.modelo.Perfil;
 import repositorio.vista.admin.InterfazAdminInsertarUsuario;
+
 public class AgregarPerfil extends javax.swing.JInternalFrame {
 
     public AgregarPerfil() {
@@ -26,7 +27,7 @@ public class AgregarPerfil extends javax.swing.JInternalFrame {
             }
         } else {
             validacion = false;
-            JOptionPane.showMessageDialog(null,"No pueden quedar campos vacios");
+            JOptionPane.showMessageDialog(null, "No pueden quedar campos vacios");
         }
         return validacion;
     }
@@ -50,6 +51,12 @@ public class AgregarPerfil extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Sitka Banner", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 0, 51));
         jLabel1.setText("Agregar Perfil");
+
+        txtId.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                SoloNumeros(evt);
+            }
+        });
 
         jLabel2.setBackground(new java.awt.Color(0, 0, 0));
         jLabel2.setFont(new java.awt.Font("Sitka Banner", 1, 14)); // NOI18N
@@ -154,6 +161,15 @@ public class AgregarPerfil extends javax.swing.JInternalFrame {
     private void btRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRegresarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btRegresarActionPerformed
+
+    private void SoloNumeros(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SoloNumeros
+        char validacion = evt.getKeyChar();
+        if (Character.isLetter(validacion)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Coloque solo números");
+        }
+    }//GEN-LAST:event_SoloNumeros
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
