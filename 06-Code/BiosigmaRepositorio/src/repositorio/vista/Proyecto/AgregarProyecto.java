@@ -1,5 +1,6 @@
 package repositorio.vista.proyecto;
 
+import com.toedter.calendar.JTextFieldDateEditor;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -40,6 +41,11 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         hoy = Calendar.getInstance();
         Date restriccion = hoy.getTime();
         dcFechaFinalProyecto.setMinSelectableDate(restriccion);
+        JTextFieldDateEditor editorfinal = (JTextFieldDateEditor) dcFechaFinalProyecto.getDateEditor();
+        editorfinal.setEditable(false);
+        JTextFieldDateEditor editorinicio = (JTextFieldDateEditor) dcFechaInicioProyecto.getDateEditor();
+        editorinicio.setEditable(false);
+
     }
 
     private boolean validarDatosactividad() {
@@ -85,6 +91,8 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
 
     }
 
+
+        
     private void cagarDatosActividades() {
         for (PlanAmbiental actividad : listaActividades) {
             System.out.println(actividad.getActividad());

@@ -1,5 +1,6 @@
 package repositorio.vista.proyecto;
 
+import com.toedter.calendar.JTextFieldDateEditor;
 import java.awt.Desktop;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -39,10 +40,15 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
 
     }
 
-    public void restringirJcalendar() {
+       public void restringirJcalendar() {
         hoy = Calendar.getInstance();
         Date restriccion = hoy.getTime();
         dcFechaFinalProyecto.setMinSelectableDate(restriccion);
+        JTextFieldDateEditor editorfinal = (JTextFieldDateEditor) dcFechaFinalProyecto.getDateEditor();
+        editorfinal.setEditable(false);
+        JTextFieldDateEditor editorinicio = (JTextFieldDateEditor) dcFechaInicioProyecto.getDateEditor();
+        editorinicio.setEditable(false);
+
     }
 
     public void llenarTablaActividades() {

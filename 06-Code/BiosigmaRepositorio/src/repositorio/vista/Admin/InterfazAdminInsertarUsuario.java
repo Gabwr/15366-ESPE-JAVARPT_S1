@@ -1,5 +1,6 @@
 package repositorio.vista.admin;
 
+import com.toedter.calendar.JTextFieldDateEditor;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
@@ -51,7 +52,10 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
         hoy.add(Calendar.YEAR, -18);
         Date restriccion = hoy.getTime();
         dcFecha.setMaxSelectableDate(restriccion);
+        JTextFieldDateEditor editor = (JTextFieldDateEditor) dcFecha.getDateEditor();
+        editor.setEditable(false);
     }
+
 
     public static void cargarComboPerfil() {
         List<Perfil> listaPerfiles = new PerfilServicio().ListarPerfiles();

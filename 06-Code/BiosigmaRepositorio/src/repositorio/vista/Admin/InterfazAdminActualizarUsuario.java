@@ -1,7 +1,9 @@
 package repositorio.vista.admin;
 
+import com.toedter.calendar.JTextFieldDateEditor;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -23,10 +25,11 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
     private int contador = 1;
     String cedulapersona = null;
     public static String cedulaContrasenia = null;
-
+    private Calendar hoy = null;
+    
     public InterfazAdminActualizarUsuario() {
         initComponents();
-        
+        restringirJcalendar();
         cbCargo.setVisible(false);
         btAgregarCargo.setVisible(false);
         lbCargo.setVisible(false);
@@ -39,6 +42,16 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
         cedulapersona = InterfazAdminJFrame.codigoUsuario;
         cargarPersona();
     }
+    
+        public void restringirJcalendar() {
+        hoy = Calendar.getInstance();
+        hoy.add(Calendar.YEAR, -18);
+        Date restriccion = hoy.getTime();
+        dcFecha.setMaxSelectableDate(restriccion);
+        JTextFieldDateEditor editor = (JTextFieldDateEditor) dcFecha.getDateEditor();
+        editor.setEditable(false);
+    }
+
 
     public String algoritmousuario(String nombre, String Cedula) {
         String usuario = "";
