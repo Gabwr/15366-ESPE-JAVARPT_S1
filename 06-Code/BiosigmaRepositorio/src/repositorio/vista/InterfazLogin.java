@@ -7,7 +7,7 @@ import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import repositorio.controlador.ServicioPersonas;
 import repositorio.modelo.Personas;
-import repositorio.vista.Cliente.RegistrarUsuarioCliente;
+import repositorio.vista.cliente.RegistrarUsuarioCliente;
 import repositorio.vista.admin.InterfazAdminJFrame;
 import repositorio.vista.cliente.InterfazCliente1JFrame;
 

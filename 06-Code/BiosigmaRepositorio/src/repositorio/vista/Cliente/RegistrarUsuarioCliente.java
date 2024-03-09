@@ -1,4 +1,4 @@
-package repositorio.vista.Cliente;
+package repositorio.vista.cliente;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -26,13 +26,15 @@ public class RegistrarUsuarioCliente extends javax.swing.JInternalFrame {
     }
     public boolean comprobarExistencia(String cedula) {
         boolean comprobar = true;
-        if ((ServicioPersonas.BuscarPorCodigoClienteyAdmin(cedula) != null) || (ServicioPersonas.BuscarPorCodigoTrabajadores(cedula) != null)) {
-
-            comprobar = false;
-        } else {
-            comprobar = true;
+        List<Personas> listaComprobar = ServicioPersonas.ListarPersonas();
+        for (Personas comprobador : listaComprobar) {
+            if (cedula.equals(comprobador.getCedula())) {
+                comprobar = false;
+            }
         }
-
+        if (comprobar == false) {
+            JOptionPane.showMessageDialog(null, "Cedula existente");
+        }
         return comprobar;
     }
 
@@ -398,6 +400,7 @@ public class RegistrarUsuarioCliente extends javax.swing.JInternalFrame {
         String cedula = txtCedulA.getText();
         String correo = txtCorreo.getText();
         Date fechaNacimiento = dcFecha.getDate();
+        
         if (validarDatosOtros()){
             if( comprobarExistencia(cedula)){
             String usuario = algoritmousuario(nombre, cedula);
