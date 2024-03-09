@@ -804,6 +804,7 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
                     fecharealizada();
                     opcionCompletado();
                     ActividadServicio.ActualizarActividad(actividad);
+                    llenarTablaActividades();
                 }
 
             }
