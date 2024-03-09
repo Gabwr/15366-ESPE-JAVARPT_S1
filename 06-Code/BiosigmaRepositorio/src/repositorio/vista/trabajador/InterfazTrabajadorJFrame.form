@@ -583,7 +583,7 @@
                                           <Group type="102" attributes="0">
                                               <Component id="jLabel9" min="-2" pref="527" max="-2" attributes="0"/>
                                               <EmptySpace max="32767" attributes="0"/>
-                                              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                                              <Component id="btnLimpiarSeleccion" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                                               <Component id="btnRegresarProyectos" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
@@ -592,13 +592,12 @@
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="jScrollPane1" min="-2" pref="782" max="-2" attributes="0"/>
                                                   <Group type="102" attributes="0">
+                                                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                                                       <Component id="btnAgregarProyecto" min="-2" pref="184" max="-2" attributes="0"/>
-                                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
                                                       <Component id="btnAbrirProyecto" min="-2" pref="184" max="-2" attributes="0"/>
-                                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
                                                       <Component id="btnActualizarProyecto" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                      <Component id="btnEliminarProyecto" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                               </Group>
                                               <EmptySpace pref="109" max="32767" attributes="0"/>
@@ -614,7 +613,7 @@
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="btnRegresarProyectos" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btnLimpiarSeleccion" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="jScrollPane1" min="-2" pref="358" max="-2" attributes="0"/>
@@ -623,7 +622,6 @@
                                           <Component id="btnActualizarProyecto" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="btnAgregarProyecto" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="btnAbrirProyecto" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="btnEliminarProyecto" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace pref="28" max="32767" attributes="0"/>
                                   </Group>
@@ -737,7 +735,7 @@
                                 <Property name="text" type="java.lang.String" value="Haga click en el proyecto que desee en la siguiente tabla para poder abrirlo"/>
                               </Properties>
                             </Component>
-                            <Component class="javax.swing.JButton" name="jButton2">
+                            <Component class="javax.swing.JButton" name="btnLimpiarSeleccion">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Sitka Banner" size="14" style="0"/>
@@ -745,21 +743,7 @@
                                 <Property name="text" type="java.lang.String" value="Limpiar Selecci&#xf3;n"/>
                               </Properties>
                               <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
-                              </Events>
-                            </Component>
-                            <Component class="javax.swing.JButton" name="btnEliminarProyecto">
-                              <Properties>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Sitka Banner" size="14" style="0"/>
-                                </Property>
-                                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                                  <Image iconType="3" name="/resource/185090_delete_garbage_icon.png"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="Eliminar Proyecto"/>
-                              </Properties>
-                              <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminarProyectoActionPerformed"/>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLimpiarSeleccionActionPerformed"/>
                               </Events>
                             </Component>
                           </SubComponents>
@@ -784,31 +768,6 @@
                           </Constraints>
                         </Component>
                       </SubComponents>
-                    </Container>
-                    <Container class="javax.swing.JPanel" name="panelInsertar">
-                      <Events>
-                        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="panelInsertarFocusGained"/>
-                      </Events>
-                      <Constraints>
-                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                          <JTabbedPaneConstraints tabName="tab4">
-                            <Property name="tabTitle" type="java.lang.String" value="tab4"/>
-                          </JTabbedPaneConstraints>
-                        </Constraint>
-                      </Constraints>
-
-                      <Layout>
-                        <DimensionLayout dim="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="955" max="32767" attributes="0"/>
-                          </Group>
-                        </DimensionLayout>
-                        <DimensionLayout dim="1">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="610" max="32767" attributes="0"/>
-                          </Group>
-                        </DimensionLayout>
-                      </Layout>
                     </Container>
                   </SubComponents>
                 </Container>

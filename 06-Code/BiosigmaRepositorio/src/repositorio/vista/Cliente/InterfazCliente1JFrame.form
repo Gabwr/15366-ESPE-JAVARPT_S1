@@ -583,8 +583,6 @@
                                           <Group type="102" attributes="0">
                                               <Component id="jLabel9" min="-2" pref="527" max="-2" attributes="0"/>
                                               <EmptySpace max="32767" attributes="0"/>
-                                              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                                               <Component id="btnRegresarProyectos" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                           </Group>
@@ -609,7 +607,6 @@
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="btnRegresarProyectos" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="jScrollPane1" min="-2" pref="358" max="-2" attributes="0"/>
@@ -698,17 +695,6 @@
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="Haga click en el proyecto que desee en la siguiente tabla para poder abrirlo"/>
                               </Properties>
-                            </Component>
-                            <Component class="javax.swing.JButton" name="jButton2">
-                              <Properties>
-                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Sitka Banner" size="14" style="0"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="Limpiar Selecci&#xf3;n"/>
-                              </Properties>
-                              <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
-                              </Events>
                             </Component>
                           </SubComponents>
                         </Container>

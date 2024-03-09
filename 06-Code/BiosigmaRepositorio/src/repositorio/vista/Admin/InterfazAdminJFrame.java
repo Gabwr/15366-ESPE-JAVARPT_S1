@@ -28,6 +28,7 @@ import repositorio.vista.perfil.ConsultarPerfil;
 public class InterfazAdminJFrame extends javax.swing.JFrame {
 
     private int contador = 1;
+    public int fila=-1;
     int filaseleccionadaAdmin=-1;
     int filaseleccionadaCliente=-1;
     int filaseleccionadaTrabajador=-1;
@@ -967,14 +968,14 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegresarProyectosActionPerformed
 
     private void btnActualizarProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarProyectoActionPerformed
-        int fila = tbProyecto.getSelectedRow();
+        fila = tbProyecto.getSelectedRow();
 
         if (fila != -1) {
             codigoProyecto = tbProyecto.getValueAt(fila, 0).toString();
             ActualizarProyecto actualizar = new ActualizarProyecto();
             escritorio.add(actualizar);
             actualizar.show();
-
+            fila=-1;
         } else {
             getToolkit().beep();
             JOptionPane.showMessageDialog(null, "Seleccione una proyecto para poder abrir");
@@ -982,13 +983,14 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnActualizarProyectoActionPerformed
 
     private void btnAbrirProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirProyectoActionPerformed
-        int fila = tbProyecto.getSelectedRow();
+        fila = tbProyecto.getSelectedRow();
 
         if (fila != -1) {
             codigoProyecto = tbProyecto.getValueAt(fila, 0).toString();
             AbrirProyecto abrir = new AbrirProyecto();
             escritorio.add(abrir);
             abrir.show();
+            fila=-1;
 
         } else {
             getToolkit().beep();
@@ -1034,7 +1036,7 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_BotonProyectosMouseClicked
 
     private void btnEliminarProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProyectoActionPerformed
-        int fila = tbProyecto.getSelectedRow();
+         fila = tbProyecto.getSelectedRow();
         DefaultTableModel dtm = (DefaultTableModel) tbProyecto.getModel();
         if (fila != -1) {
             int resultado = JOptionPane.showConfirmDialog(null, "¿Esta segúro de eliminar el proyecto seleccionado?", "Eliminar", JOptionPane.YES_NO_OPTION);
@@ -1044,6 +1046,7 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
                     if ("345@9".equals(codigoConfirmacion)) {
                         ProyectoServicio.EliminarProyecto(tbProyecto.getValueAt(fila, 0).toString());
                         dtm.removeRow(fila);
+                        fila=-1;
                     } else {
                         JOptionPane.showMessageDialog(null, "El código ingresado no es el correcto", "Error al Eliminar", JOptionPane.ERROR_MESSAGE);
                     }
@@ -1055,7 +1058,9 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarProyectoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+                ListSelectionModel tablamodelo = tbProyecto.getSelectionModel();
+                tablamodelo.clearSelection();
+                fila = -1;
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void tbAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAdminMouseClicked

@@ -6,18 +6,16 @@ import java.awt.Color;
 import java.awt.HeadlessException;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import repositorio.controlador.ProyectoServicio;
 import repositorio.modelo.Proyecto;
+import repositorio.vista.InterfazLogin;
 
 public class InterfazCliente1JFrame extends javax.swing.JFrame {
 
-
     public InterfazAdminInsertarUsuario IntfzInsertar = new InterfazAdminInsertarUsuario();
     private int contador = 1;
-    int filaseleccionadaAdmin = -1;
-    int filaseleccionadaCliente = -1;
-    int filaseleccionadaTrabajador = -1;
     private static String codigoProyecto = "";
     private static String codigoUsuario = "";
     private DefaultTableModel dtm = null;
@@ -25,7 +23,6 @@ public class InterfazCliente1JFrame extends javax.swing.JFrame {
     public static String getCodigoProyecto() {
         return codigoProyecto;
     }
-    
 
     public InterfazCliente1JFrame() {
         initComponents();
@@ -112,7 +109,6 @@ public class InterfazCliente1JFrame extends javax.swing.JFrame {
         btnAbrirProyecto = new javax.swing.JButton();
         btnRegresarProyectos = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         panelSuperior = new javax.swing.JPanel();
         BotonOpciones = new javax.swing.JPanel();
@@ -375,14 +371,6 @@ public class InterfazCliente1JFrame extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(0, 51, 51));
         jLabel9.setText("Haga click en el proyecto que desee en la siguiente tabla para poder abrirlo");
 
-        jButton2.setFont(new java.awt.Font("Sitka Banner", 0, 14)); // NOI18N
-        jButton2.setText("Limpiar Selección");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout panelTablaProyectosLayout = new javax.swing.GroupLayout(panelTablaProyectos);
         panelTablaProyectos.setLayout(panelTablaProyectosLayout);
         panelTablaProyectosLayout.setHorizontalGroup(
@@ -393,8 +381,6 @@ public class InterfazCliente1JFrame extends javax.swing.JFrame {
                     .addGroup(panelTablaProyectosLayout.createSequentialGroup()
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)
-                        .addGap(43, 43, 43)
                         .addComponent(btnRegresarProyectos)
                         .addGap(18, 18, 18))
                     .addGroup(panelTablaProyectosLayout.createSequentialGroup()
@@ -411,8 +397,7 @@ public class InterfazCliente1JFrame extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addGroup(panelTablaProyectosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegresarProyectos)
-                    .addComponent(jLabel9)
-                    .addComponent(jButton2))
+                    .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
@@ -535,7 +520,6 @@ public class InterfazCliente1JFrame extends javax.swing.JFrame {
                 + "\n1.- Gabriel López"
                 + "\n2.- Mateo Medranda"
                 + "\n3.- Alejandro Obando"
-                + "\n4.- Joselyn Morocho"
                 + "\n==============================================");
     }//GEN-LAST:event_btInfoProgramadorActionPerformed
 
@@ -578,6 +562,8 @@ public class InterfazCliente1JFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAbrirProyectoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        InterfazLogin login = new InterfazLogin();
+        login.show();
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -592,10 +578,6 @@ public class InterfazCliente1JFrame extends javax.swing.JFrame {
     private void BotonProyectosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonProyectosMouseClicked
         tbPaneles.setSelectedIndex(1);
     }//GEN-LAST:event_BotonProyectosMouseClicked
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     public static void main(String args[]) {
 
@@ -615,7 +597,6 @@ public class InterfazCliente1JFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnRegresarProyectos;
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
