@@ -650,8 +650,8 @@ public class InterfazTrabajadorJFrame extends javax.swing.JFrame {
 
     private void btnLimpiarSeleccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarSeleccionActionPerformed
         ListSelectionModel tablamodelo = tbProyecto.getSelectionModel();
-                tablamodelo.clearSelection();
-                fila = -1;
+        tablamodelo.clearSelection();
+        fila = -1;
     }//GEN-LAST:event_btnLimpiarSeleccionActionPerformed
 
     public static void main(String args[]) {

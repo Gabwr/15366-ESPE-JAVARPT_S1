@@ -262,6 +262,11 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
                 dcFechaPropertyChange(evt);
             }
         });
+        dcFecha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                SoloNumeros(evt);
+            }
+        });
         JPInsertar.add(dcFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(159, 124, 140, -1));
 
         txtCedulA.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -620,6 +625,12 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
             lbAvisoCedula.setVisible(false);
         }
     }//GEN-LAST:event_txtCedulAKeyPressed
+
+    private void SoloNumeros(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SoloNumeros
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Seleccione una fecha desde el boton");
+    }//GEN-LAST:event_SoloNumeros
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

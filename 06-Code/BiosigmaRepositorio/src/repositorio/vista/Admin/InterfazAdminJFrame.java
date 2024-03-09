@@ -1097,7 +1097,15 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_tbTrabajadoresMouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+       ListSelectionModel tablamodelo1 = tbAdmin.getSelectionModel();
+        ListSelectionModel tablamodelo2 = tbTrabajadores.getSelectionModel();
+        ListSelectionModel tablamodelo3= tbClientes.getSelectionModel();
+        filaseleccionadaAdmin = -1;
+        filaseleccionadaCliente = -1;
+        filaseleccionadaTrabajador = -1;
+        tablamodelo1.clearSelection();
+        tablamodelo2.clearSelection();
+        tablamodelo3.clearSelection();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void btVerPerfilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVerPerfilesActionPerformed
