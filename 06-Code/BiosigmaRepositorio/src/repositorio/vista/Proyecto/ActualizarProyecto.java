@@ -97,6 +97,17 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         return codigo;
     }
 
+    private void agregarActividadTabla() {
+        PlanAmbiental actividades = new PlanAmbiental();
+        actividades.setEvidencias(null);
+        actividades.setActividad(txtActividadAgregar.getText());
+        actividades.setCompletado(false);
+        actividades.setId(obtenercodigointerfacez());
+        actividades.setFechaRealizada(dcFechaFinalProyecto.getDate());
+        ActividadServicio.InsertarActividades(actividades);
+
+    }
+
     private boolean validarDatos() {
         if ((txtNombreProyecto.getText().length() > 0) && (txtDescripcionProyecto.getText().length() > 0) && (dcFechaInicioProyecto.getDate() != null) && (rdEnProgreso.isSelected() || dcFechaFinalProyecto != null)) {
             return true;
@@ -265,7 +276,7 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         jLabel40 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        txtActividadAgregar = new javax.swing.JTextField();
         jButton9 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel38 = new javax.swing.JLabel();
@@ -413,7 +424,7 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
                         .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtActividadAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(96, 96, 96)
                         .addComponent(jButton9)))
@@ -425,7 +436,7 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
                 .addGap(23, 23, 23)
                 .addComponent(jLabel40)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtActividadAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton9)
                 .addContainerGap(65, Short.MAX_VALUE))
@@ -860,7 +871,13 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btActualizarActividadActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
+        int resultado = JOptionPane.showConfirmDialog(null, "¿Esta seguro de actualizar", "Confirmación", JOptionPane.YES_NO_OPTION);
+        if (resultado == JOptionPane.YES_OPTION) {
+            agregarActividadTabla();
+            txtActividadAgregar.setText("");
+            llenarTablaActividades();
+        }
+
 
     }//GEN-LAST:event_jButton9ActionPerformed
 
@@ -964,7 +981,6 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JLabel lbAuditoria;
     private javax.swing.JLabel lbMonitoreo;
     private javax.swing.JLabel lbPermisoAgua;
@@ -974,6 +990,7 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton rdEnProgreso;
     private static javax.swing.JTable tbActividades;
     private javax.swing.JTextField txtActividadActualizar;
+    private javax.swing.JTextField txtActividadAgregar;
     private javax.swing.JTextField txtActividadEliminar;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextArea txtDescripcionProyecto;
