@@ -54,4 +54,7 @@ public class ServicioPersonas {
     public static Personas desencrpitaryAutentificar(String usuario, String Contrasenia){
         return new personaMetodos().desencriptaryAutentificar(usuario, Contrasenia);
     }
+    public static boolean ActualizarContrasenia(String contrasenia, Personas perosonaactualizar){
+        return new personaMetodos().ActualizarContrasenia(contrasenia, perosonaactualizar);
+    }
 }

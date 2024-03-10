@@ -307,4 +307,21 @@ public class personaMetodos implements IPersonas {
         return suPersona;
     }
 
+    @Override
+    public boolean ActualizarContrasenia(String contrasenia, Personas perosonactualizar) {
+         Document filtro, actualizar;
+        UpdateResult resultado;
+        boolean actualizo = false;
+        try {
+            filtro = new Document("cedula", perosonactualizar.getCedula());
+            actualizar = new Document("$set", new Document("contrasenia", contrasenia));
+            resultado = coleccionPersonas.updateOne(filtro, actualizar);
+            if (resultado.getModifiedCount() > 0) {
+                actualizo = true;
+            }
+        } catch (MongoException ex) {
+            JOptionPane.showMessageDialog(null, "Error al actualizar la clave" + ex.toString());
+        }
+        return actualizo;}
+
 }

@@ -4,6 +4,7 @@
  */
 package repositorio.vista.admin;
 
+import javax.swing.JOptionPane;
 import repositorio.controlador.ServicioPersonas;
 import repositorio.modelo.Personas;
 import repositorio.vista.admin.InterfazAdminActualizarUsuario;
@@ -14,20 +15,22 @@ import repositorio.vista.admin.InterfazAdminActualizarUsuario;
  */
 public class InterfazCambiarContrasenia extends javax.swing.JInternalFrame {
 
-    String cedulapersona=null;
-    Personas persona= null;
+    String cedulapersona = null;
+    Personas persona = null;
+
     public InterfazCambiarContrasenia() {
         initComponents();
         InterfazAdminActualizarUsuario cedulaconseguir = new InterfazAdminActualizarUsuario();
-        cedulapersona= cedulaconseguir.cedulaContrasenia;
+        cedulapersona = cedulaconseguir.cedulaContrasenia;
         cargarPersona();
     }
 
-public void cargarPersona() {
+    public void cargarPersona() {
         persona = ServicioPersonas.BuscarPorCodigoClienteyAdmin(cedulapersona);
         txtCedulA.setText(persona.getCedula());
         txtUsuario.setText(persona.getUsuario());
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -144,12 +147,23 @@ public void cargarPersona() {
     }//GEN-LAST:event_btnRegresarUsuariosActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        if (!psfcontraConfirmar.getText().equals(psfnuevoContra.getText())&&!psfnuevoContra.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Las contraseñas no son iguales");
+        } else {
+            int resultado = JOptionPane.showConfirmDialog(null, "¿Esta segúro de actualizar la clave?", "Actualizar", JOptionPane.YES_NO_OPTION);
+            if (resultado == JOptionPane.YES_OPTION) {
+                String contraseniaEncritada = ServicioPersonas.encriptar(psfnuevoContra.getText());
+                Personas nuevacontra = ServicioPersonas.BuscarPorCodigoClienteyAdmin(txtCedulA.getText());
+                ServicioPersonas.ActualizarContrasenia(contraseniaEncritada, nuevacontra);
+                JOptionPane.showMessageDialog(null, "Contrasena Actualizada");
+            }
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void psfnuevoContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_psfnuevoContraActionPerformed
-        if(psfcontraConfirmar.getText().equals(psfnuevoContra.getText())){
-            
+        if (psfcontraConfirmar.getText().equals(psfnuevoContra.getText())) {
+
         }
     }//GEN-LAST:event_psfnuevoContraActionPerformed
 

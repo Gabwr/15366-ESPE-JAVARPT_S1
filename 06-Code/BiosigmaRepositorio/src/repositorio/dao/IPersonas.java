@@ -18,4 +18,5 @@ public interface IPersonas {
     public String encriptar(String contrasenia);
     public String desencriptar(String contrasenia,String contraseniausada);
     public Personas desencriptaryAutentificar(String usuario, String Contrasenia);
+    public boolean ActualizarContrasenia(String contrasenia, Personas perosonactualizar);
 }
