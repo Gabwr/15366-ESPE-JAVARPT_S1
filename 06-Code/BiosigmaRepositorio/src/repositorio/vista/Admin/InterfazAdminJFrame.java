@@ -5,6 +5,8 @@ import repositorio.vista.proyecto.AgregarProyecto;
 import repositorio.vista.proyecto.ActualizarProyecto;
 import java.awt.Color;
 import java.awt.HeadlessException;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.geom.RoundRectangle2D;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -35,12 +37,11 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
     private static String codigoProyecto = "";
     public static String codigoUsuario = "";
     private DefaultTableModel dtm = null;
-    
 
     public static String getCodigoProyecto() {
         return codigoProyecto;
     }
-    
+
     public InterfazAdminJFrame() {
         initComponents();
         llenarTablaProyectos();
@@ -52,9 +53,16 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         panelDescripcion.setBackground(new Color(0, 0, 0, 100));
         panelOpciones.setBackground(new Color(0, 0, 0, 160));
         panelOpciones.setVisible(false);
+        setIconImage(getIconImage());
     }
-    
-    public void cargarDatosLogin(){
+
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("resource/colibri_png.png"));
+        return retValue;
+    }
+
+    public void cargarDatosLogin() {
         Personas login = ServicioPersonas.BuscarPorCodigoClienteyAdmin(InterfazLogin.idPersona);
         txtNombreIngreso.setText(login.getNombre());
         txtCorreoIngreso.setText(login.getCorreo());

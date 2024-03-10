@@ -4,7 +4,6 @@ import repositorio.vista.trabajador.InterfazTrabajadorJFrame;
 
 import java.awt.Image;
 import java.awt.Toolkit;
-import javax.swing.JOptionPane;
 import repositorio.controlador.ServicioPersonas;
 import repositorio.modelo.Personas;
 import repositorio.vista.cliente.RegistrarUsuarioCliente;
@@ -17,6 +16,7 @@ public class InterfazLogin extends javax.swing.JFrame {
 
     public InterfazLogin() {
         initComponents();
+        setLocationRelativeTo(null);
         setIconImage(getIconImage());
     }
 
@@ -173,11 +173,11 @@ public class InterfazLogin extends javax.swing.JFrame {
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escritorioLayout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 744, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        getContentPane().add(escritorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 750));
+        getContentPane().add(escritorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 740));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -224,12 +224,12 @@ public class InterfazLogin extends javax.swing.JFrame {
                     setVisible(false);
                     limpiar();
                 } else {
-                    JOptionPane.showMessageDialog(null, "Usuario o contraseña no encontrado");
                     getToolkit().beep();
                     lbAvisoLogin.setVisible(true);
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Usuario o contraseña no encontrado");
+                getToolkit().beep();
+                lbAvisoLogin.setVisible(true);
             }
         }
     }//GEN-LAST:event_btnSesionActionPerformed
