@@ -13,6 +13,8 @@ import repositorio.vista.cliente.InterfazCliente1JFrame;
 
 public class InterfazLogin extends javax.swing.JFrame {
 
+    public static String idPersona;
+
     public InterfazLogin() {
         initComponents();
         setIconImage(getIconImage());
@@ -188,42 +190,45 @@ public class InterfazLogin extends javax.swing.JFrame {
             usuario = txtUsuario.getText();
             contrasenia = txtContra.getText();
             Personas personacomparada = ServicioPersonas.desencrpitaryAutentificar(usuario, contrasenia);
-            if(personacomparada!=null){
-            Personas Admin_cliente = null;
-            Personas Trabajador = null;
-            if (personacomparada.getIdPerfil() == 1 || personacomparada.getIdPerfil() == 3) {
-                Admin_cliente = ServicioPersonas.BuscarPorCodigoClienteyAdmin(personacomparada.getCedula());
-            } else {
-                Trabajador = ServicioPersonas.BuscarPorCodigoTrabajadores(personacomparada.getCedula());
-            }
-            if (personacomparada != null && personacomparada.getIdPerfil() == 1
-                    && personacomparada.getUsuario().equals(Admin_cliente.getUsuario())
-                    && contrasenia.equals(ServicioPersonas.desencriptar(Admin_cliente.getContrasenia(),contrasenia))) {
-                InterfazAdminJFrame modificar = new InterfazAdminJFrame();
-                modificar.setVisible(true);
-                setVisible(false);
-                limpiar();
-            } else if (personacomparada != null && personacomparada.getIdPerfil() == 2
-                    && personacomparada.getUsuario().equals(Trabajador.getUsuario())
-                    && contrasenia.equals(ServicioPersonas.desencriptar(Trabajador.getContrasenia(),contrasenia))) {
-                InterfazTrabajadorJFrame modificar = new InterfazTrabajadorJFrame();
-                modificar.setVisible(true);
-                setVisible(false);
-                limpiar();
+            
+            if (personacomparada != null) {
+                Personas Admin_cliente = null;
+                Personas Trabajador = null;
+                idPersona = personacomparada.getCedula();
+                
+                if (personacomparada.getIdPerfil() == 1 || personacomparada.getIdPerfil() == 3) {
+                    Admin_cliente = ServicioPersonas.BuscarPorCodigoClienteyAdmin(personacomparada.getCedula());
+                } else {
+                    Trabajador = ServicioPersonas.BuscarPorCodigoTrabajadores(personacomparada.getCedula());
+                }
+                if (personacomparada != null && personacomparada.getIdPerfil() == 1
+                        && personacomparada.getUsuario().equals(Admin_cliente.getUsuario())
+                        && contrasenia.equals(ServicioPersonas.desencriptar(Admin_cliente.getContrasenia(), contrasenia))) {
+                    InterfazAdminJFrame modificar = new InterfazAdminJFrame();
+                    modificar.setVisible(true);
+                    setVisible(false);
+                    limpiar();
+                } else if (personacomparada != null && personacomparada.getIdPerfil() == 2
+                        && personacomparada.getUsuario().equals(Trabajador.getUsuario())
+                        && contrasenia.equals(ServicioPersonas.desencriptar(Trabajador.getContrasenia(), contrasenia))) {
+                    InterfazTrabajadorJFrame modificar = new InterfazTrabajadorJFrame();
+                    modificar.setVisible(true);
+                    setVisible(false);
+                    limpiar();
 
-            } else if (personacomparada != null && personacomparada.getIdPerfil() == 3
-                    && personacomparada.getUsuario().equals(Admin_cliente.getUsuario())
-                    && contrasenia.equals(ServicioPersonas.desencriptar(Admin_cliente.getContrasenia(),contrasenia))) {
-                InterfazCliente1JFrame modificar = new InterfazCliente1JFrame();
-                modificar.setVisible(true);
-                setVisible(false);
-                limpiar();
+                } else if (personacomparada != null && personacomparada.getIdPerfil() == 3
+                        && personacomparada.getUsuario().equals(Admin_cliente.getUsuario())
+                        && contrasenia.equals(ServicioPersonas.desencriptar(Admin_cliente.getContrasenia(), contrasenia))) {
+                    InterfazCliente1JFrame modificar = new InterfazCliente1JFrame();
+                    modificar.setVisible(true);
+                    setVisible(false);
+                    limpiar();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Usuario o contraseña no encontrado");
+                    getToolkit().beep();
+                    lbAvisoLogin.setVisible(true);
+                }
             } else {
-                JOptionPane.showMessageDialog(null, "Usuario o contraseña no encontrado");
-                getToolkit().beep();
-                lbAvisoLogin.setVisible(true);
-            }
-        }else{
                 JOptionPane.showMessageDialog(null, "Usuario o contraseña no encontrado");
             }
         }
