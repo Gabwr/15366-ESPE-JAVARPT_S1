@@ -24,7 +24,7 @@ public class ServicioPersonas {
     }
 
     public static boolean ActualizarPersonasTrabajador(Personas persona) {
-        return new personaMetodos().InsertarPersonasTrabajadores(persona);
+        return new personaMetodos().ActualizarPersonasTrabajador(persona);
     }
 
     public static boolean EliminarPersonas(String idpersona) {

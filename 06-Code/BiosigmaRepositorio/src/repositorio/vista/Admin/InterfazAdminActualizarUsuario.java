@@ -491,8 +491,7 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
             int idCargo = Integer.parseInt(cargo[0].trim());
             Cargo cargoIngreso = CargoServicio.BuscarCargo(idCargo);
 
-            Personas TrabajadorNuevo = new Personas(perfilIngreso.getId(), usuario, cedula, 
-                    correo, nombre, fechaNacimiento, cargoIngreso.getIdCargo());
+            Personas TrabajadorNuevo = new Personas(perfilIngreso.getId(), usuario, cedula, correo, nombre, fechaNacimiento, cargoIngreso.getIdCargo());
             if (ServicioPersonas.ActualizarPersonasTrabajador(TrabajadorNuevo)) {
                 JOptionPane.showMessageDialog(null, "Datos Ingresados");
                 InterfazAdminJFrame.llenarPersonas();

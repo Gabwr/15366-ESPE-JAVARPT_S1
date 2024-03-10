@@ -855,7 +855,7 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         panelSuperior.add(panelOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, 490, 50));
 
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/Vólcan_Cotopaxi.jpg"))); // NOI18N
-        panelSuperior.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 6, -1, 180));
+        panelSuperior.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 6, 600, 180));
 
         jPanel5.add(panelSuperior, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 950, 130));
 
