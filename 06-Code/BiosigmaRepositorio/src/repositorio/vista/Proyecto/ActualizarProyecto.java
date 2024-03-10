@@ -32,7 +32,7 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
     Proyecto proyecto;
     PlanAmbiental actividad = new PlanAmbiental();
     public Calendar hoy = null;
-    static int filaseleccionadaActividad = -1;
+    private static int filaseleccionadaActividad = -1;
     private DefaultTableModel dtm = null;
 
     public ActualizarProyecto() {

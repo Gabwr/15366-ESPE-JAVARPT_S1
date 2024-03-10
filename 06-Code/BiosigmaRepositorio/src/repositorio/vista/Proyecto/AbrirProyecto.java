@@ -10,8 +10,13 @@ import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import org.bson.diagnostics.Logger;
+import repositorio.controlador.ActividadServicio;
 import repositorio.controlador.ProyectoServicio;
+import repositorio.modelo.PlanAmbiental;
 import repositorio.modelo.Proyecto;
 import repositorio.vista.admin.InterfazAdminJFrame;
 import repositorio.vista.cliente.InterfazCliente1JFrame;
@@ -20,29 +25,80 @@ import repositorio.vista.trabajador.InterfazTrabajadorJFrame;
 public class AbrirProyecto extends javax.swing.JInternalFrame {
 
     Proyecto proyecto;
+    PlanAmbiental actividad = new PlanAmbiental();
+    private DefaultTableModel dtm = null;
+    private static int filaseleccionadaactividades = -1;
+    
 
     public AbrirProyecto() {
         initComponents();
         consultarDatos();
+        llenarTablaActividades();
     }
+
+    private void abrirArchivoProyecto(byte[] archivo) {
+        if (archivo != null) {
+            try {
+                Path tempPdf = Files.createTempFile("Archivo Guardado", ".pdf");
+                Files.copy(new ByteArrayInputStream(archivo), tempPdf, StandardCopyOption.REPLACE_EXISTING);
+
+                Desktop.getDesktop().open(tempPdf.toFile());
+            } catch (IOException ex) {
+
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No se ha cargado el documento aún");
+        }
+    }
+
+    public void llenarTablaActividades() {
+        dtm = (DefaultTableModel) tbActividades.getModel();
+        TableColumnModel columnModel = tbActividades.getColumnModel();
+        TableColumn columna = columnModel.getColumn(0);
+        columna.setMinWidth(0);
+        columna.setMaxWidth(0);
+
+        dtm.setRowCount(0);
+        for (PlanAmbiental actividades : ActividadServicio.ListaActividades(obtenercodigointerfacez())) {
+            String fechaafinal, evidencia, completado;
+            if (actividades.getFechaRealizada() == null) {
+                fechaafinal = "Indefinida";
+            } else {
+                fechaafinal = new SimpleDateFormat("dd/MM/yyyy").format(actividades.getFechaRealizada());
+            }
+            if (actividades.getCompletado()) {
+                completado = "Completado";
+            } else {
+                completado = "En progreso";
+            }
+
+            if (actividades.getEvidencias() == null) {
+                evidencia = "Por cargar";
+            } else {
+                evidencia = "Cargado";
+            }
+
+            dtm.addRow(new Object[]{actividades.getIdActividad(), actividades.getActividad(), completado, fechaafinal, evidencia});
+        }
+    }
+
     private String obtenercodigointerfacez() {
-        String codigo="";
+        String codigo = "";
         if (InterfazAdminJFrame.getCodigoProyecto() != "") {
             codigo = InterfazAdminJFrame.getCodigoProyecto();
-            
 
         } else if (InterfazTrabajadorJFrame.getCodigoProyecto() != "") {
             codigo = InterfazTrabajadorJFrame.getCodigoProyecto();
-          
-        }
-         else if (InterfazCliente1JFrame.getCodigoProyecto() != "") {
-             
+
+        } else if (InterfazCliente1JFrame.getCodigoProyecto() != "") {
+
             codigo = InterfazCliente1JFrame.getCodigoProyecto();
         }
         return codigo;
     }
+
     private void consultarDatos() {
-        
+
         try {
             proyecto = ProyectoServicio.BuscarProyecto(obtenercodigointerfacez());
             txtCodigo.setText(proyecto.getIdProyecto());
@@ -91,15 +147,15 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
         }
     }
 
-    private void abrirArchivoProyecto(byte[] archivo) {
+    private void abrirArchivooProyecto(byte[] archivo) {
         if (archivo != null) {
-            try{
-                Path tempPdf = Files.createTempFile("Archivo Guardado",".pdf");
-                Files.copy(new ByteArrayInputStream(archivo),tempPdf, StandardCopyOption.REPLACE_EXISTING);
-                
+            try {
+                Path tempPdf = Files.createTempFile("Archivo Guardado", ".pdf");
+                Files.copy(new ByteArrayInputStream(archivo), tempPdf, StandardCopyOption.REPLACE_EXISTING);
+
                 Desktop.getDesktop().open(tempPdf.toFile());
-            }catch(IOException ex){
-                
+            } catch (IOException ex) {
+
             }
         } else {
             JOptionPane.showMessageDialog(null, "No se ha cargado el documento aún");
@@ -146,8 +202,8 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtActividadaAbrir = new javax.swing.JTextField();
+        btnAbrirEvidencia = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -281,6 +337,11 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        tbActividades.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbActividadesMouseClicked(evt);
+            }
+        });
         jScrollPane14.setViewportView(tbActividades);
 
         panelAbrirProyecto.add(jScrollPane14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 550, 150));
@@ -355,17 +416,17 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
         jLabel24.setText("Actividad");
         panelAbrirProyecto.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 460, 100, -1));
 
-        jTextField1.setEditable(false);
-        panelAbrirProyecto.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 490, 140, -1));
+        txtActividadaAbrir.setEditable(false);
+        panelAbrirProyecto.add(txtActividadaAbrir, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 490, 140, -1));
 
-        jButton1.setText("Abrir Evidencia");
-        jButton1.setToolTipText("abrir pdf");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAbrirEvidencia.setText("Abrir Evidencia");
+        btnAbrirEvidencia.setToolTipText("abrir pdf");
+        btnAbrirEvidencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAbrirEvidenciaActionPerformed(evt);
             }
         });
-        panelAbrirProyecto.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 530, 140, -1));
+        panelAbrirProyecto.add(btnAbrirEvidencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 530, 140, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/ImagenFondoAbrirProyecto.png"))); // NOI18N
         panelAbrirProyecto.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, -1, -1));
@@ -412,9 +473,27 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
         abrirArchivoProyecto(proyecto.getMonitoreo());
     }//GEN-LAST:event_btMonitoreoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnAbrirEvidenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirEvidenciaActionPerformed
+        if (filaseleccionadaactividades > -1) {
+            int resultado = JOptionPane.showConfirmDialog(null, "¿Esta seguro de abrir la actividad", "Confirmación", JOptionPane.YES_NO_OPTION);
+            if (resultado == JOptionPane.YES_OPTION) {
+                if (actividad.getEvidencias() != null) {
+                    abrirArchivoProyecto(actividad.getEvidencias());
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se han cargado evidencias");
+                }
+            }
+        }
+    }//GEN-LAST:event_btnAbrirEvidenciaActionPerformed
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void tbActividadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbActividadesMouseClicked
+        filaseleccionadaactividades = tbActividades.getSelectedRow();
+        if (filaseleccionadaactividades >= 0) {
+            actividad = ActividadServicio.BuscarActividad(tbActividades.getValueAt(filaseleccionadaactividades, 0));
+            txtActividadaAbrir.setText(actividad.getActividad());
+
+        }
+    }//GEN-LAST:event_tbActividadesMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -422,8 +501,8 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
     private javax.swing.JButton btMonitoreo;
     private javax.swing.JButton btPermisoAgua;
     private javax.swing.JButton btPermisoAmbiental;
+    private javax.swing.JButton btnAbrirEvidencia;
     private javax.swing.JButton btnRegresarPanelTabla1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -444,13 +523,13 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lbAuditoria;
     private javax.swing.JLabel lbMonitoreo;
     private javax.swing.JLabel lbPermisoAgua;
     private javax.swing.JLabel lbPermisoAmbiental;
     private javax.swing.JPanel panelAbrirProyecto;
     private javax.swing.JTable tbActividades;
+    private javax.swing.JTextField txtActividadaAbrir;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextArea txtDescripcion;
     private javax.swing.JTextField txtFechaFinal;
