@@ -42,6 +42,10 @@ public class ServicioPersonas {
     public static Personas BuscarPorCodigoClienteyAdmin(String idpersona) {
         return new personaMetodos().BuscarPorCodigoClienteyAdmin(idpersona);
     }
+    
+    public static Personas BuscarPorCodigo(String idPersona){
+        return new personaMetodos().BuscarPorCodigo(idPersona);
+    }
 
     public static String encriptar(String contrasenia) {
         return new personaMetodos().encriptar(contrasenia);

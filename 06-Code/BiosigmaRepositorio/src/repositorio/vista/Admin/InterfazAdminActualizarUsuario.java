@@ -121,8 +121,7 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
     }
 
     public void cargarPersona() {
-        Personas persona = ServicioPersonas.BuscarPorCodigoClienteyAdmin(cedulapersona);
-        Personas persona2 = ServicioPersonas.BuscarPorCodigoTrabajadores(cedulapersona);
+        Personas persona = ServicioPersonas.BuscarPorCodigo(cedulapersona);
         txtCedulA.setText(persona.getCedula());
         txtCorreo.setText(persona.getCorreo());
         calcularEdad(persona.getFechaNacimiento().getYear());
@@ -132,9 +131,9 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
         cargarComboPerfil(persona.getIdPerfil());
         dcFecha.setDate(persona.getFechaNacimiento());
         cbTipoPersona.setSelectedItem(persona.getIdPerfil() + " - " + perfil.getNombrePerfil());
-        if (persona2.getIdPerfil() == 2) {
-            Cargo cargo = CargoServicio.BuscarCargo(persona2.getCargo());
-            cargarComboCargo(persona2.getCargo());
+        if (persona.getIdPerfil() == 2) {
+            Cargo cargo = CargoServicio.BuscarCargo(persona.getCargo());
+            cargarComboCargo(persona.getCargo());
             cbCargo.setSelectedItem(cargo.getIdCargo() + " - " + cargo.getCargo());
         }
     }
@@ -590,6 +589,7 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
                 cbCargo.setVisible(true);
                 lbAvisoCargo.setVisible(true);
                 btAgregarCargo.setVisible(true);
+                cargarComboCargo(1);
             } else {
                 lbAvisoTipoUsuario.setVisible(false);
                 lbCargo.setVisible(false);

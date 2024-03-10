@@ -192,16 +192,16 @@ public class personaMetodos implements IPersonas {
     @Override
     public Personas BuscarPorCodigoTrabajadores(String idpersona) {
 
-        Document filtroPersona = null,filtrocargo = null, resultado = null, cargo = null, perfil = null;
+        Document filtroPersona = null, filtrocargo = null, resultado = null, cargo = null, perfil = null;
         try {
             filtroPersona = new Document("cedula", idpersona);
             resultado = coleccionPersonas.find(filtroPersona).first();
-            filtrocargo = new Document("id_Cargo",resultado.getInteger("cargo"));
+            filtrocargo = new Document("id_Cargo", resultado.getInteger("cargo"));
             cargo = coleccionCargos.find(filtrocargo).first();
             if (resultado != null) {
-                perfil = (Document) coleccionPerfiles.find(eq("id_Perfil", 
-                            resultado.getInteger("id_Perfil"))).first();
-                
+                perfil = (Document) coleccionPerfiles.find(eq("id_Perfil",
+                        resultado.getInteger("id_Perfil"))).first();
+
                 return new Personas(perfil.getInteger("id_Perfil"),
                         resultado.getString("usuario"),
                         resultado.getString("contrasenia"),
@@ -209,8 +209,7 @@ public class personaMetodos implements IPersonas {
                         resultado.getString("correo"),
                         resultado.getString("nombre"),
                         cargo.getInteger("id_Cargo"),
-                        resultado.getDate("fechaNacimiento"))
-                        ;
+                        resultado.getDate("fechaNacimiento"));
             }
         } catch (MongoException ex) {
             JOptionPane.showMessageDialog(null, "No se ha podido encontrar la persona, error: " + ex.toString());
@@ -246,7 +245,7 @@ public class personaMetodos implements IPersonas {
     public String encriptar(String contrasenia) {
         String Encriptado = "";
         try {
-              MessageDigest gestor = MessageDigest.getInstance("MD5");
+            MessageDigest gestor = MessageDigest.getInstance("MD5");
             byte[] llaveClave = gestor.digest(contrasenia.getBytes("utf-8"));
             byte[] clavebyte = Arrays.copyOf(llaveClave, 24);
             SecretKey llave = new SecretKeySpec(clavebyte, "DESede");
@@ -275,10 +274,10 @@ public class personaMetodos implements IPersonas {
             descifrado.init(Cipher.DECRYPT_MODE, llave);
             byte[] textoPlano = descifrado.doFinal(mensaje);
             desEncriptado = new String(textoPlano, "UTF-8");
-        }catch  (NoSuchAlgorithmException | UnsupportedEncodingException | InvalidKeyException |
-        NoSuchPaddingException | BadPaddingException | IllegalBlockSizeException e) {
-        e.printStackTrace(); 
-        }catch (Exception e) {
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException | InvalidKeyException
+                | NoSuchPaddingException | BadPaddingException | IllegalBlockSizeException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
         }
         return desEncriptado;
     }
@@ -286,18 +285,18 @@ public class personaMetodos implements IPersonas {
     @Override
     public Personas desencriptaryAutentificar(String usuario, String Contrasenia) {
         Personas suPersona = new Personas();
-        Document filtro = null, resultado = null,perfil = null;
+        Document filtro = null, resultado = null, perfil = null;
         try {
             filtro = new Document("usuario", usuario);
             resultado = (Document) coleccionPersonas.find(filtro).first();
             if (resultado != null) {
-                    perfil =  coleccionPerfiles.find(eq("id_Perfil", 
-                            resultado.getInteger("id_Perfil"))).first();
+                perfil = coleccionPerfiles.find(eq("id_Perfil",
+                        resultado.getInteger("id_Perfil"))).first();
                 suPersona.setCedula(resultado.getString("cedula"));
                 suPersona.setIdPerfil(perfil.getInteger("id_Perfil"));
                 suPersona.setUsuario(usuario);
                 suPersona.setContrasenia(Contrasenia);
-            }else{
+            } else {
                 return null;
             }
         } catch (MongoException ex) {
@@ -309,7 +308,7 @@ public class personaMetodos implements IPersonas {
 
     @Override
     public boolean ActualizarContrasenia(String contrasenia, Personas perosonactualizar) {
-         Document filtro, actualizar;
+        Document filtro, actualizar;
         UpdateResult resultado;
         boolean actualizo = false;
         try {
@@ -322,6 +321,48 @@ public class personaMetodos implements IPersonas {
         } catch (MongoException ex) {
             JOptionPane.showMessageDialog(null, "Error al actualizar la clave" + ex.toString());
         }
-        return actualizo;}
+        return actualizo;
+    }
+
+    @Override
+    public Personas BuscarPorCodigo(String idpersona) {
+        Document filtroPersona = null, filtrocargo = null, resultado = null, cargo = null, perfil = null;
+        try {
+            filtroPersona = new Document("cedula", idpersona);
+            resultado = coleccionPersonas.find(filtroPersona).first();
+            int idperfil = 0;
+
+            if (resultado != null) {
+                idperfil = resultado.getInteger("id_Perfil");
+                perfil = (Document) coleccionPerfiles.find(eq("id_Perfil",
+                        resultado.getInteger("id_Perfil"))).first();
+                if (idperfil == 2) {
+                    filtrocargo = new Document("id_Cargo", resultado.getInteger("cargo"));
+                    cargo = coleccionCargos.find(filtrocargo).first();
+                    
+                    return new Personas(perfil.getInteger("id_Perfil"),
+                            resultado.getString("usuario"),
+                            resultado.getString("contrasenia"),
+                            idpersona,
+                            resultado.getString("correo"),
+                            resultado.getString("nombre"),
+                            cargo.getInteger("id_Cargo"),
+                            resultado.getDate("fechaNacimiento"));
+                } else {
+                    return new Personas(perfil.getInteger("id_Perfil"),
+                            resultado.getString("usuario"),
+                            resultado.getString("contrasenia"),
+                            idpersona,
+                            resultado.getString("correo"),
+                            resultado.getString("nombre"),
+                            resultado.getDate("fechaNacimiento"));
+                }
+
+            }
+        } catch (MongoException ex) {
+            JOptionPane.showMessageDialog(null, "No se ha podido encontrar la persona, error: " + ex.toString());
+        }
+        return null;
+    }
 
 }
