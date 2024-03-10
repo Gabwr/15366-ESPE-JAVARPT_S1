@@ -20,7 +20,7 @@ import repositorio.vista.cargo.ConsultarCargo;
 public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
 
     private Perfil perfilIngreso;
-    private Calendar hoy = null;
+    public Calendar hoy = null;
 
     public InterfazAdminInsertarUsuario() {
         initComponents();

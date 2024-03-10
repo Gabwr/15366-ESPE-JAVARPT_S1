@@ -25,7 +25,7 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
     private int contador = 1;
     String cedulapersona = null;
     public static String cedulaContrasenia = null;
-    private Calendar hoy = null;
+    public Calendar hoy = null;
     
     public InterfazAdminActualizarUsuario() {
         initComponents();

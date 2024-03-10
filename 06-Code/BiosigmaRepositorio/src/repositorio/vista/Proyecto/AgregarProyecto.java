@@ -28,7 +28,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
 
     private static DefaultTableModel dtm = null;
     List<PlanAmbiental> listaActividades = new ArrayList<>();
-    private Calendar hoy = null;
+    public Calendar hoy = null;
 
     public AgregarProyecto() {
         initComponents();

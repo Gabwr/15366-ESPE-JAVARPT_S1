@@ -31,7 +31,7 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
 
     Proyecto proyecto;
     PlanAmbiental actividad = new PlanAmbiental();
-    private Calendar hoy = null;
+    public Calendar hoy = null;
     static int filaseleccionadaActividad = -1;
     private DefaultTableModel dtm = null;
 
@@ -39,6 +39,7 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         initComponents();
         consultarDatos();
         llenarTablaActividades();
+        restringirJcalendar();
 
     }
 
@@ -46,6 +47,7 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         hoy = Calendar.getInstance();
         Date restriccion = hoy.getTime();
         dcFechaFinalProyecto.setMinSelectableDate(restriccion);
+        dcFechaInicioProyecto.setMinSelectableDate(restriccion);
         JTextFieldDateEditor editorfinal = (JTextFieldDateEditor) dcFechaFinalProyecto.getDateEditor();
         editorfinal.setEditable(false);
         JTextFieldDateEditor editorinicio = (JTextFieldDateEditor) dcFechaInicioProyecto.getDateEditor();
@@ -67,7 +69,6 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
                 fechaafinal = "Indefinida";
             } else {
                 fechaafinal = new SimpleDateFormat("dd/MM/yyyy").format(actividades.getFechaRealizada());
-
             }
             if (actividades.getCompletado()) {
                 completado = "Completado";
@@ -98,12 +99,14 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
     }
 
     private void agregarActividadTabla() {
+        hoy = Calendar.getInstance();
+        Date fecharealizacion = hoy.getTime();
         PlanAmbiental actividades = new PlanAmbiental();
         actividades.setEvidencias(null);
         actividades.setActividad(txtActividadAgregar.getText());
         actividades.setCompletado(false);
         actividades.setId(obtenercodigointerfacez());
-        actividades.setFechaRealizada(dcFechaFinalProyecto.getDate());
+        actividades.setFechaRealizada(fecharealizacion);
         ActividadServicio.InsertarActividades(actividades);
 
     }
@@ -274,11 +277,7 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         dcFechaFinalProyecto = new com.toedter.calendar.JDateChooser();
         rdEnProgreso = new javax.swing.JRadioButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel40 = new javax.swing.JLabel();
-        txtActividadAgregar = new javax.swing.JTextField();
-        jButton9 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        tbactualizarActividad = new javax.swing.JPanel();
         jLabel38 = new javax.swing.JLabel();
         txtActividadActualizar = new javax.swing.JTextField();
         btActualizarActividad = new javax.swing.JButton();
@@ -286,10 +285,14 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         rbtProgreso = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        tbEliminarActividad = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         txtActividadEliminar = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel40 = new javax.swing.JLabel();
+        txtActividadAgregar = new javax.swing.JTextField();
+        jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         jScrollPane14 = new javax.swing.JScrollPane();
         tbActividades = new javax.swing.JTable();
@@ -400,51 +403,7 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         });
         PanelActualizarProyecto.add(rdEnProgreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 100, -1, -1));
 
-        jPanel3.setBackground(new java.awt.Color(204, 255, 255));
-
-        jLabel40.setFont(new java.awt.Font("Sitka Banner", 1, 14)); // NOI18N
-        jLabel40.setForeground(new java.awt.Color(51, 0, 51));
-        jLabel40.setText("Actividad");
-
-        jButton9.setText("Agregar");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(104, 104, 104)
-                        .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(txtActividadAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(96, 96, 96)
-                        .addComponent(jButton9)))
-                .addContainerGap(45, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel40)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtActividadAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton9)
-                .addContainerGap(65, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Agregar actividad", jPanel3);
-
-        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
+        tbactualizarActividad.setBackground(new java.awt.Color(204, 255, 204));
 
         jLabel38.setFont(new java.awt.Font("Sitka Banner", 1, 14)); // NOI18N
         jLabel38.setForeground(new java.awt.Color(51, 0, 51));
@@ -488,37 +447,37 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout tbactualizarActividadLayout = new javax.swing.GroupLayout(tbactualizarActividad);
+        tbactualizarActividad.setLayout(tbactualizarActividadLayout);
+        tbactualizarActividadLayout.setHorizontalGroup(
+            tbactualizarActividadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tbactualizarActividadLayout.createSequentialGroup()
+                .addGroup(tbactualizarActividadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tbactualizarActividadLayout.createSequentialGroup()
                         .addGap(31, 31, 31)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(tbactualizarActividadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(rbtProgreso)
                             .addComponent(rbtCompletada)
                             .addComponent(txtActividadActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(tbactualizarActividadLayout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton3)))
                 .addGap(0, 16, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(tbactualizarActividadLayout.createSequentialGroup()
+                .addGroup(tbactualizarActividadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tbactualizarActividadLayout.createSequentialGroup()
                         .addGap(100, 100, 100)
                         .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(tbactualizarActividadLayout.createSequentialGroup()
                         .addGap(75, 75, 75)
                         .addComponent(btActualizarActividad)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        tbactualizarActividadLayout.setVerticalGroup(
+            tbactualizarActividadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tbactualizarActividadLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel38)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -528,7 +487,7 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rbtProgreso)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(tbactualizarActividadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -536,9 +495,9 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
                 .addGap(17, 17, 17))
         );
 
-        jTabbedPane1.addTab("Actualizar actividad", jPanel1);
+        jTabbedPane1.addTab("Actualizar actividad", tbactualizarActividad);
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 204));
+        tbEliminarActividad.setBackground(new java.awt.Color(255, 255, 204));
 
         jLabel4.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
         jLabel4.setText("Actividad");
@@ -552,26 +511,26 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout tbEliminarActividadLayout = new javax.swing.GroupLayout(tbEliminarActividad);
+        tbEliminarActividad.setLayout(tbEliminarActividadLayout);
+        tbEliminarActividadLayout.setHorizontalGroup(
+            tbEliminarActividadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tbEliminarActividadLayout.createSequentialGroup()
+                .addGroup(tbEliminarActividadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tbEliminarActividadLayout.createSequentialGroup()
                         .addGap(104, 104, 104)
                         .addComponent(jLabel4))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(tbEliminarActividadLayout.createSequentialGroup()
                         .addGap(97, 97, 97)
                         .addComponent(jButton2))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(tbEliminarActividadLayout.createSequentialGroup()
                         .addGap(75, 75, 75)
                         .addComponent(txtActividadEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(76, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        tbEliminarActividadLayout.setVerticalGroup(
+            tbEliminarActividadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tbEliminarActividadLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -581,7 +540,51 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
                 .addContainerGap(76, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Eliminar Actividad", jPanel2);
+        jTabbedPane1.addTab("Eliminar Actividad", tbEliminarActividad);
+
+        jPanel3.setBackground(new java.awt.Color(204, 255, 255));
+
+        jLabel40.setFont(new java.awt.Font("Sitka Banner", 1, 14)); // NOI18N
+        jLabel40.setForeground(new java.awt.Color(51, 0, 51));
+        jLabel40.setText("Actividad");
+
+        jButton9.setText("Agregar");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(104, 104, 104)
+                        .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(txtActividadAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(96, 96, 96)
+                        .addComponent(jButton9)))
+                .addContainerGap(45, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel40)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtActividadAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton9)
+                .addContainerGap(65, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Agregar actividad", jPanel3);
 
         PanelActualizarProyecto.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 370, 280, 240));
 
@@ -871,7 +874,7 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btActualizarActividadActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        int resultado = JOptionPane.showConfirmDialog(null, "¿Esta seguro de actualizar", "Confirmación", JOptionPane.YES_NO_OPTION);
+        int resultado = JOptionPane.showConfirmDialog(null, "¿Esta seguro de agregar esta actividad?", "Confirmación", JOptionPane.YES_NO_OPTION);
         if (resultado == JOptionPane.YES_OPTION) {
             agregarActividadTabla();
             txtActividadAgregar.setText("");
@@ -883,6 +886,7 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
 
     private void tbActividadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbActividadesMouseClicked
         filaseleccionadaActividad = tbActividades.getSelectedRow();
+        
         if (filaseleccionadaActividad >= 0) {
             actividad = ActividadServicio.BuscarActividad(tbActividades.getValueAt(filaseleccionadaActividad, 0));
             txtActividadActualizar.setText(actividad.getActividad());
@@ -922,16 +926,22 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+        if (filaseleccionadaActividad > -1) {
         int resultado = JOptionPane.showConfirmDialog(null, "¿Esta seguro de eliminar", "Confirmación", JOptionPane.YES_NO_OPTION);
         if (resultado == JOptionPane.YES_OPTION) {
-            if (filaseleccionadaActividad > -1) {
+            
                 dtm = (DefaultTableModel) tbActividades.getModel();
                 Object idActividad = dtm.getValueAt(filaseleccionadaActividad, 0);
 
                 ActividadServicio.EliminarActividad(idActividad);
                 llenarTablaActividades();
-            }
+                 txtActividadActualizar.setText("");
+                txtActividadEliminar.setText("");
+                rbtCompletada.setSelected(false);
+                rbtProgreso.setSelected(false);
+        }
+        }else{
+            JOptionPane.showMessageDialog(null, "Seleccione una actividad a eliminar");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -973,8 +983,6 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane8;
@@ -989,6 +997,8 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton rbtProgreso;
     private javax.swing.JRadioButton rdEnProgreso;
     private static javax.swing.JTable tbActividades;
+    private javax.swing.JPanel tbEliminarActividad;
+    private javax.swing.JPanel tbactualizarActividad;
     private javax.swing.JTextField txtActividadActualizar;
     private javax.swing.JTextField txtActividadAgregar;
     private javax.swing.JTextField txtActividadEliminar;

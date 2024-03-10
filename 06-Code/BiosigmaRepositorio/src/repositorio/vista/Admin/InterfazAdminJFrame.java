@@ -474,6 +474,11 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
             }
         });
         tbProyecto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tbProyecto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                tbProyectoMouseEntered(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbProyecto);
 
         btnAgregarProyecto.setFont(new java.awt.Font("Sitka Banner", 0, 14)); // NOI18N
@@ -755,6 +760,11 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         jPanel5.add(panelPestañas, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 950, 610));
 
         panelSuperior.setBackground(new java.awt.Color(102, 255, 204));
+        panelSuperior.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panelSuperiorMouseEntered(evt);
+            }
+        });
         panelSuperior.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         BotonOpciones.setBackground(new java.awt.Color(102, 255, 204));
@@ -1117,6 +1127,15 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         ConsultarCargo consultarCargo = new ConsultarCargo();
         consultarCargo.setVisible(true);
     }//GEN-LAST:event_btVerCargosActionPerformed
+
+    private void tbProyectoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbProyectoMouseEntered
+        llenarTablaProyectos();
+    }//GEN-LAST:event_tbProyectoMouseEntered
+
+    private void panelSuperiorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelSuperiorMouseEntered
+        llenarTablaProyectos();
+        llenarPersonas();
+    }//GEN-LAST:event_panelSuperiorMouseEntered
 
     public static void main(String args[]) {
 
