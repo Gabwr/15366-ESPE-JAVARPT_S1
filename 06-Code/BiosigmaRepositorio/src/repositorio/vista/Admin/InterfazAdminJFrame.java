@@ -437,7 +437,7 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
         jLabel1.setBackground(new java.awt.Color(255, 153, 102));
         jLabel1.setFont(new java.awt.Font("Cambria Math", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 0, 0));
-        jLabel1.setText("BIOSIGMA RESPOSITORIO");
+        jLabel1.setText("BIOSIGMA REPOSITORIO");
         panelPresentacion.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(167, 22, -1, -1));
 
         jTextArea5.setEditable(false);
@@ -1069,8 +1069,8 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
             int resultado = JOptionPane.showConfirmDialog(null, "¿Esta segúro de eliminar el proyecto seleccionado?", "Eliminar", JOptionPane.YES_NO_OPTION);
             try {
                 if (resultado == JOptionPane.YES_OPTION) {
-                    String codigoConfirmacion = JOptionPane.showInputDialog("Ingrese el código de seguridad para eliminar");
-                    if ("345@9".equals(codigoConfirmacion)) {
+                    String codigoConfirmacion = JOptionPane.showInputDialog("Ingrese si para eliminar");
+                    if ("si".equals(codigoConfirmacion.toLowerCase())) {
                         ProyectoServicio.EliminarProyecto(tbProyecto.getValueAt(fila, 0).toString());
                         dtm.removeRow(fila);
                         fila = -1;

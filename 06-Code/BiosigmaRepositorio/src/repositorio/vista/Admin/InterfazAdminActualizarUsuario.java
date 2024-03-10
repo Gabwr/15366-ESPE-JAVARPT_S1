@@ -153,7 +153,7 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
     }
 
     private boolean validarCedula() {
-        if (txtCedulA.getText().isEmpty()) {
+        if (txtCedulA.getText().isEmpty()||txtCedulA.getText().length()>10) {
             return false;
         } else {
             int[] cedulaContenido = new int[10];
@@ -283,6 +283,9 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
         JPInsertar.add(dcFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(124, 143, 106, -1));
 
         txtCedulA.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCedulAKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtCedulAKeyReleased(evt);
             }
@@ -524,10 +527,17 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_dcFechaPropertyChange
 
     private void txtCedulAKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulAKeyReleased
+        char validacion = evt.getKeyChar();
+        if(Character.isSpaceChar(validacion)){
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "No ingrese espacios");  
+        }else{
         if (!validarCedula()) {
             lbAvisoCedula.setVisible(true);
         } else {
             lbAvisoCedula.setVisible(false);
+        }
         }
     }//GEN-LAST:event_txtCedulAKeyReleased
 
@@ -626,6 +636,21 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
         Dp_Contrasenia.add(contrasenia);
         contrasenia.show();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtCedulAKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulAKeyPressed
+                char validacion = evt.getKeyChar();
+        if(Character.isSpaceChar(validacion)){
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "No ingrese espacios");  
+        }else{
+        if (!validarCedula()) {
+            lbAvisoCedula.setVisible(true);
+        } else {
+            lbAvisoCedula.setVisible(false);
+        }
+        }
+    }//GEN-LAST:event_txtCedulAKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

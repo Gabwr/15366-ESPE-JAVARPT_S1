@@ -1,6 +1,8 @@
 package repositorio.vista.admin;
 
 import com.toedter.calendar.JTextFieldDateEditor;
+import java.awt.Event;
+import static java.awt.Event.BACK_SPACE;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
@@ -132,14 +134,19 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
         cbCargo.setVisible(false);
         lbAvisoCargo.setVisible(false);
         btAgregarCargo.setVisible(false);
+        pswfContrasenia.setText("");
     }
 
     private boolean validarCedula() {
-        if (txtCedulA.getText().isEmpty()) {
+        if (txtCedulA.getText().isEmpty()||txtCedulA.getText().length()>10) {
             return false;
         } else {
+            if(txtCedulA.getText().length()<=9){
+                return false;
+            }
+            else{
             int[] cedulaContenido = new int[10];
-            int cedulaString = Integer.parseInt(txtCedulA.getText());
+            int cedulaString = Integer.parseInt(txtCedulA.getText().trim());
             int cedulaStringDivisor = cedulaString, cont = 0, iniciador = 0, residuo, cosciente, mul = 0, sumpar = 0, sumimpar = 0, sumtotal = 0, res = 0, comprobador = 0;
 
             for (iniciador = 9; iniciador >= 0; iniciador--) {
@@ -147,6 +154,7 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
                 residuo = cedulaStringDivisor % 10;
                 cedulaContenido[iniciador] = residuo;
                 cedulaStringDivisor = cosciente;
+                
             }
 
             if (cedulaContenido[0] == 0 && cedulaContenido[1] == 0) {
@@ -179,6 +187,7 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
             } else {
                 return false;
             }
+        }
         }
     }
 
@@ -472,6 +481,7 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
             evt.consume();
             JOptionPane.showMessageDialog(null, "Ingrese solo digitos");
         }
+        
     }//GEN-LAST:event_txtCedulAKeyTyped
 
     private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased
@@ -606,6 +616,7 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BtnLimpiarUsuariosActionPerformed
 
     private void pswfContraseniaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pswfContraseniaKeyPressed
+        
         if (validarcontrasenia()) {
             lbAvisoContrasenia.setVisible(false);
         } else {
@@ -615,18 +626,33 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_pswfContraseniaKeyPressed
 
     private void pswfContraseniaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pswfContraseniaKeyReleased
-        if (validarcontrasenia()) {
-            lbAvisoContrasenia.setVisible(false);
-        } else {
-            lbAvisoContrasenia.setVisible(true);
-        }
-    }//GEN-LAST:event_pswfContraseniaKeyReleased
-
-    private void txtCedulAKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulAKeyPressed
+        char validacion = evt.getKeyChar();
+        if(Character.isSpaceChar(validacion)){
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "No ingrese espacios");  
+        }else{
         if (!validarCedula()) {
             lbAvisoCedula.setVisible(true);
         } else {
             lbAvisoCedula.setVisible(false);
+        }
+        }
+    }//GEN-LAST:event_pswfContraseniaKeyReleased
+
+    private void txtCedulAKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulAKeyPressed
+        char validacion = evt.getKeyChar();
+        if(Character.isSpaceChar(validacion)){
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "No ingrese espacios");  
+        }
+        else{
+        if (!validarCedula()) {
+            lbAvisoCedula.setVisible(true);
+        } else {
+            lbAvisoCedula.setVisible(false);
+        }
         }
     }//GEN-LAST:event_txtCedulAKeyPressed
 

@@ -41,6 +41,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         hoy = Calendar.getInstance();
         Date restriccion = hoy.getTime();
         dcFechaFinalProyecto.setMinSelectableDate(restriccion);
+        dcFechaInicioProyecto.setMinSelectableDate(restriccion);
         JTextFieldDateEditor editorfinal = (JTextFieldDateEditor) dcFechaFinalProyecto.getDateEditor();
         editorfinal.setEditable(false);
         JTextFieldDateEditor editorinicio = (JTextFieldDateEditor) dcFechaInicioProyecto.getDateEditor();
