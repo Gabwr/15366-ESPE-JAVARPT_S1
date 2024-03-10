@@ -195,8 +195,11 @@ public class ConsultarPerfil extends javax.swing.JFrame {
     private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarActionPerformed
         int fila = tbDatos.getSelectedRow();
         if (fila != -1) {
-            PerfilServicio.EliminarPerfil((Integer) tbDatos.getValueAt(fila, 0));
-            consultarDatos();
+            int resultado = JOptionPane.showConfirmDialog(null, "¿Esta seguro de eliminar?", "Confirmación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (resultado == JOptionPane.YES_OPTION) {
+                PerfilServicio.EliminarPerfil((Integer) tbDatos.getValueAt(fila, 0));
+                consultarDatos();
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Seleccione la fila que desea Eliminar");
         }
