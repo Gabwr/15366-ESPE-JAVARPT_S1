@@ -40,7 +40,7 @@ public class personaMetodos implements IPersonas {
             this.database = conn.getDataB();
             this.coleccionPersonas = database.getCollection("personas");
             this.coleccionPerfiles = database.getCollection("perfil");
-            this.coleccionCargos = database.getCollection("cargos");
+            this.coleccionCargos = database.getCollection("cargo");
 
         }
     }
@@ -208,7 +208,7 @@ public class personaMetodos implements IPersonas {
                         idpersona,
                         resultado.getString("correo"),
                         resultado.getString("nombre"),
-                        cargo.getInteger("cargo"),
+                        cargo.getInteger("id_Cargo"),
                         resultado.getDate("fechaNacimiento"))
                         ;
             }

@@ -26,7 +26,7 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
     String cedulapersona = null;
     public static String cedulaContrasenia = null;
     public Calendar hoy = null;
-    
+
     public InterfazAdminActualizarUsuario() {
         initComponents();
         restringirJcalendar();
@@ -42,8 +42,8 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
         cedulapersona = InterfazAdminJFrame.codigoUsuario;
         cargarPersona();
     }
-    
-        public void restringirJcalendar() {
+
+    public void restringirJcalendar() {
         hoy = Calendar.getInstance();
         hoy.add(Calendar.YEAR, -18);
         Date restriccion = hoy.getTime();
@@ -51,7 +51,6 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
         JTextFieldDateEditor editor = (JTextFieldDateEditor) dcFecha.getDateEditor();
         editor.setEditable(false);
     }
-
 
     public String algoritmousuario(String nombre, String Cedula) {
         String usuario = "";
@@ -79,7 +78,6 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
         }
     }
 
-
     private boolean validarDatosOtros() {
         boolean validacion = false;
         if ((txtNombre.getText().length() > 0) && validarCedula() && (dcFecha.getDate() != null)
@@ -95,8 +93,8 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
     public static void cargarComboPerfil(int idPerfil) {
         List<Perfil> listaPerfiles = new PerfilServicio().ListarPerfiles();
         for (Perfil temp : listaPerfiles) {
-                cbTipoPersona.addItem(temp.getId() + " - " + temp.getNombrePerfil());
-            
+            cbTipoPersona.addItem(temp.getId() + " - " + temp.getNombrePerfil());
+
         }
     }
 
@@ -114,31 +112,30 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
 
     public static void cargarComboCargo(int idCargo) {
         List<Cargo> listaCargos = new CargoServicio().ListarCargos();
-        
+
         for (Cargo temp : listaCargos) {
-            if (temp.getIdCargo() != idCargo) {
+
                 cbCargo.addItem(temp.getIdCargo() + " - " + temp.getCargo());
-            }
+            
         }
     }
 
     public void cargarPersona() {
         Personas persona = ServicioPersonas.BuscarPorCodigoClienteyAdmin(cedulapersona);
+        Personas persona2 = ServicioPersonas.BuscarPorCodigoTrabajadores(cedulapersona);
         txtCedulA.setText(persona.getCedula());
         txtCorreo.setText(persona.getCorreo());
         calcularEdad(persona.getFechaNacimiento().getYear());
         txtNombre.setText(persona.getNombre());
         Perfil perfil = PerfilServicio.BuscarPerfil(persona.getIdPerfil());
-        
+
         cargarComboPerfil(persona.getIdPerfil());
         dcFecha.setDate(persona.getFechaNacimiento());
-        cbTipoPersona.setSelectedItem(persona.getIdPerfil()+" - "+perfil.getNombrePerfil());
-        if (persona.getIdPerfil() != 2) {
-            cargarComboCargo(-1);
-        } else {
-            Cargo cargo = CargoServicio.BuscarCargo(persona.getCargo());
-            cbCargo.addItem(cargo.getIdCargo() + " - " + cargo.getCargo());
-            cargarComboCargo(persona.getCargo());
+        cbTipoPersona.setSelectedItem(persona.getIdPerfil() + " - " + perfil.getNombrePerfil());
+        if (persona2.getIdPerfil() == 2) {
+            Cargo cargo = CargoServicio.BuscarCargo(persona2.getCargo());
+            cargarComboCargo(persona2.getCargo());
+            cbCargo.setSelectedItem(cargo.getIdCargo() + " - " + cargo.getCargo());
         }
     }
 
@@ -470,10 +467,10 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
         Date fechaNacimiento = dcFecha.getDate();
         perfilIngreso = PerfilServicio.BuscarPerfil(idPerfil);
 
-        if (validarDatosOtros() && validarCedula() && (perfilIngreso.getId() == 1) && 
-                comprobarExistencia(cedula)) {
+        if (validarDatosOtros() && validarCedula() && (perfilIngreso.getId() == 1)
+                && comprobarExistencia(cedula)) {
 
-            Personas AdminNuevo = new Personas(perfilIngreso.getId(), usuario, cedula, 
+            Personas AdminNuevo = new Personas(perfilIngreso.getId(), usuario, cedula,
                     correo, nombre, fechaNacimiento);
 
             if (ServicioPersonas.ActualizarPersonasClientesAdmin(AdminNuevo)) {
@@ -500,7 +497,7 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Datos no Ingresados");
             }
 
-        } else if (validarDatosOtros() && validarCedula() && (perfilIngreso.getId() != 1) 
+        } else if (validarDatosOtros() && validarCedula() && (perfilIngreso.getId() != 1)
                 && (perfilIngreso.getId() != 2)) {
             Personas ClienteNuevo = new Personas(perfilIngreso.getId(), usuario, cedula,
                     correo, nombre, fechaNacimiento);
@@ -565,7 +562,7 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnRegresarUsuariosActionPerformed
 
     private void cbTipoPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoPersonaActionPerformed
-       String dato = cbTipoPersona.getSelectedItem().toString();
+        String dato = cbTipoPersona.getSelectedItem().toString();
         String perfil[] = null;
         int idPerfil = 0;
         if (cbTipoPersona.getSelectedIndex() == 0) {
@@ -573,23 +570,23 @@ public class InterfazAdminActualizarUsuario extends javax.swing.JInternalFrame {
             cbCargo.setVisible(false);
             btAgregarCargo.setVisible(false);
             lbAvisoTipoUsuario.setVisible(true);
-        } else{
+        } else {
             perfil = dato.split("-");
             idPerfil = Integer.parseInt(perfil[0].trim());
             perfilIngreso = PerfilServicio.BuscarPerfil(idPerfil);
             if (perfilIngreso.getId() == 2) {
-            lbAvisoTipoUsuario.setVisible(false);
-            lbCargo.setVisible(true);
-            cbCargo.setVisible(true);
-            lbAvisoCargo.setVisible(true);
-            btAgregarCargo.setVisible(true);
-        } else {
-            lbAvisoTipoUsuario.setVisible(false);
-            lbCargo.setVisible(false);
-            cbCargo.setVisible(false);
-            lbAvisoCargo.setVisible(false);
-            btAgregarCargo.setVisible(false);
-        }
+                lbAvisoTipoUsuario.setVisible(false);
+                lbCargo.setVisible(true);
+                cbCargo.setVisible(true);
+                lbAvisoCargo.setVisible(true);
+                btAgregarCargo.setVisible(true);
+            } else {
+                lbAvisoTipoUsuario.setVisible(false);
+                lbCargo.setVisible(false);
+                cbCargo.setVisible(false);
+                lbAvisoCargo.setVisible(false);
+                btAgregarCargo.setVisible(false);
+            }
         }
     }//GEN-LAST:event_cbTipoPersonaActionPerformed
 
