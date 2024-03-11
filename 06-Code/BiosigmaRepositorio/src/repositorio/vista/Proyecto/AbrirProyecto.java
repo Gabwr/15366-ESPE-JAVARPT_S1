@@ -18,9 +18,9 @@ import repositorio.controlador.ActividadServicio;
 import repositorio.controlador.ProyectoServicio;
 import repositorio.modelo.PlanAmbiental;
 import repositorio.modelo.Proyecto;
+import repositorio.vista.cliente.InterfazClienteJFrame;
 import repositorio.vista.admin.InterfazAdminJFrame;
-import repositorio.vista.cliente.InterfazCliente1JFrame;
-import repositorio.vista.trabajador.InterfazTrabajadorJFrame;
+import repositorio.vista.trabajador.InterfazTrabajador1JFrame;
 
 public class AbrirProyecto extends javax.swing.JInternalFrame {
 
@@ -28,7 +28,6 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
     PlanAmbiental actividad = new PlanAmbiental();
     private DefaultTableModel dtm = null;
     private static int filaseleccionadaactividades = -1;
-    
 
     public AbrirProyecto() {
         initComponents();
@@ -53,11 +52,6 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
 
     public void llenarTablaActividades() {
         dtm = (DefaultTableModel) tbActividades.getModel();
-        TableColumnModel columnModel = tbActividades.getColumnModel();
-        TableColumn columna = columnModel.getColumn(0);
-        columna.setMinWidth(0);
-        columna.setMaxWidth(0);
-
         dtm.setRowCount(0);
         for (PlanAmbiental actividades : ActividadServicio.ListaActividades(obtenercodigointerfacez())) {
             String fechaafinal, evidencia, completado;
@@ -71,7 +65,6 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
             } else {
                 completado = "En progreso";
             }
-
             if (actividades.getEvidencias() == null) {
                 evidencia = "Por cargar";
             } else {
@@ -79,6 +72,10 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
             }
 
             dtm.addRow(new Object[]{actividades.getIdActividad(), actividades.getActividad(), completado, fechaafinal, evidencia});
+            TableColumnModel columnModel = tbActividades.getColumnModel();
+            TableColumn columna = columnModel.getColumn(0);
+            columna.setMinWidth(0);
+            columna.setMaxWidth(0);
         }
     }
 
@@ -87,12 +84,12 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
         if (InterfazAdminJFrame.getCodigoProyecto() != "") {
             codigo = InterfazAdminJFrame.getCodigoProyecto();
 
-        } else if (InterfazTrabajadorJFrame.getCodigoProyecto() != "") {
-            codigo = InterfazTrabajadorJFrame.getCodigoProyecto();
+        } else if (InterfazTrabajador1JFrame.getCodigoProyecto() != "") {
+            codigo = InterfazTrabajador1JFrame.getCodigoProyecto();
 
-        } else if (InterfazCliente1JFrame.getCodigoProyecto() != "") {
+        } else if (InterfazClienteJFrame.getCodigoProyecto() != "") {
 
-            codigo = InterfazCliente1JFrame.getCodigoProyecto();
+            codigo = InterfazClienteJFrame.getCodigoProyecto();
         }
         return codigo;
     }
@@ -326,11 +323,11 @@ public class AbrirProyecto extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Actividades", "Completado", "Fecha realizada", "Evidencia"
+                "id", "Actividades", "Completado", "Fecha realizada", "Evidencia"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true
+                true, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

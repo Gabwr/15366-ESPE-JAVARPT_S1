@@ -1,11 +1,11 @@
-package repositorio.vista.trabajador;
+package repositorio.vista.cliente;
 
-import repositorio.vista.admin.InterfazAdminInsertarUsuario;
+
 import repositorio.vista.proyecto.AbrirProyecto;
-import repositorio.vista.proyecto.AgregarProyecto;
-import repositorio.vista.proyecto.ActualizarProyecto;
 import java.awt.Color;
-import java.awt.HeadlessException;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.geom.RoundRectangle2D;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
@@ -16,35 +16,41 @@ import repositorio.modelo.Personas;
 import repositorio.modelo.Proyecto;
 import repositorio.vista.InterfazLogin;
 
-public class InterfazTrabajadorJFrame extends javax.swing.JFrame {
+public class InterfazClienteJFrame extends javax.swing.JFrame {
 
-
-    public InterfazAdminInsertarUsuario IntfzInsertar = new InterfazAdminInsertarUsuario();
     private int contador = 1;
+    public int fila = -1;
     int filaseleccionadaAdmin = -1;
     int filaseleccionadaCliente = -1;
     int filaseleccionadaTrabajador = -1;
     private static String codigoProyecto = "";
-    private static String codigoUsuario = "";
+    public static String codigoUsuario = "";
     private DefaultTableModel dtm = null;
-    public int fila=0;
 
     public static String getCodigoProyecto() {
         return codigoProyecto;
     }
-    
 
-    public InterfazTrabajadorJFrame() {
+    public InterfazClienteJFrame() {
         initComponents();
         llenarTablaProyectos();
+        this.setLocationRelativeTo(null);
+        setShape(new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 27, 27));
+        cargarDatosLogin();
         PanelBiosigmaLogo.setBackground(new Color(0, 0, 0, 160));
         panelDescripcion.setBackground(new Color(0, 0, 0, 100));
         panelOpciones.setBackground(new Color(0, 0, 0, 160));
         panelOpciones.setVisible(false);
-        cargarDatosLogin();
+        setIconImage(getIconImage());
     }
 
-        public void cargarDatosLogin() {
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("resource/colibri_png.png"));
+        return retValue;
+    }
+
+    public void cargarDatosLogin() {
         Personas login = ServicioPersonas.BuscarPorCodigoClienteyAdmin(InterfazLogin.idPersona);
         txtNombreIngreso.setText(login.getNombre());
         txtCorreoIngreso.setText(login.getCorreo());
@@ -118,17 +124,15 @@ public class InterfazTrabajadorJFrame extends javax.swing.JFrame {
         jTextArea5 = new javax.swing.JTextArea();
         jLabel10 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         panelProyectos = new javax.swing.JPanel();
         panelTablaProyectos = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbProyecto = new javax.swing.JTable();
-        btnAgregarProyecto = new javax.swing.JButton();
         btnAbrirProyecto = new javax.swing.JButton();
-        btnActualizarProyecto = new javax.swing.JButton();
         btnRegresarProyectos = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        btnLimpiarSeleccion = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         panelSuperior = new javax.swing.JPanel();
         BotonOpciones = new javax.swing.JPanel();
@@ -138,6 +142,7 @@ public class InterfazTrabajadorJFrame extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -193,14 +198,16 @@ public class InterfazTrabajadorJFrame extends javax.swing.JFrame {
         panelBotones1.add(PanelBiosigmaLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 230, 60));
 
         txtCorreoIngreso.setEditable(false);
-        txtCorreoIngreso.setBackground(new java.awt.Color(102, 204, 255));
-        txtCorreoIngreso.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtCorreoIngreso.setBackground(new java.awt.Color(204, 255, 204));
+        txtCorreoIngreso.setFont(new java.awt.Font("Sitka Banner", 1, 21)); // NOI18N
+        txtCorreoIngreso.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtCorreoIngreso.setBorder(null);
         panelBotones1.add(txtCorreoIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 190, 30));
 
         txtNombreIngreso.setEditable(false);
-        txtNombreIngreso.setBackground(new java.awt.Color(102, 204, 255));
-        txtNombreIngreso.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtNombreIngreso.setBackground(new java.awt.Color(204, 255, 204));
+        txtNombreIngreso.setFont(new java.awt.Font("Sitka Banner", 1, 21)); // NOI18N
+        txtNombreIngreso.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtNombreIngreso.setBorder(null);
         panelBotones1.add(txtNombreIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 190, 30));
 
@@ -209,6 +216,7 @@ public class InterfazTrabajadorJFrame extends javax.swing.JFrame {
         panelBotones1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 230, 100));
 
         BotonProyectos.setBackground(new java.awt.Color(0, 204, 153));
+        BotonProyectos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BotonProyectos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BotonProyectosMouseClicked(evt);
@@ -253,18 +261,19 @@ public class InterfazTrabajadorJFrame extends javax.swing.JFrame {
         panelBotones1.add(BotonProyectos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 230, 70));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/colibri_png.png"))); // NOI18N
-        panelBotones1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 520, 160, 170));
+        panelBotones1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 540, 160, 170));
 
         jButton1.setBackground(new java.awt.Color(255, 204, 255));
         jButton1.setFont(new java.awt.Font("Tempus Sans ITC", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 51, 51));
         jButton1.setText("Cerrar Sesión");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        panelBotones1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 470, -1, -1));
+        panelBotones1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 490, -1, -1));
 
         jLabel29.setBackground(new java.awt.Color(255, 51, 51));
         jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/FondoBienvenidos.png"))); // NOI18N
@@ -302,12 +311,12 @@ public class InterfazTrabajadorJFrame extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(255, 153, 102));
         jLabel1.setFont(new java.awt.Font("Cambria Math", 1, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel1.setText("BIOSIGMA RESPOSITORIO");
+        jLabel1.setForeground(new java.awt.Color(51, 0, 0));
+        jLabel1.setText("BIOSIGMA REPOSITORIO");
         panelPresentacion.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(167, 22, -1, -1));
 
         jTextArea5.setEditable(false);
-        jTextArea5.setBackground(new java.awt.Color(255, 255, 204));
+        jTextArea5.setBackground(new java.awt.Color(204, 255, 204));
         jTextArea5.setColumns(20);
         jTextArea5.setFont(new java.awt.Font("Sitka Banner", 1, 16)); // NOI18N
         jTextArea5.setForeground(new java.awt.Color(0, 51, 0));
@@ -322,24 +331,12 @@ public class InterfazTrabajadorJFrame extends javax.swing.JFrame {
         panelPresentacion.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 363, 470, 230));
 
         jLabel37.setFont(new java.awt.Font("Sitka Banner", 1, 24)); // NOI18N
-        jLabel37.setForeground(new java.awt.Color(51, 0, 0));
+        jLabel37.setForeground(new java.awt.Color(51, 0, 51));
         jLabel37.setText("¿Qué significa Biosigma?");
-        panelPresentacion.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(584, 116, -1, -1));
+        panelPresentacion.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 140, -1, -1));
 
-        jPanel1.setBackground(new java.awt.Color(170, 228, 156));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 950, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 310, Short.MAX_VALUE)
-        );
-
-        panelPresentacion.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 310));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/ImagenFondoPresentacion.png"))); // NOI18N
+        panelPresentacion.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, -1));
 
         tbPaneles.addTab("tab1", panelPresentacion);
 
@@ -368,37 +365,27 @@ public class InterfazTrabajadorJFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tbProyecto);
-
-        btnAgregarProyecto.setFont(new java.awt.Font("Sitka Banner", 0, 14)); // NOI18N
-        btnAgregarProyecto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/1814113_add_more_plus_icon.png"))); // NOI18N
-        btnAgregarProyecto.setText("Agregar Proyecto");
-        btnAgregarProyecto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarProyectoActionPerformed(evt);
+        tbProyecto.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tbProyecto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                tbProyectoMouseEntered(evt);
             }
         });
+        jScrollPane1.setViewportView(tbProyecto);
 
         btnAbrirProyecto.setFont(new java.awt.Font("Sitka Banner", 0, 14)); // NOI18N
         btnAbrirProyecto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/3643772-archive-archives-document-folder-open_113445.png"))); // NOI18N
         btnAbrirProyecto.setText("Abrir Proyecto");
+        btnAbrirProyecto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAbrirProyecto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAbrirProyectoActionPerformed(evt);
             }
         });
 
-        btnActualizarProyecto.setFont(new java.awt.Font("Sitka Banner", 0, 14)); // NOI18N
-        btnActualizarProyecto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/185042_edit_modify_icon.png"))); // NOI18N
-        btnActualizarProyecto.setText("Actualizar Proyecto");
-        btnActualizarProyecto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActualizarProyectoActionPerformed(evt);
-            }
-        });
-
         btnRegresarProyectos.setFont(new java.awt.Font("Sitka Banner", 0, 14)); // NOI18N
         btnRegresarProyectos.setText("Regresar");
+        btnRegresarProyectos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegresarProyectos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegresarProyectosActionPerformed(evt);
@@ -409,11 +396,12 @@ public class InterfazTrabajadorJFrame extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(0, 51, 51));
         jLabel9.setText("Haga click en el proyecto que desee en la siguiente tabla para poder abrirlo");
 
-        btnLimpiarSeleccion.setFont(new java.awt.Font("Sitka Banner", 0, 14)); // NOI18N
-        btnLimpiarSeleccion.setText("Limpiar Selección");
-        btnLimpiarSeleccion.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setFont(new java.awt.Font("Sitka Banner", 0, 14)); // NOI18N
+        jButton2.setText("Limpiar Selección");
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimpiarSeleccionActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -427,21 +415,17 @@ public class InterfazTrabajadorJFrame extends javax.swing.JFrame {
                     .addGroup(panelTablaProyectosLayout.createSequentialGroup()
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnLimpiarSeleccion)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(43, 43, 43)
                         .addComponent(btnRegresarProyectos)
                         .addGap(18, 18, 18))
                     .addGroup(panelTablaProyectosLayout.createSequentialGroup()
-                        .addGroup(panelTablaProyectosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 782, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panelTablaProyectosLayout.createSequentialGroup()
-                                .addGap(33, 33, 33)
-                                .addComponent(btnAgregarProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(62, 62, 62)
-                                .addComponent(btnAbrirProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(59, 59, 59)
-                                .addComponent(btnActualizarProyecto)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 782, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(109, Short.MAX_VALUE))))
+            .addGroup(panelTablaProyectosLayout.createSequentialGroup()
+                .addGap(302, 302, 302)
+                .addComponent(btnAbrirProyecto, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         panelTablaProyectosLayout.setVerticalGroup(
             panelTablaProyectosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -450,15 +434,12 @@ public class InterfazTrabajadorJFrame extends javax.swing.JFrame {
                 .addGroup(panelTablaProyectosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegresarProyectos)
                     .addComponent(jLabel9)
-                    .addComponent(btnLimpiarSeleccion))
+                    .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
-                .addGroup(panelTablaProyectosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnActualizarProyecto)
-                    .addComponent(btnAgregarProyecto)
-                    .addComponent(btnAbrirProyecto))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnAbrirProyecto)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         panelProyectos.add(panelTablaProyectos, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 71, 910, -1));
@@ -471,10 +452,33 @@ public class InterfazTrabajadorJFrame extends javax.swing.JFrame {
 
         tbPaneles.addTab("tab4", panelProyectos);
 
+        javax.swing.GroupLayout panelPestañasLayout = new javax.swing.GroupLayout(panelPestañas);
+        panelPestañas.setLayout(panelPestañasLayout);
+        panelPestañasLayout.setHorizontalGroup(
+            panelPestañasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelPestañasLayout.createSequentialGroup()
+                .addComponent(tbPaneles, javax.swing.GroupLayout.PREFERRED_SIZE, 1007, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        panelPestañasLayout.setVerticalGroup(
+            panelPestañasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPestañasLayout.createSequentialGroup()
+                .addComponent(tbPaneles, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jPanel5.add(panelPestañas, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 950, 610));
+
         panelSuperior.setBackground(new java.awt.Color(102, 255, 204));
+        panelSuperior.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panelSuperiorMouseEntered(evt);
+            }
+        });
         panelSuperior.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         BotonOpciones.setBackground(new java.awt.Color(102, 255, 204));
+        BotonOpciones.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BotonOpciones.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BotonOpcionesMouseClicked(evt);
@@ -494,9 +498,8 @@ public class InterfazTrabajadorJFrame extends javax.swing.JFrame {
         BotonOpcionesLayout.setHorizontalGroup(
             BotonOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BotonOpcionesLayout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jLabel12)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 2, Short.MAX_VALUE))
         );
         BotonOpcionesLayout.setVerticalGroup(
             BotonOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -505,13 +508,14 @@ public class InterfazTrabajadorJFrame extends javax.swing.JFrame {
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        panelSuperior.add(BotonOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 20, 60, -1));
+        panelSuperior.add(BotonOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 20, 50, -1));
 
         panelOpciones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btInfoProgramador.setBackground(new java.awt.Color(51, 51, 51));
         btInfoProgramador.setForeground(new java.awt.Color(204, 255, 255));
         btInfoProgramador.setText("Información del Programador");
+        btInfoProgramador.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btInfoProgramador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btInfoProgramadorActionPerformed(evt);
@@ -519,37 +523,12 @@ public class InterfazTrabajadorJFrame extends javax.swing.JFrame {
         });
         panelOpciones.add(btInfoProgramador, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
 
-        panelSuperior.add(panelOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 20, 260, 50));
+        panelSuperior.add(panelOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 20, 280, 50));
 
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/Vólcan_Cotopaxi.jpg"))); // NOI18N
-        panelSuperior.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 6, -1, 180));
+        panelSuperior.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 6, 600, 180));
 
-        javax.swing.GroupLayout panelPestañasLayout = new javax.swing.GroupLayout(panelPestañas);
-        panelPestañas.setLayout(panelPestañasLayout);
-        panelPestañasLayout.setHorizontalGroup(
-            panelPestañasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelPestañasLayout.createSequentialGroup()
-                .addComponent(tbPaneles, javax.swing.GroupLayout.PREFERRED_SIZE, 1007, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(panelPestañasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panelPestañasLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(panelSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, 950, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        panelPestañasLayout.setVerticalGroup(
-            panelPestañasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPestañasLayout.createSequentialGroup()
-                .addComponent(tbPaneles, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(panelPestañasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panelPestañasLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(panelSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-
-        jPanel5.add(panelPestañas, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 950, 610));
+        jPanel5.add(panelSuperior, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 950, 130));
 
         escritorio.setLayer(jPanel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -578,79 +557,13 @@ public class InterfazTrabajadorJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRegresarProyectosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarProyectosActionPerformed
-        tbPaneles.setSelectedIndex(0);
-    }//GEN-LAST:event_btnRegresarProyectosActionPerformed
-
-    private void btnActualizarProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarProyectoActionPerformed
-         fila = tbProyecto.getSelectedRow();
-
-        if (fila != -1) {
-            codigoProyecto = tbProyecto.getValueAt(fila, 0).toString();
-            ActualizarProyecto actualizar = new ActualizarProyecto();
-            escritorio.add(actualizar);
-            actualizar.show();
-            fila=-1;    
-        } else {
-            getToolkit().beep();
-            JOptionPane.showMessageDialog(null, "Seleccione una proyecto para poder abrir");
-        }
-    }//GEN-LAST:event_btnActualizarProyectoActionPerformed
-
-    private void btnAbrirProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirProyectoActionPerformed
-        fila = tbProyecto.getSelectedRow();
-
-        if (fila != -1) {
-            codigoProyecto = tbProyecto.getValueAt(fila, 0).toString();
-            AbrirProyecto abrir = new AbrirProyecto();
-            escritorio.add(abrir);
-            abrir.show();
-            fila=-1;
-
-        } else {
-            getToolkit().beep();
-            JOptionPane.showMessageDialog(null, "Seleccione una proyecto para poder abrir");
-        }
-    }//GEN-LAST:event_btnAbrirProyectoActionPerformed
-
-    private void btnAgregarProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProyectoActionPerformed
-        AgregarProyecto agregar = new AgregarProyecto();
-        escritorio.add(agregar);
-        agregar.show();
-
-    }//GEN-LAST:event_btnAgregarProyectoActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        InterfazLogin login = new InterfazLogin();
-        login.show();
-        dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void BotonProyectosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonProyectosMouseExited
-        BotonProyectos.setBackground(new Color(0, 204, 153));
-    }//GEN-LAST:event_BotonProyectosMouseExited
-
-    private void BotonProyectosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonProyectosMouseEntered
-        BotonProyectos.setBackground(new Color(204, 255, 204));
-    }//GEN-LAST:event_BotonProyectosMouseEntered
-
-    private void BotonProyectosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonProyectosMouseClicked
-        tbPaneles.setSelectedIndex(1);
-    }//GEN-LAST:event_BotonProyectosMouseClicked
-
-    private void btnLimpiarSeleccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarSeleccionActionPerformed
-        ListSelectionModel tablamodelo = tbProyecto.getSelectionModel();
-        tablamodelo.clearSelection();
-        fila = -1;
-    }//GEN-LAST:event_btnLimpiarSeleccionActionPerformed
-
     private void btInfoProgramadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInfoProgramadorActionPerformed
         JOptionPane.showMessageDialog(null, "=============================================="
-            + "\n\tProgramadores:"
-            + "\n1.- Gabriel López"
-            + "\n2.- Mateo Medranda"
-            + "\n3.- Alejandro Obando"
-            + "\n==============================================");
+                + "\n\tProgramadores:"
+                + "\n1.- Gabriel López"
+                + "\n2.- Mateo Medranda"
+                + "\n3.- Alejandro Obando"
+                + "\n==============================================");
     }//GEN-LAST:event_btInfoProgramadorActionPerformed
 
     private void BotonOpcionesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonOpcionesMouseExited
@@ -671,11 +584,63 @@ public class InterfazTrabajadorJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BotonOpcionesMouseClicked
 
+    private void btnRegresarProyectosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarProyectosActionPerformed
+        tbPaneles.setSelectedIndex(0);
+    }//GEN-LAST:event_btnRegresarProyectosActionPerformed
+
+    private void btnAbrirProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirProyectoActionPerformed
+        fila = tbProyecto.getSelectedRow();
+
+        if (fila != -1) {
+            codigoProyecto = tbProyecto.getValueAt(fila, 0).toString();
+            AbrirProyecto abrir = new AbrirProyecto();
+            escritorio.add(abrir);
+            abrir.show();
+            fila = -1;
+
+        } else {
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "Seleccione una proyecto para poder abrir");
+        }
+    }//GEN-LAST:event_btnAbrirProyectoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        InterfazLogin login = new InterfazLogin();
+        login.show();
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void BotonProyectosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonProyectosMouseExited
+        BotonProyectos.setBackground(new Color(0, 204, 153));
+    }//GEN-LAST:event_BotonProyectosMouseExited
+
+    private void BotonProyectosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonProyectosMouseEntered
+        BotonProyectos.setBackground(new Color(204, 255, 204));
+    }//GEN-LAST:event_BotonProyectosMouseEntered
+
+    private void BotonProyectosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonProyectosMouseClicked
+        tbPaneles.setSelectedIndex(1);
+    }//GEN-LAST:event_BotonProyectosMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        ListSelectionModel tablamodelo = tbProyecto.getSelectionModel();
+        tablamodelo.clearSelection();
+        fila = -1;
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void tbProyectoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbProyectoMouseEntered
+        llenarTablaProyectos();
+    }//GEN-LAST:event_tbProyectoMouseEntered
+
+    private void panelSuperiorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelSuperiorMouseEntered
+        llenarTablaProyectos();
+    }//GEN-LAST:event_panelSuperiorMouseEntered
+
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InterfazTrabajadorJFrame().setVisible(true);
+                new InterfazClienteJFrame().setVisible(true);
             }
         });
     }
@@ -686,18 +651,17 @@ public class InterfazTrabajadorJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel PanelBiosigmaLogo;
     private javax.swing.JButton btInfoProgramador;
     private javax.swing.JButton btnAbrirProyecto;
-    private javax.swing.JButton btnActualizarProyecto;
-    private javax.swing.JButton btnAgregarProyecto;
-    private javax.swing.JButton btnLimpiarSeleccion;
     private javax.swing.JButton btnRegresarProyectos;
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel37;
@@ -707,7 +671,6 @@ public class InterfazTrabajadorJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;

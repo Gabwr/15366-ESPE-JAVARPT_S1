@@ -1,14 +1,13 @@
 package repositorio.vista;
 
-import repositorio.vista.trabajador.InterfazTrabajadorJFrame;
-
 import java.awt.Image;
 import java.awt.Toolkit;
 import repositorio.controlador.ServicioPersonas;
 import repositorio.modelo.Personas;
+import repositorio.vista.cliente.InterfazClienteJFrame;
 import repositorio.vista.cliente.RegistrarUsuarioCliente;
 import repositorio.vista.admin.InterfazAdminJFrame;
-import repositorio.vista.cliente.InterfazCliente1JFrame;
+import repositorio.vista.trabajador.InterfazTrabajador1JFrame;
 
 public class InterfazLogin extends javax.swing.JFrame {
 
@@ -211,7 +210,7 @@ public class InterfazLogin extends javax.swing.JFrame {
                 } else if (personacomparada != null && personacomparada.getIdPerfil() == 2
                         && personacomparada.getUsuario().equals(Trabajador.getUsuario())
                         && contrasenia.equals(ServicioPersonas.desencriptar(Trabajador.getContrasenia(), contrasenia))) {
-                    InterfazTrabajadorJFrame modificar = new InterfazTrabajadorJFrame();
+                    InterfazTrabajador1JFrame modificar = new InterfazTrabajador1JFrame();
                     modificar.setVisible(true);
                     setVisible(false);
                     limpiar();
@@ -219,7 +218,7 @@ public class InterfazLogin extends javax.swing.JFrame {
                 } else if (personacomparada != null && personacomparada.getIdPerfil() == 3
                         && personacomparada.getUsuario().equals(Admin_cliente.getUsuario())
                         && contrasenia.equals(ServicioPersonas.desencriptar(Admin_cliente.getContrasenia(), contrasenia))) {
-                    InterfazCliente1JFrame modificar = new InterfazCliente1JFrame();
+                    InterfazClienteJFrame modificar = new InterfazClienteJFrame();
                     modificar.setVisible(true);
                     setVisible(false);
                     limpiar();

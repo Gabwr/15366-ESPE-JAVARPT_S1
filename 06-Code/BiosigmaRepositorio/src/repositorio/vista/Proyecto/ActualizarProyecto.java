@@ -25,7 +25,7 @@ import repositorio.controlador.ProyectoServicio;
 import repositorio.modelo.PlanAmbiental;
 import repositorio.vista.admin.InterfazAdminJFrame;
 import static repositorio.vista.admin.InterfazAdminJFrame.codigoUsuario;
-import repositorio.vista.trabajador.InterfazTrabajadorJFrame;
+import repositorio.vista.trabajador.InterfazTrabajador1JFrame;
 
 public class ActualizarProyecto extends javax.swing.JInternalFrame {
 
@@ -91,8 +91,8 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         if (InterfazAdminJFrame.getCodigoProyecto() != "") {
             codigo = InterfazAdminJFrame.getCodigoProyecto();
 
-        } else if (InterfazTrabajadorJFrame.getCodigoProyecto() != "") {
-            codigo = InterfazTrabajadorJFrame.getCodigoProyecto();
+        } else if (InterfazTrabajador1JFrame.getCodigoProyecto() != "") {
+            codigo = InterfazTrabajador1JFrame.getCodigoProyecto();
 
         }
         return codigo;
