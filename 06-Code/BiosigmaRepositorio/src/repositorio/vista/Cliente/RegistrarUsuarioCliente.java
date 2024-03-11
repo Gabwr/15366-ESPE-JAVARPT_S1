@@ -87,6 +87,9 @@ public class RegistrarUsuarioCliente extends javax.swing.JInternalFrame {
         if (txtCedulA.getText().isEmpty()||txtCedulA.getText().length()>10) {
             return false;
         } else {
+            if(txtCedulA.getText().length()<=9){
+                return false;
+            }else{
             int[] cedulaContenido = new int[10];
             int cedulaString = Integer.parseInt(txtCedulA.getText());
             int cedulaStringDivisor = cedulaString, cont = 0, iniciador = 0, residuo, cosciente, mul = 0, sumpar = 0, sumimpar = 0, sumtotal = 0, res = 0, comprobador = 0;
@@ -127,6 +130,7 @@ public class RegistrarUsuarioCliente extends javax.swing.JInternalFrame {
                 return true;
             } else {
                 return false;
+            }
             }
         }
     }

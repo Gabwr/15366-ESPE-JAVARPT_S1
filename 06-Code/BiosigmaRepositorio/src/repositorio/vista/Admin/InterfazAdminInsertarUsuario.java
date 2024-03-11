@@ -141,9 +141,9 @@ public class InterfazAdminInsertarUsuario extends javax.swing.JInternalFrame {
         if (txtCedulA.getText().isEmpty()||txtCedulA.getText().length()>10) {
             return false;
         } else {
-            if(txtCedulA.getText().length()<=9){
-                return false;
-            }
+                if(txtCedulA.getText().length()<=9){
+                    return false;
+                }
             else{
             int[] cedulaContenido = new int[10];
             int cedulaString = Integer.parseInt(txtCedulA.getText().trim());

@@ -1081,6 +1081,8 @@ public class InterfazAdminJFrame extends javax.swing.JFrame {
             } catch (HeadlessException ex) {
                 JOptionPane.showMessageDialog(null, "Ha ocurrido un error: " + ex.toString());
             }
+        }else{
+            JOptionPane.showMessageDialog(null, "Seleccione un Dato a eliminar");
         }
     }//GEN-LAST:event_btnEliminarProyectoActionPerformed
 

@@ -578,33 +578,6 @@ public class InterfazTrabajadorJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btInfoProgramadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInfoProgramadorActionPerformed
-        JOptionPane.showMessageDialog(null, "=============================================="
-                + "\n\tProgramadores:"
-                + "\n1.- Gabriel López"
-                + "\n2.- Mateo Medranda"
-                + "\n3.- Alejandro Obando"
-                + "\n==============================================");
-    }//GEN-LAST:event_btInfoProgramadorActionPerformed
-
-    private void BotonOpcionesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonOpcionesMouseExited
-        BotonOpciones.setBackground(new Color(102, 255, 204));
-    }//GEN-LAST:event_BotonOpcionesMouseExited
-
-    private void BotonOpcionesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonOpcionesMouseEntered
-        BotonOpciones.setBackground(new Color(204, 255, 204));
-    }//GEN-LAST:event_BotonOpcionesMouseEntered
-
-    private void BotonOpcionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonOpcionesMouseClicked
-        if (contador == 1) {
-            panelOpciones.setVisible(true);
-            contador = 2;
-        } else if (contador == 2) {
-            panelOpciones.setVisible(false);
-            contador = 1;
-        }
-    }//GEN-LAST:event_BotonOpcionesMouseClicked
-
     private void btnRegresarProyectosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarProyectosActionPerformed
         tbPaneles.setSelectedIndex(0);
     }//GEN-LAST:event_btnRegresarProyectosActionPerformed
@@ -670,6 +643,33 @@ public class InterfazTrabajadorJFrame extends javax.swing.JFrame {
         tablamodelo.clearSelection();
         fila = -1;
     }//GEN-LAST:event_btnLimpiarSeleccionActionPerformed
+
+    private void btInfoProgramadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInfoProgramadorActionPerformed
+        JOptionPane.showMessageDialog(null, "=============================================="
+            + "\n\tProgramadores:"
+            + "\n1.- Gabriel López"
+            + "\n2.- Mateo Medranda"
+            + "\n3.- Alejandro Obando"
+            + "\n==============================================");
+    }//GEN-LAST:event_btInfoProgramadorActionPerformed
+
+    private void BotonOpcionesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonOpcionesMouseExited
+        BotonOpciones.setBackground(new Color(102, 255, 204));
+    }//GEN-LAST:event_BotonOpcionesMouseExited
+
+    private void BotonOpcionesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonOpcionesMouseEntered
+        BotonOpciones.setBackground(new Color(204, 255, 204));
+    }//GEN-LAST:event_BotonOpcionesMouseEntered
+
+    private void BotonOpcionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonOpcionesMouseClicked
+        if (contador == 1) {
+            panelOpciones.setVisible(true);
+            contador = 2;
+        } else if (contador == 2) {
+            panelOpciones.setVisible(false);
+            contador = 1;
+        }
+    }//GEN-LAST:event_BotonOpcionesMouseClicked
 
     public static void main(String args[]) {
 
