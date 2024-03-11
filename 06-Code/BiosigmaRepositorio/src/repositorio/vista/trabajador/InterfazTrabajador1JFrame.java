@@ -631,6 +631,7 @@ public class InterfazTrabajador1JFrame extends javax.swing.JFrame {
             escritorio.add(actualizar);
             actualizar.show();
             fila = -1;
+            codigoProyecto = "";
         } else {
             getToolkit().beep();
             JOptionPane.showMessageDialog(null, "Seleccione una proyecto para poder abrir");
@@ -646,7 +647,7 @@ public class InterfazTrabajador1JFrame extends javax.swing.JFrame {
             escritorio.add(abrir);
             abrir.show();
             fila = -1;
-
+            codigoProyecto = "";
         } else {
             getToolkit().beep();
             JOptionPane.showMessageDialog(null, "Seleccione una proyecto para poder abrir");

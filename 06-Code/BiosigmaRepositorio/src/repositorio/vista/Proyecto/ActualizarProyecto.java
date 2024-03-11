@@ -861,7 +861,7 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
                     Object idActividad = dtm.getValueAt(filaseleccionadaActividad, 0);
 
                     actividad.setActividad(txtActividadActualizar.getText());
-                    actividad.setId(InterfazAdminJFrame.getCodigoProyecto());
+                    actividad.setId(txtCodigo.getText());
                     actividad.setIdActividad(idActividad);
                     fecharealizada();
                     opcionCompletado();

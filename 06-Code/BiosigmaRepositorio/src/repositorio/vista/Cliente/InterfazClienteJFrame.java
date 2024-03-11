@@ -20,9 +20,6 @@ public class InterfazClienteJFrame extends javax.swing.JFrame {
 
     private int contador = 1;
     public int fila = -1;
-    int filaseleccionadaAdmin = -1;
-    int filaseleccionadaCliente = -1;
-    int filaseleccionadaTrabajador = -1;
     private static String codigoProyecto = "";
     public static String codigoUsuario = "";
     private DefaultTableModel dtm = null;
@@ -590,14 +587,13 @@ public class InterfazClienteJFrame extends javax.swing.JFrame {
 
     private void btnAbrirProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirProyectoActionPerformed
         fila = tbProyecto.getSelectedRow();
-
         if (fila != -1) {
             codigoProyecto = tbProyecto.getValueAt(fila, 0).toString();
             AbrirProyecto abrir = new AbrirProyecto();
             escritorio.add(abrir);
             abrir.show();
             fila = -1;
-
+            codigoProyecto = "";
         } else {
             getToolkit().beep();
             JOptionPane.showMessageDialog(null, "Seleccione una proyecto para poder abrir");
