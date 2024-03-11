@@ -9,6 +9,8 @@ import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import repositorio.controlador.ProyectoServicio;
+import repositorio.controlador.ServicioPersonas;
+import repositorio.modelo.Personas;
 import repositorio.modelo.Proyecto;
 import repositorio.vista.InterfazLogin;
 
@@ -23,7 +25,12 @@ public class InterfazCliente1JFrame extends javax.swing.JFrame {
     public static String getCodigoProyecto() {
         return codigoProyecto;
     }
-
+    
+        public void cargarDatosLogin() {
+        Personas login = ServicioPersonas.BuscarPorCodigoClienteyAdmin(InterfazLogin.idPersona);
+        txtNombreIngreso.setText(login.getNombre());
+        txtCorreoIngreso.setText(login.getCorreo());
+    }
     public InterfazCliente1JFrame() {
         initComponents();
         llenarTablaProyectos();
@@ -31,6 +38,8 @@ public class InterfazCliente1JFrame extends javax.swing.JFrame {
         panelDescripcion.setBackground(new Color(0, 0, 0, 100));
         panelOpciones.setBackground(new Color(0, 0, 0, 160));
         panelOpciones.setVisible(false);
+        cargarDatosLogin();
+        
     }
 
     public static void llenarTablaProyectos() {
@@ -82,8 +91,8 @@ public class InterfazCliente1JFrame extends javax.swing.JFrame {
         jLabel41 = new javax.swing.JLabel();
         PanelBiosigmaLogo = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtCorreoIngreso = new javax.swing.JTextField();
+        txtNombreIngreso = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         BotonProyectos = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -172,17 +181,17 @@ public class InterfazCliente1JFrame extends javax.swing.JFrame {
 
         panelBotones1.add(PanelBiosigmaLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 230, 60));
 
-        jTextField1.setEditable(false);
-        jTextField1.setBackground(new java.awt.Color(102, 204, 255));
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jTextField1.setBorder(null);
-        panelBotones1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 190, 30));
+        txtCorreoIngreso.setEditable(false);
+        txtCorreoIngreso.setBackground(new java.awt.Color(102, 204, 255));
+        txtCorreoIngreso.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtCorreoIngreso.setBorder(null);
+        panelBotones1.add(txtCorreoIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 190, 30));
 
-        jTextField2.setEditable(false);
-        jTextField2.setBackground(new java.awt.Color(102, 204, 255));
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jTextField2.setBorder(null);
-        panelBotones1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 190, 30));
+        txtNombreIngreso.setEditable(false);
+        txtNombreIngreso.setBackground(new java.awt.Color(102, 204, 255));
+        txtNombreIngreso.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtNombreIngreso.setBorder(null);
+        panelBotones1.add(txtNombreIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 190, 30));
 
         jLabel3.setBackground(new java.awt.Color(255, 51, 51));
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/FondoBienvenidos.png"))); // NOI18N
@@ -618,8 +627,6 @@ public class InterfazCliente1JFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JTextArea jTextArea5;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JPanel panelBotones1;
     private javax.swing.JPanel panelDescripcion;
     private javax.swing.JPanel panelOpciones;
@@ -630,5 +637,7 @@ public class InterfazCliente1JFrame extends javax.swing.JFrame {
     private javax.swing.JPanel panelTablaProyectos;
     private javax.swing.JTabbedPane tbPaneles;
     private static javax.swing.JTable tbProyecto;
+    private javax.swing.JTextField txtCorreoIngreso;
+    private javax.swing.JTextField txtNombreIngreso;
     // End of variables declaration//GEN-END:variables
 }
