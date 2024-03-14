@@ -624,6 +624,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         byte[] pdfBytes = seleccionarArchivo();
         if (pdfBytes != null) {
             proyecto.setAuditoria(pdfBytes);
+            lbAuditoria.setVisible(true);
         }
     }//GEN-LAST:event_btAuditoriasActionPerformed
 
@@ -632,6 +633,7 @@ public class AgregarProyecto extends javax.swing.JInternalFrame {
         byte[] pdfBytes = seleccionarArchivo();
         if (pdfBytes != null) {
             proyecto.setMonitoreo(pdfBytes);
+            lbMonitoreo.setVisible(true);
         }
     }//GEN-LAST:event_btMonitoreoActionPerformed
 

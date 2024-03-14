@@ -57,13 +57,8 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
 
     public void llenarTablaActividades() {
         dtm = (DefaultTableModel) tbActividades.getModel();
-        TableColumnModel columnModel = tbActividades.getColumnModel();
-        TableColumn columna = columnModel.getColumn(0);
-        columna.setMinWidth(0);
-        columna.setMaxWidth(0);
-
         dtm.setRowCount(0);
-        for (PlanAmbiental actividades : ActividadServicio.ListaActividades(obtenercodigointerfacez())) {
+        for (PlanAmbiental actividades : ActividadServicio.ListaActividades(txtCodigo.getText())) {
             String fechaafinal, evidencia, completado;
             if (actividades.getFechaRealizada() == null) {
                 fechaafinal = "Indefinida";
@@ -84,6 +79,10 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
 
             dtm.addRow(new Object[]{actividades.getIdActividad(), actividades.getActividad(), completado, fechaafinal, evidencia});
         }
+        TableColumnModel columnModel = tbActividades.getColumnModel();
+        TableColumn columna = columnModel.getColumn(0);
+        columna.setMinWidth(0);
+        columna.setMaxWidth(0);
     }
 
     private String obtenercodigointerfacez() {
@@ -105,7 +104,7 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         actividades.setEvidencias(null);
         actividades.setActividad(txtActividadAgregar.getText());
         actividades.setCompletado(false);
-        actividades.setId(obtenercodigointerfacez());
+        actividades.setId(txtCodigo.getText());
         actividades.setFechaRealizada(fecharealizacion);
         ActividadServicio.InsertarActividades(actividades);
 
@@ -877,8 +876,9 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
         int resultado = JOptionPane.showConfirmDialog(null, "¿Esta seguro de agregar esta actividad?", "Confirmación", JOptionPane.YES_NO_OPTION);
         if (resultado == JOptionPane.YES_OPTION) {
             agregarActividadTabla();
-            txtActividadAgregar.setText("");
             llenarTablaActividades();
+            txtActividadAgregar.setText("");
+
         }
 
 
@@ -886,7 +886,7 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
 
     private void tbActividadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbActividadesMouseClicked
         filaseleccionadaActividad = tbActividades.getSelectedRow();
-        
+
         if (filaseleccionadaActividad >= 0) {
             actividad = ActividadServicio.BuscarActividad(tbActividades.getValueAt(filaseleccionadaActividad, 0));
             txtActividadActualizar.setText(actividad.getActividad());
@@ -927,20 +927,20 @@ public class ActualizarProyecto extends javax.swing.JInternalFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (filaseleccionadaActividad > -1) {
-        int resultado = JOptionPane.showConfirmDialog(null, "¿Esta seguro de eliminar", "Confirmación", JOptionPane.YES_NO_OPTION);
-        if (resultado == JOptionPane.YES_OPTION) {
-            
+            int resultado = JOptionPane.showConfirmDialog(null, "¿Esta seguro de eliminar", "Confirmación", JOptionPane.YES_NO_OPTION);
+            if (resultado == JOptionPane.YES_OPTION) {
+
                 dtm = (DefaultTableModel) tbActividades.getModel();
                 Object idActividad = dtm.getValueAt(filaseleccionadaActividad, 0);
 
                 ActividadServicio.EliminarActividad(idActividad);
                 llenarTablaActividades();
-                 txtActividadActualizar.setText("");
+                txtActividadActualizar.setText("");
                 txtActividadEliminar.setText("");
                 rbtCompletada.setSelected(false);
                 rbtProgreso.setSelected(false);
-        }
-        }else{
+            }
+        } else {
             JOptionPane.showMessageDialog(null, "Seleccione una actividad a eliminar");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
