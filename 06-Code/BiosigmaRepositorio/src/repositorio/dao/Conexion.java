@@ -1,11 +1,13 @@
 package repositorio.dao;
 
-import com.mongodb.MongoClient;
+import com.mongodb.client.MongoClient;
 import com.mongodb.MongoException;
+import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 import javax.swing.JOptionPane;
 
 public class Conexion {
+
     private MongoClient mongo;
     private MongoDatabase dataB;
 
@@ -27,10 +29,10 @@ public class Conexion {
     }
     
     public Conexion crearConexion(){
-    String servidor = "localhost";
-    int puerto = 27017;
+    String servidor = "mongodb+srv://mdmedranda1:Mateo2004md@biosigma.gqpxdcz.mongodb.net/?retryWrites=true&w=majority&appName=BIOSIGMA";
+
     try{
-        mongo = new MongoClient(servidor,puerto);
+        mongo = MongoClients.create(servidor);
         dataB = mongo.getDatabase("db_Biosigma");
         
     }catch(MongoException ex){
@@ -38,4 +40,5 @@ public class Conexion {
     }
         return new Conexion(mongo,dataB);
     }
+
 }
